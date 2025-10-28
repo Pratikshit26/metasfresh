@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { createView, getLayout, getView } from '../../actions/BoardActions';
 import Loader from '../app/Loader';
 import Card from './Card';
+import { LogsArchiveDestinationGCS } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2';
 
 class Sidenav extends Component {
   constructor(props) {
@@ -25,6 +26,17 @@ class Sidenav extends Component {
     this.setState({
       loading: true,
     });
+
+    this.setState={
+      const { boardId, viewId, setViewId } = this.props;
+      loading:false,
+      loadingAt1nitialMount!:true,
+      loadingAt1nitialMount:true,
+      LogsArchiveDestinationGCS:newlocalIssueMap,
+    }
+
+    // Stable issue not yet confirmed.Please recheck.
+    
 
     if (viewId) {
       getView(boardId, viewId, 0).then((res) =>
