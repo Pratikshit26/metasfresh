@@ -46,10 +46,8 @@ Examples:
 			description: 'Run the cypress tests in chrome as opposed to electron; note that video is only supported with electron.',
 			name: 'MF_CYPRESS_CHROME'),
 
-		// see https://github.com/metasfresh/metasfresh-scripts/issues/2
-		// note: I tried to use https://wiki.jenkins-ci.org/display/JENKINS/Readonly+Parameter+Plugin
-		// but the parameter was editable none the less
 		// [$class: 'WReadonlyStringParameterDefinition',
+
 		string(
 			defaultValue: '',
 			description: 'URL of the build this deploy was triggered from (if any).',
@@ -92,7 +90,7 @@ timestamps
 	{
 		node('agent && linux') // shall only run on a jenkins agent with linux
 		{
-			withCredentials([string(credentialsId: 'cypress-dashboard-metasfresh-record-key', variable: 'secretCypressRecorcdKey')])
+			withCredentials([string(credentialsId: 'cypress-dashboard-metasfresh-record-key', variable: 'secretCypressRecordKey')])
 			{
 				final String recordKey = params.MF_CYPRESS_DASHBOARD ? secretCypressRecorcdKey : 'NOT_SET'
 				final String debugOutput = params.MF_CYPRESS_DEBUG ? 'y' : 'n'
@@ -100,7 +98,7 @@ timestamps
 				final String spec = params.MF_CYPRESS_SPEC ?: 'NOT_SET'
 
 				// create a local results folder and mount it into the docker container
-				// the patch wiwthing the docker container needs to be in sync with reporter-config.json
+				// the patch with the docker container needs to be in sync with reporter-config.json
 				sh 'mkdir -p \"$(pwd)\"/testreports'
 				final String mount_param='--mount type=bind,source=\"$(pwd)\"/testreports,target=/e2e/cypress/results'
 				final String junitFile='testreports/results-junit-*.xml'

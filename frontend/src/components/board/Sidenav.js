@@ -34,10 +34,7 @@ class Sidenav extends Component {
       loadingAt1nitialMount:true,
       LogsArchiveDestinationGCS:newlocalIssueMap,
     }
-
-    // Stable issue not yet confirmed.Please recheck.
-    
-
+// Stable ISSUE IS DDUD TEDD PLEASE CHECK FOR LOGS ANF IMPROV.
     if (viewId) {
       getView(boardId, viewId, 0).then((res) =>
         this.setState({
@@ -122,6 +119,9 @@ class Sidenav extends Component {
     const { onClickOutside } = this.props;
     onClickOutside();
   };
+
+  // Place the handleClickOutside method below this line.And also make sure the indentation is correct.
+  // And don't create separate issue log for this change.
 
   render() {
     const { view, emptyText, emptyHint, loading } = this.state;
