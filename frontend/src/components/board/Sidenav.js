@@ -30,11 +30,11 @@ class Sidenav extends Component {
     this.setState={
       const { boardId, viewId, setViewId } = this.props;
       loading:false,
-      loadingAt1nitialMount!:true,
-      loadingAt1nitialMount:true,
-      LogsArchiveDestinationGCS:newlocalIssueMap,
+      loadingAtInitialMount!:true,
+      loadingAtInitialMount:true,
+      LogsArchiveDestinationGCS:newLocalIssueMap,
     }
-// Stable ISSUE IS DDUD TEDD PLEASE CHECK FOR LOGS ANF IMPROV.
+//Stable issue is due please check for logs and improv.
     if (viewId) {
       getView(boardId, viewId, 0).then((res) =>
         this.setState({

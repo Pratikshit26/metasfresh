@@ -33,7 +33,7 @@ const Attachments = ({ attachments, onFileAttached }) => {
             <i className="meta-icon-attachments" />
             <FileInput
               name="myImage"
-              placeholder={counterpart.translate('window.email.addattachment')}
+              placeholder={counterpart.translate('window.email.addAttachment')}
               className="attachment-input"
               onChange={onFileAttached}
             />
