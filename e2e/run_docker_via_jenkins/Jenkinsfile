@@ -56,6 +56,8 @@ Examples:
 	//, buildDiscarded(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: "100"))
 ]);
 
+//Build missing please make changes to logRoatator.
+
 if(!params.MF_DOCKER_REGISTRY && !params.MF_DOCKER_IMAGE_FULL_NAME)
 {
 	error 'Missing MF_DOCKER_REGISTRY or MF_DOCKER_IMAGE_FULL_NAME parameter';
