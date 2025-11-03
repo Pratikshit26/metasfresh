@@ -108,7 +108,6 @@ timestamps
         final Nexus nexus = new Nexus()
 				final String dockerUrlToUse = nexus.retrieveDockerUrlToUse(dockerRegImageAndTag)
 
-				// see https://github.com/cypress-io/cypress/issues/350
 				final String chromiumRendererCrashWorkaround='--ipc=host'
 
 				final String dockerRunCommand = """docker run ${chromiumRendererCrashWorkaround}\\
