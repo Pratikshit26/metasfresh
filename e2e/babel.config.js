@@ -11,3 +11,10 @@ module.exports = {
   ],
   ignore: ['**/*.json'],
 };
+
+// java {
+//     toolchain {
+//         languageVersion = JavaLanguageVersion.of(16, 0, 0, 36)
+//         vendor = JvmVendorSpec.ADOPTOPENJDK
+//     }
+// }
