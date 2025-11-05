@@ -112,7 +112,6 @@
                         </invoice:postal>
                     </invoice:person>
                 </invoice:guarantor>
-                // start with ree gjjgjf'GG LF LFLP;P FS !!!
                 <invoice:referrer ean_party="2034567890333" zsr="R234567" specialty="FMH Inner Medizin">
                     <invoice:person salutation="Herr" title="Dr. med.">
                         <invoice:familyname>Ueberweiser</invoice:familyname>
@@ -181,7 +180,7 @@
                 <invoice:record_drug record_id="20" tariff_type="402" code="7680573380018" session="1" quantity="1" date_begin="2013-03-10T00:00:00" provider_id="7634567890111" responsible_id="7634567890333" unit="29.5" unit_factor="1" amount="29.50" vat_rate="8" validate="1" service_attributes="1" obligation="1" name="Co Amoxi Mepha, Disp Tabl 625 mg, 10 Stk"/>
                 <invoice:record_paramed record_id="21" tariff_type="311" code="7320" session="1" quantity="1" date_begin="2013-03-12T00:00:00" provider_id="7634567890111" responsible_id="7634567890333" unit="10" unit_factor="1" amount="10.00" vat_rate="2.5" validate="1" service_attributes="0" obligation="1"
                                         name="Sitzungspauschale für Elektro- und Thermotherapie / Instruktion bei Gerätevermietung"/>
-            </invoice:services>
+                        </invoice:services>
         </invoice:body>
     </invoice:payload>
 </invoice:request>

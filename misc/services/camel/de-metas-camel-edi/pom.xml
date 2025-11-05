@@ -93,6 +93,24 @@
             <groupId>de.metas.common.rest_api</groupId>
             <artifactId>de-metas-common-rest_api</artifactId>
             <version>${metasfresh-common.version}</version>
+
+        <!-- JAXB API/runtime: required explicitly for Java 9+ because JAXB was removed from the JDK -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <!-- Activation (may be required by some JAXB runtime implementations) -->
+        <dependency>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>javax.activation</artifactId>
+            <version>1.2.0</version>
+        </dependency>
         </dependency>
 
         <dependency>

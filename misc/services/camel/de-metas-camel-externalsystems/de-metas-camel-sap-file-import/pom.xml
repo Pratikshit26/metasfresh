@@ -2,9 +2,7 @@
 <!--
   ~ #%L
   ~ de-metas-camel-sap-file-import
-  ~ %%
-  ~ Copyright (C) 2022 metas GmbH
-  ~ %%
+
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as
   ~ published by the Free Software Foundation, either version 2 of the
@@ -21,6 +19,7 @@
   ~ #L%
   -->
 
+<!-- cspell:ignore metas externalsystems assertj springframework bindy bytebuddy objenesis springboot javaconfig endpointdsl fasterxml externalsystem Javac -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -133,7 +132,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- camel -->
+        <!-- What doe camel present here  -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot-starter</artifactId>
