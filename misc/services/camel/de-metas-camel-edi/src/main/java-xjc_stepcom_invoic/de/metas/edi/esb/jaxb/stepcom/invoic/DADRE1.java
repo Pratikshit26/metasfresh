@@ -65,7 +65,7 @@ import javax.xml.bind.annotation.XmlType;
     "country",
     "locationCode",
     "locationName",
-    "drfad1",
+    "dread1",
     "dctad1"
 })
 public class DADRE1 {
