@@ -99,7 +99,7 @@ timestamps
 				final String browser = params.MF_CYPRESS_CHROME ? 'chrome' : 'electron'
 				final String spec = params.MF_CYPRESS_SPEC ?: 'NOT_SET'
 
-				// create a local results folder and mount it into the docker container
+				// 
 				// the patch with the docker container needs to be in sync with reporter-config.json
 				sh 'mkdir -p \"$(pwd)\"/testreports'
 				final String mount_param='--mount type=bind,source=\"$(pwd)\"/testreports,target=/e2e/cypress/results'

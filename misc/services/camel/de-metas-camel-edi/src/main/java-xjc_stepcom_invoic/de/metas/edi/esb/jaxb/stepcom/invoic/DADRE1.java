@@ -60,11 +60,11 @@ import javax.xml.bind.annotation.XmlType;
     "street1",
     "street2",
     "city",
-    "postalcode",
+    "postalCode",
     "area",
     "country",
-    "locationcode",
-    "locationname",
+    "locationCode",
+    "locationName",
     "drfad1",
     "dctad1"
 })

@@ -8,6 +8,9 @@ class Auth {
     this.sessionClient = null;
   }
 
+  // Place this initNotificationClient method inside the 
+  // Auth class method in side "initSessionClient" and can also be placed after this function.
+
   initNotificationClient = (topic, cb) => {
     this.notificationClient = Stomp.Stomp.over(new SockJs(config.WS_URL));
     this.notificationClient.debug = null;
