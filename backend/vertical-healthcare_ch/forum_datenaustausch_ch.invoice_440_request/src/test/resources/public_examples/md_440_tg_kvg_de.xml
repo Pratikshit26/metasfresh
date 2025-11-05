@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
-<invoice:request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:invoice="http://www.forum-datenaustausch.ch/invoice" xsi:schemaLocation="http://www.forum-datenaustausch.ch/invoice generalInvoiceRequest_440.xsd" xmlns="http://www.forum-datenaustausch.ch/invoice" language="de" modus="production" validation_status="0">
+<invoice:request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:invoice="http://www.forum-datenaustausch.ch/invoice" xsi:schemaLocation="http://www.forum-datenaustausch.ch/invoice http://www.forum-datenaustausch.ch/schemas/generalInvoiceRequest_440.xsd" xmlns="http://www.forum-datenaustausch.ch/invoice" language="de" modus="production" validation_status="0">
     <invoice:processing print_at_intermediate="1">
         <invoice:transport from="7601001302112" to="7634567890000">
             <invoice:via via="2099999999999" sequence_id="1"/>
@@ -90,6 +90,7 @@
                 <invoice:patient gender="male" birthdate="1964-02-28T00:00:00" ssn="7561234567890">
                     <invoice:person salutation="Herr">
                         <invoice:familyname>Muster</invoice:familyname>
+                        
                         <invoice:givenname>Peter</invoice:givenname>
                         <invoice:subaddressing>c/o Mieter Karl</invoice:subaddressing>
                         <invoice:postal>
@@ -111,6 +112,7 @@
                         </invoice:postal>
                     </invoice:person>
                 </invoice:guarantor>
+                // start with ree gjjgjf'GG LF LFLP;P FS !!!
                 <invoice:referrer ean_party="2034567890333" zsr="R234567" specialty="FMH Inner Medizin">
                     <invoice:person salutation="Herr" title="Dr. med.">
                         <invoice:familyname>Ueberweiser</invoice:familyname>
