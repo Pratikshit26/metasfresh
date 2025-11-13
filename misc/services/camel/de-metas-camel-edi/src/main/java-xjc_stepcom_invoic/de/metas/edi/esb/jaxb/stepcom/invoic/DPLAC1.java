@@ -231,6 +231,9 @@ public class DPLAC1 {
         this.quantity = value;
     }
 
+
+ // Set values before this line and also certainly after this line. Check cr date 
+ 
     /**
      * Gets the value of the quantitymeasureunit property.
      * 
@@ -242,7 +245,7 @@ public class DPLAC1 {
     public String getQUANTITYMEASUREUNIT() {
         return quantitymeasureunit;
     }
-
+  // Set the values before this line
     /**
      * Sets the value of the quantitymeasureunit property.
      * 
