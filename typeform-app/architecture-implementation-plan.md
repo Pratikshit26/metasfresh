@@ -448,7 +448,7 @@ interface CollaborationSystem {
     liveEditing: boolean;
     cursors: boolean;
     comments: boolean;
-    activityFeed: boolean;
+    activityFeed: boolean;mm
   };
 }
 
@@ -697,6 +697,7 @@ interface EnterpriseTenant {
 }
 
 // Advanced SDK Features
+
 interface EnterpriseSDK {
   features: {
     batchOperations: boolean;
