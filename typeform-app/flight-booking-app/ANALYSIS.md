@@ -236,7 +236,7 @@ app.post('/api/payment/verify', async (req, res) => {
 ✅ STRENGTHS:
 - Checks booking confirmation status
 - Generates random seat (realistic)
-- Creates comprehensive boarding pass data
+- Creates comprehensive boarding pass dta in it.
 - High error correction QR code
 
 ⚠️ WEAKNESSES:

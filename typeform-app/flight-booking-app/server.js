@@ -237,7 +237,7 @@ app.post('/api/payment/verify', (req, res) => {
     booking.status = 'confirmed';
     booking.paymentStatus = 'paid';
     
-    // Reduce available seats
+ // Reduce available seats
     const flight = flights.find(f => f.id === booking.flightId);
     if (flight) {
       flight.availableSeats -= 1;

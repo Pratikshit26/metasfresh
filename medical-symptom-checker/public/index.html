@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Symptom Checker - When to See a Doctor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .disclaimer h3 {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .symptom-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .chip {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .chip .remove {
+            cursor: pointer;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .severity-slider {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .severity-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .chronic-conditions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .urgency-card {
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 5px solid;
+        }
+
+        .urgency-card.EMERGENCY {
+            background: #ffebee;
+            border-color: #c62828;
+        }
+
+        .urgency-card.URGENT {
+            background: #fff3e0;
+            border-color: #ef6c00;
+        }
+
+        .urgency-card.MODERATE {
+            background: #fff9c4;
+            border-color: #f9a825;
+        }
+
+        .urgency-card.ROUTINE {
+            background: #e8f5e9;
+            border-color: #2e7d32;
+        }
+
+        .urgency-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .urgency-badge.EMERGENCY {
+            background: #c62828;
+            color: white;
+        }
+
+        .urgency-badge.URGENT {
+            background: #ef6c00;
+            color: white;
+        }
+
+        .urgency-badge.MODERATE {
+            background: #f9a825;
+            color: white;
+        }
+
+        .urgency-badge.ROUTINE {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .condition-match {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .condition-match h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .matched-symptoms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .matched-symptom {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        .action-required {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .risk-factors {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .risk-factors h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .risk-factors ul {
+            list-style-position: inside;
+            color: #bf360c;
+        }
+
+        .self-care {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .self-care h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .self-care ul {
+            list-style-position: inside;
+            color: #1b5e20;
+        }
+
+        .emergency-banner {
+            background: #c62828;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .emergency-banner h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .emergency-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .main-card {
+                padding: 20px;
+            }
+
+            .chronic-conditions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Medical Symptom Checker</h1>
+            <p class="subtitle">Analyze your symptoms and get guidance on when to see a doctor</p>
+        </div>
+
+        <div class="disclaimer">
+            <h3>⚠️ Important Medical Disclaimer</h3>
+            <p>This tool is for informational purposes only and does not replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or qualified health provider with any questions about your medical condition. In case of emergency, call 911 immediately.</p>
+        </div>
+
+        <div class="main-card">
+            <h2 style="margin-bottom: 25px;">Enter Your Information</h2>
+            
+            <form id="symptomForm">
+                <div class="form-group">
+                    <label for="patientName">Patient Name (Optional)</label>
+                    <input type="text" id="patientName" placeholder="Enter patient name">
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" min="0" max="120" required placeholder="Enter age">
+                </div>
+
+                <div class="form-group">
+                    <label for="symptomInput">Describe Your Symptoms *</label>
+                    <textarea id="symptomInput" placeholder="E.g., chest pain, difficulty breathing, high fever, headache..." required></textarea>
+                    <small style="color: #666; display: block; margin-top: 5px;">Separate multiple symptoms with commas</small>
+                </div>
+
+                <div class="symptom-chips" id="symptomChips"></div>
+
+                <div class="form-group">
+                    <label for="duration">How long have you had these symptoms?</label>
+                    <select id="duration">
+                        <option value="">Select duration</option>
+                        <option value="less than 1 hour">Less than 1 hour</option>
+                        <option value="1-6 hours">1-6 hours</option>
+                        <option value="6-24 hours">6-24 hours</option>
+                        <option value="1-3 days">1-3 days</option>
+                        <option value="3-7 days">3-7 days</option>
+                        <option value="1-2 weeks">1-2 weeks</option>
+                        <option value="more than 2 weeks">More than 2 weeks</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="severity">Pain/Discomfort Severity (0-10)</label>
+                    <input type="range" id="severity" class="severity-slider" min="0" max="10" value="5">
+                    <div class="severity-labels">
+                        <span>No Pain (0)</span>
+                        <span id="severityValue">5</span>
+                        <span>Worst Pain (10)</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have any chronic conditions?</label>
+                    <div class="chronic-conditions" id="chronicConditions">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="diabetes" value="diabetes">
+                            <label for="diabetes">Diabetes</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="heartDisease" value="heart disease">
+                            <label for="heartDisease">Heart Disease</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="asthma" value="asthma">
+                            <label for="asthma">Asthma</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="pregnancy" value="pregnancy">
+                            <label for="pregnancy">Pregnancy</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="immunocompromised" value="immunocompromised">
+                            <label for="immunocompromised">Immunocompromised</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="cancer" value="cancer">
+                            <label for="cancer">Cancer</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="analyzeBtn">🔍 Analyze Symptoms</button>
+            </form>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 15px;">Analyzing your symptoms...</p>
+        </div>
+
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('symptomForm');
+        const symptomInput = document.getElementById('symptomInput');
+        const symptomChips = document.getElementById('symptomChips');
+        const severitySlider = document.getElementById('severity');
+        const severityValue = document.getElementById('severityValue');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+
+        let symptoms = [];
+
+        // Update severity value display
+        severitySlider.addEventListener('input', (e) => {
+            severityValue.textContent = e.target.value;
+        });
+
+        // Process symptoms
+        symptomInput.addEventListener('blur', () => {
+            const inputSymptoms = symptomInput.value.split(',')
+                .map(s => s.trim())
+                .filter(s => s.length > 0);
+            
+            inputSymptoms.forEach(symptom => {
+                if (!symptoms.includes(symptom)) {
+                    symptoms.push(symptom);
+                }
+            });
+            
+            updateSymptomChips();
+            symptomInput.value = '';
+        });
+
+        function updateSymptomChips() {
+            symptomChips.innerHTML = symptoms.map(symptom => `
+                <div class="chip">
+                    ${symptom}
+                    <span class="remove" onclick="removeSymptom('${symptom}')">×</span>
+                </div>
+            `).join('');
+        }
+
+        function removeSymptom(symptom) {
+            symptoms = symptoms.filter(s => s !== symptom);
+            updateSymptomChips();
+        }
+
+        // Get selected chronic conditions
+        function getChronicConditions() {
+            const checkboxes = document.querySelectorAll('#chronicConditions input[type="checkbox"]:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        // Form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Collect any remaining symptoms from input
+            if (symptomInput.value.trim()) {
+                const inputSymptoms = symptomInput.value.split(',')
+                    .map(s => s.trim())
+                    .filter(s => s.length > 0);
+                
+                inputSymptoms.forEach(symptom => {
+                    if (!symptoms.includes(symptom)) {
+                        symptoms.push(symptom);
+                    }
+                });
+            }
+
+            if (symptoms.length === 0) {
+                alert('Please enter at least one symptom');
+                return;
+            }
+
+            const patientData = {
+                name: document.getElementById('patientName').value,
+                age: parseInt(document.getElementById('age').value),
+                symptoms: symptoms,
+                duration: document.getElementById('duration').value,
+                severity: parseInt(document.getElementById('severity').value),
+                chronicConditions: getChronicConditions()
+            };
+
+            // Show loading
+            loading.classList.add('show');
+            results.classList.remove('show');
+
+            try {
+                const response = await fetch('http://localhost:3002/api/analyze-symptoms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(patientData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data.data);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to analyze symptoms. Please make sure the server is running.');
+            } finally {
+                loading.classList.remove('show');
+            }
+        });
+
+        function displayResults(data) {
+            const { analysis } = data;
+            
+            let html = '';
+
+            // Emergency banner if needed
+            if (analysis.urgencyLevel === 'EMERGENCY') {
+                html += `
+                    <div class="emergency-banner">
+                        <h2>🚨 MEDICAL EMERGENCY DETECTED</h2>
+                        <p>Your symptoms require immediate medical attention!</p>
+                        <div class="emergency-number">CALL 911 NOW</div>
+                        <p>Do not wait - call emergency services immediately</p>
+                    </div>
+                `;
+            }
+
+            // Main urgency card
+            html += `
+                <div class="urgency-card ${analysis.urgencyLevel}">
+                    <span class="urgency-badge ${analysis.urgencyLevel}">${analysis.urgencyLevel}</span>
+                    <h3>Recommendation: ${analysis.recommendation}</h3>
+                </div>
+            `;
+
+            // Risk factors
+            if (analysis.riskFactors.length > 0) {
+                html += `
+                    <div class="risk-factors">
+                        <h4>⚠️ Risk Factors Detected</h4>
+                        <ul>
+                            ${analysis.riskFactors.map(factor => `<li>${factor}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Condition matches
+            if (analysis.matches.length > 0) {
+                html += '<h3 style="margin: 20px 0;">Possible Conditions:</h3>';
+                
+                analysis.matches.forEach(match => {
+                    html += `
+                        <div class="condition-match">
+                            <h4>${match.condition}</h4>
+                            <div class="matched-symptoms">
+                                ${match.matchedSymptoms.map(s => `<span class="matched-symptom">${s}</span>`).join('')}
+                            </div>
+                            <div class="action-required">
+                                📋 Action: ${match.action}
+                            </div>
+                            ${match.additionalSymptoms ? `
+                                <div style="margin-top: 10px;">
+                                    <strong>Watch for these additional symptoms:</strong>
+                                    <p style="color: #666; margin-top: 5px;">${match.additionalSymptoms.join(', ')}</p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            // Self-care advice
+            if (analysis.selfCareAdvice.length > 0) {
+                html += `
+                    <div class="self-care">
+                        <h4>💚 Self-Care Recommendations</h4>
+                        <ul>
+                            ${analysis.selfCareAdvice.map(advice => `<li>${advice}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Warnings
+            if (analysis.warnings.length > 0) {
+                html += `
+                    <div class="risk-factors" style="margin-top: 15px;">
+                        <h4>⚠️ Important Warnings</h4>
+                        <ul>
+                            ${analysis.warnings.map(warning => `<li>${warning}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            results.innerHTML = html;
+            results.classList.add('show');
+            
+            // Scroll to results
+            results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
