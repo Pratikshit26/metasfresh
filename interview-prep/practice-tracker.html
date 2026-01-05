@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Prep - Practice Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b7280;
+            font-size: 1.1em;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+        
+        .calendar {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .calendar h2 {
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .day-label {
+            text-align: center;
+            font-weight: 600;
+            color: #6b7280;
+            padding: 8px;
+            font-size: 0.85em;
+        }
+        
+        .day {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .day.empty {
+            background: transparent;
+            cursor: default;
+        }
+        
+        .day.normal {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        
+        .day.today {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: #f59e0b;
+            font-size: 1.1em;
+        }
+        
+        .day.completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .day.in-progress {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .day:hover:not(.empty) {
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .legend {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .problems {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        
+        .problems h2 {
+            margin-bottom: 20px;
+            color: #1f2937;
+            position: sticky;
+            top: 0;
+            background: white;
+            padding-bottom: 10px;
+        }
+        
+        .problem-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.2s;
+        }
+        
+        .problem-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+        
+        .problem-card.completed {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+        
+        .problem-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #1f2937;
+            flex: 1;
+        }
+        
+        .difficulty {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .difficulty.easy {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .difficulty.medium {
+            background: #fed7aa;
+            color: #92400e;
+        }
+        
+        .difficulty.hard {
+            background: #fecaca;
+            color: #991b1b;
+        }
+        
+        .problem-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        
+        .problem-description {
+            color: #4b5563;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .problem-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-size: 0.9em;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+        }
+        
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        @media (max-width: 968px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 5-Day Interview Prep Challenge</h1>
+            <p>January 6-10, 2026 • Master Data Structures & System Design</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalProblems">0</div>
+                <div class="stat-label">Problems Solved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="todayProblems">0</div>
+                <div class="stat-label">Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="streak">1</div>
+                <div class="stat-label">Day Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="timeSpent">0h</div>
+                <div class="stat-label">Time Invested</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="calendar">
+                <h2>📅 January 2026</h2>
+                <div class="calendar-grid">
+                    <div class="day-label">Sun</div>
+                    <div class="day-label">Mon</div>
+                    <div class="day-label">Tue</div>
+                    <div class="day-label">Wed</div>
+                    <div class="day-label">Thu</div>
+                    <div class="day-label">Fri</div>
+                    <div class="day-label">Sat</div>
+                    
+                    <!-- Empty days for January 2026 (starts on Wednesday) -->
+                    <div class="day empty"></div>
+                    <div class="day empty"></div>
+                    <div class="day empty"></div>
+                    
+                    <!-- Days 1-4 -->
+                    <div class="day normal">1</div>
+                    <div class="day normal">2</div>
+                    <div class="day normal">3</div>
+                    <div class="day normal">4</div>
+                    
+                    <!-- Day 5 - TODAY -->
+                    <div class="day today" data-day="5">5<br><small>TODAY</small></div>
+                    <div class="day in-progress" data-day="6">6<br><small>Arrays</small></div>
+                    <div class="day normal" data-day="7">7<br><small>Trees</small></div>
+                    <div class="day normal" data-day="8">8<br><small>DP</small></div>
+                    <div class="day normal" data-day="9">9<br><small>System</small></div>
+                    <div class="day normal" data-day="10">10<br><small>Mock</small></div>
+                    <div class="day normal">11</div>
+                    
+                    <!-- Rest of January -->
+                    <div class="day normal">12</div>
+                    <div class="day normal">13</div>
+                    <div class="day normal">14</div>
+                    <div class="day normal">15</div>
+                    <div class="day normal">16</div>
+                    <div class="day normal">17</div>
+                    <div class="day normal">18</div>
+                    <div class="day normal">19</div>
+                    <div class="day normal">20</div>
+                    <div class="day normal">21</div>
+                    <div class="day normal">22</div>
+                    <div class="day normal">23</div>
+                    <div class="day normal">24</div>
+                    <div class="day normal">25</div>
+                    <div class="day normal">26</div>
+                    <div class="day normal">27</div>
+                    <div class="day normal">28</div>
+                    <div class="day normal">29</div>
+                    <div class="day normal">30</div>
+                    <div class="day normal">31</div>
+                </div>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #fef3c7; border: 2px solid #f59e0b;"></div>
+                        <span>Today</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #dbeafe;"></div>
+                        <span>In Progress</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #d1fae5;"></div>
+                        <span>Completed</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="problems">
+                <h2>Today's Problems - Day 1: Arrays & Data Structures</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+                
+                <div class="filter-tabs">
+                    <button class="tab active" onclick="filterProblems('all')">All</button>
+                    <button class="tab" onclick="filterProblems('easy')">Easy</button>
+                    <button class="tab" onclick="filterProblems('medium')">Medium</button>
+                    <button class="tab" onclick="filterProblems('hard')">Hard</button>
+                </div>
+                
+                <div id="problemsList">
+                    <!-- Problems will be loaded by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const problems = [
+            {
+                id: 1,
+                title: "Two Sum",
+                difficulty: "easy",
+                time: "15 min",
+                description: "Given an array of integers and a target, return indices of two numbers that add up to target.",
+                link: "https://leetcode.com/problems/two-sum/",
+                hint: "Use HashMap for O(n) solution"
+            },
+            {
+                id: 2,
+                title: "Best Time to Buy and Sell Stock",
+                difficulty: "easy",
+                time: "20 min",
+                description: "Find maximum profit from buying and selling stock once.",
+                link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+                hint: "Track minimum price seen so far"
+            },
+            {
+                id: 3,
+                title: "Contains Duplicate",
+                difficulty: "easy",
+                time: "10 min",
+                description: "Check if any value appears at least twice in the array.",
+                link: "https://leetcode.com/problems/contains-duplicate/",
+                hint: "Use HashSet"
+            },
+            {
+                id: 4,
+                title: "Product of Array Except Self",
+                difficulty: "medium",
+                time: "25 min",
+                description: "Return array where each element is product of all others except itself. No division allowed.",
+                link: "https://leetcode.com/problems/product-of-array-except-self/",
+                hint: "Use prefix and suffix products"
+            },
+            {
+                id: 5,
+                title: "Maximum Subarray",
+                difficulty: "medium",
+                time: "25 min",
+                description: "Find the contiguous subarray with the largest sum (Kadane's Algorithm).",
+                link: "https://leetcode.com/problems/maximum-subarray/",
+                hint: "Dynamic programming approach"
+            },
+            {
+                id: 6,
+                title: "Container With Most Water",
+                difficulty: "medium",
+                time: "30 min",
+                description: "Find two lines that form container holding most water.",
+                link: "https://leetcode.com/problems/container-with-most-water/",
+                hint: "Two pointer technique"
+            },
+            {
+                id: 7,
+                title: "3Sum",
+                difficulty: "medium",
+                time: "35 min",
+                description: "Find all unique triplets in array that sum to zero.",
+                link: "https://leetcode.com/problems/3sum/",
+                hint: "Sort array, then use two pointers"
+            },
+            {
+                id: 8,
+                title: "Merge Intervals",
+                difficulty: "medium",
+                time: "30 min",
+                description: "Merge all overlapping intervals.",
+                link: "https://leetcode.com/problems/merge-intervals/",
+                hint: "Sort by start time first"
+            },
+            {
+                id: 9,
+                title: "Two Sum II - Sorted Array",
+                difficulty: "easy",
+                time: "15 min",
+                description: "Find two numbers in sorted array that add up to target. O(1) space.",
+                link: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
+                hint: "Two pointers from both ends"
+            },
+            {
+                id: 10,
+                title: "Trapping Rain Water",
+                difficulty: "hard",
+                time: "40 min",
+                description: "Calculate how much water can be trapped after raining.",
+                link: "https://leetcode.com/problems/trapping-rain-water/",
+                hint: "Track max heights on both sides"
+            }
+        ];
+        
+        let completedProblems = new Set();
+        
+        function renderProblems(filter = 'all') {
+            const container = document.getElementById('problemsList');
+            const filteredProblems = filter === 'all' 
+                ? problems 
+                : problems.filter(p => p.difficulty === filter);
+            
+            container.innerHTML = filteredProblems.map(problem => `
+                <div class="problem-card ${completedProblems.has(problem.id) ? 'completed' : ''}" data-difficulty="${problem.difficulty}">
+                    <div class="problem-header">
+                        <div class="problem-title">${problem.title}</div>
+                        <span class="difficulty ${problem.difficulty}">${problem.difficulty.toUpperCase()}</span>
+                    </div>
+                    <div class="problem-meta">
+                        <span>⏱️ ${problem.time}</span>
+                        <span>💡 ${problem.hint}</span>
+                    </div>
+                    <div class="problem-description">${problem.description}</div>
+                    <div class="problem-actions">
+                        <button class="btn btn-primary" onclick="window.open('${problem.link}', '_blank')">
+                            Solve on LeetCode
+                        </button>
+                        <button class="btn ${completedProblems.has(problem.id) ? 'btn-success' : 'btn-secondary'}" 
+                                onclick="toggleComplete(${problem.id})">
+                            ${completedProblems.has(problem.id) ? '✓ Completed' : 'Mark Complete'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            updateStats();
+        }
+        
+        function toggleComplete(problemId) {
+            if (completedProblems.has(problemId)) {
+                completedProblems.delete(problemId);
+            } else {
+                completedProblems.add(problemId);
+            }
+            localStorage.setItem('completedProblems', JSON.stringify([...completedProblems]));
+            renderProblems();
+        }
+        
+        function updateStats() {
+            const total = completedProblems.size;
+            const progress = (total / problems.length) * 100;
+            
+            document.getElementById('totalProblems').textContent = total;
+            document.getElementById('todayProblems').textContent = total;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // Update calendar if all problems completed
+            if (total === problems.length) {
+                const day5 = document.querySelector('.day.today');
+                day5.classList.remove('today', 'in-progress');
+                day5.classList.add('completed');
+                day5.innerHTML = '5<br><small>✓ Done</small>';
+            }
+        }
+        
+        function filterProblems(difficulty) {
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderProblems(difficulty);
+        }
+        
+        // Load saved progress
+        const saved = localStorage.getItem('completedProblems');
+        if (saved) {
+            completedProblems = new Set(JSON.parse(saved));
+        }
+        
+        // Initial render
+        renderProblems();
+        
+        // Add click handlers to calendar days
+        document.querySelectorAll('.day[data-day]').forEach(day => {
+            day.addEventListener('click', function() {
+                const dayNum = this.dataset.day;
+                alert(`Day ${dayNum} - Coming soon!`);
+            });
+        });
+    </script>
+</body>
+</html>
