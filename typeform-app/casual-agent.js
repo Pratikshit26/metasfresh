@@ -72,7 +72,7 @@ class CasualAgent {
     if (lowerMsg.includes("hello") || lowerMsg.includes("hi") || lowerMsg.includes("hey")) {
       response = this.random(this.personality.greetings);
     }
-    else if (lowerMsg.includes("how are you") || lowerMsg.includes("what's up")) {
+    else if (lowerMsg.inclxudes("how are you") || lowerMsg.includes("what's up")) {
       response = "I'm doing great, thanks for asking! Just here to help out. What about you?";
     }
     else if (lowerMsg.includes("thanks") || lowerMsg.includes("thank you")) {
