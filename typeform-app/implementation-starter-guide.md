@@ -336,6 +336,17 @@ const buttonVariants = cva(
   }
 );
 
+
+const asyncSearch = async (options) => {
+    return await request.search({ entity, options });
+  };
+
+  let { onFetch, result, isSuccess, isLoading } = useOnFetch();
+
+  const labels = (optionField) => {
+    return displayLabels.map((x) => optionField[x]).join(' ');
+  };
+
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
