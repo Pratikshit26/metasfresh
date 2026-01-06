@@ -252,7 +252,9 @@ app.post('/api/payment/verify', (req, res) => {
   });
 });
 
-// 📄 Get Booking Details
+// 📄 Get Booking Details also get the details for this 
+// issue and can we get more realitis approach to the mail.Also plese better way to handle this 
+// We are currently on verification.
 app.get('/api/bookings/:bookingId', (req, res) => {
   const booking = bookings.find(b => b.id === req.params.bookingId);
   
