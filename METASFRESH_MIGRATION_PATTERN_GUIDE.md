@@ -399,6 +399,12 @@ backend/de.metas.ui.web.base/
 backend/de.metas.fresh/
 ```
 
+# fresh modulear 
+#erp specific 
+meta.fresh 
+
+#fresg odule (ERP-specific )
+
 ### Understanding by Example
 
 1. **Find a recent migration**: 
