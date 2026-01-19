@@ -109,7 +109,8 @@ try {
                     mattermostSend color: 'danger', endpoint: secretWebhookUrl, channel: 'jenkins-low-prio', message: mattermostMsg
                 }
     }
-    throw all
+    throw all // re-throw to mark the build as failed ,it shows re-throw build as failed ,
+     // so carrie on with post actions and mark them done in it .
 }
 
 private void buildAll(String mfVersion, MvnConf mvnConf, scmVars) {

@@ -1,0 +1,8 @@
+#! 0-default-infrastructure-namespace.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: default-infrastructure
+    labels:
+        com.docker.compose.project: default_infrastructure

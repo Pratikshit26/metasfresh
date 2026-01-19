@@ -1,0 +1,47 @@
+#! search-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: search
+    namespace: default-infrastructure
+    labels:
+        com.docker.compose.project: default_infrastructure
+        com.docker.compose.service: search
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: default_infrastructure
+            com.docker.compose.service: search
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: default_infrastructure
+                com.docker.compose.service: search
+                com.docker.compose.network.default: "true"
+        spec:
+            containers:
+                - name: search
+                  image: docker-search
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: ES_JAVA_OPTS
+                      value: "-Xms128M -Xmx256m"
+                  securityContext:
+                    capabilities:
+                        add: [IPC_LOCK]
+                  ports:
+                    - name: search-9300
+                      containerPort: 9300
+                    - name: search-9200
+                      containerPort: 9200
+                  volumeMounts:
+                    - name: usr-share-elasticsearch-data
+                      mountPath: /usr/share/elasticsearch/data
+            volumes:
+                - name: usr-share-elasticsearch-data
+                  persistentVolumeClaim:
+                    claimName: search-metasfresh-elasticsearch

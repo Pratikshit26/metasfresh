@@ -1,0 +1,34 @@
+#! papercut-smtp-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: papercut-smtp
+    namespace: default-infrastructure
+    labels:
+        com.docker.compose.project: default_infrastructure
+        com.docker.compose.service: papercut-smtp
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: default_infrastructure
+            com.docker.compose.service: papercut-smtp
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: default_infrastructure
+                com.docker.compose.service: papercut-smtp
+                com.docker.compose.network.default: "true"
+        spec:
+            containers:
+                - name: papercut-smtp
+                  image: docker-papercut-smtp
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: papercut--37408
+                      containerPort: 37408
+                    - name: papercut-smt-25
+                      containerPort: 25

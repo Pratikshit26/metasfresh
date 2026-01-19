@@ -1,0 +1,18 @@
+#! search-metasfresh_elasticsearch-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: search-metasfresh-elasticsearch
+    namespace: default-infrastructure
+    labels:
+        com.docker.compose.service: search
+        com.docker.compose.volume: metasfresh_elasticsearch
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

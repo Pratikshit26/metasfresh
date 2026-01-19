@@ -1,0 +1,9 @@
+#! search-metasfresh_elasticsearch-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: search-metasfresh-elasticsearch
+    namespace: default-infrastructure
+spec:
+    storageClassName: "hostpath" # see docker/desktop-storage-provisioner

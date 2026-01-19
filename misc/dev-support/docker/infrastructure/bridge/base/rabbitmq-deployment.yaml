@@ -1,0 +1,53 @@
+#! rabbitmq-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: rabbitmq
+    namespace: default-infrastructure
+    labels:
+        com.docker.compose.project: default_infrastructure
+        com.docker.compose.service: rabbitmq
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: default_infrastructure
+            com.docker.compose.service: rabbitmq
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: default_infrastructure
+                com.docker.compose.service: rabbitmq
+                com.docker.compose.network.default: "true"
+        spec:
+            containers:
+                - name: rabbitmq
+                  image: rabbitmq
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: RABBITMQ_DEFAULT_PASS
+                      value: "guest"
+                    - name: RABBITMQ_DEFAULT_USER
+                      value: "guest"
+                    - name: RABBITMQ_DEFAULT_VHOST
+                      value: "/"
+                  ports:
+                    - name: rabbitmq-5672
+                      containerPort: 5672
+                    - name: rabbitmq-15672
+                      containerPort: 15672
+                    - name: rabbitmq-
+                      containerPort:
+                    - name: rabbitmq-15691
+                      containerPort: 15691
+                    - name: rabbitmq-15692
+                      containerPort: 15692
+                    - name: rabbitmq-25672
+                      containerPort: 25672
+                    - name: rabbitmq-4369
+                      containerPort: 4369
+                    - name: rabbitmq-5671
+                      containerPort: 5671

@@ -1,0 +1,21 @@
+#! papercut-smtp-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: papercut-smtp
+    namespace: default-infrastructure
+    labels:
+        com.docker.compose.project: default_infrastructure
+        com.docker.compose.service: papercut-smtp
+spec:
+    selector:
+        com.docker.compose.project: default_infrastructure
+        com.docker.compose.service: papercut-smtp
+    ports:
+        - name: papercut--37408
+          port: 37408
+          targetPort: papercut--37408
+        - name: papercut-smt-25
+          port: 25
+          targetPort: papercut-smt-25

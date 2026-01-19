@@ -1,0 +1,21 @@
+#! search-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: search
+    namespace: default-infrastructure
+    labels:
+        com.docker.compose.project: default_infrastructure
+        com.docker.compose.service: search
+spec:
+    selector:
+        com.docker.compose.project: default_infrastructure
+        com.docker.compose.service: search
+    ports:
+        - name: search-9300
+          port: 9300
+          targetPort: search-9300
+        - name: search-9200
+          port: 9200
+          targetPort: search-9200
