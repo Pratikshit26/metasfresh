@@ -16,6 +16,9 @@ import javax.xml.bind.annotation.XmlType;
     "dateto",
     "days"
 })
+
+// 
+
 public class DDATE1 {
 
     @XmlElement(name = "DOCUMENTID", required = true)
