@@ -183,6 +183,9 @@ public class DPLAC1 {
         this.locationname = value;
     }
 
+
+    // Value property please setup here 
+
     /**
      * Gets the value of the date property.
      * 

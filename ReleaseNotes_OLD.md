@@ -1069,7 +1069,7 @@ Here come the actual (historical) release notes:
 
 ## Fixes
 * metasfresh
-  * [#11070](https://github.com/metasfresh/metasfresh/issues/11070) Investigate build issue introduced by prettier
+  * [#11070](https://github.com/metasfresh/metasfresh/issues/11070) Investigate build issue introduced by prettier {prittier not e\ on save file }
   * [#11082](https://github.com/metasfresh/metasfresh/issues/11082) Umsatzreport Geschäftspartner Woche
   * [#11091](https://github.com/metasfresh/metasfresh/issues/11091) Leergut-Rücknahme ergibt Fehlermeldung
   * [#11096](https://github.com/metasfresh/metasfresh/issues/11096) Organisation window is not working properly
