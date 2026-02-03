@@ -1,0 +1,364 @@
+name: Authentication System Workflow
+description: Comprehensive workflow for user authentication, registration, and session management
+
+workflows:
+  login_flow:
+    name: User Login Process
+    description: Handle user authentication and session creation
+    steps:
+      - name: validate_credentials
+        description: Validate user email and password format
+        inputs:
+          - email: string (required, valid email format)
+          - password: string (required, minimum length)
+        validation:
+          - email_format: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          - password_strength: minimum 8 characters
+        outputs:
+          - validation_result: { valid: boolean, errors?: string[] }
+        
+      - name: authenticate_user
+        description: Verify credentials against database
+        depends_on: validate_credentials
+        inputs:
+          - email: string
+          - password: string
+        outputs:
+          - auth_result: { user: UserObject, token: string, refreshToken: string }
+        error_handling:
+          - invalid_credentials: "Return 'Invalid credentials' error"
+          - account_locked: "Account temporarily locked due to multiple failed attempts"
+          - unverified_email: "Email verification required"
+        
+      - name: create_session
+        description: Generate JWT tokens and establish user session
+        depends_on: authenticate_user
+        inputs:
+          - user: UserObject
+        outputs:
+          - session: { token: string, refreshToken: string, expiresAt: Date }
+        
+      - name: store_session
+        description: Store session data securely
+        depends_on: create_session
+        inputs:
+          - session: SessionObject
+          - user: UserObject
+        outputs:
+          - session_stored: boolean
+
+  registration_flow:
+    name: User Registration Process
+    description: Handle new user account creation and verification
+    steps:
+      - name: validate_registration_data
+        description: Validate all registration form fields
+        inputs:
+          - firstName: string (required, 2-50 characters)
+          - lastName: string (required, 2-50 characters)
+          - email: string (required, valid email format)
+          - password: string (required, strong password)
+        validation:
+          - name_format: alphanumeric and spaces only
+          - email_format: valid email structure
+          - password_strength: 8+ chars, uppercase, lowercase, number, special char
+        outputs:
+          - validation_result: { valid: boolean, errors?: string[] }
+        
+      - name: check_email_availability
+        description: Verify email is not already registered
+        depends_on: validate_registration_data
+        inputs:
+          - email: string
+        outputs:
+          - availability: { available: boolean, message?: string }
+        error_handling:
+          - duplicate_email: "Email already exists"
+        
+      - name: create_user_account
+        description: Create new user record in database
+        depends_on: check_email_availability
+        inputs:
+          - userData: RegistrationData
+        outputs:
+          - user: { id: string, email: string, verified: false, createdAt: Date }
+        
+      - name: send_verification_email
+        description: Send email verification link to user
+        depends_on: create_user_account
+        inputs:
+          - user: UserObject
+        outputs:
+          - email_sent: { success: boolean, message: string }
+        
+      - name: generate_welcome_data
+        description: Prepare onboarding materials for new user
+        depends_on: send_verification_email
+        inputs:
+          - user: UserObject
+        outputs:
+          - welcome_package: { message: string, resources: any[] }
+
+  password_reset_flow:
+    name: Password Reset Process
+    description: Handle forgotten password recovery
+    steps:
+      - name: validate_reset_email
+        description: Validate email format for reset request
+        inputs:
+          - email: string
+        validation:
+          - email_format: valid email structure
+        outputs:
+          - validation_result: { valid: boolean }
+        
+      - name: generate_reset_token
+        description: Create secure password reset token
+        depends_on: validate_reset_email
+        inputs:
+          - email: string
+        outputs:
+          - reset_token: { token: string, expiresAt: Date }
+        security:
+          - token_expiry: 1 hour
+          - single_use: true
+        
+      - name: send_reset_email
+        description: Send password reset link via email
+        depends_on: generate_reset_token
+        inputs:
+          - email: string
+          - resetToken: string
+        outputs:
+          - email_result: { message: "Password reset email sent" }
+        note: "Always return success to prevent email enumeration attacks"
+        
+      - name: validate_reset_token
+        description: Verify reset token when user clicks link
+        inputs:
+          - token: string
+        outputs:
+          - token_valid: { valid: boolean, userId?: string }
+        error_handling:
+          - invalid_token: "Invalid or expired token"
+        
+      - name: update_password
+        description: Update user password with new value
+        depends_on: validate_reset_token
+        inputs:
+          - userId: string
+          - newPassword: string
+        validation:
+          - password_strength: same as registration
+        outputs:
+          - password_updated: { success: boolean }
+
+  email_verification_flow:
+    name: Email Verification Process
+    description: Verify user email addresses
+    steps:
+      - name: validate_verification_token
+        description: Check if verification token is valid
+        inputs:
+          - token: string
+        outputs:
+          - token_result: { valid: boolean, userId?: string }
+        error_handling:
+          - invalid_token: "Invalid or expired token"
+        
+      - name: mark_email_verified
+        description: Update user record as email verified
+        depends_on: validate_verification_token
+        inputs:
+          - userId: string
+        outputs:
+          - verification_result: { success: boolean, message: string }
+        
+      - name: activate_account
+        description: Enable full account functionality
+        depends_on: mark_email_verified
+        inputs:
+          - userId: string
+        outputs:
+          - activation_result: { activated: boolean }
+
+  session_management:
+    name: Session Management System
+    description: Handle user sessions, tokens, and logout
+    steps:
+      - name: get_current_user
+        description: Retrieve current user from session
+        inputs:
+          - token: string
+        outputs:
+          - user: UserObject | null
+        error_handling:
+          - invalid_token: return null
+          - expired_token: return null
+        
+      - name: refresh_access_token
+        description: Generate new access token using refresh token
+        inputs:
+          - refreshToken: string
+        outputs:
+          - tokens: { token: string, refreshToken: string }
+        error_handling:
+          - expired_refresh_token: "Refresh token expired"
+        
+      - name: logout_user
+        description: Invalidate user session and clear data
+        inputs:
+          - token: string
+          - refreshToken?: string
+        outputs:
+          - logout_result: { success: boolean }
+        cleanup:
+          - invalidate_tokens: true
+          - clear_session_storage: true
+          - remove_cookies: true
+
+  social_authentication:
+    name: Social OAuth Integration
+    description: Handle third-party authentication providers
+    providers:
+      - google
+      - github
+      - facebook
+      - microsoft
+    steps:
+      - name: initiate_oauth
+        description: Start OAuth flow with provider
+        inputs:
+          - provider: string
+          - redirect_uri: string
+        outputs:
+          - oauth_url: string
+        
+      - name: handle_oauth_callback
+        description: Process OAuth provider callback
+        inputs:
+          - provider: string
+          - authorization_code: string
+        outputs:
+          - provider_user: ProviderUserObject
+        
+      - name: link_or_create_account
+        description: Link to existing account or create new one
+        depends_on: handle_oauth_callback
+        inputs:
+          - providerUser: ProviderUserObject
+        outputs:
+          - user: UserObject
+          - isNewUser: boolean
+        
+      - name: create_oauth_session
+        description: Generate session for OAuth user
+        depends_on: link_or_create_account
+        inputs:
+          - user: UserObject
+        outputs:
+          - session: SessionObject
+
+data_models:
+  UserObject:
+    properties:
+      id: string
+      email: string
+      firstName: string
+      lastName: string
+      verified: boolean
+      provider?: string
+      subscriptionTier: string
+      createdAt: Date
+      lastLoginAt?: Date
+      
+  SessionObject:
+    properties:
+      token: string
+      refreshToken: string
+      userId: string
+      expiresAt: Date
+      createdAt: Date
+      
+  RegistrationData:
+    properties:
+      firstName: string
+      lastName: string
+      email: string
+      password: string
+      
+  ProviderUserObject:
+    properties:
+      providerId: string
+      provider: string
+      email: string
+      firstName: string
+      lastName: string
+      avatar?: string
+
+validation_rules:
+  email_format:
+    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    message: "Please enter a valid email address"
+    
+  password_strength:
+    requirements:
+      - minimum_length: 8
+      - uppercase: 1
+      - lowercase: 1
+      - numbers: 1
+      - special_characters: 1
+    message: "Password must be at least 8 characters with uppercase, lowercase, number, and special character"
+    
+  name_validation:
+    pattern: /^[a-zA-Z\s]{2,50}$/
+    message: "Name must be 2-50 characters, letters and spaces only"
+
+security_considerations:
+  password_handling:
+    - hash_algorithm: bcrypt
+    - salt_rounds: 12
+    - never_store_plaintext: true
+    
+  token_security:
+    - jwt_algorithm: RS256
+    - access_token_expiry: 15 minutes
+    - refresh_token_expiry: 7 days
+    - rotate_refresh_tokens: true
+    
+  rate_limiting:
+    - login_attempts: 5 per 15 minutes
+    - registration_attempts: 3 per hour
+    - password_reset: 1 per 5 minutes
+    
+  session_security:
+    - httpOnly_cookies: true
+    - secure_flag: true (HTTPS only)
+    - sameSite: strict
+    - csrf_protection: true
+
+error_handling:
+  authentication_errors:
+    - invalid_credentials
+    - account_locked
+    - unverified_email
+    - expired_session
+    
+  registration_errors:
+    - duplicate_email
+    - weak_password
+    - invalid_name_format
+    - email_service_unavailable
+    
+  system_errors:
+    - database_connection_failed
+    - email_service_down
+    - oauth_provider_error
+    - token_generation_failed
+
+performance_optimizations:
+  - cache_user_sessions: Redis/memory cache
+  - password_hashing: Use worker threads for bcrypt
+  - database_indexing: email, user_id fields
+  - rate_limiting: Use Redis for distributed rate limiting
+  - oauth_caching: Cache provider user data temporarily
