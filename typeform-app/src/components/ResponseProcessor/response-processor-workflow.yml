@@ -1,0 +1,177 @@
+name: Response Processor Workflow
+description: Comprehensive workflow for handling form responses from submission to analytics
+
+workflows:
+  response_submission:
+    name: Response Submission Pipeline
+    description: Process form responses through validation, storage, and notification
+    steps:
+      - name: validate_answers
+        description: Validate form answers against schema
+        inputs:
+          - formId: string
+          - answers: Record<string, any>
+        outputs:
+          - validation: { valid: boolean, errors?: string[] }
+        error_handling:
+          - validation_failed: "Throw validation error if answers are invalid"
+        
+      - name: save_response
+        description: Persist response to database
+        depends_on: validate_answers
+        inputs:
+          - formId: string
+          - answers: Record<string, any>
+        outputs:
+          - response: { id: string, formId: string, answers: any, createdAt: Date, status?: string, completionTime?: number }
+        
+      - name: trigger_notifications
+        description: Send notifications based on response
+        depends_on: save_response
+        inputs:
+          - formId: string
+          - response: ResponseObject
+        outputs:
+          - notification_result: void
+        
+      - name: update_analytics
+        description: Update form analytics and metrics
+        depends_on: trigger_notifications
+        inputs:
+          - formId: string
+        outputs:
+          - analytics_result: void
+
+  response_retrieval:
+    name: Response Retrieval System
+    description: Retrieve and filter form responses
+    steps:
+      - name: get_responses
+        description: Fetch responses with optional filtering
+        inputs:
+          - formId: string
+          - filters?: FilterOptions
+        filter_options:
+          - startDate: Date
+          - endDate: Date
+          - status: "completed" | "in_progress" | "draft"
+          - page: number
+          - limit: number
+        outputs:
+          - responses: ResponseObject[]
+
+  response_management:
+    name: Response Management Operations
+    description: Handle response deletion and maintenance
+    steps:
+      - name: delete_response
+        description: Remove response by ID
+        inputs:
+          - responseId: string
+        outputs:
+          - result: { success: boolean }
+        error_handling:
+          - not_found: "Throw error if response doesn't exist"
+
+  response_export:
+    name: Response Export System
+    description: Export responses in various formats
+    steps:
+      - name: export_responses
+        description: Export form responses
+        inputs:
+          - formId: string
+          - format: "csv" | "json" | "excel"
+        outputs:
+          - csv: { data: string[][], format: "csv" }
+          - json: { data: object[], format: "json" }
+          - excel: { data: Buffer, format: "excel" }
+
+  auto_save:
+    name: Auto-save Functionality
+    description: Periodic saving of draft responses
+    steps:
+      - name: save_draft
+        description: Save partial responses as drafts
+        trigger: periodic_timer | user_input_change
+        inputs:
+          - formId: string
+          - partialAnswers: Record<string, any>
+        outputs:
+          - draft_response: { id: string, status: "in_progress" }
+        
+      - name: restore_draft
+        description: Load saved draft when user returns
+        inputs:
+          - formId: string
+          - userId?: string
+        outputs:
+          - draft_response: ResponseObject | null
+
+validation_rules:
+  required_fields:
+    description: Ensure required fields are present and non-empty
+    example: "Question 2 is required"
+    
+  email_format:
+    description: Validate email addresses using standard format
+    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    example: "Invalid email format"
+    
+  number_range:
+    description: Validate numeric inputs within specified ranges
+    example: "Rating must be between 1 and 10"
+
+analytics_tracking:
+  metrics:
+    - response_count: "Total number of responses per form"
+    - completion_rate: "Percentage of started vs completed responses"
+    - completion_time: "Average time to complete form"
+    - abandonment_points: "Questions where users typically abandon form"
+    - response_trends: "Response patterns over time"
+
+error_handling:
+  validation_errors:
+    - required_field_missing
+    - invalid_format
+    - out_of_range_value
+    
+  system_errors:
+    - database_connection_failed
+    - notification_service_unavailable
+    - analytics_update_failed
+    
+  user_errors:
+    - response_not_found
+    - unauthorized_access
+    - malformed_request
+
+data_models:
+  ResponseObject:
+    properties:
+      id: string
+      formId: string
+      answers: Record<string, any>
+      createdAt: Date
+      status?: "completed" | "in_progress" | "draft"
+      completionTime?: number
+      
+  ValidationResult:
+    properties:
+      valid: boolean
+      errors?: string[]
+      
+  FilterOptions:
+    properties:
+      startDate?: Date
+      endDate?: Date
+      status?: string
+      page?: number
+      limit?: number
+
+performance_considerations:
+  - Use pagination for large result sets
+  - Implement caching for frequently accessed responses
+  - Batch analytics updates to reduce database load
+  - Use background jobs for non-critical operations like notifications
+  - Optimize database queries with proper indexing

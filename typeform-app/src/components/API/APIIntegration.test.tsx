@@ -1,6 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '../../test/utils'
 import { createMockForm, createMockUser } from '../../test/utils'
+import { useState, useEffect } from 'react'
+import '@testing-library/jest-dom'
 
 // Mock API functions
 const mockApiCall = vi.fn()
@@ -395,6 +397,8 @@ describe('API Integration Tests', () => {
         expect(screen.getByTestId('form-form-1')).toBeInTheDocument()
         expect(screen.getByTestId('form-form-2')).toBeInTheDocument()
       })
+
+      expect(formApi.list).toHaveBeenCalledWith('user-1')
     })
 
     it('creates new form', async () => {
