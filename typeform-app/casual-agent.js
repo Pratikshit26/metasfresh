@@ -62,7 +62,7 @@ class CasualAgent {
   }
 
   // Respond to user input
-  chat(userMessage) {
+chat(userMessage){
     this.conversations.push({ role: "user", message: userMessage });
     
     const lowerMsg = userMessage.toLowerCase();
@@ -102,36 +102,36 @@ class CasualAgent {
     return response;
   }
 
-  // Generate a casual response
-  generateCasualResponse(message) {
-    const responses = [
-      `Got it! So about "${message}" - that's pretty cool!`,
-      `Interesting! Tell me more about that.`,
-      `Nice! I hear you on that.`,
-      `Yeah, I feel you. What else?`,
-      `For sure! That makes sense.`,
-      `Totally get what you mean!`
-    ];
-    return this.random(responses);
-  }
+// Generate a casual response
+generateCasualResponse(message) {
+  const responses = [
+    `Got it! So about "${message}" - that's pretty cool!`,
+    `Interesting! Tell me more about that.`,
+    `Nice! I hear you on that.`,
+    `Yeah, I feel you. What else?`,
+    `For sure! That makes sense.`,
+    `Totally get what you mean!`
+  ];
+  return this.random(responses);
+}
 
-  // Tell a random joke
-  tellJoke() {
-    const jokes = [
-      "Why don't programmers like nature? It has too many bugs! 🐛",
-      "How many programmers does it take to change a lightbulb? None, that's a hardware problem! 💡",
-      "Why do Java developers wear glasses? Because they can't C# 😎",
-      "What's a programmer's favorite hangout spot? The Foo Bar! 🍺",
-      "Why did the developer go broke? Because they used up all their cache! 💸"
-    ];
-    return this.random(jokes);
-  }
+// Tell a random joke
+tellJoke() {
+  const jokes = [
+    "Why don't programmers like nature? It has too many bugs! 🐛",
+    "How many programmers does it take to change a lightbulb? None, that's a hardware problem! 💡",
+    "Why do Java developers wear glasses? Because they can't C# 😎",
+    "What's a programmer's favorite hangout spot? The Foo Bar! 🍺",
+    "Why did the developer go broke? Because they used up all their cache! 💸"
+  ];
+  return this.random(jokes);
+}
 
-  // Set the mood
-  setMood(mood) {
-    this.mood = mood;
-    console.log(`${this.name}: Cool, switching to ${mood} mode!`);
-  }
+// Set the mood
+setMood(mood) {
+  this.mood = mood;
+  console.log(`${this.name}: Cool, switching to ${mood} mode!`);
+}
 
   // Show conversation history
   showHistory() {
@@ -144,52 +144,52 @@ class CasualAgent {
   }
 
   // Get advice (casual style)
-  giveAdvice(topic) {
-    const advice = {
-      coding: "Dude, just take it one step at a time. Break it down into smaller chunks, test as you go, and don't be afraid to Google stuff. Everyone does it! 💻",
-      life: "Here's the thing - don't stress too much about the small stuff. Focus on what makes you happy and everything else will fall into place. You got this! 🌟",
-      career: "Follow what you're passionate about, keep learning new stuff, and network with cool people. Opportunities will come! 🚀",
-      health: "Stay hydrated, get some exercise (even just walks), and sleep properly. Your body and mind will thank you! 💪",
-      default: "My advice? Just do your thing and don't overthink it. You'll figure it out! ✨"
-    };
+giveAdvice(topic) {
+  const advice = {
+    coding: "Dude, just take it one step at a time. Break it down into smaller chunks, test as you go, and don't be afraid to Google stuff. Everyone does it! 💻",
+    life: "Here's the thing - don't stress too much about the small stuff. Focus on what makes you happy and everything else will fall into place. You got this! 🌟",
+    career: "Follow what you're passionate about, keep learning new stuff, and network with cool people. Opportunities will come! 🚀",
+    health: "Stay hydrated, get some exercise (even just walks), and sleep properly. Your body and mind will thank you! 💪",
+    default: "My advice? Just do your thing and don't overthink it. You'll figure it out! ✨"
+  };
 
-    const response = advice[topic.toLowerCase()] || advice.default;
-    console.log(`${this.name}: ${response}`);
-    return response;
-  }
+  const response = advice[topic.toLowerCase()] || advice.default;
+  console.log(`${this.name}: ${response}`);
+  return response;
+}
 
-  // Motivate the user
-  motivate() {
-    const motivations = [
-      "You're doing awesome! Keep crushing it! 💪",
-      "Believe in yourself - you've got this! 🌟",
-      "Every expert was once a beginner. You're on the right path! 🚀",
-      "Don't give up! You're closer than you think! 🎯",
-      "You're capable of amazing things! Let's go! 🔥",
-      "Progress over perfection! You're doing great! ⭐"
-    ];
-    
-    const msg = this.random(motivations);
-    console.log(`${this.name}: ${msg}`);
-    return msg;
-  }
+// Motivate the user
+motivate() {
+  const motivations = [
+    "You're doing awesome! Keep crushing it! 💪",
+    "Believe in yourself - you've got this! 🌟",
+    "Every expert was once a beginner. You're on the right path! 🚀",
+    "Don't give up! You're closer than you think! 🎯",
+    "You're capable of amazing things! Let's go! 🔥",
+    "Progress over perfection! You're doing great! ⭐"
+  ];
+  
+  const msg = this.random(motivations);
+  console.log(`${this.name}: ${msg}`);
+  return msg;
+}
 
-  // React to emotions
-  reactToEmotion(emotion) {
-    const reactions = {
-      happy: "That's awesome! Love the positive vibes! 😄",
-      sad: "Aw man, sorry to hear that. Wanna talk about it? I'm here for you. 💙",
-      angry: "I get it, that's frustrating! Take a deep breath, we'll figure this out. 😤",
-      excited: "Hell yeah! That energy is contagious! Let's gooo! 🎉",
-      tired: "I feel you. Maybe take a quick break? Coffee helps too! ☕",
-      confused: "No worries! Let's break it down together, step by step. 🤔",
-      stressed: "Hey, it's gonna be okay. Let's tackle this one thing at a time. You're not alone! 🫂"
-    };
+// React to emotions
+reactToEmotion(emotion) {
+  const reactions = {
+    happy: "That's awesome! Love the positive vibes! 😄",
+    sad: "Aw man, sorry to hear that. Wanna talk about it? I'm here for you. 💙",
+    angry: "I get it, that's frustrating! Take a deep breath, we'll figure this out. 😤",
+    excited: "Hell yeah! That energy is contagious! Let's gooo! 🎉",
+    tired: "I feel you. Maybe take a quick break? Coffee helps too! ☕",
+    confused: "No worries! Let's break it down together, step by step. 🤔",
+    stressed: "Hey, it's gonna be okay. Let's tackle this one thing at a time. You're not alone! 🫂"
+  };
 
-    const response = reactions[emotion.toLowerCase()] || "I hear you! Thanks for sharing that with me.";
-    console.log(`${this.name}: ${response}`);
-    return response;
-  }
+  const response = reactions[emotion.toLowerCase()] || "I hear you! Thanks for sharing that with me.";
+  console.log(`${this.name}: ${response}`);
+  return response;
+}
 }
 
 // 🎮 Interactive Demo
