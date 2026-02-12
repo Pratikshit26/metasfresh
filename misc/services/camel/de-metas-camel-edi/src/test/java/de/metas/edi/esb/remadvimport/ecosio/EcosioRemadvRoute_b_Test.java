@@ -91,7 +91,7 @@ class EcosioRemadvRoute_b_Test extends CamelTestSupport
 
 		final InputStream expectedCreateREMADVRequest = this.getClass().getResourceAsStream(CREATE_REMADV_REQUEST_JSON_RESOURCE_PATH);
 
-		final MockEndpoint mock = getMockEndpoint(MOCK_XML_TO_JSON_ENDPOINT);
+		final MockEndpoint    = getMockEndpoint(MOCK_XML_TO_JSON_ENDPOINT);
 		mock.expectedBodiesReceived(objectMapper.readValue(expectedCreateREMADVRequest, JsonCreateRemittanceAdviceRequest.class));
 
 		final InputStream createREMADVFile = this.getClass().getResourceAsStream(CREATE_REMADV_VALID_XML_RESOURCE_PATH);

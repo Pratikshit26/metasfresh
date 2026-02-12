@@ -285,7 +285,7 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 		{
 			called++;
 
-			// mock getOrders
+			//    getOrders
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.registerModule(new JavaTimeModule());
 
@@ -304,7 +304,7 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 					.build();
 			final MultiQueryRequest importOrdersRequest = OrderQueryHelper.buildShopware6QueryRequest(externalSystemRequest, PageAndLimit.of(1, ExternalSystemConstants.DEFAULT_SW6_ORDER_PAGE_SIZE));
 
-			// mock shopware client
+			//    shopware client
 			final ShopwareClient shopwareClient = prepareShopwareClientMock(mapper, externalSystemRequest);
 
 			final ImportOrdersRouteContext ordersContext = BuildOrdersContextProcessor.buildContext(
@@ -328,21 +328,21 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 
 			Mockito.doNothing().when(shopwareClientSpy).refreshTokenIfExpired();
 
-			//1. mock getDeliveries
+			//1.    getDeliveries
 			final String deliveriesString = loadAsString(JSON_ORDER_DELIVERIES_PATH);
 
 			Mockito.doReturn(ResponseEntity.ok(deliveriesString))
 					.when(shopwareClientSpy)
 					.performWithRetry(any(), eq(HttpMethod.GET), eq(String.class), any());
 
-			//2. mock billing order address
+			//2.    billing order address
 			final String billingAddressString = loadAsString(JSON_ORDER_BILLING_ADDRESS_PATH);
 			final UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(MOCK_BILLING_ADDRESS_HTTP_URL);
 			Mockito.doReturn(ResponseEntity.ok(billingAddressString))
 					.when(shopwareClientSpy)
 					.performWithRetry(eq(uriComponentsBuilder.build().toUri()), eq(HttpMethod.GET), eq(String.class), any());
 
-			//3. mock getCountryDetails
+			//3.    getCountryDetails
 			final InputStream countryIS = GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests.class.getResourceAsStream(JSON_COUNTRY_INFO_PATH);
 			final JsonCountry jsonCountry = mapper.readValue(countryIS, JsonCountry.class);
 
@@ -350,7 +350,7 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 					.when(shopwareClientSpy)
 					.getCountryDetails(any(String.class));
 
-			//4. mock orderLines
+			//4.    orderLines
 			final InputStream orderLinesIS = GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests.class.getResourceAsStream(JSON_ORDER_LINES);
 			final JsonOrderLines orderLines = mapper.readValue(orderLinesIS, JsonOrderLines.class);
 
@@ -358,7 +358,7 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 					.when(shopwareClientSpy)
 					.performWithRetry(any(), eq(HttpMethod.GET), eq(JsonOrderLines.class), any());
 
-			//5. mock order transactions
+			//5.    order transactions
 			final InputStream orderTrxIS = GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests.class.getResourceAsStream(JSON_ORDER_TRANSACTIONS_PATH);
 			final JsonOrderTransactions orderTransactions = mapper.readValue(orderTrxIS, JsonOrderTransactions.class);
 
@@ -366,7 +366,7 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 					.when(shopwareClientSpy)
 					.performWithRetry(any(), eq(HttpMethod.GET), eq(JsonOrderTransactions.class), any());
 
-			//6. mock payment method
+			//6.    payment method
 			final InputStream paymentMethodIS = GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests.class.getResourceAsStream(JSON_ORDER_PAYMENT_METHOD_PATH);
 			final JsonPaymentMethod paymentMethod = mapper.readValue(paymentMethodIS, JsonPaymentMethod.class);
 
@@ -374,7 +374,7 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 					.when(shopwareClientSpy)
 					.getPaymentMethod(any());
 
-			//7. mock order customer group
+			//7.    order customer group
 			final InputStream orderCustomerGroup = GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests.class.getResourceAsStream(JSON_ORDER_GROUPS_PATH);
 			final JsonCustomerGroups customerGroups = mapper.readValue(orderCustomerGroup, JsonCustomerGroups.class);
 
@@ -382,7 +382,7 @@ public class GetOrdersRouteBuilder_HappyFlow_zeroTax_Tests extends CamelTestSupp
 					.when(shopwareClientSpy)
 					.performWithRetry(any(), eq(HttpMethod.GET), eq(JsonCustomerGroups.class), any());
 
-			//8. mock get orders
+			//8.    get orders
 			final String orders = loadAsString(JSON_ORDERS_RESOURCE_PATH);
 
 			final Shopware6QueryRequest shopware6QueryRequest = OrderQueryHelper

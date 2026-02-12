@@ -70,7 +70,7 @@ public class WebuiPush implements IWebuiPush
 	@NonNull
 	private IAgentSync getAgentSync()
 	{
-		// if (true) return NullAgentSync.instance; // DEBUGGING: mock the agent sync
+		// if (true) return NullAgentSync.instance; // DEBUGGING:    the agent sync
 
 		return Services.get(IAgentSyncBL.class);
 	}

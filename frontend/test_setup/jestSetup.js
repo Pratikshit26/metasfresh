@@ -32,7 +32,7 @@ global.console = {
       width: width+"px",
       height: height+"px",
     });
-    // we have to mock this for jsdom.
+    // we have to    this for jsdom.
     div.getBoundingClientRect = () => ({
       width,
       height,

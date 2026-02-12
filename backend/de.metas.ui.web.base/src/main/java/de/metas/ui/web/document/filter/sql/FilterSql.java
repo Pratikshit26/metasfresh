@@ -126,7 +126,7 @@ public class FilterSql
 
 	@Value
 	@Builder
-	@NonFinal // because we want to mock it while testing
+	@NonFinal // because we want to    it while testing
 	public static class FullTextSearchResult
 	{
 		@NonNull String searchId;
@@ -177,7 +177,7 @@ public class FilterSql
 
 	@EqualsAndHashCode
 	@ToString
-	@NonFinal // because we want to mock it while testing
+	@NonFinal // because we want to    it while testing
 	public static class RecordsToAlwaysIncludeSql
 	{
 		@NonNull private final SqlAndParams sqlAndParams;

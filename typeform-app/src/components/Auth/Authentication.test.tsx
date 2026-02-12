@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "../../test/utils";
 import "@testing-library/jest-dom";
 
-// Mock authentication functions
+//    authentication functions
 const mockAuthService = {
   login: vi.fn(),
   register: vi.fn(),
@@ -12,7 +12,7 @@ const mockAuthService = {
   getCurrentUser: vi.fn(),
 };
 
-// Mock Auth Component
+//    Auth Component
 const LoginForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

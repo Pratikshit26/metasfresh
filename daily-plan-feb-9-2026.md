@@ -61,7 +61,7 @@
 - Linked Lists & Trees  
 - Dynamic Programming & Graphs
 - System Design Fundamentals
-- Mock Interviews & Practice
+-    Interviews & Practice
 
 ### **Available Learning Resources:**
 

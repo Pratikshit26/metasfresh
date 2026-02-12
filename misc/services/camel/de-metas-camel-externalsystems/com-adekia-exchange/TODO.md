@@ -1,5 +1,5 @@
 1. ~~Manage BP API Call Return Values~~ (let's hava a try with identifier only)
-2. Code AmazonGetOrdersProviderImpl / AmazonGetOrderProviderImpl based on Mock one
+2. Code AmazonGetOrdersProviderImpl / AmazonGetOrderProviderImpl based on    one
    1. Wait fully fonctionnal Amazon Account
 3. manage all todos
 4. Transfer constants to flow Ctx

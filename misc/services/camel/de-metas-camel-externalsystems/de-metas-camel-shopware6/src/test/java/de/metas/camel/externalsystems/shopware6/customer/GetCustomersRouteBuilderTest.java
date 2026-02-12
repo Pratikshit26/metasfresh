@@ -213,27 +213,27 @@ public class GetCustomersRouteBuilderTest extends CamelTestSupport
 
 			Mockito.doNothing().when(shopwareClientSpy).refreshTokenIfExpired();
 
-			//1. mock get customer
+			//1.    get customer
 			final UriComponentsBuilder uriComponentsBuilderCustomers = UriComponentsBuilder.fromHttpUrl(MOCK_GET_CUSTOMERS_HTTP_URL);
 			Mockito.doReturn(ResponseEntity.ok(customerMockResponse))
 					.when(shopwareClientSpy)
 					.performWithRetry(eq(uriComponentsBuilderCustomers.build().toUri()), eq(HttpMethod.POST), eq(String.class), ArgumentMatchers.any());
 
-			//2. mock get customer address
+			//2.    get customer address
 			final String customerAddressString = loadAsString(JSON_CUSTOMER_ADDRESS_DETAIL_PATH);
 			final UriComponentsBuilder uriComponentsBuilderAddress = UriComponentsBuilder.fromHttpUrl(MOCK_CUSTOMER_ADDRESS_HTTP_URL);
 			Mockito.doReturn(ResponseEntity.ok(customerAddressString))
 					.when(shopwareClientSpy)
 					.performWithRetry(eq(uriComponentsBuilderAddress.build().toUri()), eq(HttpMethod.GET), eq(String.class), ArgumentMatchers.any());
 
-			//3. mock get customer group
+			//3.    get customer group
 			final String customerGroupString = loadAsString(JSON_CUSTOMER_GROUP_PATH);
 			final UriComponentsBuilder uriComponentsBuilderGroup = UriComponentsBuilder.fromHttpUrl(MOCK_CUSTOMER_GROUP_HTTP_URL);
 			Mockito.doReturn(ResponseEntity.ok(customerGroupString))
 					.when(shopwareClientSpy)
 					.performWithRetry(eq(uriComponentsBuilderGroup.build().toUri()), eq(HttpMethod.GET), eq(String.class), ArgumentMatchers.any());
 
-			//4. mock getCountryDetails
+			//4.    getCountryDetails
 			final InputStream countryIS = GetCustomersRouteBuilderTest.class.getResourceAsStream(JSON_COUNTRY_INFO_PATH);
 			final JsonCountry jsonCountry = mapper.readValue(countryIS, JsonCountry.class);
 

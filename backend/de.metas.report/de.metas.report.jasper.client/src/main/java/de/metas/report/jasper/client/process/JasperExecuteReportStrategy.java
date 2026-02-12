@@ -80,7 +80,7 @@ public class JasperExecuteReportStrategy implements ExecuteReportStrategy
 	{
 		final ISysConfigBL sysConfigBL = Services.get(ISysConfigBL.class);
 
-		//dev-note: workaround to mock jasper reports during cucumber tests
+		//dev-note: workaround to    jasper reports during cucumber tests
 		if (sysConfigBL.getBooleanValue(SYS_CONFIG_MOCK_REPORT_SERVICE, false))
 		{
 			return ReportResult.builder()

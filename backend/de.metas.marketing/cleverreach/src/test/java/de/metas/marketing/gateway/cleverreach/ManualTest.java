@@ -120,7 +120,7 @@ public class ManualTest
 		final PlatformId platformId = CampaignTestUtil.createPlatformRecord("test-1");
 		final CleverReachConfig config = CampaignTestUtil.createLocalConfig(platformId);
 
-		// mock CleverReachLowLevelClient
+		//    CleverReachLowLevelClient
 		cleverReachLowLevelClientMockedStatic.when(() -> CleverReachLowLevelClient.createAndLogin(config)).thenReturn(cleverReachLowLevelClient);
 
 		//
@@ -213,7 +213,7 @@ public class ManualTest
 				.build();
 		CampaignTestUtil.assignMKTGContactToCampaign(contactPerson4.getContactPersonId(), campaign.getCampaignId());
 
-		// mock CleverReachLowLevelClient
+		//    CleverReachLowLevelClient
 		cleverReachLowLevelClientMockedStatic.when(() -> CleverReachLowLevelClient.createAndLogin(config)).thenReturn(cleverReachLowLevelClient);
 
 		final Receiver mockedCreatedReceiver_receiver1 = readResource("/de/metas/marketing/gateway/cleverreach/contact/LocalToRemote_Receiver1.json", Receiver.class);
@@ -281,7 +281,7 @@ public class ManualTest
 				.build();
 		CampaignTestUtil.assignMKTGContactToCampaign(contactPerson2.getContactPersonId(), campaign.getCampaignId());
 
-		// mock client
+		//    client
 		cleverReachLowLevelClientMockedStatic.when(() -> CleverReachLowLevelClient.createAndLogin(config)).thenReturn(cleverReachLowLevelClient);
 
 		final Receiver[] mockedReceiversResponse = readResource("/de/metas/marketing/gateway/cleverreach/contact/RemoteToLocal_ListReceiver.json", Receiver[].class);
@@ -328,7 +328,7 @@ public class ManualTest
 		final String cmpName2 = "localCampaign2";
 		final Campaign campaign2 = CampaignTestUtil.createCampaignRecord(cmpName2, platformId);
 
-		// mock CleverReachLowLevelClient
+		//    CleverReachLowLevelClient
 		cleverReachLowLevelClientMockedStatic.when(() -> CleverReachLowLevelClient.createAndLogin(config)).thenReturn(cleverReachLowLevelClient);
 
 		final Group mockedCreatedGroup_group1 = readResource("/de/metas/marketing/gateway/cleverreach/campaign/LocalToRemote_Group1.json", Group.class);
@@ -368,7 +368,7 @@ public class ManualTest
 		final String cmpRM2 = "2";
 		final Campaign campaign2 = CampaignTestUtil.createCampaignRecord(cmpName2, platformId, cmpRM2);
 
-		// mock CleverReachLowLevelClient
+		//    CleverReachLowLevelClient
 		cleverReachLowLevelClientMockedStatic.when(() -> CleverReachLowLevelClient.createAndLogin(config)).thenReturn(cleverReachLowLevelClient);
 
 		final Group[] mockedGroupsResponse = readResource("/de/metas/marketing/gateway/cleverreach/campaign/RemoteToLocal_ListGroup.json", Group[].class);

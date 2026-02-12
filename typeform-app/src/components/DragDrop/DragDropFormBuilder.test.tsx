@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "../../test/utils";
 import { useState } from "react";
 
-// Mock DnD Kit imports (since they require DOM APIs)
+//    DnD Kit imports (since they require DOM APIs)
 vi.mock("@dnd-kit/core", () => ({
   DndContext: ({ children, onDragEnd }: any) => (
     <div data-testid="dnd-context" onDrop={onDragEnd}>
@@ -25,6 +25,9 @@ vi.mock("@dnd-kit/core", () => ({
   }),
 }));
 
+// Dnd kit sortable imports 
+// (we'll just simulate the sortable context and reordering logic)
+
 vi.mock("@dnd-kit/sortable", () => ({
   SortableContext: ({ children }: any) => (
     <div data-testid="sortable-context">{children}</div>
@@ -46,7 +49,7 @@ vi.mock("@dnd-kit/sortable", () => ({
   },
 }));
 
-// Mock question types palette
+//  question types palette
 const QuestionTypesPalette = ({
   onAddQuestion,
 }: {
@@ -79,7 +82,7 @@ const QuestionTypesPalette = ({
   );
 };
 
-// Mock draggable question item
+//    draggable question item
 const DraggableQuestion = ({ question, onUpdate, onDelete }: any) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(question.title);
@@ -147,7 +150,7 @@ const DraggableQuestion = ({ question, onUpdate, onDelete }: any) => {
   );
 };
 
-// Mock drag and drop form builder
+//    drag and drop form builder
 const DragDropFormBuilder = () => {
   const [questions, setQuestions] = useState<any[]>([]);
   const [draggedItem, setDraggedItem] = useState<any>(null);

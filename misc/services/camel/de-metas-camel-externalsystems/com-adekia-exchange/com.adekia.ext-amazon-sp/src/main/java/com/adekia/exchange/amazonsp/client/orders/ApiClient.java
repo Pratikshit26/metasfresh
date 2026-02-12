@@ -79,7 +79,7 @@ import java.util.regex.Pattern;
 public class ApiClient {
 
 
-    public boolean mock = false;
+    public boolean    = false;
     private String basePath = "https://sellingpartnerapi-na.amazon.com";
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();

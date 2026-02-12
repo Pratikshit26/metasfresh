@@ -92,7 +92,7 @@ public class PurchaseOrderFromItemsAggregatorTest
 		@Override
 		public void updatePrices(@NonNull OrderLinePriceUpdateRequest request)
 		{
-			// mock IOrderLineBL.updatePrices() because
+			//    IOrderLineBL.updatePrices() because
 			// setting up the required masterdata and testing the pricing engine is out of scope.
 
 			updatePricesCallCount++;

@@ -162,7 +162,7 @@
 
 ---
 
-## Day 5 - Friday, January 10: Behavioral & Mock Interviews
+## Day 5 - Friday, January 10: Behavioral &    Interviews
 
 ### Morning (9:00 AM - 12:00 PM)
 **Behavioral Preparation**
@@ -182,7 +182,7 @@
 - [ ] "Where do you see yourself in 5 years?"
 
 ### Afternoon (2:00 PM - 5:00 PM)
-**Full Mock Interview #1**
+**Full    Interview #1**
 - [ ] 45-minute coding interview (2 problems)
 - [ ] Record and review
 - [ ] Identify improvement areas
@@ -194,7 +194,7 @@
 - [ ] Read engineering blogs
 
 ### Evening (6:00 PM - 9:00 PM)
-**Full Mock Interview #2**
+**Full    Interview #2**
 - [ ] 60-minute system design interview
 - [ ] Practice whiteboarding
 - [ ] Clarifying requirements
@@ -236,7 +236,7 @@
 - **LeetCode Premium** - Company-specific questions
 - **NeetCode.io** - Structured roadmap with video explanations
 - **AlgoExpert** - Clear video explanations
-- **Pramp/Interviewing.io** - Live mock interviews
+- **Pramp/Interviewing.io** - Live    interviews
 
 ### System Design
 - **System Design Primer** - GitHub repository
@@ -256,7 +256,7 @@
 ### By End of Day 5:
 - [ ] Solved 50+ LeetCode problems (20 Easy, 25 Medium, 5 Hard)
 - [ ] Completed 5+ system design case studies
-- [ ] Conducted 3+ full mock interviews
+- [ ] Conducted 3+ full    interviews
 - [ ] Prepared 10 STAR method stories
 - [ ] Documented FormBuilder & metasfresh architecture clearly
 - [ ] Confident explaining all resume projects

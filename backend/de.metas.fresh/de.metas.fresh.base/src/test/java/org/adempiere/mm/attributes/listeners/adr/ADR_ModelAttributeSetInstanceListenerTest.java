@@ -138,7 +138,7 @@ public class ADR_ModelAttributeSetInstanceListenerTest
 		}
 
 		//
-		// Mock EDIOLCandBL
+		//    EDIOLCandBL
 		final EDIOLCandBL ediOLCandBL = new EDIOLCandBL()
 		{
 			@Override

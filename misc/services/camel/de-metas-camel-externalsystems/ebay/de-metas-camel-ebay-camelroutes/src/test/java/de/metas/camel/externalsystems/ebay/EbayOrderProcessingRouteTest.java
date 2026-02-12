@@ -132,7 +132,7 @@ public class EbayOrderProcessingRouteTest
 	public void flowWithSimpleOrder() throws Exception
 	{
 
-		// mock result of bpartner upsert.
+		//    result of bpartner upsert.
 		final MockUpsertBPartnerProcessor createdBPartnerProcessor = new MockUpsertBPartnerProcessor();
 		final MockUpsertOLCProcessor createdOLCProcessor = new MockUpsertOLCProcessor();
 		AdviceWith.adviceWith(camelContext, GetEbayOrdersRouteBuilder.PROCESS_ORDERS_ROUTE_ID,
@@ -146,7 +146,7 @@ public class EbayOrderProcessingRouteTest
 						.process(createdOLCProcessor);
 				});
 		
-		// mock result of product upsert.
+		//    result of product upsert.
 		final MockUpsertProductProcessor createProductProcessor = new MockUpsertProductProcessor();
 		final MockUpsertProductPriceProcessor createProductPriceProcessor = new MockUpsertProductPriceProcessor();
 		AdviceWith.adviceWith(camelContext, GetEbayOrdersRouteBuilder.PROCESS_PRODUCTS_ROUTE_ID, 
@@ -183,7 +183,7 @@ public class EbayOrderProcessingRouteTest
 				"auditendpoint",
 				"externalSystemChildConfigValue");
 
-		// put mock clients into body
+		// put    clients into body
 		Map<String, Object> body = new HashMap<>();
 		body.put(EbayConstants.ROUTE_PROPERTY_EBAY_CLIENT, orderApi);
 		body.put(EbayConstants.ROUTE_PROPERTY_EBAY_AUTH_CLIENT, authApi);

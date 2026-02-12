@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "../../test/utils";
 
-// Mock Question components
+//    Question components
 const TextQuestion = ({ question, value, onChange, error }: any) => (
   <div data-testid={`question-${question.id}`}>
     <label>

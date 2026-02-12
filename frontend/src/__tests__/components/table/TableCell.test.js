@@ -8,7 +8,7 @@ import { getSizeClass, getTdValue, getDescription } from '../../../utils/tableHe
 // TODO: ^^ this should not be passed to the component as it makes the component not easy to test
 // TODO:    components should receive bare props
 
-// Mock getWidgetData
+//    getWidgetData
 const getCellProps = (overrideProps) => {
   const { widgetData } = tableCellProps;
   const tdValue = getPropsTdValue(tableCellProps);

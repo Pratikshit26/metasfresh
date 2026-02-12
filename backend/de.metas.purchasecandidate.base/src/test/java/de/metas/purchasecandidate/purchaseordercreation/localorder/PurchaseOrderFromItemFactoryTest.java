@@ -124,7 +124,7 @@ public class PurchaseOrderFromItemFactoryTest
 
 		dimension = createDimension();
 
-		// mock IOrderLineBL.updatePrices() because setting up the required masterdata and testing the pricing engine is out of scope.
+		//    IOrderLineBL.updatePrices() because setting up the required masterdata and testing the pricing engine is out of scope.
 		final OrderLineBL orderLineBL = new OrderLineBL()
 		{
 			@Override

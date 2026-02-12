@@ -7,7 +7,7 @@ afterEach(() => {
   cleanup();
 });
 
-// Mock Next.js router
+//    Next.js router
 vi.mock("next/router", () => ({
   useRouter: () => ({
     route: "/",
@@ -28,7 +28,7 @@ vi.mock("next/router", () => ({
   }),
 }));
 
-// Mock Next.js navigation (App Router)
+//    Next.js navigation (App Router)
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
     push: vi.fn(),
@@ -42,7 +42,7 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
-// Mock environment variables
+//    environment variables
 beforeAll(() => {
   // Set NODE_ENV to test if not already set
   if (!process.env.NODE_ENV) {
@@ -57,7 +57,7 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }));
 
-// Mock window.matchMedia
+//    window.matchMedia
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({

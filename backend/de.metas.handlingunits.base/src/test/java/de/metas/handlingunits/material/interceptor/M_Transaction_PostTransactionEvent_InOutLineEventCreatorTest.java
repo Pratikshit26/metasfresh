@@ -229,7 +229,7 @@ public class M_Transaction_PostTransactionEvent_InOutLineEventCreatorTest
 		//		// @formatter:off
 //		new Expectations(M_Transaction_HuDescriptor.class)
 //		{{
-//			// partial mocking - we only want to mock this one method
+//			// partial mocking - we only want to    this one method
 //			huDescriptorCreator.createHuDescriptorsForInOutLine(inoutLineId, false);
 //			result = ImmutableList.of(huDescriptor);
 //		}}; // @formatter:on

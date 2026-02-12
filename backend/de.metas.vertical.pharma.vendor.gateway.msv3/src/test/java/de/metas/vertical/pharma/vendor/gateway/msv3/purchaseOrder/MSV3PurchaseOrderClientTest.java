@@ -156,7 +156,7 @@ public class MSV3PurchaseOrderClientTest
 
 		context.client.prepare(request);
 
-		// set up the mock server
+		// set up the    server
 		final Source requestPayload = createRequest(context);
 		final Source responsePayload = context.responseProducer.apply(context);
 

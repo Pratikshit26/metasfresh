@@ -187,7 +187,7 @@ public class GetPatientsRouteTests extends CamelTestSupport
 			final MockBPartnerRelationUpsertResponse mockBPartnerRelationUpsertResponse,
 			final MockGetDocumentsProcessor mockGetDocumentsProcessor) throws Exception
 	{
-		// inject our mock processor that returns the patient-JSON from alberta
+		// inject our    processor that returns the patient-JSON from alberta
 		AdviceWith.adviceWith(context, GET_PATIENTS_ROUTE_ID,
 				advice -> {
 					advice.weaveById(PREPARE_PATIENTS_API_PROCESSOR_ID)
@@ -276,14 +276,14 @@ public class GetPatientsRouteTests extends CamelTestSupport
 		{
 			final PatientApi albertaPatientApi = Mockito.mock(PatientApi.class);
 
-			//1. mock retrieval of created payments
+			//1.    retrieval of created payments
 			final String createdPatientsStr = loadAsString(JSON_ALBERTA_GET_CREATED_PATIENTS_RESPONSE);
 			final ArrayOfPatients createdPatients = json.deserialize(createdPatientsStr, ArrayOfPatients.class);
 			//Mockito.when(albertaPatientApi.getCreatedPatients(any(String.class), any(String.class), eq(CREATED.getValue()), any(String.class)))
 			Mockito.when(albertaPatientApi.getCreatedPatients(any(String.class), any(String.class), any(String.class)))
 					.thenReturn(createdPatients);
 
-			//2. mock retrieval of updated payments
+			//2.    retrieval of updated payments
 			final String updatedPatientsStr = loadAsString(JSON_ALBERTA_GET_UPDATED_PATIENTS_RESPONSE);
 			final ArrayOfPatients updatedPatients = json.deserialize(updatedPatientsStr, ArrayOfPatients.class);
 			Mockito.when(albertaPatientApi.getCreatedPatients(any(String.class), eq(UPDATED.getValue()), any(String.class)))

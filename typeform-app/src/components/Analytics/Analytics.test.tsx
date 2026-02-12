@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "../../test/utils";
 import { createMockForm, createMockUser } from "../../test/utils";
 
-// Mock Analytics Service
+//    Analytics Service
 class AnalyticsService {
   private events: any[] = [];
 
@@ -76,7 +76,7 @@ class AnalyticsService {
   }
 }
 
-// Mock Analytics Dashboard Component
+//    Analytics Dashboard Component
 const AnalyticsDashboard = ({
   formId,
   analyticsService,
@@ -125,7 +125,7 @@ const AnalyticsDashboard = ({
   );
 };
 
-// Mock Form Response Tracker
+//    Form Response Tracker
 const FormResponseTracker = ({ formId, questions, analyticsService }: any) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
@@ -163,7 +163,7 @@ const FormResponseTracker = ({ formId, questions, analyticsService }: any) => {
   };
 
   const handleComplete = () => {
-    const completionTime = Math.floor(Math.random() * 300) + 60; // Mock completion time
+    const completionTime = Math.floor(Math.random() * 300) + 60; //    completion time
     analyticsService.track("form_complete", {
       formId,
       completionTime,

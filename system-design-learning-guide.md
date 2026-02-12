@@ -18,7 +18,7 @@
 - Performance optimization
 
 ### **Phase 4: Practice & Interview Prep (4-6 weeks)**
-- Mock interviews
+-    interviews
 - Case studies
 - Portfolio building
 
@@ -430,11 +430,11 @@ Focus on:
    - Trade-offs discussion
 ```
 
-### **Week 23-24: Mock Interviews & Portfolio**
+### **Week 23-24:    Interviews & Portfolio**
 
 #### **Mock Interview Practice**
 ```bash
-# Schedule mock interviews with:
+# Schedule    interviews with:
 - Pramp.com (free peer interviews)
 - InterviewBit
 - Interviewing.io
@@ -590,7 +590,7 @@ Weekly Goals:
 Monthly Milestones:
 - Complete 1 phase of learning path
 - Build 1 complete system
-- Conduct mock interviews
+- Conduct    interviews
 - Update portfolio
 ```
 
@@ -647,7 +647,7 @@ Week 13-20 (Advanced):
 
 Week 21-24 (Practice):
 □ Solved 5+ classic problems
-□ Conducted 10+ mock interviews
+□ Conducted 10+    interviews
 □ Built portfolio projects
 □ Can handle 45-minute interviews
 □ Confident in system design discussions

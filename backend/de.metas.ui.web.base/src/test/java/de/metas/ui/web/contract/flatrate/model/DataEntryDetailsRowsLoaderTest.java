@@ -60,7 +60,7 @@ public class DataEntryDetailsRowsLoaderTest
 	@Test
 	public void loadTest()
 	{
-		//Prepare Mock objects
+		//Prepare    objects
 		final LookupDataSource departmentLookup = Mockito.mock(LookupDataSource.class);
 		final LookupValue departmentLookupValue = Mockito.mock(LookupValue.class);
 
@@ -98,7 +98,7 @@ public class DataEntryDetailsRowsLoaderTest
 				.period(period)
 				.build();
 
-		//when specific methods are called on the mock objects, then return specific values
+		//when specific methods are called on the    objects, then return specific values
 		Mockito.when(entryRepo.getById(flatrateDataEntryId)).thenReturn(entry);
 		Mockito.when(entryService.addMissingDetails(entry)).thenReturn(entry);
 		Mockito.when(departmentLookup.findById(Mockito.any())).thenReturn(departmentLookupValue);
@@ -115,7 +115,7 @@ public class DataEntryDetailsRowsLoaderTest
 				.build();
 		final DataEntryDetailsRowsData result = dataEntryDetailsRowsLoader.load();
 
-		//Verify the method calls on mock objects
+		//Verify the method calls on    objects
 		Mockito.verify(entryRepo, Mockito.times(1)).getById(flatrateDataEntryId);
 		Mockito.verify(entryService, Mockito.times(1)).addMissingDetails(Mockito.any());
 		Mockito.verify(departmentLookup, Mockito.times(1)).findById(Mockito.any());

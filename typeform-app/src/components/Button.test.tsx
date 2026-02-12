@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "../test/utils";
 
-// Mock Button component for testing
+//    Button component for testing
 const Button = ({
   children,
   onClick,

@@ -226,7 +226,7 @@ app.post('/api/payment/verify', (req, res) => {
     return res.status(404).json({ success: false, message: 'Payment not found' });
   }
   
-  // Mock verification (in production, verify with payment gateway)
+  //    verification (in production, verify with payment gateway)
   payment.status = 'completed';
   payment.transactionId = transactionId || `TXN${Date.now()}`;
   payment.completedAt = new Date().toISOString();

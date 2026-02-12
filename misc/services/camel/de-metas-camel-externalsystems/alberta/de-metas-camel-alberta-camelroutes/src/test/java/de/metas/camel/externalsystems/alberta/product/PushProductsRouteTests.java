@@ -191,11 +191,11 @@ public class PushProductsRouteTests extends CamelTestSupport
 		@Override
 		public void process(final Exchange exchange) throws IOException
 		{
-			// mock addArticle & updateArticle response
+			//    addArticle & updateArticle response
 			final ObjectMapper mapper = new ObjectMapper();
 			final InputStream jsonGetProductsResponse = PushProductsRouteTests.class.getResourceAsStream(JSON_MF_GET_PRODUCTS);
 
-			// mock shopware client
+			//    shopware client
 			final AlbertaProductApi albertaProductApi = prepareAlbertaProductAPIClient(mapper);
 
 			//set up the exchange
@@ -209,14 +209,14 @@ public class PushProductsRouteTests extends CamelTestSupport
 		{
 			final AlbertaProductApi albertaProductApi = Mockito.mock(AlbertaProductApi.class);
 
-			//1. mock updateProductFallbackAdd
+			//1.    updateProductFallbackAdd
 			final InputStream mappingsIS = PushProductsRouteTests.class.getResourceAsStream(JSON_ARTICLE_MAPPINGS);
 			final ArticleMapping articleMapping = mapper.readValue(mappingsIS, ArticleMapping.class);
 
 			Mockito.when(albertaProductApi.updateProductFallbackAdd(any(Article.class)))
 					.thenReturn(articleMapping);
 
-			//2. mock addProductFallbackUpdate
+			//2.    addProductFallbackUpdate
 			Mockito.when(albertaProductApi.addProductFallbackUpdate(any(Article.class)))
 					.thenReturn(articleMapping);
 

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "../../test/utils";
 import { useState } from "react";
 
-// Mock form validation utilities
+//    form validation utilities
 const validateField = (question: any, value: any) => {
   if (question.required && (!value || value.toString().trim() === "")) {
     return "This field is required";
@@ -49,7 +49,7 @@ const validateForm = (questions: any[], answers: Record<string, any>) => {
   return errors;
 };
 
-// Mock Form Validation Component
+//    Form Validation Component
 const FormValidator = ({
   questions,
   onValidate,

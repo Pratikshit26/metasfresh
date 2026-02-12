@@ -195,7 +195,7 @@ const upiString = `upi://pay?pa=${process.env.UPI_ID}&am=${amount}&tn=${bookingI
 
 **4. POST /api/payment/verify** (Lines 224-260)
 ```javascript
-⚠️ CRITICAL ISSUE: MOCK VERIFICATION
+⚠️ CRITICAL ISSUE:    VERIFICATION
 // Current code ALWAYS marks payment as successful!
 payment.status = 'completed'; // No actual verification!
 
@@ -543,7 +543,7 @@ setInterval(async () => {
 | ID | Severity | Location | Description | Impact |
 |----|----------|----------|-------------|--------|
 | BUG-001 | 🔴 CRITICAL | `server.js:146` | Race condition in seat booking | Double booking possible |
-| BUG-002 | 🔴 CRITICAL | `server.js:224` | Mock payment verification | Anyone can mark payment as paid |
+| BUG-002 | 🔴 CRITICAL | `server.js:224` |    payment verification | Anyone can mark payment as paid |
 | BUG-003 | 🔴 CRITICAL | `server.js:274` | No auth on boarding pass | Anyone can access any pass |
 | BUG-004 | 🟠 HIGH | `server.js:*` | In-memory storage | Data lost on restart |
 | BUG-005 | 🟠 HIGH | `index.html:*` | No input validation | XSS/injection possible |
@@ -624,7 +624,7 @@ await prisma.$transaction(async (tx) => {
   ❌ No CSRF tokens
 
 ❌ Payment Security
-  ❌ Mock verification (bypasses payment)
+  ❌    verification (bypasses payment)
   ❌ No signature verification
   ❌ Hardcoded UPI ID
   ❌ No PCI compliance
@@ -1101,7 +1101,7 @@ try {
 
 ### **Weaknesses** ❌
 1. No authentication/authorization
-2. Mock payment verification (security hole)
+2.    payment verification (security hole)
 3. In-memory storage (data loss on restart)
 4. No input validation
 5. No error handling

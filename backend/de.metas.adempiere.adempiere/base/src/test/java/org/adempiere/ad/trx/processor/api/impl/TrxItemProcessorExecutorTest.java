@@ -395,7 +395,7 @@ public class TrxItemProcessorExecutorTest
 		final ItemProcessorResult resultExpected = new ItemProcessorResult(
 				new AggregatedItem("1", "trx1",
 						new Item("1", "1"),
-						// new Item("1", "2"), // the failing item will not make it into the result, because the mock processor throws an exception instead of adding it
+						// new Item("1", "2"), // the failing item will not make it into the result, because the    processor throws an exception instead of adding it
 						new Item("1", "3")),
 				new AggregatedItem("2", "trx2",
 						new Item("2", "1")),

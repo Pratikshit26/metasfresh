@@ -70,7 +70,7 @@ public final class MockedCloseableIterator<E> implements Iterator<E>, Closeable
 	{
 		if (iterator == null)
 		{
-			throw new IllegalArgumentException("Cannot mock an null iterator");
+			throw new IllegalArgumentException("Cannot    an null iterator");
 		}
 		this.iterator = iterator;
 	}

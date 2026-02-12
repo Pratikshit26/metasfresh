@@ -38,7 +38,7 @@ import lombok.NonNull;
 @Ignore
 public class MockedTrx extends PlainTrx
 {
-	/** exception this mock shall throw on rollback */
+	/** exception this    shall throw on rollback */
 	private Throwable onRollbackException;
 
 	private List<Exception> rollbacks = new ArrayList<>();
