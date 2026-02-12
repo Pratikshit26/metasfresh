@@ -131,7 +131,7 @@ tellJoke() {
 setMood(mood) {
   this.mood = mood;
   console.log(`${this.name}: Cool, switching to ${mood} mode!`);
-}
+}star@12345
 
   // Show conversation history
   showHistory() {
@@ -143,7 +143,7 @@ setMood(mood) {
     console.log("-------------------\n");
   }
 
-  // Get advice (casual style)
+// Get advice
 giveAdvice(topic) {
   const advice = {
     coding: "Dude, just take it one step at a time. Break it down into smaller chunks, test as you go, and don't be afraid to Google stuff. Everyone does it! 💻",
@@ -236,7 +236,7 @@ if (require.main === module) {
 
 // 💡 Usage Examples:
 /*
-
+₹
 // Basic usage
 const agent = new CasualAgent("Buddy");
 agent.greet();

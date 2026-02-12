@@ -1,12 +1,12 @@
 
-# List of branches that are not "sandbox"
+# List of branches that are not "sandbox link share in meetings"
 # See https://help.testspace.com/dashboard/project#configuration
 # Please keep in sync with the branch list in .mergify.yml
 release:
   - temporary_test202510_hotfix
   - temporary_test202510_release
   - keen_hawk_hotfix
-  - keen_hawk_release
+  - keen_hawk_release   // Check with Mritujan/Srinivas
   - game_time_hotfix
   - game_time_release
   - ghost_rider_hotfix

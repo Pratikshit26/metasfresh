@@ -1,19 +1,19 @@
-import '@testing-library/jest-dom'
-import { cleanup } from '@testing-library/react'
-import { afterEach, beforeAll, vi } from 'vitest'
+import "@testing-library/jest-dom";
+import { cleanup } from "@testing-library/react";
+import { afterEach, beforeAll, vi } from "vitest";
 
 // Clean up after each test
 afterEach(() => {
-  cleanup()
-})
+  cleanup();
+});
 
 // Mock Next.js router
-vi.mock('next/router', () => ({
+vi.mock("next/router", () => ({
   useRouter: () => ({
-    route: '/',
-    pathname: '/',
+    route: "/",
+    pathname: "/",
     query: {},
-    asPath: '/',
+    asPath: "/",
     push: vi.fn(),
     replace: vi.fn(),
     reload: vi.fn(),
@@ -26,10 +26,10 @@ vi.mock('next/router', () => ({
       emit: vi.fn(),
     },
   }),
-}))
+}));
 
 // Mock Next.js navigation (App Router)
-vi.mock('next/navigation', () => ({
+vi.mock("next/navigation", () => ({
   useRouter: () => ({
     push: vi.fn(),
     replace: vi.fn(),
@@ -38,29 +38,29 @@ vi.mock('next/navigation', () => ({
     forward: vi.fn(),
     prefetch: vi.fn(),
   }),
-  usePathname: () => '/',
+  usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),
-}))
+}));
 
 // Mock environment variables
 beforeAll(() => {
   // Set NODE_ENV to test if not already set
   if (!process.env.NODE_ENV) {
-    process.env.NODE_ENV = 'test'
+    process.env.NODE_ENV = "test";
   }
-})
+});
 
 // Global test utilities
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
-}))
+}));
 
 // Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -70,4 +70,4 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
   })),
-})
+});
