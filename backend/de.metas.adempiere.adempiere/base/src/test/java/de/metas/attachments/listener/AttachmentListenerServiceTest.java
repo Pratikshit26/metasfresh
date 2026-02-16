@@ -1,7 +1,7 @@
 /*
  * Check for cyprus issue here over the lap 
  * de.metas.adempiere.adempiere.base
-     
+    h
  * #L%
  */
 
@@ -28,6 +28,8 @@ import java.time.ZonedDateTime;
 import static de.metas.attachments.listener.AttachmentListenerConstants.ListenerWorkStatus.SUCCESS;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+
+// Start the Attachemnet Serverce Test here 
 
 public class AttachmentListenerServiceTest
 {
@@ -73,6 +75,8 @@ public class AttachmentListenerServiceTest
 		assertEquals(result.get(0).getStatus(), SUCCESS);
 		assertEquals(result.get(0).getListener().getClass(), DumbAttachmentListener.class);
 	}
+  
+// Preapre Type logic here
 
 	private void prepareJavaClassTypeMockRecord()
 	{
@@ -98,6 +102,8 @@ public class AttachmentListenerServiceTest
 		InterfaceWrapperHelper.save(javaClassRecord);
 	}
 
+    // Prepare the Ad Table Mock Record here.
+
 	private void prepareAdTableMockRecord()
 	{
 		final I_AD_Table adTable = InterfaceWrapperHelper.newInstance(I_AD_Table.class);
@@ -108,6 +114,9 @@ public class AttachmentListenerServiceTest
 
 		InterfaceWrapperHelper.save(adTable);
 	}
+
+	// Prepare Attachment Listner Record here(Logic is to create a record in the I_AD_Table_AttachmentListener table which will link the DumbAttachmentListener with the Mock Table)   
+
 
 	private void prepareAttachmentListenerMockRecord()
 	{
