@@ -22,7 +22,7 @@ export default defineConfig({
       'coverage'
     ],
     
-    // Coverage configuration
+    // Coverage configuration and thresholds.
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
