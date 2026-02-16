@@ -18,10 +18,10 @@ class ResponseProcessor {
     // 2. Save to database
     const response = await this.saveResponse(formId, answers);
 
-    // 3. Trigger notifications
+    // 3. Trigger notifications like mail or webhooks over here .
     await this.triggerNotifications(formId, response);
 
-    // 4. Update form analytics
+    // 4. Update form Anlytics
     await this.updateAnalytics(formId);
 
     return response;
@@ -36,10 +36,10 @@ class ResponseProcessor {
   }
 
   async exportResponses(formId: string, format: "csv" | "json" | "excel") {
-    return { data: [], format };
+    return { data: [] as any[], format };
   }
 
-  // Expose mocks for testing
+  // Expose logs for testing
   _getMocks() {
     return {
       validateAnswers: this.validateAnswers,
