@@ -27,7 +27,7 @@ class ResponseProcessor {
     return response;
   }
 
-  async getResponses(formId: string, filters?: any) {
+  async getResponses(formId: string, filters?: any): Promise<any[]> {
     return [];
   }
 
@@ -49,6 +49,10 @@ class ResponseProcessor {
     };
   }
 }
+
+// Test suite for Response Processor
+// Note: In a real application, you would import ResponseProcessor from its module'
+// Mock dependencies here for notificaion
 
 describe("Response Processor", () => {
   let processor: ResponseProcessor;
@@ -258,6 +262,7 @@ describe("Response Processor", () => {
       const responses = await processor.getResponses(formId, filters);
 
       expect(responses.every((r) => r.status === "completed")).toBe(true);
+
     });
 
     it("should paginate responses", async () => {
