@@ -57,6 +57,10 @@ public class AttachmentListenerServiceTest
 		prepareAttachmentListenerMockRecord();
 	}
 
+
+// Model Deployment Logic here and then the test case to check the notification 
+// logic when the attachment entry is linked with the record.
+
 	@Test
 	public void givenAttachmentEntry_whenNotifyAttachmentListeners_returnSuccess()
 	{
