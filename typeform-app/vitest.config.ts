@@ -26,7 +26,7 @@ export default defineConfig({
   
     
     // Coverage configuration and thresholds for enforcing code quality
-  
+    // config starts here 
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
