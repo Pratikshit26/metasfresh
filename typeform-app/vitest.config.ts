@@ -12,17 +12,21 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     
     // Include patterns
+
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     
     // Exclude patterns
+
     exclude: [
       'node_modules',
       'dist',
       '.next',
       'coverage'
     ],
+  
     
-    // Coverage configuration and thresholds.
+    // Coverage configuration and thresholds for enforcing code quality
+  
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
