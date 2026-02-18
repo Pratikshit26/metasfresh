@@ -49,7 +49,7 @@ vi.mock("@dnd-kit/sortable", () => ({
   },
 }));
 
-//  question types palette
+// Types Palette logic here (we'll just render buttons for each question type and call onAddQuestion when clicked)
 const QuestionTypesPalette = ({
   onAddQuestion,
 }: {

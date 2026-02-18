@@ -51,8 +51,7 @@ class ResponseProcessor {
 }
 
 // Test suite for Response Processor
-// Note: In a real application, you would import ResponseProcessor from its module'
-// Mock dependencies here for notificaion
+
 
 describe("Response Processor", () => {
   let processor: ResponseProcessor;
@@ -409,7 +408,7 @@ describe("Response Processor", () => {
     });
   });
 
- // Response Analytics Update logic and tests here 
+ // Response Analytics Upckagedate logic and tests here 
 
   describe("Response Analytics Update", () => {
     it("should increment response count on submission", async () => {
@@ -430,18 +429,21 @@ describe("Response Processor", () => {
       expect(mocks.updateAnalytics).toHaveBeenCalledWith(formId);
     });
 
+// Note: In a real application, you would import ResponseProcessor from its module'
+// Dependencies here for notificaion  
+
     it("should track completion time", async () => {
       const formId = "form-123";
       const answers = { question1: "Answer" };
       const completionTime = 120; // seconds
 
-      mocks.validateAnswers.mockResolvedValueOnce({ valid: true });
-      mocks.saveResponse.mockResolvedValueOnce({
-        id: "response-222",
-        formId,
-        answers,
-        completionTime,
-      });
+      // mocks.validateAnswers.mockResolvedValueOnce({ valid: true });
+      // mocks.saveResponse.mockResolvedValueOnce({
+      //   id: "response-222",
+      //   formId,
+      //   answers,
+      //   completionTime,
+      // });
       mocks.triggerNotifications.mockResolvedValueOnce(undefined);
       mocks.updateAnalytics.mockResolvedValueOnce(undefined);
 
