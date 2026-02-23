@@ -39,7 +39,10 @@ class ResponseProcessor {
     return { data: [] as any[], format };
   }
 
-  // Expose logs for testing
+ 
+// Expose logs for testing in next build/production build we can remove this 
+// and use actual implementations of these methods instead of mocks
+  
   _getMocks() {
     return {
       validateAnswers: this.validateAnswers,
@@ -50,8 +53,8 @@ class ResponseProcessor {
   }
 }
 
-// Test suite for Response Processor
 
+// Note:Test suite for Response Processor, handling form responses including retrieval and submission logic.
 
 describe("Response Processor", () => {
   let processor: ResponseProcessor;

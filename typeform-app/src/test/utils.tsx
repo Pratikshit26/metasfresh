@@ -1,6 +1,7 @@
 import { render, RenderOptions } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { expect } from "vitest";
 
 // Custom render function with providers
 const AllTheProviders = ({ children }: { children: ReactNode }) => {
@@ -27,7 +28,7 @@ const customRender = (
 export * from "@testing-library/react";
 export { customRender as render };
 
-// Custom matchers
+// Utility functions for tests
 export const expectToBeInTheDocument = (element: HTMLElement | null) => {
   expect(element).toBeInTheDocument();
 };
@@ -39,7 +40,7 @@ export const expectToHaveClass = (
   expect(element).toHaveClass(className);
 };
 
-//    data factories
+// Data factories
 export const createMockForm = (overrides = {}) => ({
   id: "test-form-id",
   title: "Test Form",
