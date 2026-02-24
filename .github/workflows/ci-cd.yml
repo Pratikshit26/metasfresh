@@ -201,7 +201,6 @@ jobs:
         name: build-files
         path: ./typeform-app/dist
 
-
         
     - name: Deploy to staging
       run: |
