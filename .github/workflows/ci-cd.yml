@@ -199,6 +199,8 @@ jobs:
       with:
         name: build-files
         path: ./typeform-app/dist
+
+
         
     - name: Deploy to staging
       run: |
@@ -210,6 +212,20 @@ jobs:
       run: |
         echo "Running smoke tests on staging..."
         # Add smoke test commands here
+
+    - name: Run staging health checks
+      run: |
+        echo "Running staging health checks..."
+
+    - name: Modify staging configuration
+      run: |
+        echo "Modifying staging configuration of <staging-environment>"
+        # Add commands to modify staging configuration if needed
+
+    - name :run staging specific tests
+      run:|
+        echo "Running staging specific activeClients next pattern worflow tests"    
+        
         
   deploy-production:
     name: Deploy to Production
