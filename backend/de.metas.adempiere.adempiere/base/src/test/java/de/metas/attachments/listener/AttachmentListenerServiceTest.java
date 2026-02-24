@@ -80,7 +80,7 @@ public class AttachmentListenerServiceTest
 		assertEquals(result.get(0).getListener().getClass(), DumbAttachmentListener.class);
 	}
   
-// Preapre Type logic here
+  // Preapre Type logic here
 
 	private void prepareJavaClassTypeMockRecord()
 	{
@@ -106,9 +106,9 @@ public class AttachmentListenerServiceTest
 		InterfaceWrapperHelper.save(javaClassRecord);
 	}
 
-    // Prepare the Ad Table Mock Record here.
+    // Prepare the ad. table record here which will the attachement listner tried change .
 
-	private void prepareAdTableMockRecord()
+	private void prepareAdTableMockRecord();
 	{
 		final I_AD_Table adTable = InterfaceWrapperHelper.newInstance(I_AD_Table.class);
 
@@ -119,7 +119,8 @@ public class AttachmentListenerServiceTest
 		InterfaceWrapperHelper.save(adTable);
 	}
 
-	// Prepare Attachment Listner Record here(Logic is to create a record in the I_AD_Table_AttachmentListener table which will link the DumbAttachmentListener with the Mock Table)   
+	// Prepare Attachment Listner Record here(Logic is to create a record 
+	// in the I_AD_Table_AttachmentListener table which will link the DumbAttachmentListener with the Mock Table)   
 
 
 	private void prepareAttachmentListenerMockRecord()

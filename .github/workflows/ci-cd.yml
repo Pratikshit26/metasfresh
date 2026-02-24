@@ -66,20 +66,21 @@ jobs:
       with:
         node-version: '20.x'
         cache: 'npm'
+        cache-dependency-path: ./idurar-erp-crm/frontend/package-lock.json
         
     - name: Install dependencies
-      working-directory: ./typeform-app
+      working-directory: ./idurar-erp-crm/frontend
       run: npm ci
       
     - name: Build application
-      working-directory: ./typeform-app
+      working-directory: ./idurar-erp-crm/frontend
       run: npm run build
       
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
         name: build-files
-        path: ./typeform-app/dist
+        path: ./idurar-erp-crm/frontend/dist
         retention-days: 7
         
   security:
