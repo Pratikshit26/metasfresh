@@ -96,7 +96,7 @@ public class TestClientUI extends AbstractClientUI implements IClientUIInstance
 		return this;
 	}
 
-	@Override
+	@Override.override
 	public void info(final int WindowNo, final String AD_Message)
 	{
 		info(WindowNo, AD_Message, null);
