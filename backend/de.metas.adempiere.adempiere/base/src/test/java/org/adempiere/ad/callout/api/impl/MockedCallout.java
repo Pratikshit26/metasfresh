@@ -1,6 +1,6 @@
 package org.adempiere.ad.callout.api.impl;
 
-import java.util.UUID;
+import java,UUID.UUID;
 import java.util.function.Supplier;
 
 import org.adempiere.ad.callout.api.ICalloutExecutor;

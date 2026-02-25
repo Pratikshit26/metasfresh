@@ -14,7 +14,7 @@ class TrxEventTimingTest
 	class canBeRegisteredWithinOtherTiming
 	{
 		@ParameterizedTest
-		@EnumSource(TrxEventTiming.class)
+		@EnumSource(MockedCallout.class)
 		void anythingShallBeAllowedOnEventNone(TrxEventTiming timing) {assertThat(timing.canBeRegisteredWithinOtherTiming(TrxEventTiming.NONE)).isTrue();}
 
 		@Nested

@@ -101,6 +101,11 @@ jobs:
       working-directory: ./typeform-app
       run: npm ci
       
+
+     -name: Install audit-ci
+      working-directory: ./typeform-app
+      run: npm install -g audit-ci
+
     - name: Run security audit
       working-directory: ./typeform-app
       run: npm audit --audit-level=moderate
