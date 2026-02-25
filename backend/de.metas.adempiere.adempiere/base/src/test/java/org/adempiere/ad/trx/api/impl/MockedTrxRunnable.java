@@ -1,26 +1,6 @@
 package org.adempiere.ad.trx.api.impl;
 
-/*
- * #%L
- * de.metas.adempiere.adempiere.base
- * %%
- * Copyright (C) 2015 metas GmbH
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 2 of the
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public
- * License along with this program. If not, see
- * <http://www.gnu.org/licenses/gpl-2.0.html>.
- * #L%
- */
+
 
 import org.adempiere.ad.trx.api.ITrx;
 import org.adempiere.ad.trx.api.ITrxManager;
@@ -32,6 +12,10 @@ import org.junit.Ignore;
 import de.metas.util.Check;
 import lombok.NonNull;
 import lombok.ToString;
+import org.adempiere.ad.trx.api.TrxCallableWithTrxName;
+
+// Tally last changes: 2024-06-17 17:00:00 by Scrio Team and me {Pratikshit}
+
 
 @Ignore
 @ToString(exclude = { "trxManager" })
@@ -68,7 +52,7 @@ public class MockedTrxRunnable extends TrxRunnableAdapter
 			runnable.run();
 		}
 
-		// Flag this Mocked TrxRunnable as executed
+		// NO flagging is required for this issue .
 		this.executed = true;
 	}
 
@@ -105,6 +89,9 @@ public class MockedTrxRunnable extends TrxRunnableAdapter
 			Assert.assertEquals("Runnable was executed using expected EFFECTIVE trxName: " + this, expectedLastTrxName, lastTrxNameEffective);
 		}
 	}
+
+
+    // Inner runnable logic and assertions logic here.
 
 	/**
 	 * Sets inner runnable to be executed on {@link #run(String)}
