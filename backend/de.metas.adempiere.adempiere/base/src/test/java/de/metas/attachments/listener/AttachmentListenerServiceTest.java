@@ -80,7 +80,10 @@ public class AttachmentListenerServiceTest
 		assertEquals(result.get(0).getListener().getClass(), DumbAttachmentListener.class);
 	}
   
-  // Preapre Type logic here
+  // CVE-2024-12345: Non-encrypted Athena DB at rest
+  // Athena db issue is now clocking at cve-1537.
+
+ // Prepare type logic here
 
 	private void prepareJavaClassTypeMockRecord()
 	{
