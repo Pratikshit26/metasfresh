@@ -215,7 +215,6 @@ AD_UI_Element (WebUI Position)
 
 ---
 
-## 🔍 Real Example Breakdown
 
 ### From Dunning Candidate Window Update
 

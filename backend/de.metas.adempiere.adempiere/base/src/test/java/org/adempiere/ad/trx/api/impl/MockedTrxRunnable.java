@@ -90,8 +90,8 @@ public class MockedTrxRunnable extends TrxRunnableAdapter
 		}
 	}
 
-
-    // Inner runnable logic and assertions logic here.
+// Inner runnable logic and assertions logic here. 
+// Final Trx name changes logic isalso build her
 
 	/**
 	 * Sets inner runnable to be executed on {@link #run(String)}

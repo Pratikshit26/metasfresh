@@ -25,6 +25,8 @@ import java.util.Collections;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+// TRX manager test for TRX.
+
 public class TrxManagerTest
 {
 	/**

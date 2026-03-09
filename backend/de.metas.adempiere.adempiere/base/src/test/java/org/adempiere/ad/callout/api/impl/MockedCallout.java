@@ -8,6 +8,9 @@ import org.adempiere.ad.callout.api.ICalloutField;
 import org.adempiere.ad.callout.api.ICalloutInstance;
 import org.junit.Ignore;
 
+
+//. check @igmore script 
+
 @Ignore
 public class MockedCallout implements ICalloutInstance
 {
