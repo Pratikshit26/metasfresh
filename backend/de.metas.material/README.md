@@ -132,7 +132,7 @@ Now someone creates a purchase order with:
 - quantity, product and warehouse from the receipt schedule
 - timestamp=the receipt schedule's DatePromised
 
-=> the system then creates a candidate "4_stock" which is the _parent_ of "3_supply", with
+=> the system then creates a candidate "4*stock" which is the \_parent* of "3_supply", with
 
 - link to the receipt schedule
 - type=`stock`

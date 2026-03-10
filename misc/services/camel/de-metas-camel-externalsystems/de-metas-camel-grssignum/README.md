@@ -98,7 +98,7 @@
     - first the process will invoke `api/v2/products/orgCode` with `JsonRequestProductUpsert` as payload to upsert the product ( making sure the latest version of that product is present in metasfresh)
     - then it invokes the endpoint `api/v2/bom/version/{orgCode}` with `JsonBOMCreateRequest` as payload to push the actual bom formula
 
-  1.`JsonBOM` - all `metasfresh-column` values refer to `M_Product` columns except the last one that refers to `C_BPartner_Product`
+    1.`JsonBOM` - all `metasfresh-column` values refer to `M_Product` columns except the last one that refers to `C_BPartner_Product`
 
 - metasfresh-json => `JsonRequestProductUpsert`
 

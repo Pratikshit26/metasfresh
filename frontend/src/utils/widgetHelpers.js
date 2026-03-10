@@ -64,8 +64,7 @@ export function getClassNames({ icon, forcedPrimary } = {}) {
       !validStatus.initialValue &&
       !isFocused,
     [`text-xs-${gridAlign}`]: gridAlign,
-    [`input-${type === "primary" || forcedPrimary ? "primary" : "secondary"}`]:
-      true,
+    [`input-${type === "primary" || forcedPrimary ? "primary" : "secondary"}`]: true,
     [`pulse-${updated ? "on" : "off"}`]: true,
     "input-table": rowId && !isModal,
   });

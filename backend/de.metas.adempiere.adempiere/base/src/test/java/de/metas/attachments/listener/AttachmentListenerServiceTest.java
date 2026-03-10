@@ -89,7 +89,7 @@ public class AttachmentListenerServiceTest
 	};
 
 
-	// Preapre for AD. table 
+	// Preapre for AD. table logic below
 
 	private void prepareJavaClassMockRecord()
 	{
@@ -118,8 +118,8 @@ public class AttachmentListenerServiceTest
 	}
 
 	// Prepare the attachement listner record which will link with the ad.
+    // PreapreAttachement logic
 
-    // PreapreAttachement Record Listner 
 	private void prepareAttachmentListenerMockRecord()
 	{
 		final I_AD_Table_AttachmentListener mockRecord = InterfaceWrapperHelper.newInstance(I_AD_Table_AttachmentListener.class);

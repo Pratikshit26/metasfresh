@@ -11,7 +11,7 @@
 
 metasfresh is a responsive, Free and Open Source ERP System. Our aim is to create fast and easy-to-use enterprise software with an outstanding user experience.
 
-> ****We do Open Source ERP****
+> \***\*We do Open Source ERP\*\***
 
 Equipped with wide and detailed functionality, metasfresh fits for companies from industry and trade that are searching business software that provides high scalability and flexibility.
 
