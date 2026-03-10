@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import CostPrice from './CostPrice';
+import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
+import cx from "classnames";
+import CostPrice from "./CostPrice";
 
 const CostPriceRange = forwardRef((props, ref) => {
   const {
@@ -28,7 +28,7 @@ const CostPriceRange = forwardRef((props, ref) => {
         value={valueFrom}
         precision={precision}
         autoComplete={autoComplete}
-        className={cx(className, 'input-range-from')}
+        className={cx(className, "input-range-from")}
         disabled={disabled}
         placeholder={placeholder}
         tabIndex={tabIndex}
@@ -44,7 +44,7 @@ const CostPriceRange = forwardRef((props, ref) => {
         value={valueTo}
         precision={precision}
         autoComplete={autoComplete}
-        className={cx(className, 'input-range-to')}
+        className={cx(className, "input-range-to")}
         disabled={disabled}
         placeholder={placeholder}
         tabIndex={tabIndex}
@@ -58,7 +58,7 @@ const CostPriceRange = forwardRef((props, ref) => {
   );
 });
 
-CostPriceRange.displayName = 'CostPriceRange';
+CostPriceRange.displayName = "CostPriceRange";
 CostPriceRange.propTypes = {
   rank: PropTypes.string,
   valueFrom: PropTypes.string,

@@ -15,108 +15,112 @@ import { computeId } from '../../utils/testing_support';
 import { useMobileLocation } from '../../hooks/useMobileLocation';
 
 export const ApplicationLayout = ({ applicationId, Component }) => {
-  const history = useMobileNavigation();
+    const history = useMobileNavigation();
 
-  //
-  // If the required process was not loaded, then redirect to home
-  const redirectToHome = isWFProcessRequiredButNotLoaded();
-  useEffect(() => {
+    //
+    // If the required process was not loaded, then redirect to home
+    const redirectToHome = isWFProcessRequiredButNotLoaded();
+    useEffect(() => {
+        if (redirectToHome) {
+            history.goHome();
+        }
+    }, [redirectToHome]);
+
+    const applicationInfo = useApplicationInfo({ applicationId });
+    const { screenId, caption, homeLocation } = useNavigationInfoFromHeaders();
+    const captionEffective = caption ? caption : applicationInfo.caption;
+
+    useEffect(() => {
+        document.title = captionEffective;
+    }, [captionEffective]);
+
+    useUITraceLocationChange();
+
     if (redirectToHome) {
-      history.goHome();
+        return null;
     }
-  }, [redirectToHome]);
 
-  const applicationInfo = useApplicationInfo({ applicationId });
-  const { screenId, caption, homeLocation } = useNavigationInfoFromHeaders();
-  const captionEffective = caption ? caption : applicationInfo.caption;
+    if (isApplicationFullScreen(applicationId)) {
+        return (
+            <div className="app-container app-container-fullscreen">
+                <Component />
+                <ScreenToaster />
+            </div>
+        );
+    }
 
-  useEffect(() => {
-    document.title = captionEffective;
-  }, [captionEffective]);
-
-  useUITraceLocationChange();
-
-  if (redirectToHome) {
-    return null;
-  }
-
-  if (isApplicationFullScreen(applicationId)) {
     return (
-      <div className="app-container app-container-fullscreen">
-        <Component />
-        <ScreenToaster />
-      </div>
+        <div id={screenId} className="app-container">
+            <div className="app-header">
+                <div className="columns is-mobile">
+                    <div className="column is-2 app-icon">
+                        <span className="icon">
+                            <i className={applicationInfo.iconClassNames} />
+                        </span>
+                    </div>
+                    <div className="column is-10 app-caption">
+                        <span>{captionEffective}</span>
+                    </div>
+                </div>
+            </div>
+            <div className="app-content">
+                <ViewHeader />
+                <Component />
+                <ScreenToaster />
+            </div>
+            <div className="app-footer">
+                <div className="columns is-mobile">
+                    <div className="column is-half">
+                        <BottomButton
+                            captionKey="general.Back"
+                            icon="fas fa-chevron-left"
+                            onClick={() => history.goBack()}
+                        />
+                    </div>
+                    <div className="column is-half">
+                        <BottomButton
+                            captionKey="general.Home"
+                            icon={homeLocation.iconClassName}
+                            onClick={() => history.push(homeLocation.location)}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
     );
-  }
-
-  return (
-    <div id={screenId} className="app-container">
-      <div className="app-header">
-        <div className="columns is-mobile">
-          <div className="column is-2 app-icon">
-            <span className="icon">
-              <i className={applicationInfo.iconClassNames} />
-            </span>
-          </div>
-          <div className="column is-10 app-caption">
-            <span>{captionEffective}</span>
-          </div>
-        </div>
-      </div>
-      <div className="app-content">
-        <ViewHeader />
-        <Component />
-        <ScreenToaster />
-      </div>
-      <div className="app-footer">
-        <div className="columns is-mobile">
-          <div className="column is-half">
-            <BottomButton captionKey="general.Back" icon="fas fa-chevron-left" onClick={() => history.goBack()} />
-          </div>
-          <div className="column is-half">
-            <BottomButton
-              captionKey="general.Home"
-              icon={homeLocation.iconClassName}
-              onClick={() => history.push(homeLocation.location)}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 };
 
 ApplicationLayout.propTypes = {
-  applicationId: PropTypes.string,
-  Component: PropTypes.any.isRequired,
+    applicationId: PropTypes.string,
+    Component: PropTypes.any.isRequired,
 };
 
 const BottomButton = ({ captionKey, icon, onClick: onClickParam }) => {
-  const id = computeId({ captionKey });
-  const caption = trl(captionKey);
-  const onClick = uiTrace.traceFunction(onClickParam, { eventName: 'buttonClick', captionKey, caption, icon });
+    const id = computeId({ captionKey });
+    const caption = trl(captionKey);
+    const onClick = uiTrace.traceFunction(onClickParam, { eventName: 'buttonClick', captionKey, caption, icon });
 
-  return (
-    <button id={id} className="button is-fullwidth" onClick={onClick}>
-      <span className="icon">
-        <i className={icon} />
-      </span>
-      <span>{caption}</span>
-    </button>
-  );
+    return (
+        <button id={id} className="button is-fullwidth" onClick={onClick}>
+            <span className="icon">
+                <i className={icon} />
+            </span>
+            <span>{caption}</span>
+        </button>
+    );
 };
 BottomButton.propTypes = {
-  captionKey: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+    captionKey: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 const isWFProcessRequiredButNotLoaded = () => {
-  const { wfProcessId } = useMobileLocation();
-  if (!wfProcessId) {
-    return false;
-  }
+    const { wfProcessId } = useMobileLocation();
+    if (!wfProcessId) {
+        return false;
+    }
 
-  const isWFProcessLoaded = useSelector((state) => isWfProcessLoaded(state, wfProcessId));
-  return !isWFProcessLoaded;
+    const isWFProcessLoaded = useSelector((state) => isWfProcessLoaded(state, wfProcessId));
+    return !isWFProcessLoaded;
 };

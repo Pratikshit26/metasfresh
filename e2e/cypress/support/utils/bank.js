@@ -25,9 +25,9 @@ export class Bank {
   }
 }
 function applyBank(bank) {
-  describe(`Create new Bank ${bank.name}`, function() {
-    cy.visitWindow('540336', 'NEW');
-    cy.writeIntoStringField('Name', bank.name);
-    cy.writeIntoStringField('RoutingNo', bank.BLZ);
+  describe(`Create new Bank ${bank.name}`, function () {
+    cy.visitWindow("540336", "NEW");
+    cy.writeIntoStringField("Name", bank.name);
+    cy.writeIntoStringField("RoutingNo", bank.BLZ);
   });
 }

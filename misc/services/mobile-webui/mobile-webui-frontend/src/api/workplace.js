@@ -31,49 +31,49 @@ import { useApplicationInfo } from '../reducers/applications';
 const workplaceAPIBase = `${apiBasePath}/workplace`;
 
 export const getCurrentWorkplaceInfo = () => {
-  return axios.get(`${workplaceAPIBase}`).then(unboxAxiosResponse);
+    return axios.get(`${workplaceAPIBase}`).then(unboxAxiosResponse);
 };
 
 export const useCurrentWorkplace = ({ applicationId }) => {
-  const { requiresWorkplace: requiresWorkplaceIfAvailable } = useApplicationInfo({ applicationId });
-  const [isLoading, setIsLoading] = useState(true);
-  const [isWorkplaceRequired, setIsWorkplaceRequired] = useState(false);
-  const [workplace, setWorkplace] = useState(null);
+    const { requiresWorkplace: requiresWorkplaceIfAvailable } = useApplicationInfo({ applicationId });
+    const [isLoading, setIsLoading] = useState(true);
+    const [isWorkplaceRequired, setIsWorkplaceRequired] = useState(false);
+    const [workplace, setWorkplace] = useState(null);
 
-  useEffect(() => {
-    if (requiresWorkplaceIfAvailable) {
-      setIsLoading(true);
-      getCurrentWorkplaceInfo()
-        .then(({ workplaceRequired, assignedWorkplace }) => {
-          setIsWorkplaceRequired(workplaceRequired);
-          setWorkplace(assignedWorkplace);
-        })
-        .catch((axiosError) => toastError({ axiosError }))
-        .finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
-    }
-  }, []);
+    useEffect(() => {
+        if (requiresWorkplaceIfAvailable) {
+            setIsLoading(true);
+            getCurrentWorkplaceInfo()
+                .then(({ workplaceRequired, assignedWorkplace }) => {
+                    setIsWorkplaceRequired(workplaceRequired);
+                    setWorkplace(assignedWorkplace);
+                })
+                .catch((axiosError) => toastError({ axiosError }))
+                .finally(() => setIsLoading(false));
+        } else {
+            setIsLoading(false);
+        }
+    }, []);
 
-  const setWorkplaceByQRCode = (qrCode) => {
-    const { workplaceId } = parseWorkplaceQRCodeString(qrCode);
-    assignWorkplace(workplaceId)
-      .then((workplace) => setWorkplace(workplace))
-      .catch((axiosError) => toastError({ axiosError }));
-  };
+    const setWorkplaceByQRCode = (qrCode) => {
+        const { workplaceId } = parseWorkplaceQRCodeString(qrCode);
+        assignWorkplace(workplaceId)
+            .then((workplace) => setWorkplace(workplace))
+            .catch((axiosError) => toastError({ axiosError }));
+    };
 
-  return {
-    isWorkplaceLoading: isLoading,
-    isWorkplaceRequired,
-    workplace,
-    setWorkplaceByQRCode,
-  };
+    return {
+        isWorkplaceLoading: isLoading,
+        isWorkplaceRequired,
+        workplace,
+        setWorkplaceByQRCode,
+    };
 };
 
 export const getWorkplaceByQRCode = (qrCode) => {
-  return axios.post(`${workplaceAPIBase}/byQRCode`, { qrCode }).then(unboxAxiosResponse);
+    return axios.post(`${workplaceAPIBase}/byQRCode`, { qrCode }).then(unboxAxiosResponse);
 };
 
 export const assignWorkplace = (workplaceId) => {
-  return axios.post(`${apiBasePath}/workplace/${workplaceId}/assign`).then(unboxAxiosResponse);
+    return axios.post(`${apiBasePath}/workplace/${workplaceId}/assign`).then(unboxAxiosResponse);
 };

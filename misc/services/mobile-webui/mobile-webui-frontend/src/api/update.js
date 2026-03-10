@@ -6,11 +6,11 @@ import { unboxAxiosResponse } from '../utils';
  * @return {Promise<string>} latest server version
  */
 export function getServerVersion() {
-  return axios
-    .get(`${apiBasePath}/version`, {
-      headers: {
-        'Cache-Control': 'no-cache',
-      },
-    })
-    .then((response) => unboxAxiosResponse(response));
+    return axios
+        .get(`${apiBasePath}/version`, {
+            headers: {
+                'Cache-Control': 'no-cache',
+            },
+        })
+        .then((response) => unboxAxiosResponse(response));
 }

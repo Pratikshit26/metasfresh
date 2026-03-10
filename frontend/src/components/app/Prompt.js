@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import ModalContextShortcuts from '../keyshortcuts/ModalContextShortcuts';
+import ModalContextShortcuts from "../keyshortcuts/ModalContextShortcuts";
 
 /**
  * @file Class based component.
@@ -80,8 +80,8 @@ class Prompt extends Component {
           </div>
           <div className="panel-groups-header panel-modal-header panel-prompt-header panel-prompt-footer">
             <div className="prompt-button-wrapper">
-              {cancel ? this.renderCancelButton() : ''}
-              {submit ? this.renderSubmitButton() : ''}
+              {cancel ? this.renderCancelButton() : ""}
+              {submit ? this.renderSubmitButton() : ""}
             </div>
           </div>
         </div>

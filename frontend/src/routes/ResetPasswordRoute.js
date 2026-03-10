@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import queryString from 'query-string';
+import React, { useState } from "react";
+import { Route, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import queryString from "query-string";
 
-import { useAuth } from '../hooks/useAuth';
-import useConstructor from '../hooks/useConstructor';
-import { getResetPasswordInfo } from '../api/login';
-import LoginRoute from './LoginRoute';
+import { useAuth } from "../hooks/useAuth";
+import useConstructor from "../hooks/useConstructor";
+import { getResetPasswordInfo } from "../api/login";
+import LoginRoute from "./LoginRoute";
 
-import Translation from '../components/Translation';
+import Translation from "../components/Translation";
 
 /**
  * @file Functional component.
@@ -27,7 +27,7 @@ const ResetPasswordRoute = ({ location, ...rest }) => {
   useConstructor(() => {
     getResetPasswordInfo(token)
       .then(() => Translation.getMessages())
-      .catch((error) => console.log('Got error', error))
+      .catch((error) => console.log("Got error", error))
       .finally(() => setPending(false));
   });
 

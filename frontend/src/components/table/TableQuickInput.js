@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import onClickOutside from 'react-onclickoutside';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import onClickOutside from "react-onclickoutside";
 import {
   completeQuickInput,
   deleteQuickInput,
@@ -9,9 +9,9 @@ import {
   fetchQuickInputLayout,
   patchQuickInput,
   updateQuickinputData,
-} from '../../actions/TableQuickInputActions';
+} from "../../actions/TableQuickInputActions";
 
-import WidgetWrapper from '../../containers/WidgetWrapper';
+import WidgetWrapper from "../../containers/WidgetWrapper";
 
 class TableQuickInput extends PureComponent {
   // promise with patching for queuing form submission after patch is done
@@ -78,10 +78,10 @@ class TableQuickInput extends PureComponent {
       .catch((err) => {
         if (err.response.status === 404) {
           addNotification(
-            'Batch entry error',
-            'Batch entry is not available.',
+            "Batch entry error",
+            "Batch entry is not available.",
             5000,
-            'error'
+            "error",
           );
           this.closeBatchEntry();
         }
@@ -94,7 +94,7 @@ class TableQuickInput extends PureComponent {
     }).catch(({ response }) => {
       const { error, message } = response.data;
 
-      addNotification(error, message, 5000, 'error');
+      addNotification(error, message, 5000, "error");
       // eslint-disable-next-line no-console
       console.error(error);
       this.closeBatchEntry();
@@ -143,7 +143,7 @@ class TableQuickInput extends PureComponent {
       // Focus the last active element, to allow user continuing typing.
       activeElement.focus();
 
-      return addNotification('Error', validationResult.error, 5000, 'error');
+      return addNotification("Error", validationResult.error, 5000, "error");
     }
 
     this.setState({ isSubmitPending: true });
@@ -164,7 +164,7 @@ class TableQuickInput extends PureComponent {
         if (fieldData.mandatory && !fieldData.value) {
           return {
             fieldName,
-            error: 'Mandatory fields are not filled!',
+            error: "Mandatory fields are not filled!",
           };
         }
       }
@@ -239,7 +239,7 @@ class TableQuickInput extends PureComponent {
             key={idx}
             ref={(node) => this.setWidgetWrapperElement(node, fieldNames)}
             dataSource="quick-input"
-            entity={'window'}
+            entity={"window"}
             windowType={windowId}
             tabId={tabId}
             subentity="quickInput"
@@ -359,7 +359,7 @@ TableQuickInput.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(onClickOutside(TableQuickInput));
 
 // needed for testing

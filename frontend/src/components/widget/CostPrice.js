@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { fieldValueToString } from '../../utils/tableHelpers';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import cx from "classnames";
+import { fieldValueToString } from "../../utils/tableHelpers";
 
 // NOTE: we cannot convert to functional component because we need callers need a ref to this object in order to call the focus() function.
 export default class CostPrice extends PureComponent {
@@ -45,10 +45,10 @@ export default class CostPrice extends PureComponent {
         <input
           className={cx(
             className,
-            'input-field js-input-field',
-            rank ? `input-${rank}` : null
+            "input-field js-input-field",
+            rank ? `input-${rank}` : null,
           )}
-          type={'text'}
+          type={"text"}
           value={fieldValueToString({ fieldValue: value, precision })}
           onChange={() => false}
           onFocus={this.focus}
@@ -59,7 +59,7 @@ export default class CostPrice extends PureComponent {
       return (
         <input
           ref={this.inputRef}
-          type={'number'}
+          type={"number"}
           value={value}
           autoComplete={autoComplete}
           className={cx(className, rank ? `input-${rank}` : null)}

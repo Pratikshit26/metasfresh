@@ -73,13 +73,7 @@
       "error": false,
       "reason": "new"
     },
-    "standardActions": [
-      "new",
-      "advancedEdit",
-      "email",
-      "letter",
-      "delete"
-    ]   
+    "standardActions": ["new", "advancedEdit", "email", "letter", "delete"]
   },
   "layout": {
     "elements": [

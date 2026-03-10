@@ -49,9 +49,7 @@
         "gridAlign": "left",
         "viewEditorRenderMode": "never",
         "sortable": true,
-        "restrictToMediaTypes": [
-          "screen"
-        ],
+        "restrictToMediaTypes": ["screen"],
         "fields": [
           {
             "field": "huPackingInfo",
@@ -134,9 +132,7 @@
     "supportAttributes": false,
     "supportTree": true,
     "collapsible": false,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": {
       "openOnSelect": true,
       "blurWhenOpen": false,
@@ -437,9 +433,7 @@
     "supportAttributes": true,
     "supportTree": true,
     "collapsible": false,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": null,
     "supportIncludedView": false,
     "supportIncludedViewOnSelect": null,

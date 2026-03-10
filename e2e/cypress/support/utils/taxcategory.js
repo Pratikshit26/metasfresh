@@ -32,8 +32,8 @@ export class TaxCategory {
 }
 
 function applyTaxCategory(taxCat) {
-  cy.visitWindow('138', 'NEW');
-  cy.writeIntoStringField('Name', taxCat.name);
-  cy.writeIntoStringField('Description', taxCat.description);
-  cy.selectInListField('VATType', taxCat.vatType);
+  cy.visitWindow("138", "NEW");
+  cy.writeIntoStringField("Name", taxCat.name);
+  cy.writeIntoStringField("Description", taxCat.description);
+  cy.selectInListField("VATType", taxCat.vatType);
 }

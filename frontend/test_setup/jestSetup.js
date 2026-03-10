@@ -1,17 +1,17 @@
-import 'jest-localstorage-mock';
-import Enzyme, { shallow, render, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { JSDOM } from 'jsdom';
-import EventSource from 'eventsourcemock';
-import React from "react" 
+import "jest-localstorage-mock";
+import Enzyme, { shallow, render, mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { JSDOM } from "jsdom";
+import EventSource from "eventsourcemock";
+import React from "react";
 
-React.useLayoutEffect = React.useEffect 
+React.useLayoutEffect = React.useEffect;
 
 // React 16 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() });
 // Make Enzyme functions available in all test files without importing
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>', {
-  url: 'http://localhost:3000',
+const jsdom = new JSDOM("<!doctype html><html><body></body></html>", {
+  url: "http://localhost:3000",
 });
 const { window } = jsdom;
 
@@ -44,7 +44,7 @@ global.console = {
     return div;
   }
 */
-window.HTMLDivElement.prototype.getBoundingClientRect = function() {
+window.HTMLDivElement.prototype.getBoundingClientRect = function () {
   return {
     width: 0,
     height: 0,
@@ -73,7 +73,7 @@ global.shallow = shallow;
 global.render = render;
 global.mount = mount;
 global.config = {
-  API_URL: 'http://api.test.url/rest/api',
+  API_URL: "http://api.test.url/rest/api",
   WS_URL: `ws://localhost:${serverTestPort}/ws`,
 };
 global.PLUGINS = [];

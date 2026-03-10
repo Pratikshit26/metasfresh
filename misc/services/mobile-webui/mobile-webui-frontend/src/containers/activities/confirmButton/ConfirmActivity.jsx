@@ -9,61 +9,61 @@ import { setActivityProcessing, updateWFProcess } from '../../../actions/Workflo
 import { useMobileNavigation } from '../../../hooks/useMobileNavigation';
 
 const ConfirmActivity = ({
-  applicationId,
-  wfProcessId,
-  activityId,
-  caption,
-  promptQuestion,
-  userInstructions,
-  isUserEditable,
-  isProcessing,
-  completeStatus,
-  isLastActivity,
+    applicationId,
+    wfProcessId,
+    activityId,
+    caption,
+    promptQuestion,
+    userInstructions,
+    isUserEditable,
+    isProcessing,
+    completeStatus,
+    isLastActivity,
 }) => {
-  const dispatch = useDispatch();
-  const history = useMobileNavigation();
-  const onUserConfirmed = () => {
-    dispatch(setActivityProcessing({ wfProcessId, activityId, processing: true }));
-    postUserConfirmation({ wfProcessId, activityId })
-      .then((wfProcess) => {
-        dispatch(updateWFProcess({ wfProcess }));
-      })
-      .then(() => {
-        if (isLastActivity) {
-          history.push(appLaunchersLocation({ applicationId }));
-        }
-      })
-      .catch((axiosError) => toastError({ axiosError }))
-      .finally(() => dispatch(setActivityProcessing({ wfProcessId, activityId, processing: false })));
-  };
+    const dispatch = useDispatch();
+    const history = useMobileNavigation();
+    const onUserConfirmed = () => {
+        dispatch(setActivityProcessing({ wfProcessId, activityId, processing: true }));
+        postUserConfirmation({ wfProcessId, activityId })
+            .then((wfProcess) => {
+                dispatch(updateWFProcess({ wfProcess }));
+            })
+            .then(() => {
+                if (isLastActivity) {
+                    history.push(appLaunchersLocation({ applicationId }));
+                }
+            })
+            .catch((axiosError) => toastError({ axiosError }))
+            .finally(() => dispatch(setActivityProcessing({ wfProcessId, activityId, processing: false })));
+    };
 
-  return (
-    <div className="mt-5">
-      <ConfirmButton
-        id={isLastActivity ? 'last-confirm-button' : null}
-        caption={caption}
-        promptQuestion={promptQuestion}
-        userInstructions={userInstructions}
-        isUserEditable={isUserEditable}
-        isProcessing={isProcessing}
-        completeStatus={completeStatus}
-        onUserConfirmed={onUserConfirmed}
-      />
-    </div>
-  );
+    return (
+        <div className="mt-5">
+            <ConfirmButton
+                id={isLastActivity ? 'last-confirm-button' : null}
+                caption={caption}
+                promptQuestion={promptQuestion}
+                userInstructions={userInstructions}
+                isUserEditable={isUserEditable}
+                isProcessing={isProcessing}
+                completeStatus={completeStatus}
+                onUserConfirmed={onUserConfirmed}
+            />
+        </div>
+    );
 };
 
 ConfirmActivity.propTypes = {
-  applicationId: PropTypes.string.isRequired,
-  wfProcessId: PropTypes.string.isRequired,
-  activityId: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
-  userInstructions: PropTypes.string,
-  promptQuestion: PropTypes.string,
-  isUserEditable: PropTypes.bool.isRequired,
-  isProcessing: PropTypes.bool,
-  completeStatus: PropTypes.string.isRequired,
-  isLastActivity: PropTypes.bool.isRequired,
+    applicationId: PropTypes.string.isRequired,
+    wfProcessId: PropTypes.string.isRequired,
+    activityId: PropTypes.string.isRequired,
+    caption: PropTypes.string.isRequired,
+    userInstructions: PropTypes.string,
+    promptQuestion: PropTypes.string,
+    isUserEditable: PropTypes.bool.isRequired,
+    isProcessing: PropTypes.bool,
+    completeStatus: PropTypes.string.isRequired,
+    isLastActivity: PropTypes.bool.isRequired,
 };
 
 export default ConfirmActivity;

@@ -10181,9 +10181,7 @@
   "mainTable": true,
   "tabIndex": 0,
   "indentSupported": false,
-  "defaultSelected": [
-    "1000194"
-  ],
+  "defaultSelected": ["1000194"],
   "openIncludedViewOnSelect": null,
   "blurOnIncludedView": null,
   "toggleState": "grid",
@@ -10213,10 +10211,7 @@
   "modalVisible": false,
   "isGerman": false,
   "activeSort": false,
-  "eventTypes": [
-    "mousedown",
-    "touchstart"
-  ],
+  "eventTypes": ["mousedown", "touchstart"],
   "outsideClickIgnoreClass": "ignore-react-onclickoutside",
   "preventDefault": false,
   "stopPropagation": false

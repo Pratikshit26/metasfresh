@@ -9,43 +9,43 @@ import { useScreenDefinition } from '../../../hooks/useScreenDefinition';
 import { distributionStepScreenLocation } from '../../../routes/distribution';
 
 const DistributionStepDropToScreen = () => {
-  const { history, wfProcessId, activityId, lineId, stepId } = useScreenDefinition({
-    screenId: 'DistributionStepDropToScreen',
-    back: distributionStepScreenLocation,
-  });
-
-  const { locatorQRCode } = useSelector((state) =>
-    getPropsFromState({ state, wfProcessId, activityId, lineId, stepId })
-  );
-
-  const dispatch = useDispatch();
-
-  const onResult = () => {
-    return postDistributionDropTo({
-      wfProcessId,
-      activityId,
-      stepId,
-    }).then((wfProcess) => {
-      dispatch(updateWFProcess({ wfProcess }));
-      history.goBack();
+    const { history, wfProcessId, activityId, lineId, stepId } = useScreenDefinition({
+        screenId: 'DistributionStepDropToScreen',
+        back: distributionStepScreenLocation,
     });
-  };
 
-  return (
-    <ScanHUAndGetQtyComponent
-      eligibleBarcode={locatorQRCode}
-      invalidBarcodeMessageKey={'activities.distribution.invalidLocatorQRCode'}
-      onResult={onResult}
-    />
-  );
+    const { locatorQRCode } = useSelector((state) =>
+        getPropsFromState({ state, wfProcessId, activityId, lineId, stepId }),
+    );
+
+    const dispatch = useDispatch();
+
+    const onResult = () => {
+        return postDistributionDropTo({
+            wfProcessId,
+            activityId,
+            stepId,
+        }).then((wfProcess) => {
+            dispatch(updateWFProcess({ wfProcess }));
+            history.goBack();
+        });
+    };
+
+    return (
+        <ScanHUAndGetQtyComponent
+            eligibleBarcode={locatorQRCode}
+            invalidBarcodeMessageKey={'activities.distribution.invalidLocatorQRCode'}
+            onResult={onResult}
+        />
+    );
 };
 
 const getPropsFromState = ({ state, wfProcessId, activityId, lineId, stepId }) => {
-  const step = getStepById(state, wfProcessId, activityId, lineId, stepId);
+    const step = getStepById(state, wfProcessId, activityId, lineId, stepId);
 
-  return {
-    locatorQRCode: step.dropToLocator.qrCode,
-  };
+    return {
+        locatorQRCode: step.dropToLocator.qrCode,
+    };
 };
 
 export default DistributionStepDropToScreen;

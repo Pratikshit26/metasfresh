@@ -38,10 +38,10 @@ export class SysConfig {
 }
 
 function applySysConfig(sysConfig) {
-  describe(`Sysconfig with name=${sysConfig.name}`, function() {
-    cy.visit('/window/50006/NEW');
+  describe(`Sysconfig with name=${sysConfig.name}`, function () {
+    cy.visit("/window/50006/NEW");
 
-    cy.writeIntoStringField('Name', sysConfig.name);
-    cy.writeIntoStringField('Value', sysConfig.value);
+    cy.writeIntoStringField("Name", sysConfig.name);
+    cy.writeIntoStringField("Value", sysConfig.value);
   });
 }

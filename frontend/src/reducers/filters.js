@@ -1,7 +1,7 @@
-import { original, produce } from 'immer';
-import { createCachedSelector } from 're-reselect';
+import { original, produce } from "immer";
+import { createCachedSelector } from "re-reselect";
 
-import * as types from '../constants/ActionTypes';
+import * as types from "../constants/ActionTypes";
 
 const EMPTY_OBJECT = {};
 
@@ -32,7 +32,7 @@ export function getFilterFromState(state, filterId) {
  */
 export const getCachedFilter = createCachedSelector(
   getFilterFromState,
-  (filters) => filters
+  (filters) => filters,
 )((_state, filterId) => filterId);
 
 /**
@@ -92,7 +92,7 @@ const reducer = produce((draftState, action) => {
       if (currentFilters) {
         const filtersAfterClearing = currentFilters.filtersActive
           ? currentFilters.filtersActive.filter(
-              (filterItem) => filterItem.filterId !== data.filterId
+              (filterItem) => filterItem.filterId !== data.filterId,
             )
           : [];
         draftState[id].filtersActive = filtersAfterClearing;

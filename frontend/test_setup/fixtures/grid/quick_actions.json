@@ -20,10 +20,7 @@
       "processId": "ADP_540911",
       "caption": "Fact Account Repost",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions",
-        "ViewActionsMenu"
-      ],
+      "displayPlaces": ["ViewQuickActions", "ViewActionsMenu"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -37,9 +34,7 @@
       "processId": "ADP_540809",
       "caption": "Open HU selection window",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "evaluateDuration": "218.7 μs",
@@ -49,9 +44,7 @@
       "processId": "ADP_540808",
       "caption": "Pick to existing HU",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -63,9 +56,7 @@
       "processId": "ADP_540807",
       "caption": "Pick to new HU",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -77,9 +68,7 @@
       "processId": "ADP_540948",
       "caption": "Picking TU Label For HU",
       "description": "Picking TU Label For HU",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -91,9 +80,7 @@
       "processId": "ADP_540810",
       "caption": "Process picking",
       "description": "Associates the picking records with their respective shipment schedule records such that shipments can be created.",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -105,9 +92,7 @@
       "processId": "ADP_540815",
       "caption": "Reactivate picking",
       "description": "Un-associates the selected picking data with their respective shipment schedules.",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -119,9 +104,7 @@
       "processId": "ADP_540805",
       "caption": "Unpick HU",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -133,9 +116,7 @@
       "processId": "ADP_540827",
       "caption": "Zurück in Quell-HU",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,

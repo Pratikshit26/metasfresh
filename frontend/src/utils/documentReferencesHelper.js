@@ -1,4 +1,4 @@
-import { getQueryString } from '.';
+import { getQueryString } from ".";
 
 export function buildRelatedDocumentsViewUrl({
   targetWindowId,
@@ -69,7 +69,7 @@ function mergeReferencesToGroup(group, referencesToAdd) {
 
 export function mergeReferencesToReferences(
   existingReferences,
-  referencesToAdd
+  referencesToAdd,
 ) {
   if (!referencesToAdd) {
     return existingReferences;
@@ -80,7 +80,7 @@ export function mergeReferencesToReferences(
       ...accum,
       [extractUniqueKey(reference)]: reference,
     }),
-    {}
+    {},
   );
   //console.log('referencesToAddByKey', { referencesToAddByKey });
 
@@ -92,7 +92,7 @@ export function mergeReferencesToReferences(
       delete referencesToAddByKey[key];
 
       return combineReferences(existingReference, referenceToAdd);
-    }
+    },
   );
   //console.log('existingReferencesMerged', { existingReferencesMerged });
 

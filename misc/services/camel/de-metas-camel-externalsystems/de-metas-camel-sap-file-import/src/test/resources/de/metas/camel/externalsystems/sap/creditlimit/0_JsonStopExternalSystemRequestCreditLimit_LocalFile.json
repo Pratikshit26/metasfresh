@@ -9,11 +9,11 @@
   "writeAuditEndpoint": "fileFolder",
   "parameters": {
     "LocalFileRootLocation": "doesntmatter",
-    "LocalFile_CreditLimit_Target_Directory" : "doesntmatter",
+    "LocalFile_CreditLimit_Target_Directory": "doesntmatter",
     "LocalFileProcessedDirectory": "doesntmatter",
     "LocalFileErroredDirectory": "doesntmatter",
     "LocalFilePollingFrequencyInMs": 1000,
     "LocalFileCreditLimitFileNamePattern": "doesntmatter",
-    "LocalFile_ApprovedBy" : "100"
+    "LocalFile_ApprovedBy": "100"
   }
 }

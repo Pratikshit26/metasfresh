@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Loader from '../app/Loader';
-import { getTargetIndicatorsDetails } from '../../actions/DashboardActions';
-import moment from 'moment';
-import counterpart from 'counterpart';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Loader from "../app/Loader";
+import { getTargetIndicatorsDetails } from "../../actions/DashboardActions";
+import moment from "moment";
+import counterpart from "counterpart";
 
 const ELAPSED_TIME_REFRESH_INTERVAL_MILLIS = 60000;
 
@@ -43,14 +43,14 @@ class Indicator extends Component {
   componentDidMount() {
     this.interval = setInterval(
       () => this.updateRenderedLastComputedString(),
-      ELAPSED_TIME_REFRESH_INTERVAL_MILLIS
+      ELAPSED_TIME_REFRESH_INTERVAL_MILLIS,
     );
   }
 
   updateRenderedLastComputedString = () => {
     const { data } = this.props;
     const renderedLastComputedString = computeRenderedLastComputedString(
-      data?.computedTimestamp
+      data?.computedTimestamp,
     );
     return this.setState({ renderedLastComputedString });
   };
@@ -67,7 +67,7 @@ class Indicator extends Component {
         const { viewId, windowId } = detailsResp.data;
         let detailsTab = window.open(
           `${window.location.origin}/window/${windowId}?viewId=${viewId}`,
-          '_blank'
+          "_blank",
         );
         detailsTab.focus();
       });
@@ -97,7 +97,7 @@ class Indicator extends Component {
     const computedTimestamp = data ? data.computedTimestamp : null;
     const error = data ? data.error : null;
     const headerCaption =
-      typeof caption === 'string' ? caption.toUpperCase() : caption;
+      typeof caption === "string" ? caption.toUpperCase() : caption;
 
     if (loader)
       return (
@@ -109,10 +109,10 @@ class Indicator extends Component {
     return (
       <div
         className={
-          'indicator js-indicator ' +
-          (editmode || framework ? 'indicator-draggable ' : '')
+          "indicator js-indicator " +
+          (editmode || framework ? "indicator-draggable " : "")
         }
-        style={fullWidth ? { width: '100%' } : {}}
+        style={fullWidth ? { width: "100%" } : {}}
       >
         <div>
           <div className="indicator-kpi-caption">{headerCaption}</div>
@@ -121,13 +121,13 @@ class Indicator extends Component {
               className="indicator-details-link"
               onClick={() => this.showDetails(id)}
             >
-              {counterpart.translate('dashboard.item.details')}
+              {counterpart.translate("dashboard.item.details")}
             </div>
           )}
         </div>
         <div className="indicator-data">
           <div className="indicator-amount">{amount || 0}</div>
-          <div className="indicator-unit">{unit || ''}</div>
+          <div className="indicator-unit">{unit || ""}</div>
         </div>
         <div className="indocator-footer">
           {renderedLastComputedString && (
@@ -136,7 +136,7 @@ class Indicator extends Component {
                 className="indicator-fuzzy"
                 data-toggle="tooltip"
                 data-placement="top"
-                title={moment(computedTimestamp).format('LLL z')}
+                title={moment(computedTimestamp).format("LLL z")}
               >
                 <i className="meta-icon-reload" />
                 {renderedLastComputedString}

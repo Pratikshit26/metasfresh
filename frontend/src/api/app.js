@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export function getNotificationsRequest() {
   return axios.get(`${config.API_URL}/notifications/all?limit=20`);
@@ -15,42 +15,42 @@ export function pathRequest(nodeId) {
 export function nodePathsRequest(nodeId, limit) {
   return axios.get(
     config.API_URL +
-      '/menu/node/' +
+      "/menu/node/" +
       nodeId +
-      '?depth=2' +
-      (limit ? '&childrenLimit=' + limit : '')
+      "?depth=2" +
+      (limit ? "&childrenLimit=" + limit : ""),
   );
 }
 
 export function elementPathRequest(pathType, elementId) {
   return axios.get(
     config.API_URL +
-      '/menu/elementPath?type=' +
+      "/menu/elementPath?type=" +
       pathType +
-      '&elementId=' +
+      "&elementId=" +
       elementId +
-      '&inclusive=true'
+      "&inclusive=true",
   );
 }
 
 export function queryPathsRequest(query, limit, child) {
   return axios.get(
     config.API_URL +
-      '/menu/queryPaths?nameQuery=' +
+      "/menu/queryPaths?nameQuery=" +
       query +
-      '&silentError=true' +
-      (limit ? '&childrenLimit=' + limit : '') +
-      (child ? '&childrenInclusive=true' : '')
+      "&silentError=true" +
+      (limit ? "&childrenLimit=" + limit : "") +
+      (child ? "&childrenInclusive=true" : ""),
   );
 }
 
 export function rootRequest(limit, depth = 0, onlyFavorites) {
   return axios.get(
     config.API_URL +
-      '/menu/root?depth=' +
+      "/menu/root?depth=" +
       depth +
-      (limit ? '&childrenLimit=' + limit : '') +
-      (onlyFavorites ? '&favorites=true' : '')
+      (limit ? "&childrenLimit=" + limit : "") +
+      (onlyFavorites ? "&favorites=true" : ""),
   );
 }
 

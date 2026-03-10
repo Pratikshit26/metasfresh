@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import { getLanguageSpecific } from './utils';
+import { getLanguageSpecific } from "./utils";
 
 export class Product {
   constructor() {
@@ -93,59 +93,67 @@ export class Product {
 
   static applyProduct(product) {
     cy.log(`Create new Product ${product.name}`);
-    cy.visitWindow('140', 'NEW');
+    cy.visitWindow("140", "NEW");
 
-    cy.writeIntoStringField('Name', product.name);
+    cy.writeIntoStringField("Name", product.name);
 
-    cy.setCheckBoxValue('IsStocked', product.isStocked);
-    cy.setCheckBoxValue('IsPurchased', product.isPurchased);
-    cy.setCheckBoxValue('IsSold', product.isSold);
-    cy.setCheckBoxValue('IsDiverse', product.isDiverse);
+    cy.setCheckBoxValue("IsStocked", product.isStocked);
+    cy.setCheckBoxValue("IsPurchased", product.isPurchased);
+    cy.setCheckBoxValue("IsSold", product.isSold);
+    cy.setCheckBoxValue("IsDiverse", product.isDiverse);
 
-    cy.getStringFieldValue('ProductType').then(productTypeValue => {
-      const productType = getLanguageSpecific(product, 'productType');
+    cy.getStringFieldValue("ProductType").then((productTypeValue) => {
+      const productType = getLanguageSpecific(product, "productType");
 
       if (productType !== productTypeValue) {
-        cy.resetListValue('ProductType');
-        cy.selectInListField('ProductType', productType);
+        cy.resetListValue("ProductType");
+        cy.selectInListField("ProductType", productType);
       }
     });
 
-    cy.selectInListField('M_Product_Category_ID', product.productCategory);
+    cy.selectInListField("M_Product_Category_ID", product.productCategory);
 
-    cy.writeIntoStringField('Description', product.description);
+    cy.writeIntoStringField("Description", product.description);
 
-    cy.getStringFieldValue('C_UOM_ID').then(uomValue => {
-      const c_uom = getLanguageSpecific(product, 'c_uom');
+    cy.getStringFieldValue("C_UOM_ID").then((uomValue) => {
+      const c_uom = getLanguageSpecific(product, "c_uom");
 
       if (c_uom && c_uom !== uomValue) {
-        cy.selectInListField('C_UOM_ID', c_uom);
+        cy.selectInListField("C_UOM_ID", c_uom);
       }
     });
 
-    product.packingInstructions.forEach(pi => {
-      cy.selectTab('M_HU_PI_Item_Product');
+    product.packingInstructions.forEach((pi) => {
+      cy.selectTab("M_HU_PI_Item_Product");
       cy.pressAddNewButton();
-      cy.selectInListField('M_HU_PI_Item_ID', pi, true);
-      cy.writeIntoStringField('Qty', 10, true, null, true);
-      cy.selectDateViaPicker('ValidFrom');
+      cy.selectInListField("M_HU_PI_Item_ID", pi, true);
+      cy.writeIntoStringField("Qty", 10, true, null, true);
+      cy.selectDateViaPicker("ValidFrom");
       cy.pressDoneButton();
     });
     cy.expectNumberOfRows(product.packingInstructions.length);
 
     if (product.businessPartner != null) {
-      cy.selectTab('C_BPartner_Product');
+      cy.selectTab("C_BPartner_Product");
       cy.pressAddNewButton();
-      cy.writeIntoLookupListField('C_BPartner_ID', product.businessPartner, product.businessPartner, true);
-      cy.clickOnCheckBox('IsCurrentVendor');
+      cy.writeIntoLookupListField(
+        "C_BPartner_ID",
+        product.businessPartner,
+        product.businessPartner,
+        true,
+      );
+      cy.clickOnCheckBox("IsCurrentVendor");
       cy.pressDoneButton();
     }
 
     if (product.productPrices.length > 0) {
-      product.productPrices.forEach(function(pp) {
+      product.productPrices.forEach(function (pp) {
         Product.applyProductPrice(pp);
       });
-      cy.get('table tbody tr').should('have.length', product.productPrices.length);
+      cy.get("table tbody tr").should(
+        "have.length",
+        product.productPrices.length,
+      );
     }
   }
 
@@ -153,21 +161,43 @@ export class Product {
    * See complaint at ProductPrice class.
    */
   static applyProductPrice(productPrice) {
-    cy.selectTab('M_ProductPrice');
+    cy.selectTab("M_ProductPrice");
     cy.pressAddNewButton();
 
-    cy.selectInListField('M_PriceList_Version_ID', productPrice.priceList, true);
-    cy.writeIntoStringField('PriceList', productPrice.listPriceAmount, true, null, true);
-    cy.writeIntoStringField('PriceStd', productPrice.standardPriceAmount, true /*modal*/, null /*rewriteUrl*/, true /*noRequest*/);
-    cy.writeIntoStringField('PriceLimit', productPrice.limitPriceAmount, true, null, true);
+    cy.selectInListField(
+      "M_PriceList_Version_ID",
+      productPrice.priceList,
+      true,
+    );
+    cy.writeIntoStringField(
+      "PriceList",
+      productPrice.listPriceAmount,
+      true,
+      null,
+      true,
+    );
+    cy.writeIntoStringField(
+      "PriceStd",
+      productPrice.standardPriceAmount,
+      true /*modal*/,
+      null /*rewriteUrl*/,
+      true /*noRequest*/,
+    );
+    cy.writeIntoStringField(
+      "PriceLimit",
+      productPrice.limitPriceAmount,
+      true,
+      null,
+      true,
+    );
 
     // don't set TaxCategory if there's a default one already selected
-    cy.get('.form-field-C_TaxCategory_ID input')
-      .invoke('val')
+    cy.get(".form-field-C_TaxCategory_ID input")
+      .invoke("val")
       .then((val) => {
         if (!val) {
-          const taxCategory = getLanguageSpecific(productPrice, 'taxCategory');
-          cy.selectInListField('C_TaxCategory_ID', taxCategory, true);
+          const taxCategory = getLanguageSpecific(productPrice, "taxCategory");
+          cy.selectInListField("C_TaxCategory_ID", taxCategory, true);
         }
       });
 
@@ -196,12 +226,12 @@ export class ProductCategory {
 
   static applyProductCategory(productCategory) {
     cy.log(`Create new Product ${productCategory.name}`);
-    cy.visitWindow('144', 'NEW');
-    cy.writeIntoStringField('Name', productCategory.name);
+    cy.visitWindow("144", "NEW");
+    cy.writeIntoStringField("Name", productCategory.name);
 
     // cy.writeIntoStringField('Value', productCategory.name + '_value');
     if (productCategory.attributeSet) {
-      cy.selectInListField('M_AttributeSet_ID', productCategory.attributeSet);
+      cy.selectInListField("M_AttributeSet_ID", productCategory.attributeSet);
     }
   }
 }

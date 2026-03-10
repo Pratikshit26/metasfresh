@@ -1,15 +1,15 @@
-import counterpart from 'counterpart';
-import React, { Component } from 'react';
-import onClickOutside from 'react-onclickoutside';
-import PropTypes from 'prop-types';
+import counterpart from "counterpart";
+import React, { Component } from "react";
+import onClickOutside from "react-onclickoutside";
+import PropTypes from "prop-types";
 
-import Avatar from '../app/Avatar';
-import Tooltips from '../tooltips/Tooltips';
-import { openSelectCurrentWorkplaceModal } from '../../actions/WindowActions';
-import { getSettingFromMEAsBoolean } from '../../utils/settings';
-import { useWorkplaces } from '../../api/userSession';
-import { useDispatch } from 'react-redux';
-import { requestRedirect } from '../../reducers/redirect';
+import Avatar from "../app/Avatar";
+import Tooltips from "../tooltips/Tooltips";
+import { openSelectCurrentWorkplaceModal } from "../../actions/WindowActions";
+import { getSettingFromMEAsBoolean } from "../../utils/settings";
+import { useWorkplaces } from "../../api/userSession";
+import { useDispatch } from "react-redux";
+import { requestRedirect } from "../../reducers/redirect";
 
 class UserDropdown extends Component {
   handleClickOutside = () => this.closeDropdownPanel();
@@ -22,12 +22,12 @@ class UserDropdown extends Component {
   closeDropdownPanel = () => {
     const { handleUDOpen, toggleTooltip } = this.props;
     handleUDOpen(false);
-    toggleTooltip('');
+    toggleTooltip("");
   };
 
   handleKeyDown = (e) => {
     switch (e.key) {
-      case 'ArrowDown': {
+      case "ArrowDown": {
         e.preventDefault();
         const activeElem = document.activeElement;
         if (activeElem.nextSibling) {
@@ -35,13 +35,13 @@ class UserDropdown extends Component {
         }
         break;
       }
-      case 'ArrowUp': {
+      case "ArrowUp": {
         e.preventDefault();
         const activeElem = document.activeElement;
         // When focus pulled out once, do not allow to get there
         if (
           activeElem.previousSibling.classList.contains(
-            'js-selection-placeholder'
+            "js-selection-placeholder",
           )
         ) {
           return;
@@ -51,11 +51,11 @@ class UserDropdown extends Component {
         }
         break;
       }
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         document.activeElement.click();
         break;
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
         this.handleClickOutside();
         break;
@@ -69,13 +69,13 @@ class UserDropdown extends Component {
     return (
       <div
         className={
-          'header-item-container ' +
-          'js-not-unselect ' +
-          'pointer user-dropdown-container tooltip-parent ' +
-          (open ? 'header-item-open ' : '')
+          "header-item-container " +
+          "js-not-unselect " +
+          "pointer user-dropdown-container tooltip-parent " +
+          (open ? "header-item-open " : "")
         }
         onMouseEnter={() => toggleTooltip(shortcut)}
-        onMouseLeave={() => toggleTooltip('')}
+        onMouseLeave={() => toggleTooltip("")}
       >
         <AvatarButton
           me={me}
@@ -134,8 +134,8 @@ const AvatarButton = ({
       {tooltipOpen === shortcut && !open && (
         <Tooltips
           name={shortcut}
-          action={counterpart.translate('mainScreen.userMenu.tooltip')}
-          type={''}
+          action={counterpart.translate("mainScreen.userMenu.tooltip")}
+          type={""}
         />
       )}
     </>
@@ -170,13 +170,13 @@ const UserDropdownPanel = ({
 
   const isShowOrg = getSettingFromMEAsBoolean(
     me,
-    'userDropdown.showOrg',
-    false
+    "userDropdown.showOrg",
+    false,
   );
   const isShowRole = getSettingFromMEAsBoolean(
     me,
-    'userDropdown.showRole',
-    true
+    "userDropdown.showRole",
+    true,
   );
 
   return (
@@ -203,9 +203,9 @@ const UserDropdownPanel = ({
       {isWorkplacesEnabled && (
         <UserDropdownItem
           caption={counterpart.translate(
-            'userDropdown.changeWorkplace.caption'
+            "userDropdown.changeWorkplace.caption",
           )}
-          icon={'meta-icon-settings'}
+          icon={"meta-icon-settings"}
           onClick={() => {
             dispatch(openSelectCurrentWorkplaceModal());
             closeDropdownPanel();
@@ -213,13 +213,13 @@ const UserDropdownPanel = ({
         />
       )}
       <UserDropdownItem
-        caption={counterpart.translate('window.settings.caption')}
+        caption={counterpart.translate("window.settings.caption")}
         icon="meta-icon-settings"
         onClick={() => {
           dispatch(
             requestRedirect(
-              '/window/' + me.userProfileWindowId + '/' + me.userProfileId
-            )
+              "/window/" + me.userProfileWindowId + "/" + me.userProfileId,
+            ),
           );
           closeDropdownPanel();
         }}
@@ -229,10 +229,10 @@ const UserDropdownPanel = ({
         closeDropdownPanel={closeDropdownPanel}
       />
       <UserDropdownItem
-        caption={counterpart.translate('window.logOut.caption')}
+        caption={counterpart.translate("window.logOut.caption")}
         icon="meta-icon-logout"
         onClick={() => {
-          dispatch(requestRedirect('/logout'));
+          dispatch(requestRedirect("/logout"));
           closeDropdownPanel();
         }}
       />
@@ -270,7 +270,7 @@ const UserDropdownPluginItems = ({ plugins, closeDropdownPanel }) => {
             dispatch(requestRedirect(plugin.userDropdownLink.url));
             closeDropdownPanel();
           }}
-        />
+        />,
       );
     }
   });

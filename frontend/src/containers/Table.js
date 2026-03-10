@@ -1,21 +1,21 @@
-import counterpart from 'counterpart';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { getZoomIntoWindow, deleteRequest } from '../api';
-import { containerPropTypes } from '../utils/tableHelpers';
-import { mapIncluded } from '../utils/documentListHelper';
-import { isGermanLanguage } from '../utils/locale';
-import { getTableId, getTable } from '../reducers/tables';
+import counterpart from "counterpart";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { getZoomIntoWindow, deleteRequest } from "../api";
+import { containerPropTypes } from "../utils/tableHelpers";
+import { mapIncluded } from "../utils/documentListHelper";
+import { isGermanLanguage } from "../utils/locale";
+import { getTableId, getTable } from "../reducers/tables";
 import {
   updateTableSelection,
   deselectTableRows,
   collapseTableRow,
   setActiveSort,
-} from '../actions/TableActions';
-import { showIncludedView } from '../actions/ViewActions';
-import { openModal, updatePropertyValue } from '../actions/WindowActions';
+} from "../actions/TableActions";
+import { showIncludedView } from "../actions/ViewActions";
+import { openModal, updatePropertyValue } from "../actions/WindowActions";
 
-import Table from '../components/table/TableWrapper';
+import Table from "../components/table/TableWrapper";
 
 class TableContainer extends PureComponent {
   /**
@@ -76,7 +76,7 @@ class TableContainer extends PureComponent {
 
   handleSelectAll = () => {
     const { keyProperty, rows } = this.props;
-    const property = keyProperty ? keyProperty : 'rowId';
+    const property = keyProperty ? keyProperty : "rowId";
     const toSelect = rows.map((item) => item[property]);
 
     this.handleSelect(toSelect);
@@ -119,11 +119,11 @@ class TableContainer extends PureComponent {
     const { openModal, windowId, tabId } = this.props;
 
     openModal({
-      title: 'Add new',
+      title: "Add new",
       windowId,
-      modalType: 'window',
+      modalType: "window",
       tabId,
-      rowId: 'NEW',
+      rowId: "NEW",
     });
   };
 
@@ -137,9 +137,9 @@ class TableContainer extends PureComponent {
 
     if (docId) {
       openModal({
-        title: counterpart.translate('window.advancedEdit.caption'),
+        title: counterpart.translate("window.advancedEdit.caption"),
         windowId,
-        modalType: 'window',
+        modalType: "window",
         tabId,
         rowId: selected[0],
         isAdvanced: true,
@@ -158,11 +158,11 @@ class TableContainer extends PureComponent {
 
     // TODO: This should be an action creator
     deleteRequest(
-      'window',
+      "window",
       windowId,
       docId ? docId : null,
       docId ? tabId : null,
-      selected
+      selected,
     )
       .then((response) => {
         // TODO: In the future we probably shouldn't refresh the whole list
@@ -195,15 +195,15 @@ class TableContainer extends PureComponent {
       entity,
       windowId,
       docId,
-      entity === 'window' ? tabId : viewId,
+      entity === "window" ? tabId : viewId,
       selected[0],
-      fieldName
+      fieldName,
     ).then((res) => {
       res &&
         res.data &&
         window.open(
           `/window/${res.data.documentPath.windowId}/${res.data.documentPath.documentId}`,
-          '_blank'
+          "_blank",
         );
     });
   };
@@ -288,5 +288,5 @@ export default connect(
     setActiveSort,
   },
   false,
-  { forwardRef: true }
+  { forwardRef: true },
 )(TableContainer);

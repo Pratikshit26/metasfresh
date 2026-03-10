@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Shortcut } from '../keyshortcuts';
+import { Shortcut } from "../keyshortcuts";
 
 const blurActiveElement = () => {
   const activeElement = document.activeElement;

@@ -1,10 +1,10 @@
-import { merge } from 'merge-anything';
+import { merge } from "merge-anything";
 
-import masterWindowData from '../../../test_setup/fixtures/master_window/data.json';
-import masterWindowLayout from '../../../test_setup/fixtures/master_window/layout.json';
-import modalFixtures from '../../../test_setup/fixtures/window/modal.json';
-import { initDataSuccess } from '../../actions/WindowActions';
-import * as ACTION_TYPES from '../../constants/ActionTypes';
+import masterWindowData from "../../../test_setup/fixtures/master_window/data.json";
+import masterWindowLayout from "../../../test_setup/fixtures/master_window/layout.json";
+import modalFixtures from "../../../test_setup/fixtures/window/modal.json";
+import { initDataSuccess } from "../../actions/WindowActions";
+import * as ACTION_TYPES from "../../constants/ActionTypes";
 import reducer, {
   initialState,
   getData,
@@ -13,7 +13,7 @@ import reducer, {
   getMasterDocStatus,
   getProcessWidgetData,
   getProcessWidgetFields,
-} from '../../reducers/windowHandler';
+} from "../../reducers/windowHandler";
 
 const createState = function (state = {}) {
   return merge(
@@ -22,12 +22,12 @@ const createState = function (state = {}) {
         ...initialState,
       },
     },
-    state
+    state,
   );
 };
 
-describe('WindowHandler helper functions', () => {
-  it('getData should return state.windowHandler.master.data', () => {
+describe("WindowHandler helper functions", () => {
+  it("getData should return state.windowHandler.master.data", () => {
     const state = createState({
       windowHandler: {
         master: {
@@ -40,7 +40,7 @@ describe('WindowHandler helper functions', () => {
     expect(masterData).toEqual(state.windowHandler.master.data);
   });
 
-  it('getData should return state.windowHandler.modal.data', () => {
+  it("getData should return state.windowHandler.modal.data", () => {
     const state = createState({
       windowHandler: {
         modal: {
@@ -53,7 +53,7 @@ describe('WindowHandler helper functions', () => {
     expect(masterData).toEqual(state.windowHandler.modal.data);
   });
 
-  it('getMasterDocStatus should return values from state.windowHandler.master.data[DocStatus/DocAction]', () => {
+  it("getMasterDocStatus should return values from state.windowHandler.master.data[DocStatus/DocAction]", () => {
     const data = masterWindowData.data1[0].fieldsByName;
     const state = createState({
       windowHandler: {
@@ -75,7 +75,7 @@ describe('WindowHandler helper functions', () => {
     expect(statusData).toEqual(mockStatusData);
   });
 
-  it('getElementWidgetData should return state.windowHandler.master.data[fieldName]', () => {
+  it("getElementWidgetData should return state.windowHandler.master.data[fieldName]", () => {
     const layout = masterWindowLayout.layout1;
     const state = createState({
       windowHandler: {
@@ -85,7 +85,7 @@ describe('WindowHandler helper functions', () => {
         },
       },
     });
-    const selectorPath = '0_0_0_2_0';
+    const selectorPath = "0_0_0_2_0";
     const widgetData = getElementWidgetData(state, false, selectorPath);
     const fieldName =
       layout.sections[0].columns[0].elementGroups[0].elementsLine[2].elements[0]
@@ -95,7 +95,7 @@ describe('WindowHandler helper functions', () => {
     expect(widgetData[0]).toEqual(fieldData);
   });
 
-  it('getElementWidgetData should return state.windowHandler.modal.data[fieldName]', () => {
+  it("getElementWidgetData should return state.windowHandler.modal.data[fieldName]", () => {
     const layout = masterWindowLayout.layout1;
     const state = createState({
       windowHandler: {
@@ -105,7 +105,7 @@ describe('WindowHandler helper functions', () => {
         },
       },
     });
-    const selectorPath = '0_0_0_2_0';
+    const selectorPath = "0_0_0_2_0";
     const widgetData = getElementWidgetData(state, true, selectorPath);
     const fieldName =
       layout.sections[0].columns[0].elementGroups[0].elementsLine[2].elements[0]
@@ -115,7 +115,7 @@ describe('WindowHandler helper functions', () => {
     expect(widgetData[0]).toEqual(fieldData);
   });
 
-  it('getProcessWidgetData should return state.windowHandler.modal.data[fieldName]', () => {
+  it("getProcessWidgetData should return state.windowHandler.modal.data[fieldName]", () => {
     const data = modalFixtures.process_data1;
     const layout = modalFixtures.process_layout1;
     const state = createState({
@@ -127,7 +127,7 @@ describe('WindowHandler helper functions', () => {
       },
     });
 
-    const elementIndex = '0';
+    const elementIndex = "0";
     const widgetData = getProcessWidgetData(state, true, elementIndex);
     const fieldName = layout.elements[elementIndex].fields[0].field;
     const fieldData = data.fieldsByName[fieldName];
@@ -135,7 +135,7 @@ describe('WindowHandler helper functions', () => {
     expect(widgetData[0]).toEqual(fieldData);
   });
 
-  it('getElementWidgetFields should return state.master.layout[path].fields', () => {
+  it("getElementWidgetFields should return state.master.layout[path].fields", () => {
     const layout = masterWindowLayout.layout1;
     const state = createState({
       windowHandler: {
@@ -154,7 +154,7 @@ describe('WindowHandler helper functions', () => {
     expect(fieldsData).toEqual(layoutFields);
   });
 
-  it('getElementWidgetFields should return state.modal.layout[path].fields', () => {
+  it("getElementWidgetFields should return state.modal.layout[path].fields", () => {
     const layout = masterWindowLayout.layout1;
     const state = createState({
       windowHandler: {
@@ -173,7 +173,7 @@ describe('WindowHandler helper functions', () => {
     expect(fieldsData).toEqual(layoutFields);
   });
 
-  it('getProcessWidgetFields should return state.modal.layout[path].fields', () => {
+  it("getProcessWidgetFields should return state.modal.layout[path].fields", () => {
     const data = modalFixtures.process_data1;
     const layout = modalFixtures.process_layout1;
     const state = createState({
@@ -185,7 +185,7 @@ describe('WindowHandler helper functions', () => {
       },
     });
 
-    const elementIndex = '0';
+    const elementIndex = "0";
     const fieldsData = getProcessWidgetFields(state, true, elementIndex);
     const layoutFields = layout.elements[elementIndex].fields;
 
@@ -193,48 +193,48 @@ describe('WindowHandler helper functions', () => {
   });
 });
 
-describe('WindowHandler reducer', () => {
-  it('should return the initial state', () => {
+describe("WindowHandler reducer", () => {
+  it("should return the initial state", () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('Should handle INIT_LAYOUT_SUCCESS', () => {
+  it("Should handle INIT_LAYOUT_SUCCESS", () => {
     const layout = {
-      activeTab: '1',
+      activeTab: "1",
       sections: [],
-      tabs: [{ windowId: '1' }],
-      windowId: '1',
+      tabs: [{ windowId: "1" }],
+      windowId: "1",
     };
 
     expect(
       reducer(undefined, {
         type: ACTION_TYPES.INIT_LAYOUT_SUCCESS,
-        scope: 'master',
+        scope: "master",
         layout,
-      })
+      }),
     ).toEqual(
       expect.objectContaining({
         master: expect.objectContaining({ layout: { ...layout } }),
-      })
+      }),
     );
   });
 
-  it('Should handle INIT_DATA_SUCCESS', () => {
+  it("Should handle INIT_DATA_SUCCESS", () => {
     const data = {
       data: {
         ID: {
-          field: 'ID',
+          field: "ID",
           value: 1000000,
-          widgetType: 'Integer',
+          widgetType: "Integer",
         },
       },
-      docId: '1000',
+      docId: "1000",
       saveStatus: {},
-      scope: 'master',
+      scope: "master",
       standardActions: [],
       validStatus: {},
       includedTabsInfo: {},
-      websocketEndpoint: 'test/url',
+      websocketEndpoint: "test/url",
     };
 
     const actions = [{}, initDataSuccess({ ...data })];
@@ -243,7 +243,7 @@ describe('WindowHandler reducer', () => {
     expect(state).toEqual(
       expect.objectContaining({
         master: expect.objectContaining({ data: { ...data.data } }),
-      })
+      }),
     );
   });
 

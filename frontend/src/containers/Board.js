@@ -1,19 +1,19 @@
-import update from 'immutability-helper';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { connect } from 'react-redux';
+import update from "immutability-helper";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { connect } from "react-redux";
 
-import { getData, deleteRequest, patchRequest } from '../api';
-import { addCard } from '../actions/BoardActions';
-import { getRequest } from '../actions/GenericActions';
-import { connectWS, disconnectWS } from '../utils/websockets';
+import { getData, deleteRequest, patchRequest } from "../api";
+import { addCard } from "../actions/BoardActions";
+import { getRequest } from "../actions/GenericActions";
+import { connectWS, disconnectWS } from "../utils/websockets";
 
-import { BlankPage } from '../components/BlankPage';
-import Container from '../components/Container';
-import Lanes from '../components/board/Lanes';
-import Sidenav from '../components/board/Sidenav';
+import { BlankPage } from "../components/BlankPage";
+import Container from "../components/Container";
+import Lanes from "../components/board/Lanes";
+import Sidenav from "../components/board/Sidenav";
 
 /**
  * @file Class based component.
@@ -54,7 +54,7 @@ class Board extends Component {
     const laneIndex = board.lanes.findIndex((lane) => lane.laneId === laneId);
 
     const prom = Promise.all(
-      cardIds.map((id) => getRequest('board', board.boardId, 'card', id))
+      cardIds.map((id) => getRequest("board", board.boardId, "card", id)),
     );
 
     prom.then((res) => {
@@ -77,7 +77,7 @@ class Board extends Component {
 
     if (!board) {
       getData({
-        entity: 'board',
+        entity: "board",
         docType: boardId,
       })
         .then((res) => {
@@ -89,18 +89,18 @@ class Board extends Component {
               connectWS.call(this, res.data.websocketEndpoint, (msg) => {
                 msg.events.map((event) => {
                   switch (event.changeType) {
-                    case 'laneCardsChanged':
+                    case "laneCardsChanged":
                       this.laneCardsChanged(event);
                       break;
                   }
                 });
               });
-            }
+            },
           );
         })
         .catch(() => {
           this.setState({
-            board: '404',
+            board: "404",
           });
         });
     }
@@ -124,21 +124,21 @@ class Board extends Component {
       if (card.initLaneId === targetLaneId) {
         //Changing position
         patchRequest({
-          entity: 'board',
+          entity: "board",
           docType: board.boardId,
-          property: 'position',
+          property: "position",
           value: card.index,
-          subentity: 'card',
+          subentity: "card",
           subentityId: card.id,
         });
       } else {
         //Changing lane at least
         patchRequest({
-          entity: 'board',
+          entity: "board",
           docType: board.boardId,
-          property: ['laneId', 'position'],
+          property: ["laneId", "position"],
           value: [targetLaneId, card.index],
-          subentity: 'card',
+          subentity: "card",
           subentityId: card.id,
         });
       }
@@ -190,7 +190,7 @@ class Board extends Component {
             },
           },
         },
-      })
+      }),
     );
   };
 
@@ -210,7 +210,7 @@ class Board extends Component {
             },
           },
         },
-      })
+      }),
     );
   };
 
@@ -223,11 +223,11 @@ class Board extends Component {
     if (!docPath) return;
 
     const url =
-      '/window/' +
+      "/window/" +
       docPath.windowId +
-      (docPath.documentId ? '/' + docPath.documentId : '');
+      (docPath.documentId ? "/" + docPath.documentId : "");
 
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   /**
@@ -242,17 +242,17 @@ class Board extends Component {
     const laneIndex = board.lanes.findIndex((l) => l.laneId === laneId);
 
     deleteRequest(
-      'board',
+      "board",
       board.boardId,
       null,
       null,
       null,
-      'card',
-      cardId
+      "card",
+      cardId,
     ).then(() => {
       this.removeCard(
         laneIndex,
-        board.lanes[laneIndex].cards.findIndex((c) => c.cardId === cardId)
+        board.lanes[laneIndex].cards.findIndex((c) => c.cardId === cardId),
       );
     });
   };
@@ -287,7 +287,7 @@ class Board extends Component {
               setViewId={this.setSidenavViewId}
             />
           )}
-          {board === '404' ? (
+          {board === "404" ? (
             <BlankPage what="Board" />
           ) : (
             <div className="board">
@@ -351,7 +351,7 @@ function mapStateToProps(state) {
     modal: false,
     rawModal: {},
     pluginModal: {},
-    indicator: '',
+    indicator: "",
   };
 
   const { breadcrumb } = menuHandler || {

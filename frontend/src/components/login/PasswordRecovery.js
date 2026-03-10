@@ -20,26 +20,26 @@
  * #L%
  */
 
-import React, { Component } from 'react';
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React, { Component } from "react";
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
 import {
   getPasswordResetAvatarUrl,
   getResetPasswordInfo,
   resetPasswordComplete,
   resetPasswordRequest,
-} from '../../api/login';
-import history from '../../services/History';
-import logo from '../../assets/images/metasfresh_logo_green_thumb.png';
+} from "../../api/login";
+import history from "../../services/History";
+import logo from "../../assets/images/metasfresh_logo_green_thumb.png";
 
 class PasswordRecovery extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      err: '',
+      err: "",
       pending: false,
       resetEmailSent: false,
       form: {},
@@ -79,14 +79,14 @@ class PasswordRecovery extends Component {
   };
 
   redirectToLogin = () => {
-    history.push('/login');
+    history.push("/login");
   };
 
   handleChange = (e, name) => {
     e.preventDefault();
 
     this.setState({
-      err: '',
+      err: "",
       form: {
         ...this.state.form,
         [`${name}`]: e.target.value,
@@ -111,7 +111,7 @@ class PasswordRecovery extends Component {
       if (password !== re_password) {
         this.setState({
           err: counterpart.translate(
-            'forgotPassword.error.retypedNewPasswordNotMatch'
+            "forgotPassword.error.retypedNewPasswordNotMatch",
           ),
         });
       } else {
@@ -119,7 +119,7 @@ class PasswordRecovery extends Component {
         this.setState(
           {
             pending: true,
-            err: '',
+            err: "",
           },
           () => {
             resetPasswordComplete(token, {
@@ -134,18 +134,18 @@ class PasswordRecovery extends Component {
                 this.setState({
                   err: err.data
                     ? err.data.message
-                    : counterpart.translate('login.error.fallback'),
+                    : counterpart.translate("login.error.fallback"),
                   pending: false,
                 });
               });
-          }
+          },
         );
       }
     } else {
       this.setState(
         {
           pending: true,
-          err: '',
+          err: "",
         },
         () => {
           resetPasswordRequest(form)
@@ -158,7 +158,7 @@ class PasswordRecovery extends Component {
             .catch((error) => {
               this.setState({ err: error.data.message, pending: false });
             });
-        }
+        },
       );
     }
   };
@@ -170,7 +170,7 @@ class PasswordRecovery extends Component {
       return (
         <div>
           <div className="form-control-label instruction-sent">
-            {counterpart.translate('forgotPassword.resetCodeSent.caption')}
+            {counterpart.translate("forgotPassword.resetCodeSent.caption")}
           </div>
         </div>
       );
@@ -182,16 +182,16 @@ class PasswordRecovery extends Component {
         <div>
           <div className="form-control-label">
             <small>
-              {counterpart.translate('forgotPassword.email.caption')}
+              {counterpart.translate("forgotPassword.email.caption")}
             </small>
           </div>
           <input
             type="email"
             name="email"
-            onChange={(e) => this.handleChange(e, 'email')}
-            className={classnames('input-primary input-block', {
-              'input-error': err,
-              'input-disabled': pending,
+            onChange={(e) => this.handleChange(e, "email")}
+            className={classnames("input-primary input-block", {
+              "input-error": err,
+              "input-disabled": pending,
             })}
             disabled={pending}
             ref={(c) => (this.focusField = c)}
@@ -210,16 +210,16 @@ class PasswordRecovery extends Component {
         <div>
           <div className="form-control-label">
             <small>
-              {counterpart.translate('forgotPassword.newPassword.caption')}
+              {counterpart.translate("forgotPassword.newPassword.caption")}
             </small>
           </div>
           <input
             type="password"
-            onChange={(e) => this.handleChange(e, 'password')}
+            onChange={(e) => this.handleChange(e, "password")}
             name="password"
-            className={classnames('input-primary input-block', {
-              'input-error': err,
-              'input-disabled': pending,
+            className={classnames("input-primary input-block", {
+              "input-error": err,
+              "input-disabled": pending,
             })}
             disabled={pending}
             ref={(c) => (this.focusField = c)}
@@ -229,16 +229,16 @@ class PasswordRecovery extends Component {
           <div className="form-control-label">
             <small>
               {counterpart.translate(
-                'forgotPassword.retypeNewPassword.caption'
+                "forgotPassword.retypeNewPassword.caption",
               )}
             </small>
           </div>
           <input
             type="password"
             name="re_password"
-            onChange={(e) => this.handleChange(e, 're_password')}
-            className={classnames('input-primary input-block', {
-              'input-disabled': pending,
+            onChange={(e) => this.handleChange(e, "re_password")}
+            className={classnames("input-primary input-block", {
+              "input-disabled": pending,
             })}
             disabled={pending}
           />
@@ -249,7 +249,7 @@ class PasswordRecovery extends Component {
 
   renderInvalid = () => {
     const { err } = this.state;
-    const buttonMessage = 'Return to login';
+    const buttonMessage = "Return to login";
 
     return (
       <div>
@@ -272,8 +272,8 @@ class PasswordRecovery extends Component {
     const { pending, resetEmailSent, form } = this.state;
     const resetPassword = !!token;
     const buttonMessage = resetPassword
-      ? counterpart.translate('forgotPassword.changePassword.caption')
-      : counterpart.translate('forgotPassword.sendResetCode.caption');
+      ? counterpart.translate("forgotPassword.changePassword.caption")
+      : counterpart.translate("forgotPassword.sendResetCode.caption");
     const avatarSrc = getPasswordResetAvatarUrl(token);
 
     return (

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { patchRequest } from '../../api';
+import { patchRequest } from "../../api";
 
 /**
  * @file Class based component.
@@ -50,10 +50,10 @@ export default class BookmarkButton extends Component {
     const { isBookmark } = this.state;
 
     patchRequest({
-      entity: 'menu',
-      property: 'favorite',
+      entity: "menu",
+      property: "favorite",
       value: !isBookmark,
-      subentity: 'node',
+      subentity: "node",
       subentityId: nodeId,
     }).then((response) => {
       this.setState({ isBookmark: !isBookmark });
@@ -88,8 +88,8 @@ export default class BookmarkButton extends Component {
             <i
               onClick={this.handleClick}
               className={
-                'btn-bookmark-icon meta-icon-star icon-spaced ' +
-                (isBookmark ? 'active ' : '')
+                "btn-bookmark-icon meta-icon-star icon-spaced " +
+                (isBookmark ? "active " : "")
               }
             />
           ))}

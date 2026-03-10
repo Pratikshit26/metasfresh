@@ -1,6 +1,8 @@
 export class DataEntryField {
   constructor(name, dataEntryLine) {
-    cy.log(`DataEntryField - set name = ${name}; dataEntryLine = ${dataEntryLine}`);
+    cy.log(
+      `DataEntryField - set name = ${name}; dataEntryLine = ${dataEntryLine}`,
+    );
     this.name = name;
     this.dataEntryLine = dataEntryLine;
     this.seqNo = undefined;
@@ -55,13 +57,17 @@ export class DataEntryField {
   }
 
   setPersonalDataCategory(personalDataCategory) {
-    cy.log(`DataEntryField - set personalDataCategory = ${personalDataCategory}`);
+    cy.log(
+      `DataEntryField - set personalDataCategory = ${personalDataCategory}`,
+    );
     this.personalDataCategory = personalDataCategory;
     return this;
   }
 
   addDataEntryListValue(dataEntryListValue) {
-    cy.log(`DataEntryField - add dataEntryListValue = ${JSON.stringify(dataEntryListValue)}`);
+    cy.log(
+      `DataEntryField - add dataEntryListValue = ${JSON.stringify(dataEntryListValue)}`,
+    );
     this.dataEntryListValues.push(dataEntryListValue);
     return this;
   }
@@ -103,74 +109,97 @@ export class DataEntryListValue {
 }
 
 function applyDataEntryField(dataEntryField) {
-  describe(`Create new dataEntryField ${dataEntryField.name}`, function() {
-    cy.visitWindow('540572', 'NEW');
-    cy.writeIntoStringField('Name', dataEntryField.name);
-    cy.writeIntoLookupListField('DataEntry_Line_ID', dataEntryField.dataEntryLine, dataEntryField.dataEntryLine);
+  describe(`Create new dataEntryField ${dataEntryField.name}`, function () {
+    cy.visitWindow("540572", "NEW");
+    cy.writeIntoStringField("Name", dataEntryField.name);
+    cy.writeIntoLookupListField(
+      "DataEntry_Line_ID",
+      dataEntryField.dataEntryLine,
+      dataEntryField.dataEntryLine,
+    );
 
     if (dataEntryField.seqNo) {
-      cy.getStringFieldValue('SeqNo').then(currentValue => {
+      cy.getStringFieldValue("SeqNo").then((currentValue) => {
         if (currentValue !== dataEntryField.seqNo) {
-          cy.log(`applyDataEntryField - dataEntryGroup.seqNo=${dataEntryField.seqNo}; currentValue=${currentValue}`);
-          cy.clearField('SeqNo');
-          cy.writeIntoStringField('SeqNo', `${dataEntryField.seqNo}`);
+          cy.log(
+            `applyDataEntryField - dataEntryGroup.seqNo=${dataEntryField.seqNo}; currentValue=${currentValue}`,
+          );
+          cy.clearField("SeqNo");
+          cy.writeIntoStringField("SeqNo", `${dataEntryField.seqNo}`);
         }
       });
     }
     if (dataEntryField.description) {
-      cy.writeIntoTextField('Description', dataEntryField.description);
+      cy.writeIntoTextField("Description", dataEntryField.description);
     }
     if (!dataEntryField.isActive) {
       cy.clickOnIsActive();
     }
     if (dataEntryField.isMandatory) {
-      cy.clickOnCheckBox('IsMandatory');
+      cy.clickOnCheckBox("IsMandatory");
     }
     if (dataEntryField.personalDataCategory) {
-      cy.selectInListField('PersonalDataCategory', dataEntryField.personalDataCategory);
+      cy.selectInListField(
+        "PersonalDataCategory",
+        dataEntryField.personalDataCategory,
+      );
     }
     if (dataEntryField.dataEntryRecordType) {
-      cy.getStringFieldValue('DataEntry_RecordType').then(currentValue => {
+      cy.getStringFieldValue("DataEntry_RecordType").then((currentValue) => {
         if (currentValue !== dataEntryField.dataEntryRecordType) {
           cy.log(
             `applyDataEntryField - dataEntryField.dataEntryRecordType=${
               dataEntryField.dataEntryRecordType
-            }; currentValue=${currentValue}`
+            }; currentValue=${currentValue}`,
           );
-          cy.selectInListField('DataEntry_RecordType', dataEntryField.dataEntryRecordType);
+          cy.selectInListField(
+            "DataEntry_RecordType",
+            dataEntryField.dataEntryRecordType,
+          );
         }
       });
     }
 
     // Thx to https://stackoverflow.com/questions/16626735/how-to-loop-through-an-array-containing-objects-and-access-their-properties
     if (dataEntryField.dataEntryListValues.length > 0) {
-      dataEntryField.dataEntryListValues.forEach(function(dataEntryListValue) {
+      dataEntryField.dataEntryListValues.forEach(function (dataEntryListValue) {
         applyDataEntryListValue(dataEntryListValue);
       });
 
-      cy.get('table tbody tr').should('have.length', dataEntryField.dataEntryListValues.length);
+      cy.get("table tbody tr").should(
+        "have.length",
+        dataEntryField.dataEntryListValues.length,
+      );
     }
   });
 }
 
 function applyDataEntryListValue(dataEntryListValue) {
-  cy.selectTab('DataEntry_ListValue');
+  cy.selectTab("DataEntry_ListValue");
   cy.pressAddNewButton();
 
-  cy.writeIntoStringField('Name', dataEntryListValue.name, true /*modal*/);
+  cy.writeIntoStringField("Name", dataEntryListValue.name, true /*modal*/);
   if (dataEntryListValue.seqNo) {
-    cy.getStringFieldValue('SeqNo', true /*modal*/).then(currentValue => {
+    cy.getStringFieldValue("SeqNo", true /*modal*/).then((currentValue) => {
       cy.log(
-        `applyDataEntryListValue - dataEntryGroup.seqNo=${dataEntryListValue.seqNo}; currentValue=${currentValue}`
+        `applyDataEntryListValue - dataEntryGroup.seqNo=${dataEntryListValue.seqNo}; currentValue=${currentValue}`,
       );
       if (currentValue !== dataEntryListValue.seqNo) {
-        cy.clearField('SeqNo', true /*modal*/);
-        cy.writeIntoStringField('SeqNo', `${dataEntryListValue.seqNo}`, true /*modal*/);
+        cy.clearField("SeqNo", true /*modal*/);
+        cy.writeIntoStringField(
+          "SeqNo",
+          `${dataEntryListValue.seqNo}`,
+          true /*modal*/,
+        );
       }
     });
   }
   if (dataEntryListValue.description) {
-    cy.writeIntoTextField('Description', dataEntryListValue.description, true /*modal*/);
+    cy.writeIntoTextField(
+      "Description",
+      dataEntryListValue.description,
+      true /*modal*/,
+    );
   }
   if (!dataEntryListValue.isActive) {
     cy.clickOnIsActive(true /*modal*/);

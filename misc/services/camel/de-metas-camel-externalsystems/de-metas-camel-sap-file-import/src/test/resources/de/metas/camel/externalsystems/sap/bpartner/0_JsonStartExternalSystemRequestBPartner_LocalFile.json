@@ -9,7 +9,7 @@
   "writeAuditEndpoint": "fileFolder",
   "parameters": {
     "LocalFileRootLocation": "doesntmatter",
-    "LocalFile_BPartner_Target_Directory" : "doesntmatter",
+    "LocalFile_BPartner_Target_Directory": "doesntmatter",
     "LocalFileProcessedDirectory": "doesntmatter",
     "LocalFileErroredDirectory": "doesntmatter",
     "LocalFilePollingFrequencyInMs": "1000",

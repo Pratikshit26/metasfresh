@@ -4,10 +4,10 @@ import { SET_TOKEN, CLEAR_TOKEN } from '../constants/TokenActionTypes';
  * @summary sets user's authentication token
  */
 export function setToken({ token, userFullname }) {
-  return {
-    type: SET_TOKEN,
-    payload: { token, userFullname },
-  };
+    return {
+        type: SET_TOKEN,
+        payload: { token, userFullname },
+    };
 }
 
 /**
@@ -15,7 +15,7 @@ export function setToken({ token, userFullname }) {
  * @summary clear user's authentication token
  */
 export function clearToken() {
-  return {
-    type: CLEAR_TOKEN,
-  };
+    return {
+        type: CLEAR_TOKEN,
+    };
 }

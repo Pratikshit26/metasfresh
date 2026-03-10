@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { togglePrintingOption } from '../../actions/WindowActions';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { togglePrintingOption } from "../../actions/WindowActions";
 
 class PrintingOptions extends PureComponent {
   handleClick = (e) => {
@@ -64,5 +64,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { togglePrintingOption })(
-  PrintingOptions
+  PrintingOptions,
 );

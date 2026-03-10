@@ -1,14 +1,14 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import DebounceInput from 'react-debounce-input';
-import { connect } from 'react-redux';
-import SpinnerOverlay from '../components/app/SpinnerOverlay';
-import history from '../services/History';
-import { nodePathsRequest, queryPathsRequest, rootRequest } from '../api';
-import { openModal } from '../actions/WindowActions';
-import Container from '../components/Container';
-import MenuOverlayContainer from '../components/header/main_menu/MenuOverlayContainer';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import DebounceInput from "react-debounce-input";
+import { connect } from "react-redux";
+import SpinnerOverlay from "../components/app/SpinnerOverlay";
+import history from "../services/History";
+import { nodePathsRequest, queryPathsRequest, rootRequest } from "../api";
+import { openModal } from "../actions/WindowActions";
+import Container from "../components/Container";
+import MenuOverlayContainer from "../components/header/main_menu/MenuOverlayContainer";
 
 /**
  * Sitemap
@@ -18,10 +18,10 @@ class NavigationTree extends Component {
     super(props);
     this.state = {
       rootResults: {
-        caption: '',
+        caption: "",
         children: [],
       },
-      query: '',
+      query: "",
       queriedResults: [],
       deepNode: null,
     };
@@ -30,7 +30,7 @@ class NavigationTree extends Component {
   componentDidMount = () => {
     this.getData();
 
-    document.getElementById('search-input').focus();
+    document.getElementById("search-input").focus();
   };
 
   getData = async (doNotResetState) => {
@@ -48,10 +48,10 @@ class NavigationTree extends Component {
               ...this.state,
               rootResults: response.data,
               queriedResults: response.data.children,
-              query: '',
+              query: "",
             },
-            resolve
-          )
+            resolve,
+          ),
         );
       } catch (error) {
         if (error.response && error.response.status === 404) {
@@ -61,10 +61,10 @@ class NavigationTree extends Component {
                 ...this.state,
                 queriedResults: [],
                 rootResults: {},
-                query: '',
+                query: "",
               },
-              resolve
-            )
+              resolve,
+            ),
           );
         }
       }
@@ -84,7 +84,7 @@ class NavigationTree extends Component {
         windowId: windowType,
         modalType: type,
         isAdvanced,
-      })
+      }),
     );
   };
 
@@ -97,8 +97,8 @@ class NavigationTree extends Component {
           {
             query: event.target.value,
           },
-          resolve
-        )
+          resolve,
+        ),
       );
 
       await this.queryRequest(event.target.value);
@@ -112,7 +112,7 @@ class NavigationTree extends Component {
   queryRequest = async (value) => {
     this.setState({ pendingQuery: true, query: value });
     const { query } = this.state;
-    await queryPathsRequest(value, '', true)
+    await queryPathsRequest(value, "", true)
       .then((res) => {
         this.setState({
           queriedResults: query === value ? res.data.children : [],
@@ -133,7 +133,7 @@ class NavigationTree extends Component {
   };
 
   clearValue = () => {
-    document.getElementById('search-input').value = '';
+    document.getElementById("search-input").value = "";
   };
 
   handleClear = async (event) => {
@@ -145,30 +145,30 @@ class NavigationTree extends Component {
   };
 
   handleKeyDown = (e) => {
-    const input = document.getElementById('search-input');
-    const firstMenuItem = document.getElementsByClassName('js-menu-item')[0];
+    const input = document.getElementById("search-input");
+    const firstMenuItem = document.getElementsByClassName("js-menu-item")[0];
     let prevParentSibling = document.activeElement.previousSibling;
     const elementToEnter = document.activeElement.childNodes[0];
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         if (document.activeElement === input) {
           firstMenuItem.focus();
         }
         break;
-      case 'ArrowUp':
-        if (document.activeElement.classList.contains('js-menu-header')) {
+      case "ArrowUp":
+        if (document.activeElement.classList.contains("js-menu-header")) {
           prevParentSibling.children[0] &&
             prevParentSibling.children[0].classList.contains(
-              'js-menu-header'
+              "js-menu-header",
             ) &&
             prevParentSibling.children[0].focus();
         }
 
-        if (document.activeElement.classList.contains('js-menu-item')) {
+        if (document.activeElement.classList.contains("js-menu-item")) {
           this.handleArrowUp();
         }
         break;
-      case 'Tab':
+      case "Tab":
         e.preventDefault();
         if (document.activeElement === input) {
           firstMenuItem.focus();
@@ -176,7 +176,7 @@ class NavigationTree extends Component {
           input.focus();
         }
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         elementToEnter.childNodes[0] && elementToEnter.childNodes[0].click();
         break;
@@ -185,11 +185,11 @@ class NavigationTree extends Component {
 
   handleArrowUp() {
     let prevSiblings = document.activeElement.previousSibling;
-    if (prevSiblings && prevSiblings.classList.contains('input-primary')) {
-      document.getElementById('search-input-query').focus();
+    if (prevSiblings && prevSiblings.classList.contains("input-primary")) {
+      document.getElementById("search-input-query").focus();
     } else if (
       prevSiblings &&
-      prevSiblings.classList.contains('js-menu-item')
+      prevSiblings.classList.contains("js-menu-item")
     ) {
       document.activeElement.previousSibling.focus();
     } else {
@@ -203,10 +203,10 @@ class NavigationTree extends Component {
     while (
       !(
         (elem &&
-          elem.classList.contains('js-menu-container') &&
+          elem.classList.contains("js-menu-container") &&
           elem.previousSibling &&
           elem.previousSibling.children.length !== 0) ||
-        (elem && elem.classList.contains('js-menu-main-container') && i < 100)
+        (elem && elem.classList.contains("js-menu-main-container") && i < 100)
       )
     ) {
       elem = elem && elem.parentElement;
@@ -220,7 +220,7 @@ class NavigationTree extends Component {
     const previousMainGroup = this.findPreviousGroup();
     const previousGroup = document.activeElement.parentElement.previousSibling;
 
-    if (previousGroup && previousGroup.classList.contains('js-menu-item')) {
+    if (previousGroup && previousGroup.classList.contains("js-menu-item")) {
       previousGroup.focus();
     } else {
       if (previousGroup && previousGroup.children.length > 0) {
@@ -239,22 +239,22 @@ class NavigationTree extends Component {
     if (listChildren.length == 1) {
       listChildren[0].focus && listChildren[0].focus();
     } else {
-      if (lastChildren.classList.contains('js-menu-item')) {
+      if (lastChildren.classList.contains("js-menu-item")) {
         lastChildren.focus();
       } else {
         if (
           lastChildren.children[
             lastChildren.children.length - 1
-          ].classList.contains('js-menu-item')
+          ].classList.contains("js-menu-item")
         ) {
           lastChildren.children[lastChildren.children.length - 1].focus();
         } else {
           lastChildren.children[lastChildren.children.length - 1]
-            .getElementsByClassName('js-menu-item')
+            .getElementsByClassName("js-menu-item")
             [
               lastChildren.children[
                 lastChildren.children.length - 1
-              ].getElementsByClassName('js-menu-item').length - 1
+              ].getElementsByClassName("js-menu-item").length - 1
             ].focus();
         }
       }
@@ -262,11 +262,11 @@ class NavigationTree extends Component {
   }
 
   handleRedirect = (elementId, isNew, type) => {
-    history.push('/' + (type ? type : 'window') + '/' + elementId);
+    history.push("/" + (type ? type : "window") + "/" + elementId);
   };
 
   handleNewRedirect = (elementId) => {
-    history.push('/window/' + elementId + '/new');
+    history.push("/window/" + elementId + "/new");
   };
 
   handleDeeper = (e, nodeId) => {
@@ -276,7 +276,7 @@ class NavigationTree extends Component {
       this.setState(
         Object.assign({}, this.state, {
           deepNode: response.data,
-        })
+        }),
       );
     });
   };
@@ -286,7 +286,7 @@ class NavigationTree extends Component {
     this.setState(
       Object.assign({}, this.state, {
         deepNode: null,
-      })
+      }),
     );
   };
 
@@ -320,10 +320,10 @@ class NavigationTree extends Component {
     const { queriedResults, query, pendingQuery } = this.state;
 
     let sitemapLeftColItems = queriedResults.filter(
-      (colItem, i) => i % 2 === 0
+      (colItem, i) => i % 2 === 0,
     );
     let sitemapRightColItems = queriedResults.filter(
-      (colItem, i) => i % 2 === 1
+      (colItem, i) => i % 2 === 1,
     );
 
     return (
@@ -337,7 +337,7 @@ class NavigationTree extends Component {
               type="text"
               id="search-input"
               className="input-field"
-              placeholder={counterpart.translate('window.type.placeholder')}
+              placeholder={counterpart.translate("window.type.placeholder")}
               onChange={this.handleQuery}
               onKeyDown={this.handleKeyDown}
             />
@@ -357,18 +357,18 @@ class NavigationTree extends Component {
             <div className="sitemap-column-left">
               {sitemapLeftColItems &&
                 sitemapLeftColItems.map((subitem, subindex) =>
-                  this.renderMenuOverlayContainer(subitem, subindex)
+                  this.renderMenuOverlayContainer(subitem, subindex),
                 )}
             </div>
             <div className="sitemap-column-right">
               {sitemapRightColItems &&
                 sitemapRightColItems.map((subitem, subindex) =>
-                  this.renderMenuOverlayContainer(subitem, subindex)
+                  this.renderMenuOverlayContainer(subitem, subindex),
                 )}
             </div>
 
-            {queriedResults.length === 0 && query !== '' && (
-              <span>{counterpart.translate('window.noResults.caption')}</span>
+            {queriedResults.length === 0 && query !== "" && (
+              <span>{counterpart.translate("window.noResults.caption")}</span>
             )}
           </div>
         )}

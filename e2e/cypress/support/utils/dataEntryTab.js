@@ -1,6 +1,8 @@
 export class DataEntryTab {
   constructor(name, targetWindowName) {
-    cy.log(`DataEntryTab - set name = ${name}; targetWindowName = ${targetWindowName}`);
+    cy.log(
+      `DataEntryTab - set name = ${name}; targetWindowName = ${targetWindowName}`,
+    );
     this.name = name;
     this.tabName = name;
     this.targetWindowName = targetWindowName;
@@ -36,13 +38,17 @@ export class DataEntryTab {
   }
 
   addDataEntrySubTab(dataEntrySubTab) {
-    cy.log(`DataEntryTab - add dataEntrySubTab = ${JSON.stringify(dataEntrySubTab)}`);
+    cy.log(
+      `DataEntryTab - add dataEntrySubTab = ${JSON.stringify(dataEntrySubTab)}`,
+    );
     this.dataEntrySubTabs.push(dataEntrySubTab);
     return this;
   }
 
   addDataEntrySection(dataEntrySection) {
-    cy.log(`DataEntryTab - add dataEntrySection = ${JSON.stringify(dataEntrySection)}`);
+    cy.log(
+      `DataEntryTab - add dataEntrySection = ${JSON.stringify(dataEntrySection)}`,
+    );
     this.dataEntrySections.push(dataEntrySection);
     return this;
   }
@@ -50,7 +56,9 @@ export class DataEntryTab {
   apply() {
     cy.log(`DataEntryTab - apply - START (name=${this.name})`);
     const result = applyDataEntryTab(this);
-    cy.log(`DataEntryTab - apply - END (name=${this.name}; result=${JSON.stringify(result)})`);
+    cy.log(
+      `DataEntryTab - apply - END (name=${this.name}; result=${JSON.stringify(result)})`,
+    );
     return this;
   }
 }
@@ -91,24 +99,27 @@ export class DataEntrySubTab {
 }
 
 function applyDataEntryTab(dataEntryTab) {
-  cy.visitWindow('540571', 'NEW');
+  cy.visitWindow("540571", "NEW");
   // Modified the oredr in which we input things, put  "Eingabefenster" to be the first one - test passes
-  cy.writeIntoLookupListField('DataEntry_TargetWindow_ID', dataEntryTab.targetWindowName, dataEntryTab.targetWindowName);
+  cy.writeIntoLookupListField(
+    "DataEntry_TargetWindow_ID",
+    dataEntryTab.targetWindowName,
+    dataEntryTab.targetWindowName,
+  );
   if (dataEntryTab.seqNo) {
-    cy.getStringFieldValue('SeqNo').then(currentValue => {
+    cy.getStringFieldValue("SeqNo").then((currentValue) => {
       if (currentValue !== dataEntryTab.seqNo) {
-        cy.clearField('SeqNo');
-        cy.writeIntoStringField('SeqNo', `${dataEntryTab.seqNo}`);
+        cy.clearField("SeqNo");
+        cy.writeIntoStringField("SeqNo", `${dataEntryTab.seqNo}`);
       }
     });
   }
 
-  cy.writeIntoStringField('Name', dataEntryTab.name);
-  cy.writeIntoStringField('TabName', dataEntryTab.tabName);
-
+  cy.writeIntoStringField("Name", dataEntryTab.name);
+  cy.writeIntoStringField("TabName", dataEntryTab.tabName);
 
   if (dataEntryTab.description) {
-    cy.writeIntoTextField('Description', dataEntryTab.description);
+    cy.writeIntoTextField("Description", dataEntryTab.description);
   }
   if (!dataEntryTab.isActive) {
     cy.clickOnIsActive(true /*modal*/);
@@ -116,7 +127,7 @@ function applyDataEntryTab(dataEntryTab) {
 
   // Thx to https://stackoverflow.com/questions/16626735/how-to-loop-through-an-array-containing-objects-and-access-their-properties
   if (dataEntryTab.dataEntrySubTabs.length > 0) {
-    dataEntryTab.dataEntrySubTabs.forEach(function(dataEntrySubTab) {
+    dataEntryTab.dataEntrySubTabs.forEach(function (dataEntrySubTab) {
       applyDataEntrySubTab(dataEntrySubTab);
     });
     cy.expectNumberOfRows(dataEntryTab.dataEntrySubTabs.length);
@@ -124,23 +135,33 @@ function applyDataEntryTab(dataEntryTab) {
 }
 
 function applyDataEntrySubTab(dataEntrySubTab) {
-  cy.selectTab('DataEntry_SubTab');
+  cy.selectTab("DataEntry_SubTab");
   cy.pressAddNewButton(dataEntrySubTab.name);
 
-  cy.writeIntoStringField('Name', dataEntrySubTab.name, true /*modal*/);
-  cy.writeIntoStringField('TabName', dataEntrySubTab.tabName, true /*modal*/);
+  cy.writeIntoStringField("Name", dataEntrySubTab.name, true /*modal*/);
+  cy.writeIntoStringField("TabName", dataEntrySubTab.tabName, true /*modal*/);
 
   if (dataEntrySubTab.seqNo) {
-    cy.getStringFieldValue('SeqNo', true /*modal*/).then(currentValue => {
-      cy.log(`applyDataEntrySubTab - dataEntryTab.seqNo=${dataEntrySubTab.seqNo}; currentValue=${currentValue}`);
+    cy.getStringFieldValue("SeqNo", true /*modal*/).then((currentValue) => {
+      cy.log(
+        `applyDataEntrySubTab - dataEntryTab.seqNo=${dataEntrySubTab.seqNo}; currentValue=${currentValue}`,
+      );
       if (currentValue !== dataEntrySubTab.seqNo) {
-        cy.clearField('SeqNo', true /*modal*/);
-        cy.writeIntoStringField('SeqNo', `${dataEntrySubTab.seqNo}`, true /*modal*/);
+        cy.clearField("SeqNo", true /*modal*/);
+        cy.writeIntoStringField(
+          "SeqNo",
+          `${dataEntrySubTab.seqNo}`,
+          true /*modal*/,
+        );
       }
     });
   }
   if (dataEntrySubTab.description) {
-    cy.writeIntoTextField('Description', dataEntrySubTab.description, true /*modal*/);
+    cy.writeIntoTextField(
+      "Description",
+      dataEntrySubTab.description,
+      true /*modal*/,
+    );
   }
   if (!dataEntrySubTab.isActive) {
     cy.clickOnIsActive(true /*modal*/);

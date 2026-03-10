@@ -39,20 +39,20 @@ export class PackingMaterial {
   }
 }
 function applyPackingMaterial(packingMaterial) {
-  describe('create new packing material', function() {
-    cy.visitWindow('540192', 'NEW');
+  describe("create new packing material", function () {
+    cy.visitWindow("540192", "NEW");
 
-    cy.writeIntoStringField('Name', packingMaterial.name);
-    cy.selectInListField('M_Product_ID', packingMaterial.product);
+    cy.writeIntoStringField("Name", packingMaterial.name);
+    cy.selectInListField("M_Product_ID", packingMaterial.product);
 
     if (packingMaterial.length) {
-      cy.writeIntoStringField('Length', packingMaterial.length);
+      cy.writeIntoStringField("Length", packingMaterial.length);
     }
     if (packingMaterial.width) {
-      cy.writeIntoStringField('Width', packingMaterial.width);
+      cy.writeIntoStringField("Width", packingMaterial.width);
     }
     if (packingMaterial.height) {
-      cy.writeIntoStringField('Height', packingMaterial.height);
+      cy.writeIntoStringField("Height", packingMaterial.height);
     }
   });
 }

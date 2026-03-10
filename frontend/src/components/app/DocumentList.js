@@ -1,49 +1,49 @@
-import counterpart from 'counterpart';
-import cx from 'classnames';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import counterpart from "counterpart";
+import cx from "classnames";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { PROCESS_NAME } from '../../constants/Constants';
+import { PROCESS_NAME } from "../../constants/Constants";
 import {
   DLpropTypes,
   GEO_PANEL_STATES,
   NO_VIEW,
   PANEL_WIDTHS,
-} from '../../utils/documentListHelper';
-import Spinner from './SpinnerOverlay';
-import { BlankPage } from '../BlankPage';
-import SelectionAttributes from './SelectionAttributes';
-import Filters from '../filters/Filters';
-import FiltersStatic from '../filters/FiltersStatic';
-import Table from '../../containers/Table';
-import QuickActions from './QuickActions';
-import GeoMap from '../maps/GeoMap';
+} from "../../utils/documentListHelper";
+import Spinner from "./SpinnerOverlay";
+import { BlankPage } from "../BlankPage";
+import SelectionAttributes from "./SelectionAttributes";
+import Filters from "../filters/Filters";
+import FiltersStatic from "../filters/FiltersStatic";
+import Table from "../../containers/Table";
+import QuickActions from "./QuickActions";
+import GeoMap from "../maps/GeoMap";
 import {
   INVOICE_TO_ALLOCATE_WINDOW_ID,
   InvoiceToAllocateViewHeader,
-} from '../paymentAllocation/InvoiceToAllocateViewHeader';
+} from "../paymentAllocation/InvoiceToAllocateViewHeader";
 import {
   PP_ORDER_CANDIDATE_WINDOW_ID,
   PPOrderCandidateViewHeader,
-} from '../ppOrderCandidate/PPOrderCandidateViewHeader';
-import { connect } from 'react-redux';
+} from "../ppOrderCandidate/PPOrderCandidateViewHeader";
+import { connect } from "react-redux";
 import {
   getSettingFromStateAsBoolean,
   getSettingFromStateAsPositiveInt,
-} from '../../utils/settings';
+} from "../../utils/settings";
 import {
   DeliveryPlanningViewHeader,
   getDeliveryPlanningViewHeaderWindowId,
-} from '../deliveryPlanning/DeliveryPlanningViewHeader';
+} from "../deliveryPlanning/DeliveryPlanningViewHeader";
 import {
   OIViewHeader,
   OIViewHeader_WINDOW_ID,
-} from '../acctOpenItems/OIViewHeader';
-import { DocumentListHeaderProperties } from './DocumentListHeaderProperties';
+} from "../acctOpenItems/OIViewHeader";
+import { DocumentListHeaderProperties } from "./DocumentListHeaderProperties";
 import {
   AcctSimulationViewHeader,
   AcctSimulationViewHeader_WINDOW_ID,
-} from '../acctSimulation/AcctSimulationViewHeader';
+} from "../acctSimulation/AcctSimulationViewHeader";
 
 /**
  * @file Class based component.
@@ -177,7 +177,7 @@ class DocumentList extends Component {
 
     if (layoutNotFound || viewData.notFound) {
       return (
-        <BlankPage what={counterpart.translate('view.error.windowName')} />
+        <BlankPage what={counterpart.translate("view.error.windowName")} />
       );
     }
 
@@ -191,10 +191,10 @@ class DocumentList extends Component {
 
     return (
       <div
-        className={cx('document-list-wrapper', {
-          'document-list-included': isShowIncluded || isIncluded,
-          'document-list-is-included': isIncluded,
-          'document-list-has-included': hasShowIncluded || hasIncluded,
+        className={cx("document-list-wrapper", {
+          "document-list-included": isShowIncluded || isIncluded,
+          "document-list-is-included": isIncluded,
+          "document-list-has-included": hasShowIncluded || hasIncluded,
         })}
         style={styleObject}
       >
@@ -236,12 +236,12 @@ class DocumentList extends Component {
           <div className="column-size-button col-xxs-3 col-md-0 ignore-react-onclickoutside">
             <button
               className={cx(
-                'btn btn-meta-outline-secondary btn-sm ignore-react-onclickoutside',
+                "btn btn-meta-outline-secondary btn-sm ignore-react-onclickoutside",
                 {
                   normal: toggleWidth === 0,
                   narrow: toggleWidth === 1,
                   wide: toggleWidth === 2,
-                }
+                },
               )}
               onClick={this.adjustWidth}
             />
@@ -251,13 +251,13 @@ class DocumentList extends Component {
         {layout && !readonly && (
           <div
             className={cx(
-              'panel panel-primary panel-spaced panel-inline document-list-header',
+              "panel panel-primary panel-spaced panel-inline document-list-header",
               {
                 posRelative: showGeoResizeBtn,
-              }
+              },
             )}
           >
-            <div className={cx('header-element', { disabled: hasIncluded })}>
+            <div className={cx("header-element", { disabled: hasIncluded })}>
               {layout.supportNewRecord && !isModal && (
                 <button
                   className="btn btn-meta-outline-secondary btn-distance btn-sm hidden-sm-down btn-new-document"
@@ -304,19 +304,19 @@ class DocumentList extends Component {
               <div className="header-element pane-size-button ignore-react-onclickoutside">
                 <button
                   className={cx(
-                    'btn btn-meta-outline-secondary btn-sm btn-switch ignore-react-onclickoutside'
+                    "btn btn-meta-outline-secondary btn-sm btn-switch ignore-react-onclickoutside",
                   )}
                   onClick={this.collapseGeoPanels}
                 >
                   <i
-                    className={cx('icon icon-grid', {
-                      greyscaled: panelsState === 'map',
+                    className={cx("icon icon-grid", {
+                      greyscaled: panelsState === "map",
                     })}
                   />
                   <i className="icon text-middle">/</i>
                   <i
-                    className={cx('icon icon-map', {
-                      greyscaled: panelsState === 'grid',
+                    className={cx("icon icon-map", {
+                      greyscaled: panelsState === "grid",
                     })}
                   />
                 </button>
@@ -457,13 +457,13 @@ const mapStateToProps = (state) => {
   return {
     isPPOrderCandidateViewHeaderEnabled: getSettingFromStateAsBoolean(
       state,
-      'PPOrderCandidateViewHeader.enabled',
-      true
+      "PPOrderCandidateViewHeader.enabled",
+      true,
     ),
     defaultQtyPrecision: getSettingFromStateAsPositiveInt(
       state,
-      'widget.Quantity.defaultPrecision',
-      2
+      "widget.Quantity.defaultPrecision",
+      2,
     ),
     deliveryPlanningViewHeaderWindowId:
       getDeliveryPlanningViewHeaderWindowId(state),

@@ -1,12 +1,12 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
 
-import history from '../../services/History';
-import { deleteDocument, getPrintingOptions } from '../../api/window';
-import { duplicateRequest } from '../../actions/GenericActions';
+import history from "../../services/History";
+import { deleteDocument, getPrintingOptions } from "../../api/window";
+import { duplicateRequest } from "../../actions/GenericActions";
 import {
   clearMasterData,
   openModal,
@@ -14,21 +14,21 @@ import {
   printDocument,
   resetPrintingOptions,
   setPrintingOptions,
-} from '../../actions/WindowActions';
-import { setBreadcrumb, updateBreadcrumb } from '../../actions/MenuActions';
+} from "../../actions/WindowActions";
+import { setBreadcrumb, updateBreadcrumb } from "../../actions/MenuActions";
 
-import keymap from '../../shortcuts/keymap';
-import GlobalContextShortcuts from '../keyshortcuts/GlobalContextShortcuts';
+import keymap from "../../shortcuts/keymap";
+import GlobalContextShortcuts from "../keyshortcuts/GlobalContextShortcuts";
 
-import WidgetWrapper from '../../containers/WidgetWrapper';
-import Indicator from '../app/Indicator';
-import Prompt from '../app/Prompt';
-import NewEmail from '../email/NewEmail';
-import Inbox from '../inbox/Inbox';
-import NewLetter from '../letter/NewLetter';
-import Tooltips from '../tooltips/Tooltips';
-import Breadcrumb from './breadcrumb/Breadcrumb';
-import SideList from './SideList';
+import WidgetWrapper from "../../containers/WidgetWrapper";
+import Indicator from "../app/Indicator";
+import Prompt from "../app/Prompt";
+import NewEmail from "../email/NewEmail";
+import Inbox from "../inbox/Inbox";
+import NewLetter from "../letter/NewLetter";
+import Tooltips from "../tooltips/Tooltips";
+import Breadcrumb from "./breadcrumb/Breadcrumb";
+import SideList from "./SideList";
 import Subheader, {
   ACTION_ABOUT_DOCUMENT,
   ACTION_BREADCRUMB_CLICK,
@@ -42,22 +42,22 @@ import Subheader, {
   ACTION_OPEN_LETTER,
   ACTION_OPEN_PRINT_RAPORT,
   ACTION_TOGGLE_EDIT_MODE,
-} from './SubHeader';
-import UserDropdown from './UserDropdown';
+} from "./SubHeader";
+import UserDropdown from "./UserDropdown";
 
-import logo from '../../assets/images/metasfresh_logo_green_thumb.png';
+import logo from "../../assets/images/metasfresh_logo_green_thumb.png";
 import {
   getDocActionElementFromState,
   getDocSummaryDataFromState,
-} from '../../reducers/windowHandlerUtils';
-import { isShowCommentsMarker } from '../../utils/tableHelpers';
-import { computeSaveStatusFlags } from '../../reducers/windowHandler';
-import { getSelection, getTableId } from '../../reducers/tables';
-import RedirectHandler from './RedirectHandler';
-import { requestRedirect } from '../../reducers/redirect';
-import * as StaticModalType from '../../constants/StaticModalType';
+} from "../../reducers/windowHandlerUtils";
+import { isShowCommentsMarker } from "../../utils/tableHelpers";
+import { computeSaveStatusFlags } from "../../reducers/windowHandler";
+import { getSelection, getTableId } from "../../reducers/tables";
+import RedirectHandler from "./RedirectHandler";
+import { requestRedirect } from "../../reducers/redirect";
+import * as StaticModalType from "../../constants/StaticModalType";
 
-const PROMPT_TYPE_CONFIRM_DELETE = 'confirmDelete';
+const PROMPT_TYPE_CONFIRM_DELETE = "confirmDelete";
 
 /**
  * @file The Header component is shown in every view besides Modal or RawModal in frontend. It defines
@@ -76,7 +76,7 @@ class Header extends PureComponent {
     scrolled: false,
     isInboxOpen: false,
     isUDOpen: false,
-    tooltipOpen: '',
+    tooltipOpen: "",
     isEmailOpen: false,
   };
 
@@ -144,7 +144,7 @@ class Header extends PureComponent {
    * @summary ToDo: Describe the method
    */
   initEventListeners = () => {
-    document.addEventListener('scroll', this.handleScroll);
+    document.addEventListener("scroll", this.handleScroll);
   };
 
   /**
@@ -152,7 +152,7 @@ class Header extends PureComponent {
    * @summary ToDo: Describe the method
    */
   removeEventListeners = () => {
-    document.removeEventListener('scroll', this.handleScroll);
+    document.removeEventListener("scroll", this.handleScroll);
   };
 
   /**
@@ -211,12 +211,12 @@ class Header extends PureComponent {
           menuOverlay: nodeId,
         },
         () => {
-          if (nodeId !== '') {
+          if (nodeId !== "") {
             this.setState({ isMenuOverlayShow: true });
           } else {
             this.setState({ isMenuOverlayShow: false });
           }
-        }
+        },
       );
     };
 
@@ -253,7 +253,7 @@ class Header extends PureComponent {
     const { dispatch } = this.props;
 
     dispatch(setBreadcrumb([]));
-    history.push('/');
+    history.push("/");
   };
 
   /**
@@ -263,9 +263,9 @@ class Header extends PureComponent {
    */
   toggleScrollScope = (open) => {
     if (!open) {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     } else {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     }
   };
 
@@ -281,13 +281,13 @@ class Header extends PureComponent {
     const { windowId } = this.props;
     this.openModal(
       windowId,
-      'static',
-      counterpart.translate('window.comments.caption'),
+      "static",
+      counterpart.translate("window.comments.caption"),
       null,
       null,
       null,
       null,
-      StaticModalType.Comments
+      StaticModalType.Comments,
     );
   };
 
@@ -299,7 +299,7 @@ class Header extends PureComponent {
     selected,
     childViewId = null,
     childViewSelectedIds = null,
-    staticModalType = null
+    staticModalType = null,
   ) => {
     const { dispatch, viewId } = this.props;
 
@@ -314,7 +314,7 @@ class Header extends PureComponent {
         childViewId,
         childViewSelectedIds,
         staticModalType,
-      })
+      }),
     );
   };
 
@@ -324,7 +324,7 @@ class Header extends PureComponent {
     caption,
     tabId,
     rowId,
-    staticModalType
+    staticModalType,
   ) => {
     const { dispatch } = this.props;
 
@@ -336,7 +336,7 @@ class Header extends PureComponent {
         tabId,
         rowId,
         staticModalType,
-      })
+      }),
     );
   };
 
@@ -352,7 +352,7 @@ class Header extends PureComponent {
 
     try {
       const response = await getPrintingOptions({
-        entity: 'window',
+        entity: "window",
         windowId,
         docId,
       });
@@ -378,7 +378,7 @@ class Header extends PureComponent {
               windowId,
               documentId: docId,
               documentNo: docNo,
-            })
+            }),
           );
         }
       }
@@ -394,7 +394,7 @@ class Header extends PureComponent {
    * @param {string} docId
    */
   handleClone = (windowId, docId) => {
-    duplicateRequest('window', windowId, docId).then((response) => {
+    duplicateRequest("window", windowId, docId).then((response) => {
       if (response && response.data && response.data.id) {
         this.redirect(`/window/${windowId}/${response.data.id}`);
       }
@@ -420,10 +420,10 @@ class Header extends PureComponent {
   handleDelete = () => {
     this.showPrompt({
       type: PROMPT_TYPE_CONFIRM_DELETE,
-      title: counterpart.translate('window.Delete.caption'),
-      text: counterpart.translate('window.delete.message'),
-      submitCaption: counterpart.translate('window.delete.confirm'),
-      cancelCaption: counterpart.translate('window.delete.cancel'),
+      title: counterpart.translate("window.Delete.caption"),
+      text: counterpart.translate("window.delete.message"),
+      submitCaption: counterpart.translate("window.delete.confirm"),
+      cancelCaption: counterpart.translate("window.delete.cancel"),
     });
   };
 
@@ -472,7 +472,7 @@ class Header extends PureComponent {
   };
 
   handleDocStatusToggle = (close) => {
-    const elem = document.getElementsByClassName('js-dropdown-toggler')[0];
+    const elem = document.getElementsByClassName("js-dropdown-toggler")[0];
 
     if (close) {
       elem.blur();
@@ -507,7 +507,7 @@ class Header extends PureComponent {
       isInboxOpen: false,
       isUDOpen: false,
       isSideListShow: false,
-      tooltipOpen: '',
+      tooltipOpen: "",
     };
 
     if (clickedItem) {
@@ -515,21 +515,21 @@ class Header extends PureComponent {
     }
 
     state.isSubheaderShow =
-      clickedItem === 'isSubheaderShow' ? !isSubheaderShow : false;
+      clickedItem === "isSubheaderShow" ? !isSubheaderShow : false;
 
     this.setState(state, callback);
 
     if (
-      document.getElementsByClassName('js-dropdown-toggler')[0] &&
-      clickedItem !== 'dropdown'
+      document.getElementsByClassName("js-dropdown-toggler")[0] &&
+      clickedItem !== "dropdown"
     ) {
       this.handleDocStatusToggle(true);
     }
   };
 
-  closeDropdownOverlay = () => this.closeOverlays('dropdown');
+  closeDropdownOverlay = () => this.closeOverlays("dropdown");
 
-  closeSubheader = () => this.closeOverlays('isSubheaderShow');
+  closeSubheader = () => this.closeOverlays("isSubheaderShow");
 
   redirect = (where) => {
     const { dispatch } = this.props;
@@ -556,22 +556,22 @@ class Header extends PureComponent {
     if (selected?.length === 1) {
       this.openModalRow(
         windowId,
-        'static',
-        counterpart.translate('window.about.caption'),
+        "static",
+        counterpart.translate("window.about.caption"),
         tabId,
         selected,
-        StaticModalType.About
+        StaticModalType.About,
       );
     } else {
       this.openModal(
         windowId,
-        'static',
-        counterpart.translate('window.about.caption'),
+        "static",
+        counterpart.translate("window.about.caption"),
         null,
         null,
         null,
         null,
-        StaticModalType.About
+        StaticModalType.About,
       );
     }
   };
@@ -610,16 +610,16 @@ class Header extends PureComponent {
         break;
       }
       case ACTION_NEW_DOCUMENT: {
-        this.redirect('/window/' + windowId + '/new');
+        this.redirect("/window/" + windowId + "/new");
         this.closeSubheader();
         break;
       }
       case ACTION_OPEN_ADVANCED_EDIT: {
         this.openModal(
           windowId,
-          'window',
-          counterpart.translate('window.advancedEdit.caption'),
-          true
+          "window",
+          counterpart.translate("window.advancedEdit.caption"),
+          true,
         );
         this.closeSubheader();
         break;
@@ -722,8 +722,8 @@ class Header extends PureComponent {
         )}
 
         <nav
-          className={classnames('header header-super-faded', {
-            'header-shadow': scrolled,
+          className={classnames("header header-super-faded", {
+            "header-shadow": scrolled,
           })}
         >
           <div className="container-fluid">
@@ -734,22 +734,22 @@ class Header extends PureComponent {
                   onMouseEnter={() =>
                     this.toggleTooltip(keymap.OPEN_ACTIONS_MENU)
                   }
-                  onMouseLeave={() => this.toggleTooltip('')}
+                  onMouseLeave={() => this.toggleTooltip("")}
                   className={classnames(
-                    'btn-square btn-header',
-                    'tooltip-parent js-not-unselect',
+                    "btn-square btn-header",
+                    "tooltip-parent js-not-unselect",
                     {
-                      'btn-meta-default-dark btn-subheader-open btn-header-open':
+                      "btn-meta-default-dark btn-subheader-open btn-header-open":
                         isSubheaderShow,
-                      'btn-meta-primary': !isSubheaderShow,
-                    }
+                      "btn-meta-primary": !isSubheaderShow,
+                    },
                   )}
                 >
                   <i className="position-relative meta-icon-more">
                     {isShowComments && hasComments && (
                       <span
                         className="notification-number size-sm"
-                        title={counterpart.translate('window.comments.caption')}
+                        title={counterpart.translate("window.comments.caption")}
                       />
                     )}
                   </i>
@@ -758,7 +758,7 @@ class Header extends PureComponent {
                     <Tooltips
                       name={keymap.OPEN_ACTIONS_MENU}
                       action={counterpart.translate(
-                        'mainScreen.actionMenu.tooltip'
+                        "mainScreen.actionMenu.tooltip",
                       )}
                       type=""
                     />
@@ -788,7 +788,7 @@ class Header extends PureComponent {
                 {docStatus && (
                   <div
                     className="hidden-sm-down tooltip-parent js-not-unselect"
-                    onClick={() => this.toggleTooltip('')}
+                    onClick={() => this.toggleTooltip("")}
                     onMouseEnter={() => this.toggleTooltip(keymap.DOC_STATUS)}
                   >
                     <WidgetWrapper
@@ -808,7 +808,7 @@ class Header extends PureComponent {
                       <Tooltips
                         name={keymap.DOC_STATUS}
                         action={counterpart.translate(
-                          'mainScreen.docStatus.tooltip'
+                          "mainScreen.docStatus.tooltip",
                         )}
                         type=""
                       />
@@ -818,18 +818,18 @@ class Header extends PureComponent {
 
                 <div
                   className={classnames(
-                    'header-item-container',
-                    'header-item-container-static',
-                    'pointer tooltip-parent js-not-unselect',
+                    "header-item-container",
+                    "header-item-container-static",
+                    "pointer tooltip-parent js-not-unselect",
                     {
-                      'header-item-open': isInboxOpen,
-                    }
+                      "header-item-open": isInboxOpen,
+                    },
                   )}
-                  onClick={() => this.closeOverlays('', this.openInbox)}
+                  onClick={() => this.closeOverlays("", this.openInbox)}
                   onMouseEnter={() =>
                     this.toggleTooltip(keymap.OPEN_INBOX_MENU)
                   }
-                  onMouseLeave={() => this.toggleTooltip('')}
+                  onMouseLeave={() => this.toggleTooltip("")}
                 >
                   <span className="header-item header-item-badge icon-lg">
                     <i className="meta-icon-notifications" />
@@ -842,8 +842,8 @@ class Header extends PureComponent {
                   {tooltipOpen === keymap.OPEN_INBOX_MENU && (
                     <Tooltips
                       name={keymap.OPEN_INBOX_MENU}
-                      action={counterpart.translate('mainScreen.inbox.tooltip')}
-                      type={''}
+                      action={counterpart.translate("mainScreen.inbox.tooltip")}
+                      type={""}
                     />
                   )}
                 </div>
@@ -872,20 +872,20 @@ class Header extends PureComponent {
                 {showSidelist && (
                   <div
                     className={classnames(
-                      'tooltip-parent btn-header',
-                      'side-panel-toggle btn-square',
-                      'js-not-unselect',
+                      "tooltip-parent btn-header",
+                      "side-panel-toggle btn-square",
+                      "js-not-unselect",
                       {
-                        'btn-meta-default-bright btn-header-open':
+                        "btn-meta-default-bright btn-header-open":
                           isSideListShow,
-                        'btn-meta-primary': !isSideListShow,
-                      }
+                        "btn-meta-primary": !isSideListShow,
+                      },
                     )}
                     onClick={() => this.handleSidelistToggle(0)}
                     onMouseEnter={() =>
                       this.toggleTooltip(keymap.OPEN_SIDEBAR_MENU_0)
                     }
-                    onMouseLeave={() => this.toggleTooltip('')}
+                    onMouseLeave={() => this.toggleTooltip("")}
                   >
                     <i className="meta-icon-list" />
                     {tooltipOpen === keymap.OPEN_SIDEBAR_MENU_0 && (
@@ -893,7 +893,7 @@ class Header extends PureComponent {
                         name={keymap.OPEN_SIDEBAR_MENU_0}
                         action={counterpart.translate(
                           /* eslint-disable max-len */
-                          'mainScreen.sideList.tooltip'
+                          "mainScreen.sideList.tooltip",
                           /* eslint-enable max-len */
                         )}
                         type=""
@@ -908,7 +908,7 @@ class Header extends PureComponent {
           {showIndicator && (
             <Indicator
               indicator={indicator}
-              error={saveStatus?.error ? saveStatus?.reason : ''}
+              error={saveStatus?.error ? saveStatus?.reason : ""}
               exception={saveStatus?.error ? saveStatus?.exception : null}
             />
           )}
@@ -935,7 +935,7 @@ class Header extends PureComponent {
 
         {showSidelist && isSideListShow && (
           <SideList
-            windowId={windowId ? windowId : ''}
+            windowId={windowId ? windowId : ""}
             closeOverlays={this.closeOverlays}
             closeSideList={this.handleSidelistToggle}
             isSideListShow={isSideListShow}
@@ -949,14 +949,14 @@ class Header extends PureComponent {
 
         {isEmailOpen && (
           <NewEmail
-            windowId={windowId ? windowId : ''}
+            windowId={windowId ? windowId : ""}
             docId={dataId}
             handleCloseEmail={this.handleCloseEmail}
           />
         )}
         {isLetterOpen && (
           <NewLetter
-            windowId={windowId ? windowId : ''}
+            windowId={windowId ? windowId : ""}
             docId={dataId}
             handleCloseLetter={this.handleCloseLetter}
           />
@@ -965,9 +965,9 @@ class Header extends PureComponent {
           handleSidelistToggle={this.handleSidelistToggle}
           handleMenuOverlay={
             isMenuOverlayShow
-              ? () => this.handleMenuOverlay('', '')
+              ? () => this.handleMenuOverlay("", "")
               : () =>
-                  this.closeOverlays('', () => this.handleMenuOverlay('', '0'))
+                  this.closeOverlays("", () => this.handleMenuOverlay("", "0"))
           }
           handleInboxToggle={this.handleInboxToggle}
           handleUDToggle={this.handleUDToggle}
@@ -976,9 +976,9 @@ class Header extends PureComponent {
               ? () =>
                   this.openModal(
                     windowId,
-                    'window',
-                    counterpart.translate('window.advancedEdit.caption'),
-                    true
+                    "window",
+                    counterpart.translate("window.advancedEdit.caption"),
+                    true,
                   )
               : undefined
           }
@@ -1000,7 +1000,7 @@ class Header extends PureComponent {
               : undefined
           }
           handleDocStatusToggle={
-            document.getElementsByClassName('js-dropdown-toggler')[0]
+            document.getElementsByClassName("js-dropdown-toggler")[0]
               ? this.handleDocStatusToggle
               : undefined
           }

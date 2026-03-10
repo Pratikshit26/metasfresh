@@ -42,12 +42,12 @@ export class TransportationOrder {
 }
 
 function applyTransportationOrder(tOrder) {
-  describe(`Create new TransportationOrder ${tOrder.tour}`, function() {
-    cy.visitWindow(540020, 'NEW');
-    cy.selectInListField('Shipper_BPartner_ID', tOrder.shipperBPartnerID);
-    cy.selectInListField('Shipper_Location_ID', tOrder.shipperLocationID);
-    cy.selectInListField('M_Shipper_ID', tOrder.shipper);
-    cy.selectInListField('M_Tour_ID', tOrder.tour);
-    cy.writeIntoStringField('DocumentNo', tOrder.documentNo);
+  describe(`Create new TransportationOrder ${tOrder.tour}`, function () {
+    cy.visitWindow(540020, "NEW");
+    cy.selectInListField("Shipper_BPartner_ID", tOrder.shipperBPartnerID);
+    cy.selectInListField("Shipper_Location_ID", tOrder.shipperLocationID);
+    cy.selectInListField("M_Shipper_ID", tOrder.shipper);
+    cy.selectInListField("M_Tour_ID", tOrder.tour);
+    cy.writeIntoStringField("DocumentNo", tOrder.documentNo);
   });
 }

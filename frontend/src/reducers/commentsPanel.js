@@ -1,8 +1,8 @@
-import * as types from '../constants/CommentTypes';
+import * as types from "../constants/CommentTypes";
 
 export const initialState = {
   data: [],
-  textInput: '',
+  textInput: "",
   isOpen: false,
 };
 

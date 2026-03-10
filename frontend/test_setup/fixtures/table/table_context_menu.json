@@ -2724,10 +2724,7 @@
   "modalVisible": false,
   "isGerman": false,
   "activeSort": false,
-  "eventTypes": [
-    "mousedown",
-    "touchstart"
-  ],
+  "eventTypes": ["mousedown", "touchstart"],
   "outsideClickIgnoreClass": "ignore-react-onclickoutside",
   "preventDefault": false,
   "stopPropagation": false

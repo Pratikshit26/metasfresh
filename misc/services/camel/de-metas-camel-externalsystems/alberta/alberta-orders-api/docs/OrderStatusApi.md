@@ -2,12 +2,14 @@
 
 All URIs are relative to *https://virtserver.swaggerhub.com/it-labs.de/AuftragWawi/1.0.1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**updateOrderStatus**](OrderStatusApi.md#updateOrderStatus) | **PATCH** /order | Auftragsstatus (ggf. später auch Rezeptstatus) ändern
+| Method                                                       | HTTP request     | Description                                           |
+| ------------------------------------------------------------ | ---------------- | ----------------------------------------------------- |
+| [**updateOrderStatus**](OrderStatusApi.md#updateOrderStatus) | **PATCH** /order | Auftragsstatus (ggf. später auch Rezeptstatus) ändern |
 
 <a name="updateOrderStatus"></a>
+
 # **updateOrderStatus**
+
 > updateOrderStatus(body, albertaApiKey, id)
 
 Auftragsstatus (ggf. später auch Rezeptstatus) ändern
@@ -15,6 +17,7 @@ Auftragsstatus (ggf. später auch Rezeptstatus) ändern
 Szenario - ein Auftrag wurde im WaWi geändert und diese Änderungen sollen in Alberta übertragen werden ----- Aufruf &#x3D;&gt; orderStatus/[orderId]
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -23,7 +26,7 @@ Szenario - ein Auftrag wurde im WaWi geändert und diese Änderungen sollen in A
 
 OrderStatusApi apiInstance = new OrderStatusApi();
 OrderStatus body = new OrderStatus(); // OrderStatus | Der Bestellstatus
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 String id = "id_example"; // String | die Id des zu ändernden Autrags
 try {
     apiInstance.updateOrderStatus(body, albertaApiKey, id);
@@ -35,11 +38,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**OrderStatus**](OrderStatus.md)| Der Bestellstatus |
- **albertaApiKey** | **String**|  |
- **id** | **String**| die Id des zu ändernden Autrags |
+| Name              | Type                              | Description                     | Notes |
+| ----------------- | --------------------------------- | ------------------------------- | ----- |
+| **body**          | [**OrderStatus**](OrderStatus.md) | Der Bestellstatus               |
+| **albertaApiKey** | **String**                        |                                 |
+| **id**            | **String**                        | die Id des zu ändernden Autrags |
 
 ### Return type
 
@@ -51,6 +54,5 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/xml
- - **Accept**: Not defined
-
+- **Content-Type**: application/json, application/xml
+- **Accept**: Not defined

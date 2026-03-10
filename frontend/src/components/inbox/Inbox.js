@@ -1,24 +1,24 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import onClickOutside from 'react-onclickoutside';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { get } from 'lodash';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import onClickOutside from "react-onclickoutside";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { get } from "lodash";
 
 import {
   deleteUserNotification,
   markAllAsRead,
   markAsRead,
-} from '../../actions/AppActions';
-import InboxItem from './InboxItem';
-import { extractWindowIdFromViewId } from '../../utils/windowHelpers';
-import { requestRedirect } from '../../reducers/redirect';
+} from "../../actions/AppActions";
+import InboxItem from "./InboxItem";
+import { extractWindowIdFromViewId } from "../../utils/windowHelpers";
+import { requestRedirect } from "../../reducers/redirect";
 
 class Inbox extends Component {
   isCurrentWindowId = (windowId) => {
     const { location } = this.props;
-    const currentViewId = get(location, 'query.viewId');
+    const currentViewId = get(location, "query.viewId");
     const currentWindowId = extractWindowIdFromViewId(currentViewId);
     return currentWindowId && currentWindowId === windowId;
   };
@@ -40,21 +40,21 @@ class Inbox extends Component {
   handleItemTarget = (itemTarget) => {
     const { dispatch } = this.props;
     switch (itemTarget.targetType) {
-      case 'window':
+      case "window":
         dispatch(
           requestRedirect(
-            `/window/${itemTarget.windowId}/${itemTarget.documentId}`
-          )
+            `/window/${itemTarget.windowId}/${itemTarget.documentId}`,
+          ),
         );
         break;
-      case 'view': {
+      case "view": {
         // keep in sync with de.metas.notification.UserNotificationRequest.TargetViewAction
 
         const targetViewId = itemTarget.viewId;
         const targetWindowId = itemTarget.windowId;
 
         let targetLocation;
-        if (targetViewId === 'DEFAULT') {
+        if (targetViewId === "DEFAULT") {
           targetLocation = `/window/${targetWindowId}`;
         } else {
           targetLocation = `/window/${itemTarget.windowId}/?viewId=${targetViewId}`;
@@ -67,7 +67,7 @@ class Inbox extends Component {
             // for some reason DocumentList won't refresh on history.push,
             // so we force a full page reload by setting `window.location`.
             setWindowLocation: this.isCurrentWindowId(targetWindowId),
-          })
+          }),
         );
 
         break;
@@ -85,7 +85,7 @@ class Inbox extends Component {
 
   handleShowAll = () => {
     const { close, dispatch } = this.props;
-    dispatch(requestRedirect('/inbox'));
+    dispatch(requestRedirect("/inbox"));
     close && close();
   };
 
@@ -98,22 +98,22 @@ class Inbox extends Component {
 
   handleKeyDown = (e) => {
     const { close } = this.props;
-    const inboxItem = document.getElementsByClassName('js-inbox-item')[0];
+    const inboxItem = document.getElementsByClassName("js-inbox-item")[0];
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
-        if (document.activeElement.classList.contains('js-inbox-wrapper')) {
+        if (document.activeElement.classList.contains("js-inbox-wrapper")) {
           if (inboxItem) {
             inboxItem.focus();
           }
         }
         break;
 
-      case 'Tab':
+      case "Tab":
         close && close();
         break;
 
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
         close && close();
         break;
@@ -129,17 +129,17 @@ class Inbox extends Component {
         onKeyDown={this.handleKeyDown}
       >
         {(all || open) && (
-          <div className={all ? 'inbox-all ' : 'inbox'}>
-            <div className={'inbox-body ' + (!all ? 'breadcrumbs-shadow' : '')}>
+          <div className={all ? "inbox-all " : "inbox"}>
+            <div className={"inbox-body " + (!all ? "breadcrumbs-shadow" : "")}>
               <div className="inbox-header">
                 <span className="inbox-header-title">
-                  {counterpart.translate('window.inbox.caption')}
+                  {counterpart.translate("window.inbox.caption")}
                 </span>
                 <span onClick={this.handleMarkAllAsRead} className="inbox-link">
-                  {counterpart.translate('window.markAsRead.caption')}
+                  {counterpart.translate("window.markAsRead.caption")}
                 </span>
               </div>
-              <div className={!all ? 'inbox-list' : ''}>
+              <div className={!all ? "inbox-list" : ""}>
                 {inbox &&
                   inbox.notifications.map((item, id) => (
                     <InboxItem
@@ -152,7 +152,7 @@ class Inbox extends Component {
                   ))}
                 {inbox && inbox.notifications.length === 0 && (
                   <div className="inbox-item inbox-item-empty">
-                    {counterpart.translate('window.inbox.empty')}
+                    {counterpart.translate("window.inbox.empty")}
                   </div>
                 )}
               </div>
@@ -162,7 +162,7 @@ class Inbox extends Component {
                     onClick={this.handleShowAll}
                     className="inbox-link text-center"
                   >
-                    {counterpart.translate('window.allInbox.caption')} &gt;&gt;
+                    {counterpart.translate("window.allInbox.caption")} &gt;&gt;
                   </div>
                 )}
               </div>
@@ -207,7 +207,7 @@ const routerInbox = withRouter(
   connect((state, { location }) => ({
     modalVisible: state.windowHandler.modal.visible,
     location,
-  }))(Inbox)
+  }))(Inbox),
 );
 
 export default onClickOutside(addClickOutsideHandler(routerInbox));

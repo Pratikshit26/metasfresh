@@ -20,16 +20,16 @@ setupCounterpart();
 export const globalStore = store(load());
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={globalStore}>
-      <ErrorBoundary FallbackComponent={ErrorScreen} onError={logErrorToBackend}>
-        <ProvideAuth>
-          <ApplicationRoot />
-        </ProvideAuth>
-      </ErrorBoundary>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={globalStore}>
+            <ErrorBoundary FallbackComponent={ErrorScreen} onError={logErrorToBackend}>
+                <ProvideAuth>
+                    <ApplicationRoot />
+                </ProvideAuth>
+            </ErrorBoundary>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root'),
 );
 
 setupOfflineModeDetector({ globalStore });

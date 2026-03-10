@@ -1,4 +1,4 @@
-import NumericInput from 'react-numeric-input';
+import NumericInput from "react-numeric-input";
 
 /**
  * Extended NumericInput component to handle numbers formatting
@@ -9,7 +9,7 @@ export default class NumericQuickInput extends NumericInput {
   _format(n) {
     let _n = this._toNumber(n);
 
-    _n += '';
+    _n += "";
 
     if (this.props.format) {
       return this.props.format(_n);
@@ -19,8 +19,8 @@ export default class NumericQuickInput extends NumericInput {
   }
 
   _parse(x) {
-    x = String(x).replace(',', '.');
-    if (typeof this.props.parse == 'function') {
+    x = String(x).replace(",", ".");
+    if (typeof this.props.parse == "function") {
       return parseFloat(this.props.parse(x));
     }
     return parseFloat(x);

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Shortcut } from '../keyshortcuts';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Shortcut } from "../keyshortcuts";
 
 export default class PaginationContextShortcuts extends Component {
   handlers = {
@@ -10,7 +10,7 @@ export default class PaginationContextShortcuts extends Component {
       const activeElement = document.activeElement;
 
       // if input is selected global shortcuts should handle this
-      if (activeElement && activeElement.nodeName === 'INPUT') {
+      if (activeElement && activeElement.nodeName === "INPUT") {
         return false;
       }
 
@@ -21,7 +21,7 @@ export default class PaginationContextShortcuts extends Component {
 
       const activeElement = document.activeElement;
 
-      if (activeElement && activeElement.nodeName === 'INPUT') {
+      if (activeElement && activeElement.nodeName === "INPUT") {
         return false;
       }
 

@@ -1,5 +1,5 @@
-import { get, find } from 'lodash';
-import { createSelector } from 'reselect';
+import { get, find } from "lodash";
+import { createSelector } from "reselect";
 
 import {
   ADD_VIEW_LOCATION_DATA,
@@ -24,7 +24,7 @@ import {
   UNSET_INCLUDED_VIEW,
   UPDATE_VIEW_DATA_ERROR,
   UPDATE_VIEW_DATA_SUCCESS,
-} from '../constants/ActionTypes';
+} from "../constants/ActionTypes";
 
 export const viewState = {
   layout: {
@@ -72,21 +72,21 @@ export const initialState = {
 
 const selectView = (state, id, isModal) => {
   return isModal
-    ? get(state, ['viewHandler', 'modals', id], viewState)
-    : get(state, ['viewHandler', 'views', id], viewState);
+    ? get(state, ["viewHandler", "modals", id], viewState)
+    : get(state, ["viewHandler", "views", id], viewState);
 };
 
 const selectLocalView = (state, id, isModal) => {
   return isModal
-    ? get(state, ['modals', id], viewState)
-    : get(state, ['views', id], viewState);
+    ? get(state, ["modals", id], viewState)
+    : get(state, ["views", id], viewState);
 };
 
 export const getView = createSelector([selectView], (view) => view);
 
 const getLocalView = createSelector([selectLocalView], (view) => view);
 
-const getViewType = (isModal) => (isModal ? 'modals' : 'views');
+const getViewType = (isModal) => (isModal ? "modals" : "views");
 
 /**
  * @method findViewByViewId
@@ -214,7 +214,7 @@ export default function viewHandler(state = initialState, action) {
 
       //WTF prettier?
       //eslint-disable-next-line
-      const page = size > 1 ? (firstRow / pageLength) + 1 : 1;
+      const page = size > 1 ? firstRow / pageLength + 1 : 1;
       const view = getLocalView(state, id, isModal);
       const viewState = {
         ...view,

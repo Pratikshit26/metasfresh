@@ -23,42 +23,42 @@
 let audioCtx = null; // lazy to allow jest testing
 
 export const beep = ({ beepFrequency, beepDurationMillis, vibrateMillis, beepVolume }) => {
-  if (!audioCtx) {
-    audioCtx = new AudioContext();
-  }
-
-  // console.trace('beep', { beepFrequency, beepDurationMillis, beepVolume, vibrateMillis, audioCtx });
-
-  try {
-    //
-    // Beep
-    if (beepFrequency > 0 && beepDurationMillis > 0 && beepVolume > 0) {
-      //
-      // Volume (connected to audio destination)
-      const volume = audioCtx.createGain();
-      volume.connect(audioCtx.destination);
-      volume.gain.value = beepVolume; // 0...1
-
-      //
-      // Oscillator (connected to Volume)
-      const oscillator = audioCtx.createOscillator();
-      oscillator.type = 'square';
-      oscillator.frequency.setValueAtTime(beepFrequency, audioCtx.currentTime); // value in hertz
-      //oscillator.connect(audioCtx.destination);
-      oscillator.connect(volume);
-
-      //
-      // Start it
-      oscillator.start();
-      oscillator.stop(audioCtx.currentTime + beepDurationMillis / 1000);
+    if (!audioCtx) {
+        audioCtx = new AudioContext();
     }
 
-    //
-    // Vibrate
-    if (vibrateMillis > 0) {
-      navigator.vibrate(vibrateMillis);
+    // console.trace('beep', { beepFrequency, beepDurationMillis, beepVolume, vibrateMillis, audioCtx });
+
+    try {
+        //
+        // Beep
+        if (beepFrequency > 0 && beepDurationMillis > 0 && beepVolume > 0) {
+            //
+            // Volume (connected to audio destination)
+            const volume = audioCtx.createGain();
+            volume.connect(audioCtx.destination);
+            volume.gain.value = beepVolume; // 0...1
+
+            //
+            // Oscillator (connected to Volume)
+            const oscillator = audioCtx.createOscillator();
+            oscillator.type = 'square';
+            oscillator.frequency.setValueAtTime(beepFrequency, audioCtx.currentTime); // value in hertz
+            //oscillator.connect(audioCtx.destination);
+            oscillator.connect(volume);
+
+            //
+            // Start it
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + beepDurationMillis / 1000);
+        }
+
+        //
+        // Vibrate
+        if (vibrateMillis > 0) {
+            navigator.vibrate(vibrateMillis);
+        }
+    } catch (error) {
+        console.log('Failed beeping', { error });
     }
-  } catch (error) {
-    console.log('Failed beeping', { error });
-  }
 };

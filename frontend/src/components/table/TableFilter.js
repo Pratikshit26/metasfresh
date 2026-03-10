@@ -1,18 +1,18 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import keymap from '../../shortcuts/keymap';
-import { TableFilterContextShortcuts } from '../keyshortcuts';
-import { openModal } from '../../actions/WindowActions';
-import { deleteTopActions, fetchTopActions } from '../../actions/Actions';
-import { addNotification } from '../../actions/AppActions';
+import keymap from "../../shortcuts/keymap";
+import { TableFilterContextShortcuts } from "../keyshortcuts";
+import { openModal } from "../../actions/WindowActions";
+import { deleteTopActions, fetchTopActions } from "../../actions/Actions";
+import { addNotification } from "../../actions/AppActions";
 
-import Tooltips from '../tooltips/Tooltips';
-import TableQuickInput from './TableQuickInput';
-import { useSelectedRowIds } from '../../reducers/tables';
-import { useTopActions } from '../../reducers/windowHandler';
+import Tooltips from "../tooltips/Tooltips";
+import TableQuickInput from "./TableQuickInput";
+import { useSelectedRowIds } from "../../reducers/tables";
+import { useTopActions } from "../../reducers/windowHandler";
 
 /**
  * Component displayed above included tab header and contains buttons like 'Add new', 'Batch entry', top actions etc.
@@ -34,7 +34,7 @@ const TableFilter = ({
   pending,
 }) => {
   const isModalVisible = useSelector(
-    (state) => state.windowHandler.modal.visible
+    (state) => state.windowHandler.modal.visible,
   );
   const selectedRowIds = useSelectedRowIds({ windowId, tabId, docId });
   const topActions = useTopActions({ tabId });
@@ -55,7 +55,7 @@ const TableFilter = ({
 
   useEffect(() => {
     setShortcutActions(
-      generateShortcutActionsArray(topActions, handleTopActionClick)
+      generateShortcutActionsArray(topActions, handleTopActionClick),
     );
   }, [topActions]);
 
@@ -68,7 +68,7 @@ const TableFilter = ({
     // Automatically open batch entry (if not already opened) when we can add new entries
     if (
       quickInputSupport &&
-      newRecordInputMode === 'QUICK_INPUT_ONLY' &&
+      newRecordInputMode === "QUICK_INPUT_ONLY" &&
       allowCreateNew &&
       !isBatchEntryActive
     ) {
@@ -91,12 +91,12 @@ const TableFilter = ({
         openModal({
           title: action.caption,
           windowId: action.processId,
-          modalType: 'process',
+          modalType: "process",
           viewDocumentIds: selectedRowIds,
-        })
+        }),
       );
     },
-    [selectedRowIds]
+    [selectedRowIds],
   );
 
   /**
@@ -118,9 +118,9 @@ const TableFilter = ({
         >
           {isTooltipShow === action.processId && (
             <Tooltips
-              name={action.shortcut ? action.shortcut.replace('-', '+') : ''}
+              name={action.shortcut ? action.shortcut.replace("-", "+") : ""}
               action={action.caption}
-              type={''}
+              type={""}
             />
           )}
         </ActionButton>
@@ -139,13 +139,13 @@ const TableFilter = ({
   const tabIndex = fullScreen || isModalVisible ? -1 : tabIndexProp;
 
   const showNewButton =
-    newRecordInputMode === 'ALL_METHODS' && // input mode allows it
+    newRecordInputMode === "ALL_METHODS" && // input mode allows it
     allowCreateNew && // we are allowed to create a new record
     !isBatchEntryActive; // batch entry is not already opened
 
   const showBatchEntryButton =
-    (newRecordInputMode === 'ALL_METHODS' ||
-      newRecordInputMode === 'QUICK_INPUT_ONLY') && // input mode allows it
+    (newRecordInputMode === "ALL_METHODS" ||
+      newRecordInputMode === "QUICK_INPUT_ONLY") && // input mode allows it
     quickInputSupport && // batch entry is supported by backend
     allowCreateNew && // we are allowed to create a new record
     !fullScreen; // included tab is not in full screen mode
@@ -161,7 +161,7 @@ const TableFilter = ({
               tabIndex={tabIndex}
               disabled={pending}
             >
-              {counterpart.translate('window.addNew.caption')}
+              {counterpart.translate("window.addNew.caption")}
             </button>
           )}
           {showBatchEntryButton && (
@@ -184,7 +184,7 @@ const TableFilter = ({
                       ? quickInputSupport.closeButtonCaption
                       : quickInputSupport.openButtonCaption
                   }
-                  type={''}
+                  type={""}
                 />
               )}
             </button>
@@ -226,10 +226,10 @@ const TableFilter = ({
               name={keymap.TOGGLE_EXPAND}
               action={
                 fullScreen
-                  ? counterpart.translate('window.table.collapse')
-                  : counterpart.translate('window.table.expand')
+                  ? counterpart.translate("window.table.collapse")
+                  : counterpart.translate("window.table.expand")
               }
-              type={''}
+              type={""}
             />
           )}
         </button>
@@ -266,7 +266,7 @@ const generateShortcutActionsArray = (actions, handleTopActionClick) => {
       continue;
     }
 
-    const shortcut = action.shortcut.replace('-', '+');
+    const shortcut = action.shortcut.replace("-", "+");
 
     shortcutActions.push({
       name: `FILTER_ACTION_${i}`,

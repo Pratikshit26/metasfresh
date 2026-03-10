@@ -5,9 +5,9 @@ import {
   SET_QUICKINPUT_DATA,
   SET_QUICKINPUT_LAYOUT,
   UPDATE_QUICKINPUT_DATA,
-} from '../constants/actions/TableQuickInputActionTypes';
-import { parseToDisplay } from '../utils/documentListHelper';
-import * as api from '../api/windowQuickInput';
+} from "../constants/actions/TableQuickInputActionTypes";
+import { parseToDisplay } from "../utils/documentListHelper";
+import * as api from "../api/windowQuickInput";
 
 /**
  * @summary Remove quick input's data

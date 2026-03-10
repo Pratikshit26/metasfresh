@@ -75,41 +75,57 @@ export class PurchaseOrderLine {
 
 function applyPurchaseOrder(purchaseOrder) {
   describe(`Create new Purchase Order`, function () {
-    cy.visitWindow('181', 'NEW');
+    cy.visitWindow("181", "NEW");
 
-    cy.writeIntoLookupListField('C_BPartner_ID', purchaseOrder.bPartner, purchaseOrder.bPartner);
+    cy.writeIntoLookupListField(
+      "C_BPartner_ID",
+      purchaseOrder.bPartner,
+      purchaseOrder.bPartner,
+    );
     if (purchaseOrder.doctype) {
-      cy.writeIntoStringField('C_DocTypeTarget_ID', purchaseOrder.documentType);
+      cy.writeIntoStringField("C_DocTypeTarget_ID", purchaseOrder.documentType);
     }
     if (purchaseOrder.poReference) {
-      cy.writeIntoStringField('POReference', purchaseOrder.poReference);
+      cy.writeIntoStringField("POReference", purchaseOrder.poReference);
     }
 
     if (purchaseOrder.priceSystem) {
-      cy.resetListValue('M_PricingSystem_ID');
-      cy.writeIntoLookupListField('M_PricingSystem_ID', purchaseOrder.priceSystem, purchaseOrder.priceSystem);
+      cy.resetListValue("M_PricingSystem_ID");
+      cy.writeIntoLookupListField(
+        "M_PricingSystem_ID",
+        purchaseOrder.priceSystem,
+        purchaseOrder.priceSystem,
+      );
     }
 
     if (purchaseOrder.isDropShip) {
-      cy.setCheckBoxValue('IsDropShip', purchaseOrder.isDropShip);
+      cy.setCheckBoxValue("IsDropShip", purchaseOrder.isDropShip);
     }
     if (purchaseOrder.warehouse) {
-      cy.selectInListField('M_Warehouse_ID', purchaseOrder.warehouse);
+      cy.selectInListField("M_Warehouse_ID", purchaseOrder.warehouse);
     }
 
     purchaseOrder.lines.forEach(function (purchaseOrderLine) {
       applyPurchaseOrderLine(purchaseOrderLine);
     });
-    cy.get('table tbody tr').should('have.length', purchaseOrder.lines.length);
+    cy.get("table tbody tr").should("have.length", purchaseOrder.lines.length);
   });
 }
 
 function applyPurchaseOrderLine(purchaseOrderLine) {
-  cy.selectTab('C_OrderLine');
+  cy.selectTab("C_OrderLine");
   cy.pressBatchEntryButton();
-  cy.writeIntoLookupListField('M_Product_ID', purchaseOrderLine.product, purchaseOrderLine.product);
-  cy.writeIntoLookupListField('M_HU_PI_Item_Product_ID', purchaseOrderLine.hu, purchaseOrderLine.hu);
-  cy.writeIntoStringField('Qty', purchaseOrderLine.quantity);
+  cy.writeIntoLookupListField(
+    "M_Product_ID",
+    purchaseOrderLine.product,
+    purchaseOrderLine.product,
+  );
+  cy.writeIntoLookupListField(
+    "M_HU_PI_Item_Product_ID",
+    purchaseOrderLine.hu,
+    purchaseOrderLine.hu,
+  );
+  cy.writeIntoStringField("Qty", purchaseOrderLine.quantity);
   cy.closeBatchEntry();
 
   // // cannot use advanced edit since adding a packing item is broken.

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import onClickOutside from 'react-onclickoutside';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import onClickOutside from "react-onclickoutside";
+import { connect } from "react-redux";
 
 import {
   openModal,
   patch,
   updatePropertyValue,
-} from '../../actions/WindowActions';
-import WidgetWrapper from '../../containers/WidgetWrapper';
-import BarcodeScanner from '../widget/BarcodeScanner/BarcodeScannerWidget';
+} from "../../actions/WindowActions";
+import WidgetWrapper from "../../containers/WidgetWrapper";
+import BarcodeScanner from "../widget/BarcodeScanner/BarcodeScannerWidget";
 
 /**
  * @file Class based component.
@@ -34,13 +34,13 @@ class OverlayField extends Component {
     const { handleSubmit, closeOverlay, onSelectBarcode } = this.props;
 
     switch (e.key) {
-      case 'Enter':
+      case "Enter":
         handleSubmit();
         break;
-      case 'Escape':
+      case "Escape":
         closeOverlay();
         break;
-      case 'Tab':
+      case "Tab":
         handleSubmit();
         break;
       default:
@@ -62,7 +62,7 @@ class OverlayField extends Component {
         className="btn btn-sm btn-meta-success"
         onClick={() => onScanBarcode(true)}
       >
-        {counterpart.translate('widget.scanFromCamera.caption')}
+        {counterpart.translate("widget.scanFromCamera.caption")}
       </button>
     );
   };
@@ -99,7 +99,7 @@ class OverlayField extends Component {
           dataSource="overlay-field"
           renderMaster={true}
           entity="process"
-          key={'element' + id}
+          key={"element" + id}
           windowId={type}
           dataId={layout.pinstanceId}
           widgetData={widgetData}
@@ -270,5 +270,5 @@ export default BarcodeScanner(
     openModal,
     patch,
     updatePropertyValue,
-  })(onClickOutside(OverlayField))
+  })(onClickOutside(OverlayField)),
 );

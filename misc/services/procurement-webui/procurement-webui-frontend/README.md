@@ -1,15 +1,17 @@
 # <img src='/images/metasfresh-logo-slogan-969x248.png' height='60' alt='metasfresh Logo - We do Open Source ERP' aria-label='metasfresh.com' /></a>
+
 [![license](https://img.shields.io/badge/license-GPL-blue.svg)](https://github.com/metasfresh/metasfresh/blob/master/LICENSE.md)
+
 # Procurement App
 
 # Technologies used
 
-* pwa
-* react (>= 17.0.1)
-* react-swipeable (>=6.0.1)
-* typescript (>= 4.1.2)
-* mobx-state-tree (>= 3.6.2)
-* bulma (>=0.9.1)
+- pwa
+- react (>= 17.0.1)
+- react-swipeable (>=6.0.1)
+- typescript (>= 4.1.2)
+- mobx-state-tree (>= 3.6.2)
+- bulma (>=0.9.1)
 
 # Running the app for dev
 
@@ -53,9 +55,7 @@ Build the app
 
 The structure can be served with whatever server you want nginx/Apache.
 
-
 You also have a Dockerfile in the root of the structure in case you want to run this in a container.
-
 
 # App structure
 
@@ -126,5 +126,3 @@ src
     └── translate.ts
 
 ```
-
-

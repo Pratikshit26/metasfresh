@@ -1,15 +1,15 @@
 // import { Hints, Steps } from 'intro.js-react';
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
 
-import { discardNewRequest } from '../../api';
-import { getTableId } from '../../reducers/tables';
+import { discardNewRequest } from "../../api";
+import { getTableId } from "../../reducers/tables";
 
-import { BlankPage } from '../BlankPage';
-import Container from '../Container';
-import SectionGroup from '../SectionGroup';
-import Overlay from '../app/Overlay';
-import { introHints, introSteps } from '../intro/intro';
+import { BlankPage } from "../BlankPage";
+import Container from "../Container";
+import SectionGroup from "../SectionGroup";
+import Overlay from "../app/Overlay";
+import { introHints, introSteps } from "../intro/intro";
 
 /**
  * @file Class based component.
@@ -44,8 +44,8 @@ export default class MasterWindow extends PureComponent {
       if (windowIntroSteps) {
         docIntroSteps = [];
 
-        if (windowIntroSteps['all']) {
-          docIntroSteps = docIntroSteps.concat(windowIntroSteps['all']);
+        if (windowIntroSteps["all"]) {
+          docIntroSteps = docIntroSteps.concat(windowIntroSteps["all"]);
         }
 
         if (master.docId && windowIntroSteps[master.docId]) {
@@ -53,16 +53,16 @@ export default class MasterWindow extends PureComponent {
         }
       }
 
-      if (Array.isArray(introHints['default'])) {
-        docIntroHints = introHints['default'];
+      if (Array.isArray(introHints["default"])) {
+        docIntroHints = introHints["default"];
       }
 
       const windowIntroHints = introHints[master.layout.windowId];
       if (windowIntroHints) {
         docIntroHints = [];
 
-        if (windowIntroHints['all']) {
-          docIntroHints = docIntroHints.concat(windowIntroHints['all']);
+        if (windowIntroHints["all"]) {
+          docIntroHints = docIntroHints.concat(windowIntroHints["all"]);
         }
 
         if (master.docId && windowIntroHints[master.docId]) {
@@ -132,7 +132,7 @@ export default class MasterWindow extends PureComponent {
     const dataId = data ? data.ID.value : -1;
 
     let fd = new FormData();
-    fd.append('file', file);
+    fd.append("file", file);
 
     return attachFileAction(type, dataId, fd);
   };
@@ -150,7 +150,7 @@ export default class MasterWindow extends PureComponent {
         this.setState({
           dropzoneFocused: false,
         });
-      }
+      },
     );
   };
 
@@ -165,10 +165,10 @@ export default class MasterWindow extends PureComponent {
       droppedFiles instanceof Array ? droppedFiles[0] : droppedFiles;
 
     addNotification(
-      'Attachment',
+      "Attachment",
       `Dropped item ['${dropped.type}'] could not be attached`,
       5000,
-      'error'
+      "error",
     );
   };
 
@@ -231,7 +231,7 @@ export default class MasterWindow extends PureComponent {
       >
         <Overlay data={overlay.data} showOverlay={overlay.visible} />
 
-        {dataId === 'notfound' ? (
+        {dataId === "notfound" ? (
           <BlankPage
             what="Document"
             title={master.layout.notFoundMessage}

@@ -1,4 +1,4 @@
-import { original, produce } from 'immer';
+import { original, produce } from "immer";
 import {
   DELETE_QUICKINPUT,
   SET_QUICKINPUT_DATA,
@@ -6,7 +6,7 @@ import {
   PATCH_QUICKINPUT_DONE,
   PATCH_QUICKINPUT_PENDING,
   UPDATE_QUICKINPUT_DATA,
-} from '../constants/actions/TableQuickInputActionTypes';
+} from "../constants/actions/TableQuickInputActionTypes";
 
 // @VisibleForTesting
 export const initialState = {

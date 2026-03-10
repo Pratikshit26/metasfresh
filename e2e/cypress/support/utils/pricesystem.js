@@ -36,7 +36,7 @@ export class Pricesystem {
 }
 
 function applyPricesystem(pricesystem) {
-  cy.visitWindow('540320', 'NEW');
-  cy.writeIntoStringField('Name', `${pricesystem.name}`);
-  cy.writeIntoStringField('Description', `${pricesystem.description}`);
+  cy.visitWindow("540320", "NEW");
+  cy.writeIntoStringField("Name", `${pricesystem.name}`);
+  cy.writeIntoStringField("Description", `${pricesystem.description}`);
 }

@@ -35,26 +35,32 @@ export class TourVersion {
 }
 
 function applyTourVersion(tourVersion) {
-  describe(`Create new TourVersion ${tourVersion.name}`, function() {
-    cy.visitWindow(540333, 'NEW');
+  describe(`Create new TourVersion ${tourVersion.name}`, function () {
+    cy.visitWindow(540333, "NEW");
 
-    cy.writeIntoStringField('Name', tourVersion.name);
-    cy.selectInListField('M_Tour_ID', tourVersion.tour);
-    cy.writeIntoStringField('ValidFrom', tourVersion.validFrom, false, null, true);
+    cy.writeIntoStringField("Name", tourVersion.name);
+    cy.selectInListField("M_Tour_ID", tourVersion.tour);
+    cy.writeIntoStringField(
+      "ValidFrom",
+      tourVersion.validFrom,
+      false,
+      null,
+      true,
+    );
 
-    cy.setCheckBoxValue('IsWeekly', true);
-    cy.setCheckBoxValue('OnMonday', true);
-    cy.writeIntoStringField('PreparationTime_1', '17:00', false, null, true);
-    cy.setCheckBoxValue('OnTuesday', true);
-    cy.writeIntoStringField('PreparationTime_2', '17:00', false, null, true);
-    cy.setCheckBoxValue('OnWednesday', true);
-    cy.writeIntoStringField('PreparationTime_3', '17:00', false, null, true);
-    cy.setCheckBoxValue('OnThursday', true);
-    cy.writeIntoStringField('PreparationTime_4', '17:00', false, null, true);
-    cy.setCheckBoxValue('OnFriday', true);
-    cy.writeIntoStringField('PreparationTime_5', '17:00', false, null, true);
+    cy.setCheckBoxValue("IsWeekly", true);
+    cy.setCheckBoxValue("OnMonday", true);
+    cy.writeIntoStringField("PreparationTime_1", "17:00", false, null, true);
+    cy.setCheckBoxValue("OnTuesday", true);
+    cy.writeIntoStringField("PreparationTime_2", "17:00", false, null, true);
+    cy.setCheckBoxValue("OnWednesday", true);
+    cy.writeIntoStringField("PreparationTime_3", "17:00", false, null, true);
+    cy.setCheckBoxValue("OnThursday", true);
+    cy.writeIntoStringField("PreparationTime_4", "17:00", false, null, true);
+    cy.setCheckBoxValue("OnFriday", true);
+    cy.writeIntoStringField("PreparationTime_5", "17:00", false, null, true);
 
-    tourVersion.tourVersionLines.forEach(line => {
+    tourVersion.tourVersionLines.forEach((line) => {
       applyLine(line);
     });
     cy.expectNumberOfRows(tourVersion.tourVersionLines.length);
@@ -62,14 +68,22 @@ function applyTourVersion(tourVersion) {
 }
 
 function applyLine(tourVersionLine) {
-  cy.selectTab('M_TourVersionLine');
+  cy.selectTab("M_TourVersionLine");
   cy.pressAddNewButton();
-  cy.writeIntoLookupListField('C_BPartner_ID', tourVersionLine.bPartner, tourVersionLine.bPartner, false, true);
+  cy.writeIntoLookupListField(
+    "C_BPartner_ID",
+    tourVersionLine.bPartner,
+    tourVersionLine.bPartner,
+    false,
+    true,
+  );
   if (tourVersionLine.bPartnerAddress) {
-    cy.log('Sorry but typing in the address field is too fiddly. Nothing will be typed. Please see: https://github.com/metasfresh/metasfresh-e2e/issues/260');
+    cy.log(
+      "Sorry but typing in the address field is too fiddly. Nothing will be typed. Please see: https://github.com/metasfresh/metasfresh-e2e/issues/260",
+    );
     // cy.writeIntoLookupListField('C_BPartner_Location_ID', tourVersionLine.bPartnerAddress, tourVersionLine.bPartnerAddress, false, true);
   }
-  cy.writeIntoStringField('BufferHours', tourVersionLine.buffer, true);
+  cy.writeIntoStringField("BufferHours", tourVersionLine.buffer, true);
   cy.pressDoneButton();
 }
 

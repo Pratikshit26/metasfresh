@@ -1,9 +1,7 @@
 {
   "143_143-O": {
     "widgetShown": false,
-    "filtersCaptions": {
-      
-    },
+    "filtersCaptions": {},
     "notValidFields": null,
     "filterData": [
       {
@@ -238,9 +236,7 @@
             "sortNo": 40000
           }
         ],
-        "debugProperties": {
-          
-        }
+        "debugProperties": {}
       }
     ],
     "filtersActive": [

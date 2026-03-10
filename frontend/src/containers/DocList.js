@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
 
-import { updateUri } from '../utils';
-import { setBreadcrumbByWindowId } from '../actions/MenuActions';
-import Container from '../components/Container';
-import DocumentList from './DocumentList';
-import Overlay from '../components/app/Overlay';
+import { updateUri } from "../utils";
+import { setBreadcrumbByWindowId } from "../actions/MenuActions";
+import Container from "../components/Container";
+import DocumentList from "./DocumentList";
+import Overlay from "../components/app/Overlay";
 
 const EMPTY_ARRAY = [];
 const EMPTY_OBJECT = {};
@@ -78,8 +78,8 @@ class DocList extends PureComponent {
         <Overlay data={overlay.data} showOverlay={overlay.visible} />
 
         <div
-          className={classnames('document-lists-wrapper', {
-            'modal-overlay': rawModal.visible,
+          className={classnames("document-lists-wrapper", {
+            "modal-overlay": rawModal.visible,
           })}
         >
           <DocumentList

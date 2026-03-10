@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
+import { createSlice } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
 const initialState = {
   attemptedUrl: null,
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const redirectSlice = createSlice({
-  name: 'redirect',
+  name: "redirect",
   initialState,
   reducers: {
     requestRedirect: (state, action) => {

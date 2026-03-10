@@ -6,20 +6,20 @@ import PropTypes from 'prop-types';
 import { getIsLoggedInFromState } from '../reducers/appHandler';
 
 function PrivateRoute({ children, ...rest }) {
-  const isLoggedIn = useSelector((state) => getIsLoggedInFromState(state));
+    const isLoggedIn = useSelector((state) => getIsLoggedInFromState(state));
 
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        isLoggedIn ? children : <Redirect to={{ pathname: '/login', state: { from: location } }} />
-      }
-    />
-  );
+    return (
+        <Route
+            {...rest}
+            render={({ location }) =>
+                isLoggedIn ? children : <Redirect to={{ pathname: '/login', state: { from: location } }} />
+            }
+        />
+    );
 }
 
 PrivateRoute.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export default PrivateRoute;

@@ -29,78 +29,82 @@ import DialogButton from '../../components/dialogs/DialogButton';
 const computeIsValid = ({ documentNo }) => !!documentNo;
 
 const GetDocumentNoDialog = ({ documentNo: documentNoInitial, onOK, onClear }) => {
-  const [documentNo, setDocumentNo] = useState(documentNoInitial ? documentNoInitial : '');
-  const inputRef = useRef();
+    const [documentNo, setDocumentNo] = useState(documentNoInitial ? documentNoInitial : '');
+    const inputRef = useRef();
 
-  const isValid = computeIsValid({ documentNo });
+    const isValid = computeIsValid({ documentNo });
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.select();
-    }
-  }, []);
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, []);
 
-  const handleDocumentNoChanged = (e) => {
-    const documentNoNew = e.target.value ? e.target.value : '';
-    setDocumentNo(documentNoNew);
+    const handleDocumentNoChanged = (e) => {
+        const documentNoNew = e.target.value ? e.target.value : '';
+        setDocumentNo(documentNoNew);
 
-    if (e.key === 'Enter') {
-      const isValidNew = computeIsValid({ documentNo: documentNoNew });
-      if (isValidNew) {
-        onOK(documentNoNew);
-      }
-    }
-  };
+        if (e.key === 'Enter') {
+            const isValidNew = computeIsValid({ documentNo: documentNoNew });
+            if (isValidNew) {
+                onOK(documentNoNew);
+            }
+        }
+    };
 
-  return (
-    <div>
-      <Dialog className="get-documentNo-dialog">
-        <>
-          <div className="table-container">
-            <table className="table">
-              <tbody>
-                <tr>
-                  <th>{trl('general.DocumentNo')}</th>
-                  <td>
-                    <div className="field">
-                      <div className="control">
-                        <input
-                          id="documentNo-input"
-                          ref={inputRef}
-                          className="input"
-                          type="text"
-                          value={documentNo}
-                          tabIndex="1"
-                          onChange={handleDocumentNoChanged}
-                          onKeyUp={handleDocumentNoChanged}
-                        />
-                      </div>
+    return (
+        <div>
+            <Dialog className="get-documentNo-dialog">
+                <>
+                    <div className="table-container">
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <th>{trl('general.DocumentNo')}</th>
+                                    <td>
+                                        <div className="field">
+                                            <div className="control">
+                                                <input
+                                                    id="documentNo-input"
+                                                    ref={inputRef}
+                                                    className="input"
+                                                    type="text"
+                                                    value={documentNo}
+                                                    tabIndex="1"
+                                                    onChange={handleDocumentNoChanged}
+                                                    onKeyUp={handleDocumentNoChanged}
+                                                />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="buttons is-centered">
-            <DialogButton
-              captionKey="general.OK"
-              className="is-success"
-              disabled={!isValid}
-              onClick={() => onOK(documentNo)}
-            />
-            <DialogButton captionKey="general.clearText" className="button is-danger" onClick={() => onClear()} />
-          </div>
-        </>
-      </Dialog>
-    </div>
-  );
+                    <div className="buttons is-centered">
+                        <DialogButton
+                            captionKey="general.OK"
+                            className="is-success"
+                            disabled={!isValid}
+                            onClick={() => onOK(documentNo)}
+                        />
+                        <DialogButton
+                            captionKey="general.clearText"
+                            className="button is-danger"
+                            onClick={() => onClear()}
+                        />
+                    </div>
+                </>
+            </Dialog>
+        </div>
+    );
 };
 
 GetDocumentNoDialog.propTypes = {
-  documentNo: PropTypes.string,
-  onOK: PropTypes.func.isRequired,
-  onClear: PropTypes.func.isRequired,
+    documentNo: PropTypes.string,
+    onOK: PropTypes.func.isRequired,
+    onClear: PropTypes.func.isRequired,
 };
 
 export default GetDocumentNoDialog;

@@ -1,10 +1,10 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 
-import Amount from '../../../components/widget/Amount';
+import Amount from "../../../components/widget/Amount";
 
-describe('Amount component', () => {
-  it('renders without errors', () => {
+describe("Amount component", () => {
+  it("renders without errors", () => {
     const wrapper = shallow(
       <Amount
         widgetField={"QtyOrdered"}
@@ -26,15 +26,15 @@ describe('Amount component', () => {
         onBlur={jest.fn()}
         onKeyDown={jest.fn()}
         onPatch={jest.fn()}
-      />
+      />,
     );
     const html = wrapper.html();
 
-    expect(html).toContain('number-field');
-    expect(wrapper.find('input').length).toBe(1);
+    expect(html).toContain("number-field");
+    expect(wrapper.find("input").length).toBe(1);
 
-    expect(wrapper.find('input').props().value).toEqual("8");
+    expect(wrapper.find("input").props().value).toEqual("8");
   });
 
-  it.todo('renders devices widget');
+  it.todo("renders devices widget");
 });

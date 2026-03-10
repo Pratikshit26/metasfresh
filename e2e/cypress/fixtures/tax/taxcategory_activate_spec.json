@@ -4,11 +4,11 @@
   "validFrom": "01/01/2019",
   "rate": 10,
 
-  "priceSystemName" : "PriceSystem",
-  "priceListName" : "PriceList",
-  "priceListVersionName" : "PriceListVersion",
+  "priceSystemName": "PriceSystem",
+  "priceListName": "PriceList",
+  "priceListVersionName": "PriceListVersion",
 
-  "productName" : "Product",
+  "productName": "Product",
   "standardPrice": 3456,
-  "initialTaxCategory" : "Regular Tax Rate 19% (Germany)"
+  "initialTaxCategory": "Regular Tax Rate 19% (Germany)"
 }

@@ -1,9 +1,9 @@
-import { delete as del, get, post } from 'axios';
+import { delete as del, get, post } from "axios";
 
-import { getData } from './view';
-import { parseToDisplay } from '../utils/documentListHelper';
-import { getQueryString } from '../utils';
-import * as StaticModalType from '../constants/StaticModalType';
+import { getData } from "./view";
+import { parseToDisplay } from "../utils/documentListHelper";
+import { getQueryString } from "../utils";
+import * as StaticModalType from "../constants/StaticModalType";
 
 export function topActionsRequest(windowId, documentId, tabId = null) {
   const url =
@@ -15,7 +15,7 @@ export function topActionsRequest(windowId, documentId, tabId = null) {
 }
 
 export function deleteDocument({ windowId, documentId }) {
-  return deleteRequest('window', windowId, null, null, [documentId]);
+  return deleteRequest("window", windowId, null, null, [documentId]);
 }
 
 export function deleteRequest(
@@ -25,14 +25,14 @@ export function deleteRequest(
   tabId,
   ids,
   subentity,
-  subentityId
+  subentityId,
 ) {
   return del(
-    `${config.API_URL}/${entity}${docType ? `/${docType}` : ''}${
-      docId ? `/${docId}` : ''
-    }${tabId ? `/${tabId}` : ''}${subentity ? `/${subentity}` : ''}${
-      subentityId ? `/${subentityId}` : ''
-    }${ids ? `?ids=${ids}` : ''}`
+    `${config.API_URL}/${entity}${docType ? `/${docType}` : ""}${
+      docId ? `/${docId}` : ""
+    }${tabId ? `/${tabId}` : ""}${subentity ? `/${subentity}` : ""}${
+      subentityId ? `/${subentityId}` : ""
+    }${ids ? `?ids=${ids}` : ""}`,
   );
 }
 
@@ -42,35 +42,35 @@ export function getZoomIntoWindow(
   docId,
   tabId,
   rowId,
-  field
+  field,
 ) {
   return get(
     config.API_URL +
-      '/' +
+      "/" +
       entity +
-      '/' +
+      "/" +
       windowId +
-      (docId ? '/' + docId : '') +
-      (tabId ? '/' + tabId : '') +
-      (rowId ? '/' + rowId : '') +
-      '/field' +
-      '/' +
+      (docId ? "/" + docId : "") +
+      (tabId ? "/" + tabId : "") +
+      (rowId ? "/" + rowId : "") +
+      "/field" +
+      "/" +
       field +
-      '/zoomInto?showError=true'
+      "/zoomInto?showError=true",
   );
 }
 
 export function discardNewRequest({ windowId, documentId, tabId, rowId } = {}) {
   return post(
     `${config.API_URL}/window/${windowId}/${documentId}${
-      tabId && rowId ? `/${tabId}/${rowId}` : ''
-    }/discardChanges`
+      tabId && rowId ? `/${tabId}/${rowId}` : ""
+    }/discardChanges`,
   );
 }
 
 export function getTabRequest(tabId, windowType, docId, orderBy) {
   return getData({
-    entity: 'window',
+    entity: "window",
     docType: windowType,
     docId: docId,
     tabId: tabId,
@@ -90,7 +90,7 @@ export function getTabRequest(tabId, windowType, docId, orderBy) {
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
-      console.error('getTabRequest error: ', error);
+      console.error("getTabRequest error: ", error);
     });
 }
 
@@ -102,9 +102,9 @@ export function getTabLayoutRequest(windowId, tabId, isAdvanced = false) {
   const queryParamsString = getQueryString(queryParams);
 
   return get(
-    `${config.API_URL}/window/${windowId}${tabId ? `/${tabId}` : ''}/layout${
-      queryParamsString ? `?${queryParamsString}` : ''
-    }`
+    `${config.API_URL}/window/${windowId}${tabId ? `/${tabId}` : ""}/layout${
+      queryParamsString ? `?${queryParamsString}` : ""
+    }`,
   ).then(({ data }) => data); // unbox
 }
 
@@ -119,8 +119,8 @@ const getAPIUrl = function ({ windowId, docId, tabId, rowId, path }) {
   }
 
   return `${config.API_URL}/window/${windowId}${
-    documentId ? `/${documentId}` : ''
-  }${rowId && tabId ? `/${tabId}/${rowId}` : ''}/${path}`;
+    documentId ? `/${documentId}` : ""
+  }${rowId && tabId ? `/${tabId}/${rowId}` : ""}/${path}`;
 };
 
 /**
@@ -157,25 +157,25 @@ export function formatParentUrl({ windowId, docId, rowId, target }) {
 export function getPrintingOptions({ entity, windowId, docId, tabId, rowId }) {
   return get(
     config.API_URL +
-      '/' +
+      "/" +
       entity +
-      '/' +
+      "/" +
       windowId +
-      (docId ? '/' + docId : '') +
-      (tabId ? '/' + tabId : '') +
-      (rowId ? '/' + rowId : '') +
-      '/printingOptions'
+      (docId ? "/" + docId : "") +
+      (tabId ? "/" + tabId : "") +
+      (rowId ? "/" + rowId : "") +
+      "/printingOptions",
   );
 }
 
 export function getPrintUrl({ windowId, documentId, filename, options }) {
-  let filenameNorm = filename.replace(/[/\\?%*:|"<>]/g, '-');
+  let filenameNorm = filename.replace(/[/\\?%*:|"<>]/g, "-");
   filenameNorm = encodeURIComponent(filenameNorm);
 
   let url = `${config.API_URL}/window/${windowId}/${documentId}/print/${filenameNorm}`;
   if (options) {
     const optionsStr = getQueryString(options);
-    url += '?' + optionsStr;
+    url += "?" + optionsStr;
   }
   return url;
 }

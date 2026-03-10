@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
-import classnames from 'classnames';
-import { F2_KEY } from '../../constants/Constants';
+import React, { PureComponent } from "react";
+import ReactDOM from "react-dom";
+import classnames from "classnames";
+import { F2_KEY } from "../../constants/Constants";
 import {
   getCellWidgetData,
   getDescription,
@@ -13,10 +13,10 @@ import {
   nestedSelect,
   prepareWidgetData,
   shouldRenderColumn,
-} from '../../utils/tableHelpers';
-import TableCell from './TableCell';
-import WithMobileDoubleTap from '../WithMobileDoubleTap';
-import PropTypes from 'prop-types';
+} from "../../utils/tableHelpers";
+import TableCell from "./TableCell";
+import WithMobileDoubleTap from "../WithMobileDoubleTap";
+import PropTypes from "prop-types";
 
 /**
  * @file Class based component.
@@ -30,7 +30,7 @@ class TableRow extends PureComponent {
     super(props);
 
     const multilineText = props.cols.filter(
-      (item) => item.multilineText === true
+      (item) => item.multilineText === true,
     ).length;
 
     let multilineTextLines = 0;
@@ -44,8 +44,8 @@ class TableRow extends PureComponent {
     });
 
     this.state = {
-      edited: '',
-      activeCell: '',
+      edited: "",
+      activeCell: "",
       activeCellName: null,
       updatedRow: false,
       multilineText,
@@ -105,7 +105,7 @@ class TableRow extends PureComponent {
           const widgetData = prepareWidgetData(item, fieldsByName);
           if (widgetData) {
             this.setState({
-              valueBeforeEditing: this.getFieldValue(fieldName) ?? '',
+              valueBeforeEditing: this.getFieldValue(fieldName) ?? "",
             });
 
             this.handleEditProperty({
@@ -145,7 +145,7 @@ class TableRow extends PureComponent {
 
   handleKeyDown = ({ event, property, readonly, isAttributeWidget }) => {
     switch (event.key) {
-      case 'Enter': {
+      case "Enter": {
         this.handleKeyDown_Enter({
           event,
           property,
@@ -154,11 +154,11 @@ class TableRow extends PureComponent {
         });
         break;
       }
-      case 'Tab': {
+      case "Tab": {
         this.handleKeyDown_Tab({ event, property, isAttributeWidget });
         break;
       }
-      case 'Escape': {
+      case "Escape": {
         this.handleKeyDown_Escape({ event, property });
         break;
       }
@@ -216,7 +216,7 @@ class TableRow extends PureComponent {
           entity,
           tableId,
         });
-      }
+      },
     );
   };
 
@@ -233,7 +233,7 @@ class TableRow extends PureComponent {
     // this test is for a case when user is navigating around the table
     // without activating the field. Then there's no widget (input), so the value
     // is undefined and we don't have to worry about it
-    if (typeof event.target.value !== 'undefined') {
+    if (typeof event.target.value !== "undefined") {
       updatePropertyValue({
         property,
         value: event.target.value,
@@ -357,7 +357,7 @@ class TableRow extends PureComponent {
           if (focus) {
             const elem =
               document.activeElement.getElementsByClassName(
-                'js-input-field'
+                "js-input-field",
               )[0];
 
             if (elem) {
@@ -366,16 +366,16 @@ class TableRow extends PureComponent {
             }
 
             const disabled =
-              document.activeElement.querySelector('.input-disabled');
+              document.activeElement.querySelector(".input-disabled");
             const readonly =
-              document.activeElement.querySelector('.input-readonly');
+              document.activeElement.querySelector(".input-readonly");
 
             if (disabled || readonly) {
               !listenOnKeys && changeListenOnTrue();
               this.handleEditProperty({ event });
             }
           }
-        }
+        },
       );
     }
   };
@@ -464,9 +464,9 @@ class TableRow extends PureComponent {
       // only cells should be stored as `activeCell` so if current element
       // is not a cell (for instance it's a widget input or a context menu)
       // find the relevant cell in the DOM
-      if (!elem.className.includes('table-cell')) {
+      if (!elem.className.includes("table-cell")) {
         elem = document.querySelector(
-          `.row-selected [data-cy="cell-${property}"]`
+          `.row-selected [data-cy="cell-${property}"]`,
         );
       }
 
@@ -545,7 +545,7 @@ class TableRow extends PureComponent {
               fieldsByName,
               item,
               isEditable,
-              supportFieldEdit
+              supportFieldEdit,
             );
             const isReadonly = widgetData[0].readonly;
             const isMandatory = widgetData[0].mandatory;
@@ -558,7 +558,7 @@ class TableRow extends PureComponent {
             const description = getDescription({ widgetData, tdValue });
             const { tooltipData, tooltipWidget } = getTooltipWidget(
               item,
-              widgetData
+              widgetData,
             );
 
             return (
@@ -645,28 +645,28 @@ class TableRow extends PureComponent {
       indentation.push(
         <div
           key={i}
-          className={classnames('indent-item-mid', {
-            'indent-collapsible-item-mid': collapsible,
+          className={classnames("indent-item-mid", {
+            "indent-collapsible-item-mid": collapsible,
           })}
         >
           {i === indent.length - 1 && <div className="indent-mid" />}
           <div
             className={classnames({
-              'indent-sign': indent[i],
-              'indent-sign-bot': lastChild && i === indent.length - 1,
+              "indent-sign": indent[i],
+              "indent-sign-bot": lastChild && i === indent.length - 1,
             })}
           />
-        </div>
+        </div>,
       );
     }
 
     return (
-      <div className={'indent'}>
+      <div className={"indent"}>
         {indentation}
         {includedDocuments && !collapsed && (
           <div
-            className={classnames('indent-bot', {
-              'indent-collapsible-bot': collapsible,
+            className={classnames("indent-bot", {
+              "indent-collapsible-bot": collapsible,
             })}
           />
         )}
@@ -683,7 +683,7 @@ class TableRow extends PureComponent {
             />
           )
         ) : (
-          ''
+          ""
         )}
         <div className="indent-icon" onClick={this.handleIndentSelect}>
           <i className={getIconClassName(huType)} />
@@ -714,13 +714,13 @@ class TableRow extends PureComponent {
           onClick={this.handleClick}
           onDoubleClick={this.handleDoubleClick}
           className={classnames(dataKey, `table-row row-${keyProperty}`, {
-            'row-selected': isSelected,
-            'tr-odd': odd,
-            'tr-even': !odd,
-            'row-disabled': processed,
-            'row-boundary': processed && lastChild && !includedDocuments,
-            'row-not-saved': notSaved,
-            'item-caption': caption,
+            "row-selected": isSelected,
+            "tr-odd": odd,
+            "tr-even": !odd,
+            "row-disabled": processed,
+            "row-boundary": processed && lastChild && !includedDocuments,
+            "row-not-saved": notSaved,
+            "item-caption": caption,
           })}
         >
           {indentSupported && indent && (

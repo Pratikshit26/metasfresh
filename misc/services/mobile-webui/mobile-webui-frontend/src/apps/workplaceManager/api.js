@@ -27,9 +27,9 @@ import { apiBasePath } from '../../constants';
 const worspaceAPIBase = `${apiBasePath}/workplace`;
 
 export const getWorkplaceByQRCode = (qrCode) => {
-  return axios.post(`${worspaceAPIBase}/byQRCode`, { qrCode }).then(unboxAxiosResponse);
+    return axios.post(`${worspaceAPIBase}/byQRCode`, { qrCode }).then(unboxAxiosResponse);
 };
 
 export const assignWorkplace = (workplaceId) => {
-  return axios.post(`${apiBasePath}/workplace/${workplaceId}/assign`).then(unboxAxiosResponse);
+    return axios.post(`${apiBasePath}/workplace/${workplaceId}/assign`).then(unboxAxiosResponse);
 };

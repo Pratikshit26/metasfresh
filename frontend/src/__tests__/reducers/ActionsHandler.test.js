@@ -1,57 +1,57 @@
-import { merge } from 'merge-anything';
+import { merge } from "merge-anything";
 
-import * as ACTION_TYPES from '../../constants/ActionTypes';
+import * as ACTION_TYPES from "../../constants/ActionTypes";
 import reducer, {
   initialState,
   initialSingleActionsState,
   getQuickActionsId,
-} from '../../reducers/actionsHandler';
+} from "../../reducers/actionsHandler";
 
-import gridDataFixtures from '../../../test_setup/fixtures/grid/data.json';
-import quickActionsFixtures from '../../../test_setup/fixtures/grid/quick_actions.json';
+import gridDataFixtures from "../../../test_setup/fixtures/grid/data.json";
+import quickActionsFixtures from "../../../test_setup/fixtures/grid/quick_actions.json";
 
-const createState = function(state = {}) {
+const createState = function (state = {}) {
   const res = merge(
     {
       ...initialState,
     },
-    state
+    state,
   );
 
   return res;
 };
 
-describe('Actions reducer', () => {
+describe("Actions reducer", () => {
   const { windowId, viewId } = gridDataFixtures.data1;
   const id = getQuickActionsId({ windowId, viewId });
   const basicData = {
-    ...initialSingleActionsState
+    ...initialSingleActionsState,
   };
 
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('Should handle FETCH_QUICK_ACTIONS', () => {
+  it("Should handle FETCH_QUICK_ACTIONS", () => {
     expect(
       reducer(undefined, {
         type: ACTION_TYPES.FETCH_QUICK_ACTIONS,
         payload: {
           id,
         },
-      })
+      }),
     ).toEqual(
       expect.objectContaining({
         [id]: expect.objectContaining({ ...basicData, pending: true }),
-      })
+      }),
     );
   });
 
-  it('Should handle FETCH_QUICK_ACTIONS_SUCCESS', () => {
+  it("Should handle FETCH_QUICK_ACTIONS_SUCCESS", () => {
     const { actions } = quickActionsFixtures;
 
     const initialStateData = createState({
-      [id]: { ...basicData, pending: true, },
+      [id]: { ...basicData, pending: true },
     });
     const successAction = {
       type: ACTION_TYPES.FETCH_QUICK_ACTIONS_SUCCESS,
@@ -67,11 +67,11 @@ describe('Actions reducer', () => {
     expect(state).toEqual(
       expect.objectContaining({
         [id]: expect.objectContaining({ ...basicData, actions }),
-      })
+      }),
     );
   });
 
-  it('Should handle FETCH_QUICK_ACTIONS_SUCCESS and delete actions marked with `toDelete`', () => {
+  it("Should handle FETCH_QUICK_ACTIONS_SUCCESS and delete actions marked with `toDelete`", () => {
     const { actions } = quickActionsFixtures;
 
     const initialStateData = createState({
@@ -91,11 +91,11 @@ describe('Actions reducer', () => {
     expect(state).toEqual({});
   });
 
-  it('Should handle FETCH_QUICK_ACTIONS_SUCCESS', () => {
+  it("Should handle FETCH_QUICK_ACTIONS_SUCCESS", () => {
     const { actions } = quickActionsFixtures;
 
     const initialStateData = createState({
-      [id]: { ...basicData, pending: true, },
+      [id]: { ...basicData, pending: true },
     });
     const failedAction = {
       type: ACTION_TYPES.FETCH_QUICK_ACTIONS_FAILURE,
@@ -110,11 +110,11 @@ describe('Actions reducer', () => {
     expect(state).toEqual(
       expect.objectContaining({
         [id]: expect.objectContaining({ ...basicData, error: true }),
-      })
+      }),
     );
   });
 
-  it('Should handle DELETE_QUICK_ACTIONS', () => {
+  it("Should handle DELETE_QUICK_ACTIONS", () => {
     const { actions } = quickActionsFixtures;
 
     const initialStateData = createState({
@@ -133,7 +133,7 @@ describe('Actions reducer', () => {
     expect(state).toEqual({});
   });
 
-  it('Should handle DELETE_QUICK_ACTIONS and mark pending QA as `toDelete`', () => {
+  it("Should handle DELETE_QUICK_ACTIONS and mark pending QA as `toDelete`", () => {
     const { actions } = quickActionsFixtures;
 
     const initialStateData = createState({
@@ -151,8 +151,12 @@ describe('Actions reducer', () => {
 
     expect(state).toEqual(
       expect.objectContaining({
-        [id]: expect.objectContaining({ ...basicData, pending: true, toDelete: true }),
-      })
+        [id]: expect.objectContaining({
+          ...basicData,
+          pending: true,
+          toDelete: true,
+        }),
+      }),
     );
   });
 });

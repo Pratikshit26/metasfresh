@@ -1,10 +1,10 @@
-import axios from 'axios';
-import counterpart from 'counterpart';
-import currentDevice from 'current-device';
+import axios from "axios";
+import counterpart from "counterpart";
+import currentDevice from "current-device";
 
-import history from '../services/History';
-import * as IndicatorState from '../constants/IndicatorState';
-import * as StaticModalType from '../constants/StaticModalType';
+import history from "../services/History";
+import * as IndicatorState from "../constants/IndicatorState";
+import * as StaticModalType from "../constants/StaticModalType";
 
 import {
   ACTIVATE_TAB,
@@ -45,16 +45,16 @@ import {
   UPDATE_MODAL,
   UPDATE_RAW_MODAL,
   UPDATE_TAB_LAYOUT,
-} from '../constants/ActionTypes';
-import { createView, patchViewAction } from './ViewActions';
-import { PROCESS_NAME } from '../constants/Constants';
-import { preFormatPostDATA, toggleFullScreen } from '../utils';
+} from "../constants/ActionTypes";
+import { createView, patchViewAction } from "./ViewActions";
+import { PROCESS_NAME } from "../constants/Constants";
+import { preFormatPostDATA, toggleFullScreen } from "../utils";
 import {
   getInvalidDataItem,
   getScope,
   parseItemToDisplay,
   parseToDisplay,
-} from '../utils/documentListHelper';
+} from "../utils/documentListHelper";
 
 import {
   formatParentUrl,
@@ -62,28 +62,28 @@ import {
   getTabLayoutRequest,
   getTabRequest,
   patchRequest,
-} from '../api';
+} from "../api";
 
-import { getTableId } from '../reducers/tables';
+import { getTableId } from "../reducers/tables";
 import {
   addNotification,
   deleteNotification,
   setNotificationProgress,
-} from './AppActions';
-import { setBreadcrumbByWindowId } from './MenuActions';
+} from "./AppActions";
+import { setBreadcrumbByWindowId } from "./MenuActions";
 import {
   updateCommentsPanel,
   updateCommentsPanelOpenFlag,
   updateCommentsPanelTextInput,
-} from './CommentsPanelActions';
+} from "./CommentsPanelActions";
 import {
   createTabTable,
   partialUpdateGridTableRows,
   updateTableRowProperty,
   updateTabTable,
-} from './TableActions';
-import { inlineTabAfterGetLayout, patchInlineTab } from './InlineTabActions';
-import { getPrintFile, getPrintUrl } from '../api/window';
+} from "./TableActions";
+import { inlineTabAfterGetLayout, patchInlineTab } from "./InlineTabActions";
+import { getPrintFile, getPrintUrl } from "../api/window";
 
 export function toggleOverlay(data) {
   return {
@@ -134,7 +134,7 @@ export function setRawModalDescription(description, windowType) {
 
 export function closeRawModal() {
   const isMobile =
-    currentDevice.type === 'mobile' || currentDevice.type === 'tablet';
+    currentDevice.type === "mobile" || currentDevice.type === "tablet";
 
   if (isMobile) {
     toggleFullScreen();
@@ -258,15 +258,15 @@ function initDataNotFound({ windowId, message, messageDetail }) {
     dispose(
       initDataSuccess({
         data: {},
-        docId: 'notfound',
+        docId: "notfound",
         notFoundMessage: message,
         notFoundMessageDetail: messageDetail,
         includedTabsInfo: {},
-        scope: 'master',
+        scope: "master",
         saveStatus: { saved: true },
         standardActions: [],
         validStatus: {},
-      })
+      }),
     );
   };
 }
@@ -345,7 +345,7 @@ export function updateDataFieldProperty(property, item, scope) {
 }
 
 export function openModal({
-  title = '',
+  title = "",
   windowId,
   modalType,
   tabId = null,
@@ -365,7 +365,7 @@ export function openModal({
   parentFieldId = null,
 }) {
   const isMobile =
-    currentDevice.type === 'mobile' || currentDevice.type === 'tablet';
+    currentDevice.type === "mobile" || currentDevice.type === "tablet";
 
   if (isMobile) {
     toggleFullScreen();
@@ -435,7 +435,7 @@ export function fetchTab({ tabId, windowId, docId, orderBy }) {
             tableId,
             tableResponse: { result: rows, orderBys },
             pending: false,
-          })
+          }),
         );
 
         return rows;
@@ -469,17 +469,17 @@ export function updateTabLayout(windowId, tabId) {
 }
 
 function getOrCreateData(windowId, docId, tabId, rowId = null, isAdvanced) {
-  if (docId === 'NEW') {
+  if (docId === "NEW") {
     //New master document
     return patchRequest({
-      entity: 'window',
+      entity: "window",
       docType: windowId,
       docId,
     });
-  } else if (rowId === 'NEW') {
+  } else if (rowId === "NEW") {
     //New row document
     return patchRequest({
-      entity: 'window',
+      entity: "window",
       docType: windowId,
       docId,
       tabId,
@@ -488,7 +488,7 @@ function getOrCreateData(windowId, docId, tabId, rowId = null, isAdvanced) {
   } else if (rowId) {
     //Existing row document
     return getData({
-      entity: 'window',
+      entity: "window",
       docType: windowId,
       docId: docId,
       tabId: tabId,
@@ -498,7 +498,7 @@ function getOrCreateData(windowId, docId, tabId, rowId = null, isAdvanced) {
   } else {
     //Existing master document
     return getData({
-      entity: 'window',
+      entity: "window",
       docType: windowId,
       docId: docId,
       fetchAdvancedFields: isAdvanced,
@@ -524,12 +524,12 @@ export function createSearchWindow({
   dispatch(
     createView({
       windowId: windowType,
-      viewType: 'grid',
+      viewType: "grid",
       refDocumentId: docId,
       refTabId: tabId,
       refRowIds: [rowId],
       isModal,
-    })
+    }),
   )
     .then(({ windowId, viewId }) => {
       dispatch(openRawModal({ windowId, viewId, title }));
@@ -553,15 +553,15 @@ export function createWindow({
   title,
   urlSearchParams,
 }) {
-  let documentId = docId || 'NEW';
-  if (documentId.toLowerCase() === 'new') {
-    documentId = 'NEW';
+  let documentId = docId || "NEW";
+  if (documentId.toLowerCase() === "new") {
+    documentId = "NEW";
   }
 
   let disconnectedData = null;
 
   return async (dispatch) => {
-    if (documentId === 'SEARCH') {
+    if (documentId === "SEARCH") {
       // set the `showSpinner` flag to true to show the spinner while data is fetched
       dispatch(setSpinner(true));
 
@@ -587,9 +587,9 @@ export function createWindow({
     // This chain is really important, to do not re-render widgets on init.
     const layout = await getTabLayoutRequest(windowId, tabId, isAdvanced).catch(
       (e) => {
-        console.log('get error while loading layout', { windowId, tabId, e });
+        console.log("get error while loading layout", { windowId, tabId, e });
         dispatch(initDataNotFound({ windowId }));
-      }
+      },
     );
     if (!layout) {
       return;
@@ -623,10 +623,10 @@ export function createWindow({
           });
         }
 
-        if (documentId === 'NEW' && !isModal) {
+        if (documentId === "NEW" && !isModal) {
           // redirect immediately, but preserve URL search params if any
           return history.replace(
-            `/window/${windowId}/${docId}${urlSearchParams ?? ''}`
+            `/window/${windowId}/${docId}${urlSearchParams ?? ""}`,
           );
         }
 
@@ -642,16 +642,16 @@ export function createWindow({
           }
         });
 
-        if (documentId === 'NEW') {
+        if (documentId === "NEW") {
           dispatch(updateModal(null, docId));
           const { includedTabsInfo } = responseDocuments[0];
           includedTabsInfo &&
-            dispatch(updateDataIncludedTabsInfo('master', includedTabsInfo));
+            dispatch(updateDataIncludedTabsInfo("master", includedTabsInfo));
         }
 
         // TODO: Is `elem` ever different than 0 ?
         docId = responseDocuments[elem].id;
-        disconnected !== 'inlineTab' &&
+        disconnected !== "inlineTab" &&
           dispatch(
             initDataSuccess({
               windowId,
@@ -664,23 +664,23 @@ export function createWindow({
               includedTabsInfo: data.includedTabsInfo,
               websocket: data.websocketEndpoint,
               hasComments: data.hasComments,
-            })
+            }),
           );
 
         if (isModal) {
-          if (rowId === 'NEW') {
+          if (rowId === "NEW") {
             /** special case of inlineTab - disconnectedData will be used for data feed */
-            if (disconnected === 'inlineTab') {
+            if (disconnected === "inlineTab") {
               disconnectedData = responseDocuments[0];
             } else {
               dispatch(
                 mapDataToState({
                   data: response.data,
                   isModal: false,
-                  rowId: 'NEW',
+                  rowId: "NEW",
                   docId,
                   windowType: windowId,
-                })
+                }),
               );
               dispatch(updateStatus(responseDocuments));
               dispatch(updateModal(data.rowId));
@@ -710,14 +710,14 @@ export function createWindow({
                     ...tab,
                   },
                   pending: false,
-                })
+                }),
               );
             });
           }
           /** post get layout action triggered for the inlineTab case */
-          if (disconnectedData && disconnected === 'inlineTab') {
+          if (disconnectedData && disconnected === "inlineTab") {
             dispatch(
-              inlineTabAfterGetLayout({ data: layout, disconnectedData })
+              inlineTabAfterGetLayout({ data: layout, disconnectedData }),
             );
           } else {
             dispatch(initLayoutSuccess(layout, getScope(isModal)));
@@ -730,7 +730,7 @@ export function createWindow({
             windowId,
             message: layout.notFoundMessage,
             messageDetail: layout.notFoundMessageDetail,
-          })
+          }),
         );
 
         return { status: e.status, message: e.statusText };
@@ -746,8 +746,8 @@ const getChangelogUrl = function (windowId, docId, tabId, rowId) {
   }
 
   return `${config.API_URL}/window/${windowId}${
-    documentId ? `/${documentId}` : ''
-  }${rowId && tabId ? `/${tabId}/${rowId}` : ''}/changeLog`;
+    documentId ? `/${documentId}` : ""
+  }${rowId && tabId ? `/${tabId}/${rowId}` : ""}/changeLog`;
 };
 
 export function fetchChangeLog(windowId, docId, tabId, rowId) {
@@ -773,8 +773,8 @@ export function fetchChangeLog(windowId, docId, tabId, rowId) {
         initDataSuccess({
           data,
           docId,
-          scope: 'modal',
-        })
+          scope: "modal",
+        }),
       );
     });
   };
@@ -799,7 +799,7 @@ export function callAPI({ windowId, docId, tabId, rowId, target, verb, data }) {
     if (!parentUrl) return;
     dispatch(updateCommentsPanelOpenFlag(true));
     // -- GET call - adapt shape as needed
-    if (verb === 'GET') {
+    if (verb === "GET") {
       return axios.get(parentUrl).then(async (response) => {
         const data = response.data;
         let rowData = null;
@@ -823,14 +823,14 @@ export function callAPI({ windowId, docId, tabId, rowId, target, verb, data }) {
           initDataSuccess({
             data,
             docId,
-            scope: 'modal',
-          })
+            scope: "modal",
+          }),
         );
       });
     }
 
     // -- actions dispatched on POST below
-    if (verb === 'POST') {
+    if (verb === "POST") {
       const dataToSend = preFormatPostDATA({ target, postData: { txt: data } });
       return axios.post(parentUrl, dataToSend).then(async (response) => {
         const data = response.data;
@@ -842,10 +842,10 @@ export function callAPI({ windowId, docId, tabId, rowId, target, verb, data }) {
               tabId,
               rowId,
               target,
-              verb: 'GET',
-            })
+              verb: "GET",
+            }),
           );
-          dispatch(updateCommentsPanelTextInput('')); // clear the input in the form
+          dispatch(updateCommentsPanelTextInput("")); // clear the input in the form
         }
         return data;
       });
@@ -855,14 +855,14 @@ export function callAPI({ windowId, docId, tabId, rowId, target, verb, data }) {
 
 export const patchWindow = ({
   windowId,
-  documentId = 'NEW',
+  documentId = "NEW",
   tabId = null,
   rowId = null,
   fieldName,
   value,
 }) => {
   return patch(
-    'window', // entity
+    "window", // entity
     windowId,
     documentId,
     tabId,
@@ -873,7 +873,7 @@ export const patchWindow = ({
     false, // isAdvanced
     null, // viewId
     false, // isEdit
-    false // disconnected
+    false, // disconnected
   );
 };
 
@@ -885,7 +885,7 @@ export const patchWindow = ({
 export function patch(
   entity, // type, e.g. documentView
   windowType, // aka windowId
-  id = 'NEW', // documentId
+  id = "NEW", // documentId
   tabId,
   rowId,
   property,
@@ -894,9 +894,9 @@ export function patch(
   isAdvanced,
   viewId,
   isEdit,
-  disconnected
+  disconnected,
 ) {
-  if (entity === 'documentView' && isModal) {
+  if (entity === "documentView" && isModal) {
     return patchViewAction({
       windowId: windowType,
       viewId,
@@ -939,7 +939,7 @@ export function patch(
         value,
         isModal,
         disconnected,
-      })
+      }),
     );
 
     try {
@@ -972,12 +972,12 @@ export function patch(
           windowType,
           isAdvanced,
           disconnected,
-        })
+        }),
       );
 
       // update the inlineTabsInfo if such information is present
       includedTabsInfo &&
-        dispatch(updateDataIncludedTabsInfo('master', includedTabsInfo));
+        dispatch(updateDataIncludedTabsInfo("master", includedTabsInfo));
 
       if (
         dataItem &&
@@ -1021,7 +1021,7 @@ export function patch(
           viewId,
           isModal,
           disconnected,
-        })
+        }),
       );
 
       // Propagate the exception, so callers are aware that something went wrong.
@@ -1063,7 +1063,7 @@ const updateDataFromServer = ({
         windowType,
         isAdvanced,
         disconnected,
-      })
+      }),
     );
   };
 };
@@ -1078,7 +1078,7 @@ export function fireUpdateData({
 }) {
   return (dispatch) => {
     getData({
-      entity: 'window',
+      entity: "window",
       docType: windowId,
       docId: documentId,
       tabId: tabId,
@@ -1094,7 +1094,7 @@ export function fireUpdateData({
             documentId,
             windowId,
             fetchAdvancedFields,
-          })
+          }),
         );
       })
       .catch((axiosError) => {
@@ -1116,11 +1116,11 @@ function is404(axiosError) {
 function updateData(doc, scope) {
   return (dispatch) => {
     Object.keys(doc).map((key) => {
-      if (key === 'fieldsByName') {
+      if (key === "fieldsByName") {
         // update all data fields at once
-        dispatch(updateDataProperty('data', doc[key], scope));
-      } else if (key === 'includedTabsInfo') {
-        dispatch(updateDataIncludedTabsInfo('master', doc[key]));
+        dispatch(updateDataProperty("data", doc[key], scope));
+      } else if (key === "includedTabsInfo") {
+        dispatch(updateDataIncludedTabsInfo("master", doc[key]));
       } else {
         dispatch(updateDataProperty(key, doc[key], scope));
       }
@@ -1129,16 +1129,16 @@ function updateData(doc, scope) {
 }
 
 function mapDataToState({ data, isModal, rowId, disconnected }) {
-  const isNewRow = rowId === 'NEW';
+  const isNewRow = rowId === "NEW";
 
   return (dispatch) => {
-    if (disconnected === 'inlineTab') {
+    if (disconnected === "inlineTab") {
       // used this trick to differentiate and have the correct path to patch endpoint when using the inlinetab within modal
       // otherwise the tabId is updated in the windowHandler.modal.tabId and then the endpoint for the PATCH in modal is altered
       return;
     }
 
-    const dataArray = typeof data.splice === 'function' ? data : [data];
+    const dataArray = typeof data.splice === "function" ? data : [data];
     const rowsToUpdateByTableId = {};
 
     dataArray.forEach((item, index) => {
@@ -1172,7 +1172,7 @@ function mapDataToState({ data, isModal, rowId, disconnected }) {
         partialUpdateGridTableRows({
           tableId,
           rowsToUpdate: rowsToUpdateByTableId[tableId],
-        })
+        }),
       );
     });
   };
@@ -1183,12 +1183,12 @@ function updateStatus(responseData) {
     const updateDispatch = (item) => {
       if (!item.rowId) {
         item.validStatus &&
-          dispatch(updateDataValidStatus('master', item.validStatus));
+          dispatch(updateDataValidStatus("master", item.validStatus));
         item.saveStatus &&
-          dispatch(updateDataSaveStatus('master', item.saveStatus));
+          dispatch(updateDataSaveStatus("master", item.saveStatus));
         // TODO: We probably don't need this anymore
         item.includedTabsInfo &&
-          dispatch(updateDataIncludedTabsInfo('master', item.includedTabsInfo));
+          dispatch(updateDataIncludedTabsInfo("master", item.includedTabsInfo));
       }
     };
 
@@ -1230,8 +1230,8 @@ export function updatePropertyValue({
         },
       };
       // - for the `inlineTab` type we will update the corresponding branch in the store
-      if (disconnected === 'inlineTab') {
-        action === 'patch' &&
+      if (disconnected === "inlineTab") {
+        action === "patch" &&
           dispatch(patchInlineTab({ ret, windowId, tabId, docId, rowId }));
         return false;
       }
@@ -1243,12 +1243,12 @@ export function updatePropertyValue({
       // modal's data is in `tables`
       if (!isModal) {
         dispatch(
-          updateDataFieldProperty(property, { value }, getScope(isModal))
+          updateDataFieldProperty(property, { value }, getScope(isModal)),
         );
       }
       if (isModal && entity !== PROCESS_NAME) {
         //update the master field too if exist
-        dispatch(updateDataFieldProperty(property, { value }, 'master'));
+        dispatch(updateDataFieldProperty(property, { value }, "master"));
       }
     }
   };
@@ -1257,7 +1257,7 @@ export function updatePropertyValue({
 function handleUploadProgress(dispatch, notificationTitle, progressEvent) {
   let percentLeft = Math.min(
     Math.floor((progressEvent.loaded * 100) / progressEvent.total),
-    98
+    98,
   );
 
   dispatch(setNotificationProgress(notificationTitle, percentLeft));
@@ -1266,22 +1266,22 @@ function handleUploadProgress(dispatch, notificationTitle, progressEvent) {
 export function attachFileAction(windowType, docId, data) {
   return (dispatch) => {
     const titlePending = counterpart.translate(
-      'window.attachment.title.pending'
+      "window.attachment.title.pending",
     );
-    const titleDone = counterpart.translate('window.attachment.title.done');
-    const titleError = counterpart.translate('window.attachment.title.error');
+    const titleDone = counterpart.translate("window.attachment.title.done");
+    const titleError = counterpart.translate("window.attachment.title.error");
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
     dispatch(
       addNotification(
         titlePending,
-        counterpart.translate('window.attachment.uploading'),
+        counterpart.translate("window.attachment.uploading"),
         0,
-        'primary',
+        "primary",
         null,
-        source
-      )
+        source,
+      ),
     );
 
     const requestConfig = {
@@ -1293,17 +1293,17 @@ export function attachFileAction(windowType, docId, data) {
       .post(
         `${config.API_URL}/window/${windowType}/${docId}/attachments`,
         data,
-        requestConfig
+        requestConfig,
       )
       .then(() =>
         dispatch(
           addNotification(
             titleDone,
-            counterpart.translate('window.attachment.upload.success'),
+            counterpart.translate("window.attachment.upload.success"),
             5000,
-            'primary'
-          )
-        )
+            "primary",
+          ),
+        ),
       )
       .finally(() => dispatch(deleteNotification(titlePending)))
       .catch((thrown) => {
@@ -1311,20 +1311,20 @@ export function attachFileAction(windowType, docId, data) {
           dispatch(
             addNotification(
               titleError,
-              'Upload terminated by the user',
+              "Upload terminated by the user",
               5000,
-              'warning',
-              'disableMouse'
-            )
+              "warning",
+              "disableMouse",
+            ),
           );
         } else {
           dispatch(
             addNotification(
               titleError,
-              counterpart.translate('window.attachment.upload.error'),
+              counterpart.translate("window.attachment.upload.error"),
               5000,
-              'error'
-            )
+              "error",
+            ),
           );
         }
       });
@@ -1374,7 +1374,7 @@ export function openPrintingOptionsModal({
   return openModal({
     title,
     windowId,
-    modalType: 'static',
+    modalType: "static",
     //viewId,
     viewDocumentIds: [documentNo],
     dataId: documentId,
@@ -1384,9 +1384,9 @@ export function openPrintingOptionsModal({
 
 export function openSelectCurrentWorkplaceModal() {
   return openModal({
-    title: counterpart.translate('userDropdown.changeWorkplace.caption'),
-    windowId: 'selectCurrentWorkplace',
-    modalType: 'static',
+    title: counterpart.translate("userDropdown.changeWorkplace.caption"),
+    windowId: "selectCurrentWorkplace",
+    modalType: "static",
     staticModalType: StaticModalType.ChangeCurrentWorkplace,
   });
 }
@@ -1412,17 +1412,17 @@ export function printDocument({
   const filename = `${windowId}_${documentNo ?? documentId}.pdf`;
 
   let isOpenInBrowser = true;
-  if (options && options['PRINTER_OPTS_IsAlsoSendToBrowser'] !== undefined) {
-    isOpenInBrowser = !!options['PRINTER_OPTS_IsAlsoSendToBrowser'];
-  } else if (options && options['IsAlsoSendToBrowser'] !== undefined) {
-    isOpenInBrowser = !!options['IsAlsoSendToBrowser'];
+  if (options && options["PRINTER_OPTS_IsAlsoSendToBrowser"] !== undefined) {
+    isOpenInBrowser = !!options["PRINTER_OPTS_IsAlsoSendToBrowser"];
+  } else if (options && options["IsAlsoSendToBrowser"] !== undefined) {
+    isOpenInBrowser = !!options["IsAlsoSendToBrowser"];
   } else {
     isOpenInBrowser = true;
   }
 
   if (isOpenInBrowser) {
     const url = getPrintUrl({ windowId, documentId, filename, options });
-    window.open(url, '_blank');
+    window.open(url, "_blank");
     return Promise.resolve();
   } else {
     return getPrintFile({ windowId, documentId, filename, options });

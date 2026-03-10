@@ -1,9 +1,7 @@
 {
   "143_143-O": {
     "widgetShown": false,
-    "filtersCaptions": {
-      
-    },
+    "filtersCaptions": {},
     "notValidFields": null,
     "filterData": [
       {
@@ -334,9 +332,7 @@
             "sortNo": 10000
           }
         ],
-        "debugProperties": {
-          
-        }
+        "debugProperties": {}
       },
       {
         "filterId": "facet-C_Order_ID",

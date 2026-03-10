@@ -1,6 +1,6 @@
-import React, { forwardRef, useCallback } from 'react';
-import Amount from './Amount';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useCallback } from "react";
+import Amount from "./Amount";
+import PropTypes from "prop-types";
 
 const AmountRange = forwardRef(
   (
@@ -26,24 +26,24 @@ const AmountRange = forwardRef(
       onKeyDown,
       onPatch,
     },
-    ref
+    ref,
   ) => {
     const valueFrom_onChange = useCallback(
       (e) => onChange?.(e, false),
-      [onChange]
+      [onChange],
     );
     const valueFrom_onFocus = useCallback(
       (e) => onFocus?.(e, false),
-      [onFocus]
+      [onFocus],
     );
     const valueFrom_onBlur = useCallback((e) => onBlur?.(e, false), [onBlur]);
     const valueFrom_onKeyDown = useCallback(
       (e) => onKeyDown?.(e, false),
-      [onKeyDown]
+      [onKeyDown],
     );
     const valueFrom_onPatch = useCallback(
       (field, value) => onPatch?.(field, value, /*id*/ undefined, valueTo),
-      [onPatch, valueTo]
+      [onPatch, valueTo],
     );
 
     //
@@ -52,17 +52,17 @@ const AmountRange = forwardRef(
 
     const valueTo_onChange = useCallback(
       (e) => onChange?.(e, true),
-      [onChange]
+      [onChange],
     );
     const valueTo_onFocus = useCallback((e) => onFocus?.(e, true), [onFocus]);
     const valueTo_onBlur = useCallback((e) => onBlur?.(e, true), [onBlur]);
     const valueTo_onKeyDown = useCallback(
       (e) => onKeyDown?.(e, true),
-      [onKeyDown]
+      [onKeyDown],
     );
     const valueTo_onPatch = useCallback(
       (field, value) => onPatch?.(field, valueFrom, /*id*/ undefined, value),
-      [onPatch, valueFrom]
+      [onPatch, valueFrom],
     );
 
     //
@@ -118,10 +118,10 @@ const AmountRange = forwardRef(
         />
       </div>
     );
-  }
+  },
 );
 
-AmountRange.displayName = 'AmountRange';
+AmountRange.displayName = "AmountRange";
 AmountRange.propTypes = {
   widgetField: PropTypes.string.isRequired,
   valueFrom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

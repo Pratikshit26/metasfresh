@@ -11,18 +11,18 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const webpackPre = require('@cypress/webpack-preprocessor');
-const webpack = require('webpack');
+const webpackPre = require("@cypress/webpack-preprocessor");
+const webpack = require("webpack");
 // const { initPlugin } = require('cypress-plugin-snapshots/plugin');
-const task = require('cypress-skip-and-only-ui/task');
-const ourConfig = require('../config.js');
-const { startDevServer } = require('@cypress/webpack-dev-server');
+const task = require("cypress-skip-and-only-ui/task");
+const ourConfig = require("../config.js");
+const { startDevServer } = require("@cypress/webpack-dev-server");
 
 module.exports = (on, config) => {
   const options = {
     // send in the options from your webpack.config.js, so it works the same
     // as your app's code
-    webpackOptions: require('../../webpack.config'),
+    webpackOptions: require("../../webpack.config"),
     watchOptions: {},
   };
 
@@ -34,8 +34,8 @@ module.exports = (on, config) => {
   ];
 
   options.webpackOptions.plugins = opts;
-  on('file:preprocessor', webpackPre(options));
-  on('task', task);
+  on("file:preprocessor", webpackPre(options));
+  on("task", task);
 
   // initPlugin(on, config);
 
@@ -55,7 +55,9 @@ module.exports = (on, config) => {
   }
 
   // start the dev server with our custom webpack config
-  on('dev-server:start', async (options) => startDevServer({ options, webpackConfig: require('../../webpack.config') }));
+  on("dev-server:start", async (options) =>
+    startDevServer({ options, webpackConfig: require("../../webpack.config") }),
+  );
 
   return config;
 };

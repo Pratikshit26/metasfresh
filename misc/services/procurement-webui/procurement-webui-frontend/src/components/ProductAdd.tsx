@@ -6,15 +6,15 @@ import View from './View';
 import ProductAddList from './ProductAddList';
 
 const ProductAdd: FunctionComponent = (): ReactElement => {
-  return (
-    <View>
-      <div>
-        <section className="section">
-          <ProductAddList />
-        </section>
-      </div>
-    </View>
-  );
+    return (
+        <View>
+            <div>
+                <section className="section">
+                    <ProductAddList />
+                </section>
+            </div>
+        </View>
+    );
 };
 
 export default ProductAdd;

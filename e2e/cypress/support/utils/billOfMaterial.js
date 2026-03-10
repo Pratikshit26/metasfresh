@@ -12,8 +12,9 @@ export class BillOfMaterial {
   setProduct(product) {
     cy.log(`BillOfMaterial - set product = ${product}`);
     this.product = product;
-    if (!name) { // if name already set explicitly then don't overwrite it
-      this.name = product + '_BOM';
+    if (!name) {
+      // if name already set explicitly then don't overwrite it
+      this.name = product + "_BOM";
     }
     return this;
   }
@@ -44,37 +45,47 @@ export class BillOfMaterial {
 }
 
 function applyBillOfMaterial(billOfMaterial) {
-  cy.visitWindow('53006', 'NEW');
+  cy.visitWindow("53006", "NEW");
 
-  cy.writeIntoTextField('Name', billOfMaterial.name);
-  cy.writeIntoLookupListField('M_Product_ID', billOfMaterial.product, billOfMaterial.product);
-  cy.writeIntoStringField('DocumentNo', billOfMaterial.documentNo);
+  cy.writeIntoTextField("Name", billOfMaterial.name);
+  cy.writeIntoLookupListField(
+    "M_Product_ID",
+    billOfMaterial.product,
+    billOfMaterial.product,
+  );
+  cy.writeIntoStringField("DocumentNo", billOfMaterial.documentNo);
 
-  billOfMaterial.lines.forEach(line => {
+  billOfMaterial.lines.forEach((line) => {
     applyBillOfMaterialLine(line);
   });
   cy.expectNumberOfRows(billOfMaterial.lines.length);
 
   if (billOfMaterial.isVerified) {
-    cy.executeHeaderActionWithDialog('PP_Product_BOM');
+    cy.executeHeaderActionWithDialog("PP_Product_BOM");
     cy.pressStartButton();
   }
 }
 
 function applyBillOfMaterialLine(bomLine) {
-  cy.selectTab('PP_Product_BOMLine');
+  cy.selectTab("PP_Product_BOMLine");
   cy.pressAddNewButton();
 
   if (bomLine.issueMethod) {
-    cy.resetListValue('IssueMethod');
-    cy.selectInListField('IssueMethod', bomLine.issueMethod, true);
+    cy.resetListValue("IssueMethod");
+    cy.selectInListField("IssueMethod", bomLine.issueMethod, true);
   }
-  cy.writeIntoLookupListField('M_Product_ID', bomLine.product, bomLine.product, false, true);
+  cy.writeIntoLookupListField(
+    "M_Product_ID",
+    bomLine.product,
+    bomLine.product,
+    false,
+    true,
+  );
   if (bomLine.quantity) {
-    cy.writeIntoStringField('QtyBOM', bomLine.quantity, true);
+    cy.writeIntoStringField("QtyBOM", bomLine.quantity, true);
   }
   if (bomLine.scrap) {
-    cy.writeIntoStringField('Scrap', bomLine.scrap, true);
+    cy.writeIntoStringField("Scrap", bomLine.scrap, true);
   }
   cy.pressDoneButton();
 }

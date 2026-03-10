@@ -35,7 +35,7 @@
       "billTo": true,
       "billToDefault": true,
       "visitorsAddress": true,
-      "ephemeral":false,
+      "ephemeral": false,
       "countryName": "CountryName",
       "changeInfo": {
         "createdMillis": 1436877663000,

@@ -475,18 +475,12 @@
     "licenseFile": "/Applications/MAMP/htdocs/metas/node_modules/jsbn/LICENSE"
   },
   "json-schema@0.2.2": {
-    "licenses": [
-      "AFLv2.1",
-      "BSD"
-    ],
+    "licenses": ["AFLv2.1", "BSD"],
     "repository": "https://github.com/kriszyp/json-schema",
     "publisher": "Kris Zyp"
   },
   "json-schema@0.2.3": {
-    "licenses": [
-      "AFLv2.1",
-      "BSD"
-    ],
+    "licenses": ["AFLv2.1", "BSD"],
     "repository": "https://github.com/kriszyp/json-schema",
     "publisher": "Kris Zyp"
   },

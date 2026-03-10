@@ -7,5 +7,5 @@ export const ORDER_STATUS_VOIDED = 'VO';
 const OPEN_ORDER_STATUSES = [ORDER_STATUS_DRAFTED, ORDER_STATUS_WAITING_PAYMENT, ORDER_STATUS_COMPLETED];
 
 export const isOpenOrderStatus = (status) => {
-  return OPEN_ORDER_STATUSES.includes(status);
+    return OPEN_ORDER_STATUSES.includes(status);
 };

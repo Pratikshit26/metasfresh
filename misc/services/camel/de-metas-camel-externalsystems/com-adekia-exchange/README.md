@@ -1,6 +1,6 @@
 # Adekia Exchange
 
-****
+---
 
 ## Table of Contents
 
@@ -14,4 +14,3 @@
 ## ...
 
 Official Documentation : https://www.adekia.com/adekia-exchange
-

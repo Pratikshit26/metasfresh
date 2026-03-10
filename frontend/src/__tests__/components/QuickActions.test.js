@@ -1,15 +1,15 @@
-import React from 'react';
-import { mount, shallow } from 'enzyme';
-import nock from 'nock';
-import { ShortcutProvider } from '../../components/keyshortcuts/ShortcutProvider';
-import { QuickActions } from '../../components/app/QuickActions';
-import fixtures from '../../../test_setup/fixtures/quickactions.json';
+import React from "react";
+import { mount, shallow } from "enzyme";
+import nock from "nock";
+import { ShortcutProvider } from "../../components/keyshortcuts/ShortcutProvider";
+import { QuickActions } from "../../components/app/QuickActions";
+import fixtures from "../../../test_setup/fixtures/quickactions.json";
 
-import hotkeys from '../../../test_setup/fixtures/hotkeys.json';
-import keymap from '../../../test_setup/fixtures/keymap.json';
-jest.mock('../../api');
+import hotkeys from "../../../test_setup/fixtures/hotkeys.json";
+import keymap from "../../../test_setup/fixtures/keymap.json";
+jest.mock("../../api");
 
-const createDummyProps = function(override = {}) {
+const createDummyProps = function (override = {}) {
   return {
     quickActions: override.quickActions || {
       actions: fixtures.data,
@@ -28,50 +28,54 @@ const createDummyProps = function(override = {}) {
     disabled: override.disabled || false,
     stopShortcutPropagation: override.stopShortcutPropagation || false,
     shouldNotUpdate: override.shouldNotUpdate || false,
-    processStatus: override.processStatus || 'saved',
+    processStatus: override.processStatus || "saved",
   };
 };
 
-describe('QuickActions standalone component', () => {
-  const emptyViewId = '540485-a';
-  describe('rendering tests:', () => {
+describe("QuickActions standalone component", () => {
+  const emptyViewId = "540485-a";
+  describe("rendering tests:", () => {
     beforeEach(() => {
       const data1 = fixtures.props;
 
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .post(`/documentView/${data1.windowId}/${emptyViewId}/quickActions`)
         .reply(200, { data: { actions: [] } });
 
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-        .post(`/documentView/${data1.windowId}/${data1.viewId}/quickActions`, 
-        { selectedIds: data1.selected })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .post(`/documentView/${data1.windowId}/${data1.viewId}/quickActions`, {
+          selectedIds: data1.selected,
+        })
         .reply(200, { data: { actions: fixtures.data } });
     });
 
-    it('renders nothing when no actions', () => {
-      const props = createDummyProps({ viewId: emptyViewId, quickActions: { actions: [], pending: false } });
+    it("renders nothing when no actions", () => {
+      const props = createDummyProps({
+        viewId: emptyViewId,
+        quickActions: { actions: [], pending: false },
+      });
       const wrapper = mount(
         <ShortcutProvider hotkeys={hotkeys} keymap={keymap}>
           <QuickActions {...props} />
-        </ShortcutProvider>
+        </ShortcutProvider>,
       );
 
       expect(wrapper.html()).toBeFalsy();
     });
 
-    it('renders actions', () => {
+    it("renders actions", () => {
       const props = createDummyProps();
       const wrapper = mount(
         <ShortcutProvider hotkeys={hotkeys} keymap={keymap}>
           <QuickActions {...props} />,
-        </ShortcutProvider>
+        </ShortcutProvider>,
       );
 
       wrapper.update();
 
-      expect(wrapper.html()).toContain('quick-actions-wrapper');
+      expect(wrapper.html()).toContain("quick-actions-wrapper");
     });
   });
 });

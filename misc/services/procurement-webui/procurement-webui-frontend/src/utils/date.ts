@@ -1,6 +1,6 @@
 interface DateFormatting {
-  currentDay: Date;
-  to?: string;
+    currentDay: Date;
+    to?: string;
 }
 
 /**
@@ -10,25 +10,25 @@ interface DateFormatting {
  * @param<string> to - string indicating we should return the next or previous day, calculated from the currentDay
  */
 export function formDate({ currentDay, to }: DateFormatting): Date {
-  const day = new Date(currentDay);
-  let newDate;
-  switch (to) {
-    case 'prev':
-      newDate = new Date(day.setDate(day.getDate() - 1));
-      break;
-    case 'next':
-      newDate = new Date(day.setDate(day.getDate() + 1));
-      break;
-    default:
-      newDate = day;
-  }
+    const day = new Date(currentDay);
+    let newDate;
+    switch (to) {
+        case 'prev':
+            newDate = new Date(day.setDate(day.getDate() - 1));
+            break;
+        case 'next':
+            newDate = new Date(day.setDate(day.getDate() + 1));
+            break;
+        default:
+            newDate = day;
+    }
 
-  return newDate;
+    return newDate;
 }
 
 interface PrettyDate {
-  lang: string;
-  date: Date;
+    lang: string;
+    date: Date;
 }
 /**
  * @method prettyDate
@@ -36,19 +36,19 @@ interface PrettyDate {
  * @param object { lang: string, date: Date; }
  */
 export function prettyDate({ lang, date }: PrettyDate): string {
-  const day = (date.getDate() < 10 ? '0' : '') + date.getDate();
-  const month = (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1);
-  const year = date.getFullYear();
+    const day = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    const month = (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1);
+    const year = date.getFullYear();
 
-  switch (lang) {
-    case 'de_CH':
-    case 'de_DE':
-      return `${day}.${month}.${year}`;
-    case 'en_US':
-    case 'en_EN':
-    default:
-      return `${day}/${month}/${year}`;
-  }
+    switch (lang) {
+        case 'de_CH':
+        case 'de_DE':
+            return `${day}.${month}.${year}`;
+        case 'en_US':
+        case 'en_EN':
+        default:
+            return `${day}/${month}/${year}`;
+    }
 }
 
 /**
@@ -57,9 +57,9 @@ export function prettyDate({ lang, date }: PrettyDate): string {
  * @param date
  */
 export function slashSeparatedYYYYmmdd(date: Date): string {
-  const dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
-  const MM = (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1);
-  const YYYY = date.getFullYear();
+    const dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    const MM = (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1);
+    const YYYY = date.getFullYear();
 
-  return `${YYYY}-${MM}-${dd}`;
+    return `${YYYY}-${MM}-${dd}`;
 }

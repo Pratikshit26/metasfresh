@@ -1,25 +1,25 @@
-import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import counterpart from 'counterpart';
-import cx from 'classnames';
+import PropTypes from "prop-types";
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import counterpart from "counterpart";
+import cx from "classnames";
 
-import Loader from '../app/Loader';
+import Loader from "../app/Loader";
 
-import { referencesEventSource } from '../../api/documentReferences';
+import { referencesEventSource } from "../../api/documentReferences";
 import {
   buildRelatedDocumentsViewUrl,
   mergeReferencesToReferences,
-} from '../../utils/documentReferencesHelper';
-import { setFilter } from '../../actions/ListActions';
-import keymap from '../../shortcuts/keymap';
+} from "../../utils/documentReferencesHelper";
+import { setFilter } from "../../actions/ListActions";
+import keymap from "../../shortcuts/keymap";
 import {
   TBL_CONTEXT_Y_OFFSET,
   TBL_CONTEXT_X_OFFSET,
   TBL_CONTEXT_MENU_X_MAX,
   TBL_CONTEXT_MENU_Y_MAX,
   TBL_CONTEXT_POPUP_HEIGHT,
-} from '../../constants/Constants';
+} from "../../constants/Constants";
 
 class TableContextMenu extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class TableContextMenu extends Component {
       },
       loadingReferences: false,
       references: [],
-      display: 'block',
+      display: "block",
     };
   }
 
@@ -45,7 +45,7 @@ class TableContextMenu extends Component {
       fieldName,
       supportZoomInto,
       supportFieldEdit,
-      this.contextMenu
+      this.contextMenu,
     );
 
     if (docId) {
@@ -66,9 +66,9 @@ class TableContextMenu extends Component {
 
   adjustElementPositionToFitInScreen = (dir, pos, element) => {
     if (element) {
-      const windowSize = dir === 'x' ? window.innerWidth : window.innerHeight;
+      const windowSize = dir === "x" ? window.innerWidth : window.innerHeight;
       const elementSize =
-        dir === 'x' ? element.offsetWidth : element.offsetHeight;
+        dir === "x" ? element.offsetWidth : element.offsetHeight;
 
       if (windowSize - pos > elementSize) {
         return pos;
@@ -86,12 +86,12 @@ class TableContextMenu extends Component {
     fieldName,
     supportZoomInto,
     supportFieldEdit,
-    elem
+    elem,
   ) => {
     this.setState({
       contextMenu: {
-        x: this.adjustElementPositionToFitInScreen('x', x, elem),
-        y: this.adjustElementPositionToFitInScreen('y', y, elem),
+        x: this.adjustElementPositionToFitInScreen("x", x, elem),
+        y: this.adjustElementPositionToFitInScreen("y", y, elem),
         fieldName,
         supportZoomInto,
         supportFieldEdit,
@@ -116,13 +116,13 @@ class TableContextMenu extends Component {
           loadingReferences: true,
           references: mergeReferencesToReferences(
             this.state.references,
-            partialGroup.references
+            partialGroup.references,
           ),
         });
       },
 
       onComplete: () => {
-        this.setState({ display: 'block', loadingReferences: false });
+        this.setState({ display: "block", loadingReferences: false });
       },
     });
   };
@@ -139,7 +139,7 @@ class TableContextMenu extends Component {
     });
 
     dispatch(setFilter(filter, targetWindowId));
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   handleOpenNewTab = () => {
@@ -217,11 +217,11 @@ class TableContextMenu extends Component {
         style={{
           left: positionX,
           top: positionY,
-          display: isDisplayed ? 'block' : 'none',
-          height: docId ? TBL_CONTEXT_POPUP_HEIGHT : '',
+          display: isDisplayed ? "block" : "none",
+          height: docId ? TBL_CONTEXT_POPUP_HEIGHT : "",
         }}
         className={
-          'context-menu context-menu-open panel-bordered panel-primary'
+          "context-menu context-menu-open panel-bordered panel-primary"
         }
         tabIndex="0"
         onBlur={blur}
@@ -229,7 +229,7 @@ class TableContextMenu extends Component {
         <div className="context-menu-main-options">
           {isShowZoomIntoOption && (
             <ContextMenuItem
-              caption={counterpart.translate('window.table.zoomInto')}
+              caption={counterpart.translate("window.table.zoomInto")}
               icon="meta-icon-share"
               onClick={this.onZoomIntoClicked}
               disabled={loadingZoomInto}
@@ -238,7 +238,7 @@ class TableContextMenu extends Component {
 
           {isShowEditOption && (
             <ContextMenuItem
-              caption={counterpart.translate('window.table.editField')}
+              caption={counterpart.translate("window.table.editField")}
               icon="meta-icon-edit"
               onClick={handleFieldEdit}
             />
@@ -250,7 +250,7 @@ class TableContextMenu extends Component {
 
           {isShowAdvancedEditOption && (
             <ContextMenuItem
-              caption={counterpart.translate('window.table.advancedEdit')}
+              caption={counterpart.translate("window.table.advancedEdit")}
               icon="meta-icon-edit"
               shortcut={keymap.ADVANCED_EDIT}
               onClick={handleAdvancedEdit}
@@ -259,7 +259,7 @@ class TableContextMenu extends Component {
 
           {isShowOpenInNewTabOption && (
             <ContextMenuItem
-              caption={counterpart.translate('window.table.openInNewTab')}
+              caption={counterpart.translate("window.table.openInNewTab")}
               icon="meta-icon-file"
               shortcut={keymap.OPEN_SELECTED}
               onClick={this.handleOpenNewTab}
@@ -268,7 +268,7 @@ class TableContextMenu extends Component {
 
           {isShowDeleteOption && (
             <ContextMenuItem
-              caption={counterpart.translate('window.delete.caption')}
+              caption={counterpart.translate("window.delete.caption")}
               icon="meta-icon-trash"
               shortcut={keymap.REMOVE_SELECTED}
               onClick={handleDelete}
@@ -303,7 +303,7 @@ class TableContextMenu extends Component {
             onClick={() => {
               this.handleReferenceClick(
                 reference.targetWindowId,
-                reference.filter
+                reference.filter,
               );
             }}
           />
@@ -345,8 +345,8 @@ const ContextMenuItem = ({
 }) => {
   return (
     <div
-      className={cx('context-menu-item', {
-        'context-menu-item-pending': pending,
+      className={cx("context-menu-item", {
+        "context-menu-item-pending": pending,
       })}
       onClick={!pending ? onClick : null}
     >

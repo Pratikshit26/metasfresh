@@ -16,10 +16,14 @@
  */
 const getLanguageSpecific = (data, key) => {
   // noinspection JSUnresolvedVariable
-  const checkArray = Array.isArray(Cypress.reduxStore.getState().appHandler.me.language);
-  const lang = checkArray ? 'en_EN' : Cypress.reduxStore.getState().appHandler.me.language.key;
+  const checkArray = Array.isArray(
+    Cypress.reduxStore.getState().appHandler.me.language,
+  );
+  const lang = checkArray
+    ? "en_EN"
+    : Cypress.reduxStore.getState().appHandler.me.language.key;
 
-  if (lang !== 'en_US' && !checkArray) {
+  if (lang !== "en_US" && !checkArray) {
     key = `${lang}__${key}`;
   }
 
@@ -31,11 +35,13 @@ const getLanguageSpecific = (data, key) => {
  *
  * WARNING: Retarded Cypress request can't catch errors
  */
-const wrapRequest = req => {
+const wrapRequest = (req) => {
   return new Promise((resolve, reject) => {
-    req.then(response => {
+    req.then((response) => {
       try {
-        resolve(response.body.result ? response.body.result[0] : response.body.values);
+        resolve(
+          response.body.result ? response.body.result[0] : response.body.values,
+        );
       } catch (e) {
         reject(e);
       }
@@ -72,12 +78,14 @@ const findByName = (dataArray, name) => {
  * @returns {string}
  */
 const humanReadableNow = () => {
-  const date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
+  const date = new Date(
+    Date.now() - new Date().getTimezoneOffset() * 60000,
+  ).toISOString();
   // noinspection RegExpSingleCharAlternation
   return date
     .slice(8, date.length - 1)
     .split(/:|\./g)
-    .join('_');
+    .join("_");
 };
 
 let date;
@@ -94,15 +102,23 @@ const appendHumanReadableNow = (str, dateOverride) => {
 const getLanguageSpecificWorkaround_date = new Date();
 const getLanguageSpecificWorkaround = () => {
   const TIME_TO_WAIT = 10 * 1000;
-  return cy.get('body').then(function() {
+  return cy.get("body").then(function () {
     const now = new Date();
     const delta = now - getLanguageSpecificWorkaround_date;
     if (delta < TIME_TO_WAIT) {
-      cy.log(`getLanguageSpecificWorkaround sleeping: date=${getLanguageSpecificWorkaround_date.getTime()}, now=${now.getTime()}, delta=${delta}ms`);
+      cy.log(
+        `getLanguageSpecificWorkaround sleeping: date=${getLanguageSpecificWorkaround_date.getTime()}, now=${now.getTime()}, delta=${delta}ms`,
+      );
       // eslint-disable-next-line
       return cy.wait(5000);
     }
   });
 };
 
-export { getLanguageSpecific, wrapRequest, findByName, humanReadableNow, appendHumanReadableNow };
+export {
+  getLanguageSpecific,
+  wrapRequest,
+  findByName,
+  humanReadableNow,
+  appendHumanReadableNow,
+};

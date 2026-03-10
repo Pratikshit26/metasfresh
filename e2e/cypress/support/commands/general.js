@@ -26,17 +26,17 @@
 
 // import 'cypress-plugin-snapshots/commands';
 
-import { List } from 'immutable';
-import 'cypress-localstorage-commands';
+import { List } from "immutable";
+import "cypress-localstorage-commands";
 
-import { loginSuccess } from '../../../src/actions/AppActions';
-import Auth from '../../../src/services/Auth';
-import config from '../../config';
-import nextTabbable from './nextTabbable';
-import { humanReadableNow } from '../utils/utils';
-import { RewriteURL } from '../utils/constants';
+import { loginSuccess } from "../../../src/actions/AppActions";
+import Auth from "../../../src/services/Auth";
+import config from "../../config";
+import nextTabbable from "./nextTabbable";
+import { humanReadableNow } from "../utils/utils";
+import { RewriteURL } from "../utils/constants";
 
-Cypress.Commands.add('loginViaForm', (username, password) => {
+Cypress.Commands.add("loginViaForm", (username, password) => {
   let user = username;
   let pass = password;
 
@@ -45,27 +45,27 @@ Cypress.Commands.add('loginViaForm', (username, password) => {
     pass = config.password;
   }
   Cypress.log({
-    name: 'loginViaForm',
-    message: user + ' | ' + '****' /*pass*/,
+    name: "loginViaForm",
+    message: user + " | " + "****" /*pass*/,
   });
 
-  cy.on('emit:reduxStore', (store) => {
+  cy.on("emit:reduxStore", (store) => {
     Cypress.reduxStore = store;
   });
 
-  cy.visit('/login').then(() => {
+  cy.visit("/login").then(() => {
     cy.location().then((location) => {
       const WAIT_FOR_LOGIN = 5000;
-      if (location.pathname === '/login') {
-        cy.get(':nth-child(1) > .input-primary').type(user);
-        cy.get(':nth-child(2) > .input-primary').type(pass);
-        cy.get('.btn').click();
+      if (location.pathname === "/login") {
+        cy.get(":nth-child(1) > .input-primary").type(user);
+        cy.get(":nth-child(2) > .input-primary").type(pass);
+        cy.get(".btn").click();
         return new Promise((resolve) => {
           setTimeout(() => {
             Cypress.Cookies.defaults({
-              preserve: ['SESSION', 'isLogged'],
+              preserve: ["SESSION", "isLogged"],
             });
-            resolve('Authenticated');
+            resolve("Authenticated");
           }, WAIT_FOR_LOGIN);
         });
       }
@@ -74,7 +74,7 @@ Cypress.Commands.add('loginViaForm', (username, password) => {
 });
 
 context('Reusable "login" custom command using API', function () {
-  Cypress.Commands.add('loginViaAPI', (username, password, redirect) => {
+  Cypress.Commands.add("loginViaAPI", (username, password, redirect) => {
     let user = username;
     let pass = password;
 
@@ -84,8 +84,8 @@ context('Reusable "login" custom command using API', function () {
     }
 
     Cypress.log({
-      name: 'loginViaAPI',
-      message: user + ' | ' + '****' /*pass*/,
+      name: "loginViaAPI",
+      message: user + " | " + "****" /*pass*/,
     });
 
     const handleSuccess = function () {
@@ -94,7 +94,7 @@ context('Reusable "login" custom command using API', function () {
         if (redirect) {
           win.history.back();
         } else {
-          win.history.pushState({}, '', '/');
+          win.history.pushState({}, "", "/");
         }
 
         return cy.wrap(null);
@@ -102,12 +102,12 @@ context('Reusable "login" custom command using API', function () {
     };
 
     const checkIfAlreadyLogged = function () {
-      const error = new Error('Error when checking if user logged in');
+      const error = new Error("Error when checking if user logged in");
 
       return cy
         .request({
-          method: 'GET',
-          url: config.API_URL + '/login/isLoggedIn',
+          method: "GET",
+          url: config.API_URL + "/login/isLoggedIn",
           failOnStatusCode: false,
           followRedirect: false,
         })
@@ -124,16 +124,16 @@ context('Reusable "login" custom command using API', function () {
 
     const auth = new Auth();
 
-    cy.on('emit:reduxStore', (store) => {
+    cy.on("emit:reduxStore", (store) => {
       Cypress.reduxStore = store;
     });
 
-    cy.visit('/login');
+    cy.visit("/login");
 
     return cy
       .request({
-        method: 'POST',
-        url: config.API_URL + '/login/authenticate',
+        method: "POST",
+        url: config.API_URL + "/login/authenticate",
         failOnStatusCode: false,
         followRedirect: false,
         body: {
@@ -143,14 +143,14 @@ context('Reusable "login" custom command using API', function () {
       })
       .then((response) => {
         if (!response.isOkStatusCode) {
-          if (response.body.message === 'User already logged in') {
+          if (response.body.message === "User already logged in") {
             return cy.wrap(true);
           }
           return checkIfAlreadyLogged();
         }
 
         if (response.body.loginComplete) {
-          cy.setLocalStorage('isLogged', true);
+          cy.setLocalStorage("isLogged", true);
           cy.saveLocalStorage();
           return handleSuccess();
         }
@@ -158,13 +158,13 @@ context('Reusable "login" custom command using API', function () {
 
         return cy
           .request({
-            method: 'POST',
-            url: config.API_URL + '/login/loginComplete',
+            method: "POST",
+            url: config.API_URL + "/login/loginComplete",
             body: roles.get(0),
             failOnStatusCode: false,
           })
           .then(() => {
-            cy.setLocalStorage('isLogged', true);
+            cy.setLocalStorage("isLogged", true);
             cy.saveLocalStorage();
             Cypress.reduxStore.dispatch(loginSuccess(auth));
 
@@ -177,22 +177,28 @@ context('Reusable "login" custom command using API', function () {
 /**
  * Emulates Tab key navigation.
  */
-Cypress.Commands.add('tab', { prevSubject: 'optional' }, ($subject, direction = 'forward', options = {}) => {
-  const thenable = $subject ? cy.wrap($subject, { log: false }) : cy.focused({ log: options.log !== false });
+Cypress.Commands.add(
+  "tab",
+  { prevSubject: "optional" },
+  ($subject, direction = "forward", options = {}) => {
+    const thenable = $subject
+      ? cy.wrap($subject, { log: false })
+      : cy.focused({ log: options.log !== false });
 
-  thenable
-    .then(($el) => nextTabbable($el, direction))
-    .then(($el) => {
-      if (options.log !== false) {
-        Cypress.log({
-          $el,
-          name: 'tab',
-          message: direction,
-        });
-      }
-    })
-    .focus({ log: false });
-});
+    thenable
+      .then(($el) => nextTabbable($el, direction))
+      .then(($el) => {
+        if (options.log !== false) {
+          Cypress.log({
+            $el,
+            name: "tab",
+            message: direction,
+          });
+        }
+      })
+      .focus({ log: false });
+  },
+);
 
 /**
  * Queries for the active element, irrespective of document focus state, unlike cy.focused().
@@ -200,15 +206,15 @@ Cypress.Commands.add('tab', { prevSubject: 'optional' }, ($subject, direction = 
  * This may not match Cypress' internal focus tracker, so you may have to .focus() the returned
  * element to interact with it.
  */
-Cypress.Commands.add('active', (options = {}) => {
+Cypress.Commands.add("active", (options = {}) => {
   cy.document({ log: false })
     .then((document) => cy.wrap(document.activeElement, { log: false }))
     .then(($el) => {
       if (options.log !== false) {
         Cypress.log({
           $el,
-          name: 'active',
-          message: '',
+          name: "active",
+          message: "",
         });
       }
     });
@@ -227,35 +233,44 @@ Cypress.Commands.add('active', (options = {}) => {
  * use the provided value or the value at index 0.
  *
  */
-Cypress.Commands.add('waitForHeader', (pageName, breadcrumbNr) => {
-  describe('Wait for page name visible in the header', function () {
+Cypress.Commands.add("waitForHeader", (pageName, breadcrumbNr) => {
+  describe("Wait for page name visible in the header", function () {
     if (pageName) {
-      cy.get('.header-breadcrumb').find('.header-item-container').should('not.have.length', 1).get('.header-item').should('contain', pageName);
+      cy.get(".header-breadcrumb")
+        .find(".header-item-container")
+        .should("not.have.length", 1)
+        .get(".header-item")
+        .should("contain", pageName);
     } else {
       const breadcrumbNumber = breadcrumbNr || 0;
 
-      cy.get('.header-breadcrumb')
-        .find('.header-item-container')
-        .should('not.have.length', 1)
+      cy.get(".header-breadcrumb")
+        .find(".header-item-container")
+        .should("not.have.length", 1)
         .window()
-        .its('store')
-        .invoke('getState')
-        .its('menuHandler.breadcrumb')
-        .should('not.have.length', 0)
+        .its("store")
+        .invoke("getState")
+        .its("menuHandler.breadcrumb")
+        .should("not.have.length", 0)
         .window()
-        .its('store')
-        .invoke('getState')
-        .its('menuHandler.breadcrumb')
+        .its("store")
+        .invoke("getState")
+        .its("menuHandler.breadcrumb")
         .then((breadcrumbs) => {
-          cy.get('.header-item').should('contain', breadcrumbs[breadcrumbNumber].caption);
+          cy.get(".header-item").should(
+            "contain",
+            breadcrumbs[breadcrumbNumber].caption,
+          );
         });
     }
   });
 });
 
 function visitTableWindow(windowId) {
-  const quickActionsAlias = 'quickActions_' + humanReadableNow();
-  cy.intercept('POST', new RegExp(RewriteURL.QuickActions)).as(quickActionsAlias);
+  const quickActionsAlias = "quickActions_" + humanReadableNow();
+  cy.intercept("POST", new RegExp(RewriteURL.QuickActions)).as(
+    quickActionsAlias,
+  );
 
   cy.visit(`/window/${windowId}`);
 
@@ -263,20 +278,25 @@ function visitTableWindow(windowId) {
 }
 
 function visitDetailWindow(windowId, recordId) {
-  describe('Open metasfresh single-record window and wait for layout and data', function () {
+  describe("Open metasfresh single-record window and wait for layout and data", function () {
     performDocumentViewAction(windowId, function () {
       cy.visit(`/window/${windowId}/${recordId}`);
     });
   });
 }
 
-Cypress.Commands.add('performDocumentViewAction', (windowId, documentViewAction) => {
-  performDocumentViewAction(windowId, documentViewAction);
-});
+Cypress.Commands.add(
+  "performDocumentViewAction",
+  (windowId, documentViewAction) => {
+    performDocumentViewAction(windowId, documentViewAction);
+  },
+);
 
 function performDocumentViewAction(windowId, documentViewAction) {
   const layoutAliasName = `visitWindow-layout-${new Date().getTime()}`;
-  cy.intercept('GET', new RegExp(`/rest/api/window/${windowId}/layout`)).as(layoutAliasName);
+  cy.intercept("GET", new RegExp(`/rest/api/window/${windowId}/layout`)).as(
+    layoutAliasName,
+  );
 
   // - removed below lines because is redundant code.. that GET call is actually done by documentViewAction ..
   // const dataAliasName = `visitWindow-data-${new Date().getTime()}`;
@@ -298,7 +318,7 @@ function performDocumentViewAction(windowId, documentViewAction) {
   // });
 }
 
-Cypress.Commands.add('visitWindow', (windowId, recordId) => {
+Cypress.Commands.add("visitWindow", (windowId, recordId) => {
   if (recordId == null) {
     // null == undefined, thx to https://stackoverflow.com/a/2647888/1012103
     visitTableWindow(windowId);
@@ -308,29 +328,29 @@ Cypress.Commands.add('visitWindow', (windowId, recordId) => {
   cy.waitForSaveIndicator();
 });
 
-Cypress.Commands.add('readAllNotifications', () => {
-  describe('Mark all current notifications as read in the API and reset counter', function () {
+Cypress.Commands.add("readAllNotifications", () => {
+  describe("Mark all current notifications as read in the API and reset counter", function () {
     return cy
       .request({
-        method: 'PUT',
-        url: config.API_URL + '/notifications/all/read',
+        method: "PUT",
+        url: config.API_URL + "/notifications/all/read",
         failOnStatusCode: false,
         followRedirect: false,
       })
       .then(() => {
-        cy.window().its('store').invoke('dispatch', {
-          type: 'READ_ALL_NOTIFICATIONS',
+        cy.window().its("store").invoke("dispatch", {
+          type: "READ_ALL_NOTIFICATIONS",
         });
       });
   });
 });
 
-Cypress.Commands.add('expectNumberOfDOMNotifications', (expectedNumber) => {
+Cypress.Commands.add("expectNumberOfDOMNotifications", (expectedNumber) => {
   const timeout = { timeout: 15000 };
 
   return cy
-    .get('.header-item-badge', timeout)
-    .find('.notification-number', timeout)
+    .get(".header-item-badge", timeout)
+    .find(".notification-number", timeout)
     .then((el) => {
       if (el[0]) {
         const val = el[0].textContent;
@@ -338,28 +358,33 @@ Cypress.Commands.add('expectNumberOfDOMNotifications', (expectedNumber) => {
         return cy.wrap(parseInt(val, 10));
       }
     })
-    .should('eq', expectedNumber);
+    .should("eq", expectedNumber);
 });
 
 /*
  * if `optionalText` is given it will look for it inside the notification element
  */
-Cypress.Commands.add('getNotificationModal', (optionalText) => {
+Cypress.Commands.add("getNotificationModal", (optionalText) => {
   const timeout = { timeout: 15000 };
 
   if (!optionalText) {
-    return cy.get('.notification-handler', timeout).find('.notification-content', timeout);
+    return cy
+      .get(".notification-handler", timeout)
+      .find(".notification-content", timeout);
   } else {
-    return cy.get('.notification-handler', timeout).find('.notification-content', timeout).contains(optionalText);
+    return cy
+      .get(".notification-handler", timeout)
+      .find(".notification-content", timeout)
+      .contains(optionalText);
   }
 });
 /**
  * Opens the inbox notification with the given text
  */
-Cypress.Commands.add('openInboxNotificationWithText', (text) => {
+Cypress.Commands.add("openInboxNotificationWithText", (text) => {
   const timeout = { timeout: 20000 };
-  cy.get('.header-item-badge.icon-lg .notification-number', timeout).click();
-  cy.get('.inbox-item-unread .inbox-item-title', timeout)
+  cy.get(".header-item-badge.icon-lg .notification-number", timeout).click();
+  cy.get(".inbox-item-unread .inbox-item-title", timeout)
     .filter(':contains("' + text + '")')
     .first()
     .click();
@@ -408,123 +433,139 @@ Cypress.Commands.add('openInboxNotificationWithText', (text) => {
 
 // may be useful to wait for the response to a particular patch where a particular field value was set
 // thx to https://github.com/cypress-io/cypress/issues/387#issuecomment-458944112
-Cypress.Commands.add('waitForFieldValue', (alias, fieldName, expectedFieldValue, expectEmptyRequest = false) => {
-  cy.wait(alias).then(function (xhr) {
-    const responseBody = xhr.response.body;
+Cypress.Commands.add(
+  "waitForFieldValue",
+  (alias, fieldName, expectedFieldValue, expectEmptyRequest = false) => {
+    cy.wait(alias).then(function (xhr) {
+      const responseBody = xhr.response.body;
 
-    if (!responseBody.documents) {
-      responseBody.documents = responseBody;
+      if (!responseBody.documents) {
+        responseBody.documents = responseBody;
+      }
+
+      if (!expectEmptyRequest) {
+        if (responseBody.documents.length <= 0) {
+          cy.log(
+            `1 waitForFieldValue - waited for alias=${alias} and ${fieldName}=${expectedFieldValue}, but the current response-body is empty; waiting once more`,
+          );
+          return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
+        }
+
+        if (!responseBody.documents[0].fieldsByName) {
+          cy.log(
+            `2 waitForFieldValue - waited for alias=${alias} and ${fieldName}=${expectedFieldValue}, but the current response-body has no fieldsByName property; waiting once more`,
+          );
+          return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
+        }
+
+        const fieldsByName = responseBody.documents[0].fieldsByName;
+        if (!fieldsByName.hasOwnProperty(fieldName)) {
+          cy.log(
+            `3 waitForFieldValue - waited for alias=${alias} and ${fieldName}=${expectedFieldValue}, but the current response has no ${fieldName} property; waiting once more`,
+          );
+          return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
+        }
+
+        const actualFieldValue = fieldsByName[fieldName].value;
+        // @TODO: Why is this check written like that ? Sometimes we get an object value, and not string
+        if (!isString(actualFieldValue)) {
+          cy.log(
+            `4 waitForFieldValue - waited for alias=${alias} and ${fieldName}='${expectedFieldValue}'; the current response body's field has ${fieldName}=${actualFieldValue}; I don't know how do check if non-string values are correct; stop waiting`,
+          );
+          return;
+        }
+
+        /**
+         * TODO: Please oh please let's fix the types at one point
+         *  Here i'm using `!=` and not `!==` so that '222' == 222 (a string is equals to a number with the same value)
+         *  We need this for cases such as `cy.writeIntoStringField('QtyEntered', 222, true);`
+         */
+        if (actualFieldValue != expectedFieldValue) {
+          cy.log(
+            `5 waitForFieldValue - waited for alias=${alias} and ${fieldName}='${expectedFieldValue}', but the current response body's field has ${fieldName}=${actualFieldValue}; waiting once more`,
+          );
+          return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
+        }
+      }
+    });
+
+    // Thx to https://stackoverflow.com/a/9436948/1012103
+    function isString(object) {
+      return typeof object === "string" || object instanceof String;
     }
+  },
+);
 
-    if (!expectEmptyRequest) {
-      if (responseBody.documents.length <= 0) {
-        cy.log(`1 waitForFieldValue - waited for alias=${alias} and ${fieldName}=${expectedFieldValue}, but the current response-body is empty; waiting once more`);
-        return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
-      }
-
-      if (!responseBody.documents[0].fieldsByName) {
-        cy.log(`2 waitForFieldValue - waited for alias=${alias} and ${fieldName}=${expectedFieldValue}, but the current response-body has no fieldsByName property; waiting once more`);
-        return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
-      }
-
-      const fieldsByName = responseBody.documents[0].fieldsByName;
-      if (!fieldsByName.hasOwnProperty(fieldName)) {
-        cy.log(`3 waitForFieldValue - waited for alias=${alias} and ${fieldName}=${expectedFieldValue}, but the current response has no ${fieldName} property; waiting once more`);
-        return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
-      }
-
-      const actualFieldValue = fieldsByName[fieldName].value;
-      // @TODO: Why is this check written like that ? Sometimes we get an object value, and not string
-      if (!isString(actualFieldValue)) {
-        cy.log(
-          `4 waitForFieldValue - waited for alias=${alias} and ${fieldName}='${expectedFieldValue}'; the current response body's field has ${fieldName}=${actualFieldValue}; I don't know how do check if non-string values are correct; stop waiting`
-        );
-        return;
-      }
-
-      /**
-       * TODO: Please oh please let's fix the types at one point
-       *  Here i'm using `!=` and not `!==` so that '222' == 222 (a string is equals to a number with the same value)
-       *  We need this for cases such as `cy.writeIntoStringField('QtyEntered', 222, true);`
-       */
-      if (actualFieldValue != expectedFieldValue) {
-        cy.log(
-          `5 waitForFieldValue - waited for alias=${alias} and ${fieldName}='${expectedFieldValue}', but the current response body's field has ${fieldName}=${actualFieldValue}; waiting once more`
-        );
-        return cy.waitForFieldValue(alias, fieldName, expectedFieldValue); //<---- this is the hacky bit
-      }
-    }
-  });
-
-  // Thx to https://stackoverflow.com/a/9436948/1012103
-  function isString(object) {
-    return typeof object === 'string' || object instanceof String;
-  }
-});
-
-Cypress.Commands.add('getCurrentWindowRecordId', () => {
+Cypress.Commands.add("getCurrentWindowRecordId", () => {
   return cy.url().then((ulrr) => {
     // noinspection UnnecessaryLocalVariableJS
-    const currentRecordId = ulrr.split('/').pop();
+    const currentRecordId = ulrr.split("/").pop();
     return currentRecordId;
   });
 });
 
-Cypress.Commands.add('getSalesInvoiceTotalAmount', () => {
+Cypress.Commands.add("getSalesInvoiceTotalAmount", () => {
   cy.waitForSaveIndicator();
-  return cy.get('.header-breadcrumb-sitename').then(function (si) {
+  return cy.get(".header-breadcrumb-sitename").then(function (si) {
     // noinspection UnnecessaryLocalVariableJS
-    const newTotalAmount = parseFloat(si.html().split(' ')[2]); // the format is "DOC_NO MM/DD/YYYY total"
+    const newTotalAmount = parseFloat(si.html().split(" ")[2]); // the format is "DOC_NO MM/DD/YYYY total"
     return newTotalAmount;
   });
 });
 
-Cypress.Commands.add('waitUntilProcessIsFinished', () => {
+Cypress.Commands.add("waitUntilProcessIsFinished", () => {
   cy.wait(10000);
 });
 
-Cypress.Commands.add('waitForSaveIndicator', (expectIndicator = false) => {
+Cypress.Commands.add("waitForSaveIndicator", (expectIndicator = false) => {
   const timeout = { timeout: 10000 };
 
   if (expectIndicator) {
-    cy.get('.indicator-pending', timeout).should('exist');
+    cy.get(".indicator-pending", timeout).should("exist");
   }
-  cy.get('.indicator-pending', timeout).should('not.exist');
-  cy.get('.indicator-saved', timeout).should('exist');
+  cy.get(".indicator-pending", timeout).should("not.exist");
+  cy.get(".indicator-saved", timeout).should("exist");
 });
 
-Cypress.Commands.add('selectNotificationContaining', (expectedValue) => {
-  cy.get('.header-item-badge.icon-lg i').click(); // notification icon
+Cypress.Commands.add("selectNotificationContaining", (expectedValue) => {
+  cy.get(".header-item-badge.icon-lg i").click(); // notification icon
   return cy
-    .get('.inbox-item-title') // search for text
+    .get(".inbox-item-title") // search for text
     .contains(expectedValue)
     .first();
 });
 
-Cypress.Commands.add('openNotificationContaining', (expectedValue, destinationWindowID) => {
-  cy.selectNotificationContaining(expectedValue).click();
-  // wait until current window is "destinationWindowID"
-  cy.url().should('contain', `/${destinationWindowID}`);
-  // hope this is enough for the whole window to load
-  cy.waitForSaveIndicator();
-});
+Cypress.Commands.add(
+  "openNotificationContaining",
+  (expectedValue, destinationWindowID) => {
+    cy.selectNotificationContaining(expectedValue).click();
+    // wait until current window is "destinationWindowID"
+    cy.url().should("contain", `/${destinationWindowID}`);
+    // hope this is enough for the whole window to load
+    cy.waitForSaveIndicator();
+  },
+);
 
-Cypress.Commands.add('selectLeftTable', function (isModal = false) {
-  cy.log('Select left table');
+Cypress.Commands.add("selectLeftTable", function (isModal = false) {
+  cy.log("Select left table");
   cy.waitForSaveIndicator();
 
-  const parentWrapperPath = isModal ? '.modal-content-wrapper' : '.document-lists-wrapper';
+  const parentWrapperPath = isModal
+    ? ".modal-content-wrapper"
+    : ".document-lists-wrapper";
 
   cy.get(`${parentWrapperPath} .document-list-has-included`).within((el) => {
     return cy.wrap(el);
   });
 });
 
-Cypress.Commands.add('selectRightTable', function (isModal = false) {
-  cy.log('Select right table');
+Cypress.Commands.add("selectRightTable", function (isModal = false) {
+  cy.log("Select right table");
   cy.waitForSaveIndicator();
 
-  const parentWrapperPath = isModal ? '.modal-content-wrapper' : '.document-lists-wrapper';
+  const parentWrapperPath = isModal
+    ? ".modal-content-wrapper"
+    : ".document-lists-wrapper";
 
   cy.get(`${parentWrapperPath} .document-list-is-included`).within((el) => {
     return cy.wrap(el);

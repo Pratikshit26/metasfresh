@@ -1,10 +1,10 @@
-import SockJS from 'sockjs-client';
-import { Client } from '@stomp/stompjs';
-import { connectionError } from '../actions/AppActions';
-import { BAD_GATEWAY_ERROR, NO_CONNECTION_ERROR } from '../constants/Constants';
-import store from '../store/store';
-import _ from 'lodash';
-import { getUserSession } from '../api/userSession';
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
+import { connectionError } from "../actions/AppActions";
+import { BAD_GATEWAY_ERROR, NO_CONNECTION_ERROR } from "../constants/Constants";
+import store from "../store/store";
+import _ from "lodash";
+import { getUserSession } from "../api/userSession";
 
 function socketFactory() {
   return new SockJS(config.WS_URL);
@@ -51,7 +51,7 @@ export function connectWS(topic, onMessageCallback) {
       debug(strMessage) {
         // console.log('debug: ', strMessage);
         // -- detect reconnect and increment the reconnect counter
-        if (strMessage.includes('reconnect')) {
+        if (strMessage.includes("reconnect")) {
           getUserSession()
             .then(({ data, status }) => {
               reconnectCounter =
@@ -70,7 +70,7 @@ export function connectWS(topic, onMessageCallback) {
           store.dispatch(
             connectionError({
               errorType: connectionErrorType,
-            })
+            }),
           );
         }
       },
@@ -90,8 +90,8 @@ export function connectWS(topic, onMessageCallback) {
       // Bad login/passcode typically will cause an error
       // Complaint brokers will set `message` header with a brief message. Body may contain details.
       // Compliant brokers will terminate the connection after any error
-      console.log('Broker reported error: ' + frame.headers['message']);
-      console.log('Additional details: ' + frame.body);
+      console.log("Broker reported error: " + frame.headers["message"]);
+      console.log("Additional details: " + frame.body);
     };
     /*eslint-enable no-console */
 
@@ -107,7 +107,7 @@ export function connectWS(topic, onMessageCallback) {
   const wasConnected = disconnectWS.call(this, connect);
   if (
     !wasConnected ||
-    (this.sockTopic !== topic && _.includes(topic, 'view'))
+    (this.sockTopic !== topic && _.includes(topic, "view"))
   ) {
     connect();
   }

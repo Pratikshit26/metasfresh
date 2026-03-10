@@ -1,15 +1,15 @@
-import Metasfresh from './page';
+import Metasfresh from "./page";
 
 class Roles extends Metasfresh {
   constructor() {
     super();
 
     this.windowId = 111;
-    this.tableRows = '.table-flex-wrapper-row';
-    this.rowSelector = 'tbody tr';
-    this.listHeader = '.document-list-header';
-    this.selectedRows = '.row-selected';
-    this.tableHeader = '.table thead tr';
+    this.tableRows = ".table-flex-wrapper-row";
+    this.rowSelector = "tbody tr";
+    this.listHeader = ".document-list-header";
+    this.selectedRows = ".row-selected";
+    this.tableHeader = ".table thead tr";
   }
 
   visit() {
@@ -21,7 +21,7 @@ class Roles extends Metasfresh {
   }
 
   verifyElements() {
-    cy.get(this.tableRows).find(this.rowSelector).eq(0).should('exist');
+    cy.get(this.tableRows).find(this.rowSelector).eq(0).should("exist");
   }
 
   getRows() {

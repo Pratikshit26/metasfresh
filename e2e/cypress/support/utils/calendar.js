@@ -31,11 +31,11 @@ export class Year {
 }
 
 function applyCalendar(calendar) {
-  cy.visitWindow('117', 'NEW');
-  cy.writeIntoStringField('Name', calendar.name);
+  cy.visitWindow("117", "NEW");
+  cy.writeIntoStringField("Name", calendar.name);
 
   // Thx to https://stackoverflow.com/questions/16626735/how-to-loop-through-an-array-containing-objects-and-access-their-properties
-  calendar.years.forEach(function(year) {
+  calendar.years.forEach(function (year) {
     applyYear(year);
   });
   cy.expectNumberOfRows(calendar.years.length);
@@ -44,12 +44,12 @@ function applyCalendar(calendar) {
 function applyYear(year) {
   const yearName = year.name;
 
-  cy.selectTab('C_Year');
+  cy.selectTab("C_Year");
   cy.pressAddNewButton();
-  cy.writeIntoStringField('FiscalYear', yearName, true /*modal*/);
+  cy.writeIntoStringField("FiscalYear", yearName, true /*modal*/);
   cy.pressDoneButton();
 
-  cy.selectRowByColumnAndValue({ column: 'FiscalYear', value: yearName });
-  cy.executeHeaderActionWithDialog('C_Year_Create_Periods');
+  cy.selectRowByColumnAndValue({ column: "FiscalYear", value: yearName });
+  cy.executeHeaderActionWithDialog("C_Year_Create_Periods");
   cy.pressStartButton();
 }

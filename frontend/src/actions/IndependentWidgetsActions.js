@@ -2,14 +2,14 @@ import {
   getViewAttributesLayoutRequest,
   getViewAttributesRequest,
   patchViewAttributesRequest,
-} from '../api';
+} from "../api";
 import {
   DELETE_ATTRIBUTES,
   FETCH_ATTRIBUTES_DATA,
   FETCH_ATTRIBUTES_LAYOUT,
   PATCH_ATTRIBUTES,
   SET_ATTRIBUTES_DATA,
-} from '../constants/ActionTypes';
+} from "../constants/ActionTypes";
 
 //
 // SELECTION ATTRIBUTES
@@ -34,7 +34,7 @@ export function fetchViewAttributes({ windowId, viewId, rowId }) {
             id: data.id,
           },
         });
-      }
+      },
     );
   };
 }
@@ -55,7 +55,7 @@ export function fetchViewAttributesLayout({ windowId, viewId, rowId }) {
           type: FETCH_ATTRIBUTES_LAYOUT,
           payload: { elements: data.elements },
         });
-      }
+      },
     );
   };
 }
@@ -77,7 +77,7 @@ export function patchViewAttributes({ windowId, viewId, rowId, prop, value }) {
       viewId,
       rowId,
       prop,
-      value
+      value,
     ).then(({ data }) => {
       if (data.length) {
         dispatch({

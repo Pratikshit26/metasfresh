@@ -12,18 +12,20 @@ import { save } from 'redux-localstorage-simple';
 // import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
 
 export const history = createBrowserHistory({
-  basename: '/mobile',
+    basename: '/mobile',
 });
 const composeEnhancer =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })
-    : compose;
+    typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })
+        : compose;
 
 export const store = function configureStore(preloadedState) {
-  return createStore(
-    createRootReducer(history),
-    preloadedState,
-    // composeEnhancer(offline(offlineConfig), applyMiddleware(routerMiddleware(history), thunk)) // unhook offline due to caching issues
-    composeEnhancer(applyMiddleware(routerMiddleware(history), thunk, save({ ignoreStates: ['appHandler', 'router'] })))
-  );
+    return createStore(
+        createRootReducer(history),
+        preloadedState,
+        // composeEnhancer(offline(offlineConfig), applyMiddleware(routerMiddleware(history), thunk)) // unhook offline due to caching issues
+        composeEnhancer(
+            applyMiddleware(routerMiddleware(history), thunk, save({ ignoreStates: ['appHandler', 'router'] })),
+        ),
+    );
 };

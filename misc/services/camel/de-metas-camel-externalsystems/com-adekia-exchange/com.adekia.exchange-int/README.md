@@ -1,13 +1,15 @@
 # Adekia Exchange interface
 
 Interface module for Adekia Exchange Project
-- Context Provider : Provider of context properties for exchange flow 
+
+- Context Provider : Provider of context properties for exchange flow
 - Provider : Input flow data provider
 - Sender : Output flow data sender
 - Transformer : Model transformer from BUL model to sender data model specifications
 
 ## Implementation Example : GetOrders
-### Provider 
+
+### Provider
 
 Create your new Service provider Implements GetOrdersProvider
 
@@ -42,7 +44,9 @@ order.sender=myNewService
 ```
 
 #### Transformer
+
 Create three new services transformer Implements :
+
 - OrderTransformer
 - OrderBPTransformer
 - OrderPaymentTransformer
@@ -55,5 +59,3 @@ Annote your services with springboot annotations :
 ```
 
 ## Author
-
-

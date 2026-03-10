@@ -1,45 +1,45 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import onClickOutside from 'react-onclickoutside';
-import { connect, useSelector } from 'react-redux';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import onClickOutside from "react-onclickoutside";
+import { connect, useSelector } from "react-redux";
 
-import { elementPathRequest } from '../../api';
-import { getSelection, getTableId } from '../../reducers/tables';
-import keymap from '../../shortcuts/keymap';
+import { elementPathRequest } from "../../api";
+import { getSelection, getTableId } from "../../reducers/tables";
+import keymap from "../../shortcuts/keymap";
 
-import Actions from './Actions';
-import BookmarkButton from './BookmarkButton';
+import Actions from "./Actions";
+import BookmarkButton from "./BookmarkButton";
 
 // keep in sync with de.metas.ui.web.window.model.DocumentStandardAction
-export const ACTION_BREADCRUMB_CLICK = 'breadcrumbClick';
-export const ACTION_TOGGLE_EDIT_MODE = 'toggleEditMode';
-export const ACTION_ABOUT_DOCUMENT = 'aboutDocument';
-export const ACTION_DOWNLOAD_SELECTED = 'downloadSelected';
+export const ACTION_BREADCRUMB_CLICK = "breadcrumbClick";
+export const ACTION_TOGGLE_EDIT_MODE = "toggleEditMode";
+export const ACTION_ABOUT_DOCUMENT = "aboutDocument";
+export const ACTION_DOWNLOAD_SELECTED = "downloadSelected";
 // Standard actions:
-export const ACTION_NEW_DOCUMENT = 'new';
-export const ACTION_OPEN_ADVANCED_EDIT = 'advancedEdit';
-export const ACTION_CLONE_DOCUMENT = 'clone';
-export const ACTION_OPEN_EMAIL = 'email';
-export const ACTION_OPEN_LETTER = 'letter';
-export const ACTION_OPEN_PRINT_RAPORT = 'print';
-export const ACTION_DELETE_DOCUMENT = 'delete';
-export const ACTION_OPEN_COMMENTS = 'comments';
+export const ACTION_NEW_DOCUMENT = "new";
+export const ACTION_OPEN_ADVANCED_EDIT = "advancedEdit";
+export const ACTION_CLONE_DOCUMENT = "clone";
+export const ACTION_OPEN_EMAIL = "email";
+export const ACTION_OPEN_LETTER = "letter";
+export const ACTION_OPEN_PRINT_RAPORT = "print";
+export const ACTION_DELETE_DOCUMENT = "delete";
+export const ACTION_OPEN_COMMENTS = "comments";
 
-const simplifyName = (name) => name.toLowerCase().replace(/\s/g, '');
+const simplifyName = (name) => name.toLowerCase().replace(/\s/g, "");
 
 /** The Actions Menu (ALT-1) */
 class SubHeader extends Component {
   state = {
     pdfSrc: null,
-    elementPath: '',
+    elementPath: "",
   };
 
   componentDidMount() {
-    document.getElementsByClassName('js-subheader-column')[0].focus();
+    document.getElementsByClassName("js-subheader-column")[0].focus();
 
     const { entity, windowId } = this.props;
-    const entityType = entity === 'board' ? 'board' : 'window';
+    const entityType = entity === "board" ? "board" : "window";
 
     // Main dashboard view doesn't have a windowTyep and is throwing 404
     if (windowId) {
@@ -53,7 +53,7 @@ class SubHeader extends Component {
     const { closeSubheader } = this.props;
 
     switch (e.key) {
-      case 'ArrowDown': {
+      case "ArrowDown": {
         e.preventDefault();
         const activeElem = this.getItemActiveElem();
         if (activeElem.nextSibling) {
@@ -62,7 +62,7 @@ class SubHeader extends Component {
         break;
       }
 
-      case 'ArrowUp': {
+      case "ArrowUp": {
         e.preventDefault();
         const activeEl = this.getItemActiveElem();
         if (activeEl.previousSibling) {
@@ -71,7 +71,7 @@ class SubHeader extends Component {
         break;
       }
 
-      case 'ArrowLeft': {
+      case "ArrowLeft": {
         e.preventDefault();
         const activeColumn = this.getColumnActiveElem();
         if (activeColumn.previousSibling) {
@@ -83,7 +83,7 @@ class SubHeader extends Component {
         break;
       }
 
-      case 'ArrowRight': {
+      case "ArrowRight": {
         e.preventDefault();
         const activeCol = this.getColumnActiveElem();
         if (activeCol.nextSibling) {
@@ -95,12 +95,12 @@ class SubHeader extends Component {
         break;
       }
 
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         document.activeElement.click();
         break;
 
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
         closeSubheader();
         break;
@@ -112,8 +112,8 @@ class SubHeader extends Component {
     const { target } = event;
 
     if (
-      !target.classList.contains('btn-header') &&
-      !target.parentElement.classList.contains('btn-header')
+      !target.classList.contains("btn-header") &&
+      !target.parentElement.classList.contains("btn-header")
     ) {
       closeSubheader();
     }
@@ -121,7 +121,7 @@ class SubHeader extends Component {
 
   getColumnActiveElem = () => {
     const active = document.activeElement;
-    if (active.classList.contains('js-subheader-item')) {
+    if (active.classList.contains("js-subheader-item")) {
       return active.parentNode;
     } else {
       return active;
@@ -131,7 +131,7 @@ class SubHeader extends Component {
   getItemActiveElem = () => {
     const active = document.activeElement;
 
-    if (active.classList.contains('js-subheader-column')) {
+    if (active.classList.contains("js-subheader-column")) {
       return active.childNodes[1];
     } else {
       return active;
@@ -245,7 +245,7 @@ const MenuNavigationColumn = ({
   onAction,
 }) => {
   const standardActions = useSelector(
-    (state) => state.windowHandler.master.standardActions
+    (state) => state.windowHandler.master.standardActions,
   );
 
   let currentNode = elementPath;
@@ -255,7 +255,7 @@ const MenuNavigationColumn = ({
     } while (
       currentNode &&
       currentNode.children &&
-      currentNode.type !== 'window'
+      currentNode.type !== "window"
     );
   }
   return (
@@ -309,7 +309,7 @@ const MenuNavigationColumn = ({
       />
       <MenuItem
         action={ACTION_TOGGLE_EDIT_MODE}
-        captionKey={editmode ? 'window.closeEditMode' : 'window.openEditMode'}
+        captionKey={editmode ? "window.closeEditMode" : "window.openEditMode"}
         icon="meta-icon-settings"
         hotkey={keymap.TOGGLE_EDIT_MODE}
         onAction={onAction}
@@ -345,44 +345,44 @@ const DocumentStandardActionMenuItems = ({
   return [
     {
       action: ACTION_OPEN_ADVANCED_EDIT,
-      icon: 'meta-icon-edit',
-      captionKey: 'window.advancedEdit.caption',
+      icon: "meta-icon-edit",
+      captionKey: "window.advancedEdit.caption",
       hotkey: keymap.OPEN_ADVANCED_EDIT,
     },
     {
       action: ACTION_CLONE_DOCUMENT,
-      icon: 'meta-icon-duplicate',
-      captionKey: 'window.clone.caption',
+      icon: "meta-icon-duplicate",
+      captionKey: "window.clone.caption",
       hotkey: keymap.CLONE_DOCUMENT,
     },
     {
       action: ACTION_OPEN_EMAIL,
-      icon: 'meta-icon-mail',
-      captionKey: 'window.email.caption',
+      icon: "meta-icon-mail",
+      captionKey: "window.email.caption",
       hotkey: keymap.OPEN_EMAIL,
     },
     {
       action: ACTION_OPEN_LETTER,
-      icon: 'meta-icon-letter',
-      captionKey: 'window.letter.caption',
+      icon: "meta-icon-letter",
+      captionKey: "window.letter.caption",
       hotkey: keymap.OPEN_LETTER,
     },
     {
       action: ACTION_OPEN_PRINT_RAPORT,
-      icon: 'meta-icon-print',
-      captionKey: 'window.Print.caption',
+      icon: "meta-icon-print",
+      captionKey: "window.Print.caption",
       hotkey: keymap.OPEN_PRINT_RAPORT,
     },
     {
       action: ACTION_DELETE_DOCUMENT,
-      icon: 'meta-icon-delete',
-      captionKey: 'window.Delete.caption',
+      icon: "meta-icon-delete",
+      captionKey: "window.Delete.caption",
       hotkey: keymap.DELETE_DOCUMENT,
     },
     {
       action: ACTION_OPEN_COMMENTS,
-      icon: 'meta-icon-message',
-      captionKey: 'window.comments.caption',
+      icon: "meta-icon-message",
+      captionKey: "window.comments.caption",
       hotkey: keymap.OPEN_COMMENTS,
     },
   ].map(({ action, icon, captionKey, hotkey }) => (
@@ -464,12 +464,12 @@ const DownloadSelectedMenuItem = ({ windowId, viewId, selected, onAction }) => {
       href={`${
         config.API_URL
       }/documentView/${windowId}/${viewId}/export/excel?selectedIds=${selected.join(
-        ','
+        ",",
       )}`}
       download
       onClick={() => onAction({ action: ACTION_DOWNLOAD_SELECTED })}
     >
-      {counterpart.translate('window.downloadSelected.caption')}
+      {counterpart.translate("window.downloadSelected.caption")}
     </a>
   );
 };

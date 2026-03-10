@@ -1,8 +1,8 @@
-import counterpart from 'counterpart';
-import axios from 'axios';
-import Moment from 'moment';
+import counterpart from "counterpart";
+import axios from "axios";
+import Moment from "moment";
 
-import { LOCAL_LANG } from '../constants/Constants';
+import { LOCAL_LANG } from "../constants/Constants";
 
 /** Just a shortcut & abstraction of counterpart's translate function */
 export const trl = (key, args = {}) => {
@@ -31,8 +31,8 @@ export function getCurrentActiveLocale() {
  * @returns {string} extracted language (e.g. 'en', 'de')
  */
 export function extractLanguageFromLocale(locale) {
-  if (!locale) return 'de';
-  const idx = locale.indexOf('_');
+  if (!locale) return "de";
+  const idx = locale.indexOf("_");
   if (idx > 0) {
     return locale.substr(0, idx);
   } else {
@@ -48,7 +48,7 @@ export function setCurrentActiveLocale(lang) {
   localStorage.setItem(LOCAL_LANG, lang);
 
   Moment.locale(lang);
-  axios.defaults.headers.common['Accept-Language'] = lang;
+  axios.defaults.headers.common["Accept-Language"] = lang;
 }
 
 /**
@@ -57,6 +57,6 @@ export function setCurrentActiveLocale(lang) {
  */
 export function isGermanLanguage(languageObj) {
   return languageObj && languageObj.key
-    ? languageObj.key.includes('de')
+    ? languageObj.key.includes("de")
     : false;
 }

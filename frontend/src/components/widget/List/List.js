@@ -1,18 +1,18 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { findKey } from 'lodash';
-import { v4 as uuidv4 } from 'uuid';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { findKey } from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   dropdownRequest,
   dropdownModalRequest,
-} from '../../../actions/GenericActions';
-import { getViewAttributeDropdown } from '../../../api';
-import RawList from './RawList';
+} from "../../../actions/GenericActions";
+import { getViewAttributeDropdown } from "../../../api";
+import RawList from "./RawList";
 
 class ListWidget extends Component {
-  previousValue = '';
+  previousValue = "";
 
   constructor(props) {
     super(props);
@@ -21,7 +21,7 @@ class ListWidget extends Component {
       list: [],
       listHash: null,
       loading: false,
-      selectedItem: '',
+      selectedItem: "",
       autoFocus: props.autoFocus,
       listToggled: false,
       listFocused: false,
@@ -58,7 +58,7 @@ class ListWidget extends Component {
     const { autoFocus, isToggled, list } = this.state;
 
     if (isInputEmpty && prevProps.isInputEmpty !== isInputEmpty) {
-      this.previousValue = '';
+      this.previousValue = "";
     }
 
     if (prevProps.autoFocus !== autoFocus && !isToggled) {
@@ -146,11 +146,11 @@ class ListWidget extends Component {
             propertyName,
             rowId,
           });
-        } else if (viewId && entity === 'window' && !filterWidget) {
+        } else if (viewId && entity === "window" && !filterWidget) {
           request = dropdownModalRequest({
             windowId: windowType,
             fieldName: propertyName,
-            entity: 'documentView',
+            entity: "documentView",
             viewId,
             rowId,
           });
@@ -159,7 +159,7 @@ class ListWidget extends Component {
             windowType,
             viewId,
             dataId,
-            propertyName
+            propertyName,
           );
         } else {
           request = dropdownRequest({
@@ -182,7 +182,7 @@ class ListWidget extends Component {
           const singleOption = values && values.length === 1;
 
           if (forceSelection && singleOption) {
-            this.previousValue = '';
+            this.previousValue = "";
 
             this.setState({
               list: values,
@@ -215,7 +215,7 @@ class ListWidget extends Component {
             !doNotOpenOnFocus && this.activate();
           }
         });
-      }
+      },
     );
   };
 
@@ -241,7 +241,7 @@ class ListWidget extends Component {
       },
       () => {
         onBlur && onBlur(field);
-      }
+      },
     );
   };
 
@@ -292,7 +292,7 @@ class ListWidget extends Component {
         });
 
         this.previousValue =
-          option !== null && option.caption !== 'undefined'
+          option !== null && option.caption !== "undefined"
             ? option.caption
             : option;
 
@@ -310,7 +310,7 @@ class ListWidget extends Component {
 
               if (
                 patchFields.lookupValuesStale === true ||
-                findKey(patchFields, ['widgetType', 'List'])
+                findKey(patchFields, ["widgetType", "List"])
               ) {
                 this.setState({
                   list: [],
@@ -429,5 +429,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, false, false, { forwardRef: true })(
-  ListWidget
+  ListWidget,
 );

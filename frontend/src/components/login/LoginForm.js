@@ -20,32 +20,32 @@
  * #L%
  */
 
-import counterpart from 'counterpart';
-import Moment from 'moment';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import counterpart from "counterpart";
+import Moment from "moment";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-import { connectionError, loginSuccess } from '../../actions/AppActions';
+import { connectionError, loginSuccess } from "../../actions/AppActions";
 
-import logo from '../../assets/images/metasfresh_logo_green_thumb.png';
-import PasswordRecovery from './PasswordRecovery';
-import { BAD_GATEWAY_ERROR } from '../../constants/Constants';
+import logo from "../../assets/images/metasfresh_logo_green_thumb.png";
+import PasswordRecovery from "./PasswordRecovery";
+import { BAD_GATEWAY_ERROR } from "../../constants/Constants";
 import {
   checkLoginRequest,
   login2FA,
   loginCompletionRequest,
   loginRequest,
-} from '../../api/login';
-import { LoginUserAndPasswordView } from './LoginUserAndPasswordView';
-import { Login2FAView } from './Login2FAView';
-import { RoleSelectView } from './RoleSelectView';
-import { getUserLang } from '../../api/userSession';
+} from "../../api/login";
+import { LoginUserAndPasswordView } from "./LoginUserAndPasswordView";
+import { Login2FAView } from "./Login2FAView";
+import { RoleSelectView } from "./RoleSelectView";
+import { getUserLang } from "../../api/userSession";
 
-const VIEW_USER_AND_PASSWORD = 'userAndPassword';
-const VIEW_2FA = '2fa';
-const VIEW_SELECT_ROLE = 'selectRole';
+const VIEW_USER_AND_PASSWORD = "userAndPassword";
+const VIEW_2FA = "2fa";
+const VIEW_SELECT_ROLE = "selectRole";
 
 class LoginForm extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class LoginForm extends Component {
 
     this.state = {
       currentView: VIEW_USER_AND_PASSWORD,
-      err: '',
+      err: "",
       handleResetSubmit: false,
     };
   }
@@ -63,7 +63,7 @@ class LoginForm extends Component {
 
     getUserLang().then((response) => {
       //GET language shall always return a result
-      Moment.locale(response.data['key']);
+      Moment.locale(response.data["key"]);
 
       // get user session and so on
       dispatch(loginSuccess(auth.auth));
@@ -74,7 +74,7 @@ class LoginForm extends Component {
         auth.clearRedirectRoute();
         history.push(redirect);
       } else {
-        history.push('/');
+        history.push("/");
       }
     });
   };
@@ -87,15 +87,15 @@ class LoginForm extends Component {
   checkIfAlreadyLogged(axiosError) {
     const { history } = this.props;
 
-    console.log('Checking if already logged in...', { axiosError });
+    console.log("Checking if already logged in...", { axiosError });
     return checkLoginRequest().then((response) => {
       const isLoggedIn = !!response.data;
 
       if (isLoggedIn) {
-        console.log('Already logged in => forwarding to /');
-        return history.push('/');
+        console.log("Already logged in => forwarding to /");
+        return history.push("/");
       } else {
-        console.log('Not already logged in');
+        console.log("Not already logged in");
         return Promise.reject(axiosError);
       }
     });
@@ -112,15 +112,15 @@ class LoginForm extends Component {
           promise: new Promise((resolve) => resolve(response)),
           setError: this.setLoginError,
         });
-      }
+      },
     );
   };
 
   setLoginError = (message) => {
     const messageEffective =
-      message || counterpart.translate('login.error.fallback');
+      message || counterpart.translate("login.error.fallback");
 
-    console.log('setLoginError', { message, messageEffective });
+    console.log("setLoginError", { message, messageEffective });
 
     this.setState({
       err: messageEffective,
@@ -143,7 +143,7 @@ class LoginForm extends Component {
   afterLoginRequest = ({ promise, setError }) => {
     return promise
       .then((response) => {
-        const errorType = response.status === 502 ? BAD_GATEWAY_ERROR : '';
+        const errorType = response.status === 502 ? BAD_GATEWAY_ERROR : "";
         this.props.dispatch(connectionError({ errorType }));
 
         if (response.status !== 200) {
@@ -182,14 +182,14 @@ class LoginForm extends Component {
         setError(
           err.response
             ? err.response.data.message
-            : counterpart.translate('login.error.fallback')
+            : counterpart.translate("login.error.fallback"),
         );
       });
   };
 
   handleForgotPassword = () => {
     const { history } = this.props;
-    history.push('/forgottenPassword');
+    history.push("/forgottenPassword");
   };
 
   render() {

@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '../../assets/css/AcctSimulationViewHeader.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import "../../assets/css/AcctSimulationViewHeader.scss";
 
-export const AcctSimulationViewHeader_WINDOW_ID = 'acctSimulation';
+export const AcctSimulationViewHeader_WINDOW_ID = "acctSimulation";
 
-const FIELDNAME_totalDebit_DC = 'totalDebit_DC';
-const FIELDNAME_totalCredit_DC = 'totalCredit_DC';
-const FIELDNAME_balance_DC = 'balance_DC';
+const FIELDNAME_totalDebit_DC = "totalDebit_DC";
+const FIELDNAME_totalCredit_DC = "totalCredit_DC";
+const FIELDNAME_balance_DC = "balance_DC";
 
-const FIELDNAME_totalDebit_LC = 'totalDebit_LC';
-const FIELDNAME_totalCredit_LC = 'totalCredit_LC';
-const FIELDNAME_balance_LC = 'balance_LC';
+const FIELDNAME_totalDebit_LC = "totalDebit_LC";
+const FIELDNAME_totalCredit_LC = "totalCredit_LC";
+const FIELDNAME_balance_LC = "balance_LC";
 
 export const AcctSimulationViewHeader = ({ headerProperties }) => {
   const propsGroups = headerProperties?.groups;

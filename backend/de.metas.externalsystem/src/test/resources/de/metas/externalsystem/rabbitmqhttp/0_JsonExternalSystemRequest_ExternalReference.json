@@ -12,5 +12,5 @@
     "RemoteURL": "remoteURL",
     "RabbitMQAuthToken": "authToken"
   },
-  "writeAuditEndpoint" : "auditFileFolder"
+  "writeAuditEndpoint": "auditFileFolder"
 }

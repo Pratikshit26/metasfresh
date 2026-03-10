@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Shortcut } from '../keyshortcuts';
-import { arePropTypesIdentical } from '../../utils';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Shortcut } from "../keyshortcuts";
+import { arePropTypesIdentical } from "../../utils";
 
 export default class DocumentStatusContextShortcuts extends Component {
   handleShortcut = (event) => {

@@ -1,5 +1,5 @@
-import config from '../../config';
-import { wrapRequest, findByName } from './utils';
+import config from "../../config";
+import { wrapRequest, findByName } from "./utils";
 
 export class SalesOrder {
   constructor({ reference, ...vals }) {
@@ -63,11 +63,11 @@ export class SalesOrder {
     return cy
       .request({
         url: `${basicUri}/NEW`,
-        method: 'PATCH',
+        method: "PATCH",
         body: JSON.stringify([]),
         headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
+          "Content-Type": "application/json",
+          accept: "application/json",
         },
       })
       .then((newResponse) => {
@@ -79,8 +79,8 @@ export class SalesOrder {
         SalesOrder.getData(basicUri, salesOrder).then((data) => {
           const dataObject = [
             {
-              op: 'replace',
-              path: 'POReference',
+              op: "replace",
+              path: "POReference",
               value: salesOrder.reference,
             },
             ...data,
@@ -89,11 +89,11 @@ export class SalesOrder {
           return cy
             .request({
               url: `${basicUri}/${salesOrder.id}`,
-              method: 'PATCH',
+              method: "PATCH",
               body: JSON.stringify(dataObject),
               headers: {
-                'Content-Type': 'application/json',
-                accept: 'application/json',
+                "Content-Type": "application/json",
+                accept: "application/json",
               },
             })
             .then(() => salesOrder);
@@ -107,71 +107,83 @@ export class SalesOrder {
     const bPartnerRequest = wrapRequest(
       cy.request({
         url: `${basicUri}/${salesOrder.id}/field/C_BPartner_ID/typeahead`,
-        method: 'GET',
+        method: "GET",
         qs: {
           query: salesOrder.bPartner,
         },
         headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
+          "Content-Type": "application/json",
+          accept: "application/json",
         },
-      })
+      }),
     );
 
     const bPartnerLocationRequest = wrapRequest(
       cy.request({
         url: `${basicUri}/${salesOrder.id}/field/C_BPartner_Location_ID/dropdown`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      })
+      }),
     );
 
     const invoicePartnerRequest = wrapRequest(
       cy.request({
         url: `${basicUri}/${salesOrder.id}/field/Bill_BPartner_ID/typeahead`,
-        method: 'GET',
+        method: "GET",
         qs: {
           query: salesOrder.bPartner,
         },
         headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
+          "Content-Type": "application/json",
+          accept: "application/json",
         },
-      })
+      }),
     );
 
     const invoicePartnerLocationRequest = wrapRequest(
       cy.request({
         url: `${basicUri}/${salesOrder.id}/field/Bill_Location_ID/dropdown`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
+          "Content-Type": "application/json",
+          accept: "application/json",
         },
-      })
+      }),
     );
 
     const warehouseRequest = wrapRequest(
       cy.request({
         url: `${basicUri}/${salesOrder.id}/field/M_Warehouse_ID/dropdown`,
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
+          "Content-Type": "application/json",
+          accept: "application/json",
         },
-      })
+      }),
     );
 
-    return Cypress.Promise.all([bPartnerRequest, bPartnerLocationRequest, invoicePartnerRequest, invoicePartnerLocationRequest, warehouseRequest]).then((vals) => {
-      const [bPartnerResponse, bPartnerLocationResponse, invoicePartnerResponse, invoicePartnerLocationResponse, warehouseResponse] = vals;
+    return Cypress.Promise.all([
+      bPartnerRequest,
+      bPartnerLocationRequest,
+      invoicePartnerRequest,
+      invoicePartnerLocationRequest,
+      warehouseRequest,
+    ]).then((vals) => {
+      const [
+        bPartnerResponse,
+        bPartnerLocationResponse,
+        invoicePartnerResponse,
+        invoicePartnerLocationResponse,
+        warehouseResponse,
+      ] = vals;
 
       const bPartner = findByName(bPartnerResponse.result, salesOrder.bPartner);
       if (salesOrder.bPartner && bPartner) {
         dataObject.push({
-          op: 'replace',
-          path: 'C_BPartner_ID',
+          op: "replace",
+          path: "C_BPartner_ID",
           value: {
             key: bPartner.key,
             caption: bPartner.caption,
@@ -179,11 +191,14 @@ export class SalesOrder {
         });
       }
 
-      const location = findByName(bPartnerLocationResponse.result, salesOrder.bPartnerLocation);
+      const location = findByName(
+        bPartnerLocationResponse.result,
+        salesOrder.bPartnerLocation,
+      );
       if (salesOrder.bPartnerLocation && location) {
         dataObject.push({
-          op: 'replace',
-          path: 'C_BPartner_Location_ID',
+          op: "replace",
+          path: "C_BPartner_Location_ID",
           value: {
             key: location.key,
             caption: location.caption,
@@ -191,11 +206,14 @@ export class SalesOrder {
         });
       }
 
-      const invoicePartner = findByName(invoicePartnerResponse.result, salesOrder.invoicePartner);
+      const invoicePartner = findByName(
+        invoicePartnerResponse.result,
+        salesOrder.invoicePartner,
+      );
       if (salesOrder.invoicePartner && invoicePartner) {
         dataObject.push({
-          op: 'replace',
-          path: 'Bill_BPartner_ID',
+          op: "replace",
+          path: "Bill_BPartner_ID",
           value: {
             key: invoicePartner.key,
             caption: invoicePartner.caption,
@@ -203,11 +221,14 @@ export class SalesOrder {
         });
       }
 
-      const invoicePartnerLocation = findByName(invoicePartnerLocationResponse.result, salesOrder.invoicePartnerLocation);
+      const invoicePartnerLocation = findByName(
+        invoicePartnerLocationResponse.result,
+        salesOrder.invoicePartnerLocation,
+      );
       if (salesOrder.invoicePartnerLocation && invoicePartnerLocation) {
         dataObject.push({
-          op: 'replace',
-          path: 'Bill_Location_ID',
+          op: "replace",
+          path: "Bill_Location_ID",
           value: {
             key: invoicePartnerLocation.key,
             caption: invoicePartnerLocation.caption,
@@ -215,11 +236,14 @@ export class SalesOrder {
         });
       }
 
-      const warehouse = findByName(warehouseResponse.result, salesOrder.warehouse);
+      const warehouse = findByName(
+        warehouseResponse.result,
+        salesOrder.warehouse,
+      );
       if (salesOrder.warehouse && warehouse) {
         dataObject.push({
-          op: 'replace',
-          path: 'M_Warehouse_ID',
+          op: "replace",
+          path: "M_Warehouse_ID",
           value: {
             key: warehouse.key,
             caption: warehouse.caption,

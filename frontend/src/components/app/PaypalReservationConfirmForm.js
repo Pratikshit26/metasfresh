@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import counterpart from 'counterpart';
-import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import counterpart from "counterpart";
+import React, { Component } from "react";
 
-import logo from '../../assets/images/metasfresh_logo_green_thumb.png';
+import logo from "../../assets/images/metasfresh_logo_green_thumb.png";
 
 class PaypalReservationConfirmForm extends Component {
   constructor(props) {
@@ -14,18 +14,18 @@ class PaypalReservationConfirmForm extends Component {
 
     let error;
     let messageEffective;
-    if (confirmStatus == 'checking') {
+    if (confirmStatus == "checking") {
       error = false;
-      messageEffective = counterpart.translate('paypal.confirm.pending');
-    } else if (confirmStatus == 'confirmed') {
+      messageEffective = counterpart.translate("paypal.confirm.pending");
+    } else if (confirmStatus == "confirmed") {
       error = false;
-      messageEffective = counterpart.translate('paypal.confirm.ok');
-    } else if (confirmStatus == 'error') {
+      messageEffective = counterpart.translate("paypal.confirm.ok");
+    } else if (confirmStatus == "error") {
       error = true;
-      messageEffective = message ? message : 'Invalid token';
+      messageEffective = message ? message : "Invalid token";
     } else {
       error = true;
-      messageEffective = 'unknown status: [' + confirmStatus + ']';
+      messageEffective = "unknown status: [" + confirmStatus + "]";
     }
 
     return (

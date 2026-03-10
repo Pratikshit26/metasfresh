@@ -20,11 +20,7 @@
     "doctorId": "doctorId",
     "pharmacyId": "pharmacyId",
     "therapyId": 2,
-    "therapyTypeIds": [
-      1,
-      2,
-      3
-    ],
+    "therapyTypeIds": [1, 2, 3],
     "isInitialCare": true,
     "orderedArticleLines": [
       {
@@ -50,7 +46,7 @@
     "rootId": "rootId",
     "dayOfDelivery": 2,
     "nextDelivery": "2021-04-01",
-    "annotation":"annotation",
+    "annotation": "annotation",
     "deliveryInformation": "deliveryInformation",
     "deliveryNote": "deliveryNote"
   }

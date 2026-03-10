@@ -46,15 +46,13 @@
     ],
     "supportAttributes": false,
     "supportTree": false,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": null,
     "supportIncludedView": false,
     "supportIncludedViewOnSelect": null,
     "supportNewRecord": false,
     "supportOpenRecord": true,
-    "supportGeoLocations": true   
+    "supportGeoLocations": true
   },
   "viewLayout2": {
     "type": "540376",
@@ -113,9 +111,7 @@
     "supportTree": true,
     "collapsible": true,
     "expandedDepth": 0,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": null,
     "supportIncludedView": false,
     "supportIncludedViewOnSelect": null,
@@ -123,7 +119,7 @@
     "supportOpenRecord": true,
     "supportGeoLocations": false
   },
-  "basicViewData1":{
+  "basicViewData1": {
     "windowId": "169",
     "viewId": "169-Bd",
     "headerProperties": {
@@ -166,7 +162,7 @@
     "queryLimit": 5000,
     "type": "169"
   },
-  "basicViewData2":{
+  "basicViewData2": {
     "windowId": "540376",
     "viewId": "540376-B6",
     "headerProperties": {
@@ -295,9 +291,7 @@
     "supportAttributes": true,
     "supportTree": true,
     "collapsible": false,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": null,
     "supportIncludedView": false,
     "supportIncludedViewOnSelect": null,

@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import classnames from "classnames";
+import PropTypes from "prop-types";
 
-import { shouldRenderColumn, getSizeClass } from '../../utils/tableHelpers';
-import { getTableId } from '../../reducers/tables';
+import { shouldRenderColumn, getSizeClass } from "../../utils/tableHelpers";
+import { getTableId } from "../../reducers/tables";
 
 export default class TableHeader extends PureComponent {
   constructor(props) {
@@ -57,7 +57,7 @@ export default class TableHeader extends PureComponent {
     } else {
       sortingValue = !Object.values(stateFields).reduce(
         (acc, curr) => acc && curr,
-        true
+        true,
       );
       fields[field] = sortingValue;
     }
@@ -82,18 +82,18 @@ export default class TableHeader extends PureComponent {
 
     return (
       <div
-        className={classnames('sort-menu', { 'sort-menu--sortable': sortable })}
+        className={classnames("sort-menu", { "sort-menu--sortable": sortable })}
         onClick={() => this.handleClick(field, sortable)}
       >
         <span
           title={description || caption}
-          className={classnames({ 'th-caption': sortable })}
+          className={classnames({ "th-caption": sortable })}
         >
           {caption}
         </span>
         <span
-          className={classnames('sort-ico', {
-            'sort rotate-90': field in fields && fieldSorting,
+          className={classnames("sort-ico", {
+            "sort rotate-90": field in fields && fieldSorting,
             sort: field in fields && !fieldSorting,
           })}
         >
@@ -117,7 +117,7 @@ export default class TableHeader extends PureComponent {
                     item.fields[0].field,
                     item.caption,
                     item.sortable,
-                    item.description
+                    item.description,
                   )
                 : item.caption}
             </th>

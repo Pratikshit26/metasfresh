@@ -9,27 +9,27 @@ import ConfirmButton from '../../components/buttons/ConfirmButton';
 import { useMobileNavigation } from '../../hooks/useMobileNavigation';
 
 const AbortButton = ({ applicationId, wfProcessId }) => {
-  const history = useMobileNavigation();
-  const onUserConfirmed = () => {
-    abortWorkflowRequest(wfProcessId).then(() => history.push(appLaunchersLocation({ applicationId })));
-  };
+    const history = useMobileNavigation();
+    const onUserConfirmed = () => {
+        abortWorkflowRequest(wfProcessId).then(() => history.push(appLaunchersLocation({ applicationId })));
+    };
 
-  return (
-    <div className="mt-5">
-      <ConfirmButton
-        id="abort-button"
-        caption={trl('activities.confirmButton.abort')}
-        isDangerousAction={true}
-        isUserEditable={true}
-        onUserConfirmed={onUserConfirmed}
-      />
-    </div>
-  );
+    return (
+        <div className="mt-5">
+            <ConfirmButton
+                id="abort-button"
+                caption={trl('activities.confirmButton.abort')}
+                isDangerousAction={true}
+                isUserEditable={true}
+                onUserConfirmed={onUserConfirmed}
+            />
+        </div>
+    );
 };
 
 AbortButton.propTypes = {
-  applicationId: PropTypes.string.isRequired,
-  wfProcessId: PropTypes.string.isRequired,
+    applicationId: PropTypes.string.isRequired,
+    wfProcessId: PropTypes.string.isRequired,
 };
 
 export default AbortButton;

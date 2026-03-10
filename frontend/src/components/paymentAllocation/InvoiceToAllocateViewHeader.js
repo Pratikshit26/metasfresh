@@ -20,16 +20,16 @@
  * #L%
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import counterpart from 'counterpart';
-import { getTable, getTableId } from '../../reducers/tables';
+import React from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import counterpart from "counterpart";
+import { getTable, getTableId } from "../../reducers/tables";
 
-import '../../assets/css/InvoiceToAllocateViewHeader.scss';
-import AmountIndicator from './AmountIndicator';
+import "../../assets/css/InvoiceToAllocateViewHeader.scss";
+import AmountIndicator from "./AmountIndicator";
 
-export const INVOICE_TO_ALLOCATE_WINDOW_ID = 'invoicesToAllocate';
+export const INVOICE_TO_ALLOCATE_WINDOW_ID = "invoicesToAllocate";
 
 export const InvoiceToAllocateViewHeader = ({
   windowId,
@@ -45,21 +45,21 @@ export const InvoiceToAllocateViewHeader = ({
   const { grandTotal, discountAmt, grandTotalMinusDiscountAmt } = computeFields(
     table,
     selectedRowIds,
-    pages > 1
+    pages > 1,
   );
 
   return (
     <div className="invoiceToAllocateViewHeader">
       <AmountIndicator
-        caption={counterpart.translate('view.invoiceToAllocate.grandTotal')}
+        caption={counterpart.translate("view.invoiceToAllocate.grandTotal")}
         value={grandTotal}
       />
       <AmountIndicator
-        caption={counterpart.translate('view.invoiceToAllocate.discountAmt')}
+        caption={counterpart.translate("view.invoiceToAllocate.discountAmt")}
         value={discountAmt}
       />
       <AmountIndicator
-        caption={counterpart.translate('view.invoiceToAllocate.netAmt')}
+        caption={counterpart.translate("view.invoiceToAllocate.netAmt")}
         value={grandTotalMinusDiscountAmt}
       />
     </div>
@@ -77,7 +77,7 @@ const computeFields = (table, selectedRowIds, hasMoreThanOnePage) => {
   if (table?.rows?.length && selectedRowIds?.length > 0) {
     // In case user selected all rows from all pages,
     // better don't show the sums because the sums are computed only from current page.
-    const isAllRowsSelected = selectedRowIds.includes('all');
+    const isAllRowsSelected = selectedRowIds.includes("all");
     if (isAllRowsSelected && hasMoreThanOnePage) {
       return {};
     }
@@ -98,7 +98,7 @@ const computeFields = (table, selectedRowIds, hasMoreThanOnePage) => {
         const fieldsByName = row.fieldsByName;
         //console.log('fieldsByName', fieldsByName);
 
-        const rowCurrencyCode = fieldsByName.currencyCodeString?.value ?? '-';
+        const rowCurrencyCode = fieldsByName.currencyCodeString?.value ?? "-";
         //console.log('rowCurrencyCode', rowCurrencyCode);
 
         if (currencyCode == null) {
@@ -122,7 +122,7 @@ const computeFields = (table, selectedRowIds, hasMoreThanOnePage) => {
       grandTotalMinusDiscountAmt: formatAmountToString(
         grandTotal - discountAmt,
         2,
-        currencyCode
+        currencyCode,
       ),
     };
   } else {
@@ -140,8 +140,8 @@ const computeNumberOfPages = (size, pageLength) => {
 
 const formatAmountToString = (amount, precision, currencyCode) => {
   let result = parseFloat(amount ?? 0).toFixed(precision);
-  if (currencyCode && currencyCode !== '-') {
-    result += ' ' + currencyCode;
+  if (currencyCode && currencyCode !== "-") {
+    result += " " + currencyCode;
   }
   return result;
 };

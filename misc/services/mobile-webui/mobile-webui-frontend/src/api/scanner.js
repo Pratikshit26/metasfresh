@@ -12,9 +12,9 @@ import { unboxAxiosResponse } from '../utils';
  * @returns wfProcess
  */
 export function postScannedBarcode({ wfProcessId, activityId, scannedBarcode }) {
-  return axios
-    .post(`${apiBasePath}/userWorkflows/wfProcess/${wfProcessId}/${activityId}/scannedBarcode`, {
-      barcode: scannedBarcode,
-    })
-    .then((response) => unboxAxiosResponse(response));
+    return axios
+        .post(`${apiBasePath}/userWorkflows/wfProcess/${wfProcessId}/${activityId}/scannedBarcode`, {
+            barcode: scannedBarcode,
+        })
+        .then((response) => unboxAxiosResponse(response));
 }

@@ -25,42 +25,42 @@ import { QRCODE_SEPARATOR } from './common';
 export const QRCODE_TYPE_WORKPLACE = 'WORKPLACE';
 
 export const parseWorkplaceQRCodeString = (string) => {
-  let remainingString = string;
-  //
-  // Type
-  let type;
-  {
-    const idx = remainingString.indexOf(QRCODE_SEPARATOR);
-    if (idx <= 0) {
-      throw 'Invalid global QR code(1): ' + string;
+    let remainingString = string;
+    //
+    // Type
+    let type;
+    {
+        const idx = remainingString.indexOf(QRCODE_SEPARATOR);
+        if (idx <= 0) {
+            throw 'Invalid global QR code(1): ' + string;
+        }
+        type = remainingString.substring(0, idx);
+        remainingString = remainingString.substring(idx + 1);
     }
-    type = remainingString.substring(0, idx);
-    remainingString = remainingString.substring(idx + 1);
-  }
-  //
-  // Version
-  let version;
-  {
-    const idx = remainingString.indexOf(QRCODE_SEPARATOR);
-    if (idx <= 0) {
-      throw 'Invalid global QR code(2): ' + string;
+    //
+    // Version
+    let version;
+    {
+        const idx = remainingString.indexOf(QRCODE_SEPARATOR);
+        if (idx <= 0) {
+            throw 'Invalid global QR code(2): ' + string;
+        }
+        version = remainingString.substring(0, idx);
+        remainingString = remainingString.substring(idx + 1);
     }
-    version = remainingString.substring(0, idx);
-    remainingString = remainingString.substring(idx + 1);
-  }
 
-  const payload = JSON.parse(remainingString);
+    const payload = JSON.parse(remainingString);
 
-  let payloadParsed;
-  if (type === QRCODE_TYPE_WORKPLACE && version === '1') {
-    payloadParsed = parseQRCodePayload_Workplace_v1(payload);
-  } else {
-    throw 'Invalid global QR code(3): ' + string;
-  }
+    let payloadParsed;
+    if (type === QRCODE_TYPE_WORKPLACE && version === '1') {
+        payloadParsed = parseQRCodePayload_Workplace_v1(payload);
+    } else {
+        throw 'Invalid global QR code(3): ' + string;
+    }
 
-  return { ...payloadParsed, code: string };
+    return { ...payloadParsed, code: string };
 };
 
 const parseQRCodePayload_Workplace_v1 = (payload) => {
-  return { workplaceId: payload.workplaceId, displayable: payload.caption };
+    return { workplaceId: payload.workplaceId, displayable: payload.caption };
 };

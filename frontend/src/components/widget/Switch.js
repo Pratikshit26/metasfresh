@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
 export default class Switch extends PureComponent {
   render() {
@@ -18,16 +18,16 @@ export default class Switch extends PureComponent {
 
     return (
       <label
-        className={classnames('input-switch', {
-          'input-disabled': readonly,
-          'input-error':
+        className={classnames("input-switch", {
+          "input-disabled": readonly,
+          "input-error":
             widgetData.validStatus && !widgetData.validStatus.valid,
-          'input-table': rowId && !isModal,
+          "input-table": rowId && !isModal,
         })}
         tabIndex={tabIndex}
         ref={forwardedRef}
         onKeyDown={(e) => {
-          e.key === ' ' && onPatch(widgetField, !widgetData.value, id);
+          e.key === " " && onPatch(widgetField, !widgetData.value, id);
         }}
       >
         <input

@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import onClickOutside from 'react-onclickoutside';
-import { connect } from 'react-redux';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import onClickOutside from "react-onclickoutside";
+import { connect } from "react-redux";
 
 /**
  * @file Class based component.
@@ -23,7 +23,7 @@ class QuickActionsDropdown extends PureComponent {
    * @summary Focus on the first quick action
    */
   componentDidMount() {
-    document.getElementsByClassName('quick-actions-item')[0].focus();
+    document.getElementsByClassName("quick-actions-item")[0].focus();
   }
 
   /**
@@ -39,22 +39,22 @@ class QuickActionsDropdown extends PureComponent {
     const prev = document.activeElement.previousSibling;
 
     switch (e.key) {
-      case 'ArrowDown':
-        if (!document.activeElement.classList.contains('quick-actions-item')) {
-          document.getElementsByClassName('quick-actions-item')[0].focus();
+      case "ArrowDown":
+        if (!document.activeElement.classList.contains("quick-actions-item")) {
+          document.getElementsByClassName("quick-actions-item")[0].focus();
         } else {
-          if (next && next.classList.contains('quick-actions-item')) {
+          if (next && next.classList.contains("quick-actions-item")) {
             next.focus();
           }
         }
 
         break;
-      case 'ArrowUp':
-        if (prev && prev.classList.contains('quick-actions-item')) {
+      case "ArrowUp":
+        if (prev && prev.classList.contains("quick-actions-item")) {
           prev.focus();
         }
         break;
-      case 'Enter':
+      case "Enter":
         handleClick(action);
         break;
     }
@@ -66,7 +66,7 @@ class QuickActionsDropdown extends PureComponent {
    * @param {*} item
    */
   handleItem = (item) => {
-    document.getElementsByClassName('quick-actions-item')[item].focus();
+    document.getElementsByClassName("quick-actions-item")[item].focus();
   };
 
   handleRefs = (ref) => {
@@ -86,8 +86,8 @@ class QuickActionsDropdown extends PureComponent {
             tabIndex={0}
             ref={this.handleRefs}
             className={
-              'quick-actions-item ' +
-              (action.disabled ? 'quick-actions-item-disabled ' : '')
+              "quick-actions-item " +
+              (action.disabled ? "quick-actions-item-disabled " : "")
             }
             key={index}
             onClick={() => handleClick(action)}

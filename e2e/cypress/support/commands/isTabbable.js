@@ -1,4 +1,4 @@
-import isFocusable from './isFocusable';
+import isFocusable from "./isFocusable";
 
 /**
  * Determines if the given element is focusable using Tab key navigation.
@@ -7,6 +7,6 @@ import isFocusable from './isFocusable';
  * disabled fieldsets, among other things.
  */
 export default function isTabbable($element) {
-  const tabIndex = $element.attr('tabindex');
+  const tabIndex = $element.attr("tabindex");
   return (!tabIndex || parseInt(tabIndex, 10) >= 0) && isFocusable($element);
 }

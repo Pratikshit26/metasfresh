@@ -7,15 +7,8 @@
     "additionalDescription": "AlbertaAdditionalDecUpdated",
     "manufacturer": "myManufacturerName",
     "manufacturerNumber": "myNewManufacturerNumber",
-    "therapyIds": [
-      1,
-      2,
-      3
-    ],
-    "billableTherapies": [
-      1,
-      3
-    ],
+    "therapyIds": [1, 2, 3],
+    "billableTherapies": [1, 3],
     "productGroupId": "82d3d688-4035-48fa-90cb-d9d39b8975bd",
     "size": "20",
     "inventoryType": 1,

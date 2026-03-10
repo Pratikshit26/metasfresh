@@ -2,19 +2,22 @@
 
 All URIs are relative to *https://virtserver.swaggerhub.com/it-labs.de/PatientWawi/1.0.1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getUser**](UserApi.md#getUser) | **GET** /users/{_id} | Daten eines einzelnen Benutzers abrufen
+| Method                            | HTTP request          | Description                             |
+| --------------------------------- | --------------------- | --------------------------------------- |
+| [**getUser**](UserApi.md#getUser) | **GET** /users/{\_id} | Daten eines einzelnen Benutzers abrufen |
 
 <a name="getUser"></a>
+
 # **getUser**
-> Users getUser(albertaApiKey, _id)
+
+> Users getUser(albertaApiKey, \_id)
 
 Daten eines einzelnen Benutzers abrufen
 
 Szenario - das WaWi fragt bei Alberta nach, wie die Daten eines Benutzers mit der angegebenen Id sind
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -22,7 +25,7 @@ Szenario - das WaWi fragt bei Alberta nach, wie die Daten eines Benutzers mit de
 
 
 UserApi apiInstance = new UserApi();
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 String _id = "_id_example"; // String | eindeutige id des Benutzers
 try {
     Users result = apiInstance.getUser(albertaApiKey, _id);
@@ -35,10 +38,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albertaApiKey** | **String**|  |
- **_id** | **String**| eindeutige id des Benutzers |
+| Name              | Type       | Description                 | Notes |
+| ----------------- | ---------- | --------------------------- | ----- |
+| **albertaApiKey** | **String** |                             |
+| **\_id**          | **String** | eindeutige id des Benutzers |
 
 ### Return type
 
@@ -50,6 +53,5 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
-
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/xml

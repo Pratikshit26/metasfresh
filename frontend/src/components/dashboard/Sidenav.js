@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import counterpart from 'counterpart';
-import { getAvailableKPIsToAdd } from '../../actions/DashboardActions';
-import Indicator from '../charts/Indicator';
-import ChartWidget from './ChartWidget';
-import DndWidget from './DndWidget';
+import React, { Component } from "react";
+import counterpart from "counterpart";
+import { getAvailableKPIsToAdd } from "../../actions/DashboardActions";
+import Indicator from "../charts/Indicator";
+import ChartWidget from "./ChartWidget";
+import DndWidget from "./DndWidget";
 
-import EntityType from './EntityType';
+import EntityType from "./EntityType";
 
 /**
  * Panel of Target Indicators and KPIs available to add
@@ -24,9 +24,9 @@ class Sidenav extends Component {
     getAvailableKPIsToAdd().then((res) => {
       this.setState({
         indicators: res.data.filter(
-          (chart) => chart.widgetTypes[0] === 'TargetIndicator'
+          (chart) => chart.widgetTypes[0] === "TargetIndicator",
         ),
-        cards: res.data.filter((chart) => chart.widgetTypes[0] === 'KPI'),
+        cards: res.data.filter((chart) => chart.widgetTypes[0] === "KPI"),
       });
     });
   };
@@ -37,11 +37,11 @@ class Sidenav extends Component {
     return (
       <div className="board-sidenav overlay-shadow">
         <div className="board-sidenav-header">
-          {counterpart.translate('dashboard.addNew.targetIndicator')}
+          {counterpart.translate("dashboard.addNew.targetIndicator")}
         </div>
         <div>{this.renderChartList(indicators)}</div>
         <div className="board-sidenav-header">
-          {counterpart.translate('dashboard.addNew.kpi')}
+          {counterpart.translate("dashboard.addNew.kpi")}
         </div>
         <div>{this.renderChartList(cards)}</div>
       </div>
@@ -54,7 +54,7 @@ class Sidenav extends Component {
   };
 
   renderChartItem = (item, index) => {
-    const isKPI = item.widgetTypes[0] === 'KPI';
+    const isKPI = item.widgetTypes[0] === "KPI";
     return (
       <DndWidget
         key={item.kpiId}

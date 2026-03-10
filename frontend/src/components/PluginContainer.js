@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import history from '../services/History';
-import Container from '../components/Container';
+import history from "../services/History";
+import Container from "../components/Container";
 
 const pluginWrapper = function pluginWrapper(WrappedComponent, ChildComponent) {
   return class WrappedPlugin extends Component {

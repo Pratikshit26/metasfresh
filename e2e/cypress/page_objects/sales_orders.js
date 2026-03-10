@@ -1,15 +1,15 @@
-import Metasfresh from './page';
+import Metasfresh from "./page";
 
 class _SalesOrders extends Metasfresh {
   constructor() {
     super();
 
     this.windowId = 143;
-    this.orderLineTabId = 'AD_Tab-187';
-    this.tableRows = '.table-flex-wrapper-row';
-    this.rowSelector = 'tbody tr';
-    this.listHeader = '.document-list-header';
-    this.selectedRows = '.row-selected';
+    this.orderLineTabId = "AD_Tab-187";
+    this.tableRows = ".table-flex-wrapper-row";
+    this.rowSelector = "tbody tr";
+    this.listHeader = ".document-list-header";
+    this.selectedRows = ".row-selected";
   }
 
   visit(recordId) {
@@ -17,10 +17,7 @@ class _SalesOrders extends Metasfresh {
   }
 
   verifyElements() {
-    cy.get(this.tableRows)
-      .find(this.rowSelector)
-      .eq(0)
-      .should('exist');
+    cy.get(this.tableRows).find(this.rowSelector).eq(0).should("exist");
   }
 
   getRows() {

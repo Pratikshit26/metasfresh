@@ -13,7 +13,7 @@
             "requestItems": [
               {
                 "amount": {
-                  "amount": 8722.00,
+                  "amount": 8722.0,
                   "currencyCode": "EUR"
                 },
                 "amountSet": true,
@@ -32,7 +32,7 @@
               },
               {
                 "amount": {
-                  "amount": 600.00,
+                  "amount": 600.0,
                   "currencyCode": "EUR"
                 },
                 "amountSet": true,
@@ -68,7 +68,3 @@
     }
   }
 }
-
-
-
-

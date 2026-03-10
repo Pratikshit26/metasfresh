@@ -1,16 +1,16 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { setFilter } from '../../actions/ListActions';
-import { referencesEventSource } from '../../api/documentReferences';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setFilter } from "../../actions/ListActions";
+import { referencesEventSource } from "../../api/documentReferences";
 import {
   buildRelatedDocumentsViewUrl,
   mergePartialGroupToGroupsArray,
-} from '../../utils/documentReferencesHelper';
-import SpinnerOverlay from '../app/SpinnerOverlay';
-import DocumentReferenceGroup from './DocumentReferenceGroup';
-import { requestRedirect } from '../../reducers/redirect';
+} from "../../utils/documentReferencesHelper";
+import SpinnerOverlay from "../app/SpinnerOverlay";
+import DocumentReferenceGroup from "./DocumentReferenceGroup";
+import { requestRedirect } from "../../reducers/redirect";
 
 /**
  * Document related documents (references) component
@@ -43,7 +43,7 @@ class DocumentReferences extends Component {
           },
           () => {
             this.referenced && this.referenced.focus();
-          }
+          },
         );
       },
 
@@ -87,7 +87,7 @@ class DocumentReferences extends Component {
     dispatch(setFilter(filter, targetWindowId));
 
     if (ctrlKeyPressed) {
-      window.open(url, '_blank');
+      window.open(url, "_blank");
     } else {
       dispatch(requestRedirect(url));
     }
@@ -99,38 +99,38 @@ class DocumentReferences extends Component {
     const keyHandler = (e, dir) => {
       e.preventDefault();
 
-      const sib = dir ? 'nextSibling' : 'previousSibling';
+      const sib = dir ? "nextSibling" : "previousSibling";
 
-      if (active.classList.contains('js-subheader-item')) {
+      if (active.classList.contains("js-subheader-item")) {
         if (!active[sib]) {
           return;
         }
-        if (active[sib].classList.contains('js-subheader-item')) {
+        if (active[sib].classList.contains("js-subheader-item")) {
           active[sib].focus();
         } else {
           active[sib][sib] && active[sib][sib].focus();
         }
       } else {
-        active.getElementsByClassName('js-subheader-item')[0].focus();
+        active.getElementsByClassName("js-subheader-item")[0].focus();
       }
     };
 
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         keyHandler(e, true);
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         keyHandler(e, false);
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         document.activeElement.dispatchEvent(
-          new MouseEvent('click', {
+          new MouseEvent("click", {
             bubbles: true,
             cancelable: true,
             view: window,
             ctrlKey: e.ctrlKey,
-          })
+          }),
         );
         break;
     }
@@ -169,7 +169,7 @@ class DocumentReferences extends Component {
     } else if (!loading) {
       return (
         <div className="subheader-item subheader-item-disabled">
-          {counterpart.translate('window.sideList.referenced.empty')}
+          {counterpart.translate("window.sideList.referenced.empty")}
         </div>
       );
     }

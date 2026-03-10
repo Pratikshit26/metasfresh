@@ -1,4 +1,4 @@
-import { isSameMoment } from '../../../utils/calendarUtils';
+import { isSameMoment } from "../../../utils/calendarUtils";
 
 export const newEntryQuery = ({
   calendarIds = null,

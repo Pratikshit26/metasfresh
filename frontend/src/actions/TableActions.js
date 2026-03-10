@@ -1,18 +1,18 @@
-import { cloneDeep, find, get, reduce, uniqBy } from 'lodash';
+import { cloneDeep, find, get, reduce, uniqBy } from "lodash";
 
-import { flattenRows } from '../utils/documentListHelper';
-import * as types from '../constants/ActionTypes';
+import { flattenRows } from "../utils/documentListHelper";
+import * as types from "../constants/ActionTypes";
 
-import { fetchQuickActions } from './Actions';
-import { showIncludedView } from './ViewActions';
+import { fetchQuickActions } from "./Actions";
+import { showIncludedView } from "./ViewActions";
 import {
   deleteViewAttributes,
   fetchViewAttributes,
   fetchViewAttributesLayout,
-} from './IndependentWidgetsActions';
+} from "./IndependentWidgetsActions";
 
-import { getView } from '../reducers/viewHandler';
-import { getSupportAttribute, getTable } from '../reducers/tables';
+import { getView } from "../reducers/viewHandler";
+import { getSupportAttribute, getTable } from "../reducers/tables";
 
 /**
  * @method createTable
@@ -192,12 +192,12 @@ export function createTableData(rawData) {
   return reduce(
     dataObject,
     (result, value, key) => {
-      if (typeof value !== 'undefined') {
+      if (typeof value !== "undefined") {
         result[key] = value;
       }
       return result;
     },
-    {}
+    {},
   );
 }
 
@@ -328,7 +328,7 @@ export function updateGridTable(tableId, tableResponse) {
         ...tableLayout,
         ...extractEmptyResultTextAndHint({ tableResponse, tableLayout }),
         headerElements: tableResponse.columnsByFieldName,
-        keyProperty: 'id',
+        keyProperty: "id",
       });
       const { keyProperty } = tableData;
 
@@ -347,7 +347,7 @@ export function updateGridTable(tableId, tableResponse) {
             collapsible,
             expandedDepth,
             keyProperty,
-          })
+          }),
         );
       }
     } else {
@@ -356,7 +356,7 @@ export function updateGridTable(tableId, tableResponse) {
         ...tableLayout,
         ...extractEmptyResultTextAndHint({ tableResponse, tableLayout }),
         headerElements: tableResponse.columnsByFieldName,
-        keyProperty: 'id',
+        keyProperty: "id",
       });
       const { collapsible, expandedDepth, keyProperty, indentSupported } =
         tableData;
@@ -375,7 +375,7 @@ export function updateGridTable(tableId, tableResponse) {
             collapsible,
             expandedDepth,
             keyProperty,
-          })
+          }),
         );
       }
     }
@@ -390,17 +390,17 @@ const extractEmptyResultTextAndHint = ({ tableResponse, tableLayout }) => {
   if (tableResponse?.emptyResultText) {
     return {
       emptyResultText: tableResponse.emptyResultText,
-      emptyResultHint: tableResponse?.emptyResultHint || '',
+      emptyResultHint: tableResponse?.emptyResultHint || "",
     };
   } else if (tableLayout?.emptyResultText) {
     return {
       emptyResultText: tableLayout.emptyResultText,
-      emptyResultHint: tableLayout?.emptyResultHint || '',
+      emptyResultHint: tableLayout?.emptyResultHint || "",
     };
   } else {
     return {
-      emptyResultText: '',
-      emptyResultHint: '',
+      emptyResultText: "",
+      emptyResultHint: "",
     };
   }
 };
@@ -426,7 +426,7 @@ export function updateGridTableData({
         rows = flattenRows(rows);
         // table rows are already flattened so we will end up with duplicates from
         // `includedDocuments` being flattened again
-        rows = uniqBy(rows, 'id');
+        rows = uniqBy(rows, "id");
       }
 
       dispatch(updateTableData(tableId, rows, keyProperty));
@@ -438,7 +438,7 @@ export function updateGridTableData({
             rows,
             preserveCollapsedStateToRowIds,
             customLayoutFlags,
-          })
+          }),
         );
       }
 
@@ -485,7 +485,7 @@ export function updateTabTable({ tableId, tableResponse, pending }) {
       const tableExists = state.tables[tableId];
       const tableData = createTableData({
         ...(tableResponse ? tableResponse : {}),
-        keyProperty: 'rowId',
+        keyProperty: "rowId",
         pending,
       });
 
@@ -565,7 +565,7 @@ function createCollapsedRows({
           tableId,
           collapsedParentRows,
           collapsedRows,
-        })
+        }),
       );
     }
   };
@@ -626,7 +626,7 @@ function updateCollapsedRows({
             !collapsedParentRows.indexOf(row.id)
           ) {
             newCollapsedParentRows = !newCollapsedParentRows.includes(
-              row[keyProperty]
+              row[keyProperty],
             )
               ? newCollapsedParentRows.concat(row[keyProperty])
               : newCollapsedParentRows;
@@ -647,7 +647,7 @@ function updateCollapsedRows({
           collapsedParentRows: newCollapsedParentRows,
           collapsedRows: newCollapsedRows,
           preserveCollapsedStateToRowIds,
-        })
+        }),
       );
     }
   };
@@ -671,13 +671,13 @@ export function collapseTableRow({ tableId, collapse, node }) {
       if (collapse) {
         collapsedParentRows.splice(
           collapsedParentRows.indexOf(parentNode[keyProperty]),
-          1
+          1,
         );
       } else {
         if (collapsedParentRows.indexOf(parentNode[keyProperty]) > -1) return;
 
         collapsedParentRows = collapsedParentRows.concat(
-          parentNode[keyProperty]
+          parentNode[keyProperty],
         );
       }
 
@@ -686,7 +686,7 @@ export function collapseTableRow({ tableId, collapse, node }) {
           if (collapse) {
             collapsedRows.splice(
               collapsedRows.indexOf(childNode[keyProperty]),
-              1
+              1,
             );
           } else {
             if (collapsedRows.indexOf(childNode[keyProperty]) > -1) return;
@@ -726,7 +726,7 @@ export function collapseTableRow({ tableId, collapse, node }) {
 export function updateTableSelection({
   id,
   selection,
-  keyProperty = 'id',
+  keyProperty = "id",
   windowId,
   viewId,
   isModal,
@@ -745,7 +745,7 @@ export function updateTableSelection({
           tableId: id,
           selection,
           isModal,
-        })
+        }),
       ).then(dispatch(fetchAttributes(id)));
     }
 
@@ -784,7 +784,7 @@ export function deselectTableRows({
           tableId: id,
           selection,
           isModal,
-        })
+        }),
       ).then(dispatch(fetchAttributes(id)));
     }
 
@@ -844,12 +844,12 @@ function handleToggleIncludedView({
         const itemId = selection[selection.length - 1];
         const item = find(rows, (row) => row[keyProperty] === itemId);
 
-        isShowIncludedView = get(item, ['supportIncludedViews'], false);
+        isShowIncludedView = get(item, ["supportIncludedViews"], false);
         includedWindowId = isShowIncludedView
-          ? get(item, ['includedView', 'windowId'], null)
+          ? get(item, ["includedView", "windowId"], null)
           : null;
         includedViewId = isShowIncludedView
-          ? get(item, ['includedView', 'viewId'], null)
+          ? get(item, ["includedView", "viewId"], null)
           : null;
 
         includedViewStateChanged = true;
@@ -864,7 +864,7 @@ function handleToggleIncludedView({
             windowId: includedWindowId,
             viewId: includedViewId,
             isModal,
-          })
+          }),
         );
       }
     }

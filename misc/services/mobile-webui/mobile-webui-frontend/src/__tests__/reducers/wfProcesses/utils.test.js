@@ -2,28 +2,28 @@ import * as CompleteStatus from '../../../constants/CompleteStatus';
 import { mergeActivitiesToState, updateUserEditable } from '../../../reducers/wfProcesses/utils';
 
 describe('reducers: utils tests', () => {
-  describe('mergeActivitiesToState', () => {
-    it('complex case with missing activities and new activities', () => {
-      let targetWFProcess;
+    describe('mergeActivitiesToState', () => {
+        it('complex case with missing activities and new activities', () => {
+            let targetWFProcess;
 
-      mergeActivitiesToState({
-        targetWFProcess: (targetWFProcess = {
-          activities: {
-            A1: { activityId: 'A1', caption: 'Activity 1' },
-            A2: { activityId: 'A2', caption: 'Activity 2' },
-            A3: { activityId: 'A3', caption: 'Activity 3' },
-            A4: { activityId: 'A4', caption: 'Activity 4' },
-          },
-        }),
-        fromActivities: [
-          { activityId: 'A5', caption: 'Activity 5 updated' },
-          { activityId: 'A4', caption: 'Activity 4 updated' },
-          { activityId: 'A3', caption: 'Activity 3 updated' },
-          { activityId: 'A2', caption: 'Activity 2 updated' },
-        ],
-      });
+            mergeActivitiesToState({
+                targetWFProcess: (targetWFProcess = {
+                    activities: {
+                        A1: { activityId: 'A1', caption: 'Activity 1' },
+                        A2: { activityId: 'A2', caption: 'Activity 2' },
+                        A3: { activityId: 'A3', caption: 'Activity 3' },
+                        A4: { activityId: 'A4', caption: 'Activity 4' },
+                    },
+                }),
+                fromActivities: [
+                    { activityId: 'A5', caption: 'Activity 5 updated' },
+                    { activityId: 'A4', caption: 'Activity 4 updated' },
+                    { activityId: 'A3', caption: 'Activity 3 updated' },
+                    { activityId: 'A2', caption: 'Activity 2 updated' },
+                ],
+            });
 
-      expect(targetWFProcess).toMatchInlineSnapshot(`
+            expect(targetWFProcess).toMatchInlineSnapshot(`
                 Object {
                   "activities": Object {
                     "A2": Object {
@@ -79,22 +79,22 @@ describe('reducers: utils tests', () => {
                   ],
                 }
             `);
+        });
     });
-  });
 
-  describe('updateUserEditable', () => {
-    it('no activities started', () => {
-      const draftWFProcess = {
-        activityIdsInOrder: ['A1', 'A2', 'A3'],
-        activities: {
-          A1: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
-          A2: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
-          A3: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
-        },
-      };
-      updateUserEditable({ draftWFProcess });
+    describe('updateUserEditable', () => {
+        it('no activities started', () => {
+            const draftWFProcess = {
+                activityIdsInOrder: ['A1', 'A2', 'A3'],
+                activities: {
+                    A1: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
+                    A2: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
+                    A3: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
+                },
+            };
+            updateUserEditable({ draftWFProcess });
 
-      expect(draftWFProcess.activities).toMatchInlineSnapshot(`
+            expect(draftWFProcess.activities).toMatchInlineSnapshot(`
                 Object {
                   "A1": Object {
                     "dataStored": Object {
@@ -116,19 +116,19 @@ describe('reducers: utils tests', () => {
                   },
                 }
             `);
-    });
+        });
 
-    it('1st activity completed, 2nd one not started', () => {
-      let draftWFProcess = {
-        activityIdsInOrder: ['A1', 'A2'],
-        activities: {
-          A1: { dataStored: { completeStatus: CompleteStatus.COMPLETED } },
-          A2: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
-        },
-      };
-      updateUserEditable({ draftWFProcess });
+        it('1st activity completed, 2nd one not started', () => {
+            let draftWFProcess = {
+                activityIdsInOrder: ['A1', 'A2'],
+                activities: {
+                    A1: { dataStored: { completeStatus: CompleteStatus.COMPLETED } },
+                    A2: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
+                },
+            };
+            updateUserEditable({ draftWFProcess });
 
-      expect(draftWFProcess.activities).toMatchInlineSnapshot(`
+            expect(draftWFProcess.activities).toMatchInlineSnapshot(`
                 Object {
                   "A1": Object {
                     "dataStored": Object {
@@ -144,19 +144,19 @@ describe('reducers: utils tests', () => {
                   },
                 }
             `);
-    });
+        });
 
-    it('1st activity completed, 2nd one in progress', () => {
-      let draftWFProcess = {
-        activityIdsInOrder: ['A1', 'A2'],
-        activities: {
-          A1: { dataStored: { completeStatus: CompleteStatus.COMPLETED } },
-          A2: { dataStored: { completeStatus: CompleteStatus.IN_PROGRESS } },
-        },
-      };
-      updateUserEditable({ draftWFProcess });
+        it('1st activity completed, 2nd one in progress', () => {
+            let draftWFProcess = {
+                activityIdsInOrder: ['A1', 'A2'],
+                activities: {
+                    A1: { dataStored: { completeStatus: CompleteStatus.COMPLETED } },
+                    A2: { dataStored: { completeStatus: CompleteStatus.IN_PROGRESS } },
+                },
+            };
+            updateUserEditable({ draftWFProcess });
 
-      expect(draftWFProcess.activities).toMatchInlineSnapshot(`
+            expect(draftWFProcess.activities).toMatchInlineSnapshot(`
                 Object {
                   "A1": Object {
                     "dataStored": Object {
@@ -172,20 +172,20 @@ describe('reducers: utils tests', () => {
                   },
                 }
             `);
-    });
+        });
 
-    it('1st activity not started, 2nd one in progress, 3rd not started', () => {
-      let draftWFProcess = {
-        activityIdsInOrder: ['A1', 'A2', 'A3'],
-        activities: {
-          A1: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
-          A2: { dataStored: { completeStatus: CompleteStatus.IN_PROGRESS } },
-          A3: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
-        },
-      };
-      updateUserEditable({ draftWFProcess });
+        it('1st activity not started, 2nd one in progress, 3rd not started', () => {
+            let draftWFProcess = {
+                activityIdsInOrder: ['A1', 'A2', 'A3'],
+                activities: {
+                    A1: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
+                    A2: { dataStored: { completeStatus: CompleteStatus.IN_PROGRESS } },
+                    A3: { dataStored: { completeStatus: CompleteStatus.NOT_STARTED } },
+                },
+            };
+            updateUserEditable({ draftWFProcess });
 
-      expect(draftWFProcess.activities).toMatchInlineSnapshot(`
+            expect(draftWFProcess.activities).toMatchInlineSnapshot(`
                 Object {
                   "A1": Object {
                     "dataStored": Object {
@@ -207,6 +207,6 @@ describe('reducers: utils tests', () => {
                   },
                 }
             `);
+        });
     });
-  });
 });

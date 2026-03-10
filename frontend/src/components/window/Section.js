@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Separator from '../Separator';
-import Column from './Column';
-import { INITIALLY_CLOSED, INITIALLY_OPEN } from '../../constants/Constants';
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import Separator from "../Separator";
+import Column from "./Column";
+import { INITIALLY_CLOSED, INITIALLY_OPEN } from "../../constants/Constants";
 
 const MAX_ROWS = 12;
 
@@ -34,7 +34,7 @@ const Section = ({
   const isFirstSection = sectionIndex === 0;
 
   return (
-    <div className={classnames('section', { collapsed: isSectionCollapsed })}>
+    <div className={classnames("section", { collapsed: isSectionCollapsed })}>
       {title && (
         <Separator
           title={title}
@@ -46,8 +46,8 @@ const Section = ({
         />
       )}
       <div
-        className={classnames('row', {
-          'collapsible-section': collapsible,
+        className={classnames("row", {
+          "collapsible-section": collapsible,
           collapsed: isSectionCollapsed,
         })}
       >

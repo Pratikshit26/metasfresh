@@ -3,10 +3,8 @@
   "priceListName": "PlanetaryPriceList",
   "priceListVersionName": "PlanetaryPriceListVersion",
 
-
   "priceListSchemaVersionName": "ProductPriceListSchemaVersion",
   "priceListVersion2ValidFrom": "01/02/2019",
-
 
   "priceListVersionNameSearch1_comment": "Here be magics that will bite our asses later on.",
   "priceListVersionNameSearch1_part1": "PlanetaryPriceList",
@@ -17,7 +15,6 @@
   "categoryName": "PopsiclesCategory",
   "productName1": "StrawberryPopsicleProduct",
   "productName2": "LemonPopsicleProduct",
-
 
   "priceListSchemaName": "PriceListSchema",
   "surchargeAmount": 22

@@ -1,7 +1,7 @@
-import * as d3 from 'd3';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { getSvg } from './svg';
+import * as d3 from "d3";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { getSvg } from "./svg";
 
 class PieChartComponent extends Component {
   svg;
@@ -30,7 +30,7 @@ class PieChartComponent extends Component {
         dimensions.pie,
         dimensions.arc,
         data,
-        color
+        color,
       );
 
     if (responsive) {
@@ -46,7 +46,7 @@ class PieChartComponent extends Component {
     const { data, colors, chartClass } = this.props;
 
     const chartWrapp = document.getElementsByClassName(
-      chartClass + '-wrapper'
+      chartClass + "-wrapper",
     )[0];
     const color = d3.scaleOrdinal().range(colors);
     const dimensions = chartWrapp && this.setDimensions(chartWrapp.offsetWidth);
@@ -63,7 +63,7 @@ class PieChartComponent extends Component {
           dimensions.pie,
           dimensions.arc,
           data,
-          color
+          color,
         );
     } else if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
       this.clearChart();
@@ -75,7 +75,7 @@ class PieChartComponent extends Component {
           dimensions.pie,
           dimensions.arc,
           data,
-          color
+          color,
         );
     }
   }
@@ -92,7 +92,7 @@ class PieChartComponent extends Component {
     let chartHeight = height;
 
     const chartWrapper = document.getElementsByClassName(
-      chartClass + '-wrapper'
+      chartClass + "-wrapper",
     )[0];
 
     if (responsive) {
@@ -125,20 +125,20 @@ class PieChartComponent extends Component {
     const { prevData } = this.state;
 
     const slice = this.svg
-      .select('.slices')
-      .selectAll('.pie-path')
+      .select(".slices")
+      .selectAll(".pie-path")
       .data(pie(data), function (d) {
         return d;
       });
 
     slice
       .enter()
-      .append('path')
-      .attr('class', 'pie-path')
-      .style('fill', (d) => color(d.data[fields[0].fieldName]))
+      .append("path")
+      .attr("class", "pie-path")
+      .style("fill", (d) => color(d.data[fields[0].fieldName]))
       .transition()
       .duration(1500)
-      .attrTween('d', (d, i) => {
+      .attrTween("d", (d, i) => {
         const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
         prevData[i] = d;
         this.setState({
@@ -158,20 +158,20 @@ class PieChartComponent extends Component {
     const { prevData } = this.state;
 
     const slice = this.svg
-      .select('.slices')
-      .selectAll('.pie-path')
+      .select(".slices")
+      .selectAll(".pie-path")
       .data(pie(data), function (d) {
         return d;
       });
 
     slice
       .enter()
-      .append('path')
-      .attr('class', 'pie-path')
-      .style('fill', (d) => color(d.data[fields[0].fieldName]))
+      .append("path")
+      .attr("class", "pie-path")
+      .style("fill", (d) => color(d.data[fields[0].fieldName]))
       .transition()
       .duration(1500)
-      .attrTween('d', (d, i) => {
+      .attrTween("d", (d, i) => {
         const current = prevData[i];
         const interpolate = d3.interpolate(current, d);
 
@@ -194,43 +194,43 @@ class PieChartComponent extends Component {
     const { groupBy, data } = this.props;
 
     const legend = svg
-      .attr('width', width)
-      .attr('height', 0.3 * height)
-      .append('g')
-      .attr('class', 'legends')
-      .attr('transform', 'translate(' + 20 + ',' + 20 + ')');
+      .attr("width", width)
+      .attr("height", 0.3 * height)
+      .append("g")
+      .attr("class", "legends")
+      .attr("transform", "translate(" + 20 + "," + 20 + ")");
 
     const legendRectSize = 18;
     const legendSpacing = 4;
 
     const legendItem = legend
-      .selectAll('.legend')
+      .selectAll(".legend")
       .data(color.domain())
       .enter()
-      .append('g')
-      .attr('class', 'legend')
-      .attr('transform', function (d, i) {
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", function (d, i) {
         const height = legendRectSize + legendSpacing;
         const vert = i * height;
-        return 'translate(' + 0 + ',' + vert + ')';
+        return "translate(" + 0 + "," + vert + ")";
       });
 
     legendItem
-      .append('rect')
-      .attr('width', legendRectSize)
-      .attr('height', legendRectSize)
-      .style('fill', color)
-      .style('stroke', color);
+      .append("rect")
+      .attr("width", legendRectSize)
+      .attr("height", legendRectSize)
+      .style("fill", color)
+      .style("stroke", color);
 
     legendItem
-      .append('text')
-      .attr('x', legendRectSize + legendSpacing)
-      .attr('y', legendRectSize - legendSpacing)
-      .attr('font-size', 12)
+      .append("text")
+      .attr("x", legendRectSize + legendSpacing)
+      .attr("y", legendRectSize - legendSpacing)
+      .attr("font-size", 12)
       .text(function (d, i) {
         return (
           data[i][groupBy.fieldName] +
-          (groupBy.unit ? ' [' + groupBy.unit + ']' : '')
+          (groupBy.unit ? " [" + groupBy.unit + "]" : "")
         );
       });
 
@@ -240,17 +240,17 @@ class PieChartComponent extends Component {
   addResponsive = (data, color) => {
     const { chartClass } = this.props;
     const chartWrap = document.getElementsByClassName(
-      chartClass + '-wrapper'
+      chartClass + "-wrapper",
     )[0];
 
-    d3.select(window).on('resize.' + chartClass, () => {
+    d3.select(window).on("resize." + chartClass, () => {
       this.clearChart();
       const dimensions = chartWrap && this.setDimensions(chartWrap.offsetWidth);
       dimensions.width > 0 &&
         this.setSvg(
           dimensions.width,
           dimensions.height,
-          dimensions.wrapperWidth
+          dimensions.wrapperWidth,
         );
       dimensions &&
         this.drawChart(
@@ -260,14 +260,14 @@ class PieChartComponent extends Component {
           dimensions.pie,
           dimensions.arc,
           data,
-          color
+          color,
         );
     });
   };
 
   clearChart = () => {
-    this.svg.select('.slices').selectAll('path').remove();
-    this.svg.selectAll('.legends').remove();
+    this.svg.select(".slices").selectAll("path").remove();
+    this.svg.selectAll(".legends").remove();
   };
 
   render() {
@@ -275,16 +275,16 @@ class PieChartComponent extends Component {
       this.props;
 
     return (
-      <div className={chartClass + '-wrapper' + ' chart-wrapper'}>
+      <div className={chartClass + "-wrapper" + " chart-wrapper"}>
         <svg className={chartClass} />
         {isMaximized && (
           <div
             className={
-              'panel panel-primary panel-bordered ' + 'chart-data-table-wrapper'
+              "panel panel-primary panel-bordered " + "chart-data-table-wrapper"
             }
           >
             <table
-              className={'table table-bordered-vertically ' + 'table-striped'}
+              className={"table table-bordered-vertically " + "table-striped"}
             >
               <thead>
                 <tr>

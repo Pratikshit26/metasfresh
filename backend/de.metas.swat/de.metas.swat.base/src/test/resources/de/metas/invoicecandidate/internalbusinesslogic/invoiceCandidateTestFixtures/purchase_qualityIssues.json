@@ -1,77 +1,77 @@
 {
-  "id" : 10,
-  "soTrx" : "PURCHASE",
+  "id": 10,
+  "soTrx": "PURCHASE",
   "product": {
     "id": 300000,
     "itemType": true
   },
-  "uomId" : 110000,
-  "orderedData" : {
-    "qty" : {
-      "qty" : "60",
-      "uomId" : 110000
+  "uomId": 110000,
+  "orderedData": {
+    "qty": {
+      "qty": "60",
+      "uomId": 110000
     },
-    "qtyInStockUom" : {
-      "qty" : "15",
-      "uomId" : 100000
+    "qtyInStockUom": {
+      "qty": "15",
+      "uomId": 100000
     },
-    "orderFullyDelivered" : false
+    "orderFullyDelivered": false
   },
-  "deliveredData" : {
-    "shipmentData" : null,
-    "receiptData" : {
-      "productId" : 300000,
-      "qtyTotalInStockUom" : {
-        "qty" : "10",
-        "uomId" : 100000
+  "deliveredData": {
+    "shipmentData": null,
+    "receiptData": {
+      "productId": 300000,
+      "qtyTotalInStockUom": {
+        "qty": "10",
+        "uomId": 100000
       },
-      "qtyTotalNominal" : {
-        "qty" : "100",
-        "uomId" : 110000
+      "qtyTotalNominal": {
+        "qty": "100",
+        "uomId": 110000
       },
-      "qtyTotalCatch" : null,
-      "qtyWithIssuesInStockUom" : {
-        "qty" : "1",
-        "uomId" : 100000
+      "qtyTotalCatch": null,
+      "qtyWithIssuesInStockUom": {
+        "qty": "1",
+        "uomId": 100000
       },
-      "qtyWithIssuesNominal" : {
-        "qty" : "10",
-        "uomId" : 110000
+      "qtyWithIssuesNominal": {
+        "qty": "10",
+        "uomId": 110000
       },
-      "qtyWithIssuesCatch" : null
+      "qtyWithIssuesCatch": null
     }
   },
-  "pickedData" : {
-    "productId" : 300000,
-    "qtyPicked" : {
-      "qty" : "0",
-      "uomId" : 100000
+  "pickedData": {
+    "productId": 300000,
+    "qtyPicked": {
+      "qty": "0",
+      "uomId": 100000
     },
-    "qtyPickedInUOM" : {
-      "qty" : "0",
-      "uomId" : 110000
+    "qtyPickedInUOM": {
+      "qty": "0",
+      "uomId": 110000
     }
   },
-  "invoicedData" : {
-    "qtys" : {
-      "productId" : 300000,
-      "stockQty" : {
-        "qty" : "0",
-        "uomId" : 100000
+  "invoicedData": {
+    "qtys": {
+      "productId": 300000,
+      "stockQty": {
+        "qty": "0",
+        "uomId": 100000
       },
-      "uomQty" : {
-        "qty" : "0",
-        "uomId" : 110000
+      "uomQty": {
+        "qty": "0",
+        "uomId": 110000
       }
     },
-    "netAmount" : {
-      "value" : 0,
-      "currencyId" : 200000
+    "netAmount": {
+      "value": 0,
+      "currencyId": 200000
     }
   },
-  "invoicableQtyBasedOn" : "NominalWeight",
-  "invoiceRule" : "AfterDelivery",
-  "priceUomId" : 110000,
-  "qualityDiscountOverride" : null,
-  "qtyToInvoiceOverrideInStockUom" : null
+  "invoicableQtyBasedOn": "NominalWeight",
+  "invoiceRule": "AfterDelivery",
+  "priceUomId": 110000,
+  "qualityDiscountOverride": null,
+  "qtyToInvoiceOverrideInStockUom": null
 }

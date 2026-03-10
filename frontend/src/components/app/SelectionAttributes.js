@@ -1,14 +1,14 @@
-import counterpart from 'counterpart';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import counterpart from "counterpart";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import {
   patchViewAttributes,
   setViewAttributesData,
-} from '../../actions/IndependentWidgetsActions';
+} from "../../actions/IndependentWidgetsActions";
 
-import WidgetWrapper from '../../containers/WidgetWrapper';
+import WidgetWrapper from "../../containers/WidgetWrapper";
 
 /**
  * @file Class based component.
@@ -48,13 +48,13 @@ class SelectionAttributes extends PureComponent {
     patchViewAttributes({ windowId, viewId, rowId: dataId, prop, value }).then(
       () => {
         cb && cb();
-      }
+      },
     );
   };
 
   moveToDevice(e) {
     switch (e.key) {
-      case 'Shift':
+      case "Shift":
         e.preventDefault();
         //TO DO
         break;
@@ -66,7 +66,7 @@ class SelectionAttributes extends PureComponent {
   }
 
   selectTable() {
-    document.getElementsByClassName('js-table')[0].focus();
+    document.getElementsByClassName("js-table")[0].focus();
   }
 
   handleFocus = () => {
@@ -84,7 +84,7 @@ class SelectionAttributes extends PureComponent {
     return (
       <div className="table-flex-wrapper attributes-selector js-not-unselect">
         <div className="attributes-selector-header">
-          {counterpart.translate('window.selectionAttributes.caption')}
+          {counterpart.translate("window.selectionAttributes.caption")}
         </div>
         <div tabIndex={1} className="attributes-selector-body js-attributes">
           {elements &&
@@ -109,13 +109,13 @@ class SelectionAttributes extends PureComponent {
                 handlePatch={this.handlePatch}
                 handleChange={this.handleChange}
                 tabIndex={this.getTabId(
-                  item.fields.map((elem) => fields[elem.field] || -1)
+                  item.fields.map((elem) => fields[elem.field] || -1),
                 )}
               />
             ))}
           {elements && !elements.length && (
             <i>
-              {counterpart.translate('window.selectionAttributes.callToAction')}
+              {counterpart.translate("window.selectionAttributes.callToAction")}
             </i>
           )}
         </div>

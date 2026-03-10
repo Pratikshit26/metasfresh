@@ -1,6 +1,6 @@
-import React from 'react';
-import CommentsPanelListing from './CommentsPanelListing';
-import CommentsPanelForm from './CommentsPanelForm';
+import React from "react";
+import CommentsPanelListing from "./CommentsPanelListing";
+import CommentsPanelForm from "./CommentsPanelForm";
 
 export const CommentsPanel = (props) => {
   return (

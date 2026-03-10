@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { omit } from 'lodash';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { omit } from "lodash";
 
-import WidgetWrapper from '../containers/WidgetWrapper';
-import Loader from './app/Loader';
+import WidgetWrapper from "../containers/WidgetWrapper";
+import Loader from "./app/Loader";
 
 /**
  * @file Class based component.
@@ -25,7 +25,7 @@ class Process extends PureComponent {
     const { layoutType } = layout;
 
     return elements.map((elem, idx) => {
-      const element = omit(elem, ['fields']);
+      const element = omit(elem, ["fields"]);
 
       return (
         <div key={`${idx}-${layout.pinstanceId}`}>

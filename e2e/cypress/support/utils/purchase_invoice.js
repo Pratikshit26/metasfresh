@@ -1,6 +1,8 @@
 export class PurchaseInvoice {
   constructor(businessPartnerName, targetDocumentType) {
-    cy.log(`PurchaseInvoice - businessPartnerName=${businessPartnerName}, targetDocumentType=${targetDocumentType}`);
+    cy.log(
+      `PurchaseInvoice - businessPartnerName=${businessPartnerName}, targetDocumentType=${targetDocumentType}`,
+    );
     this.businessPartner = businessPartnerName;
     this.targetDocumentType = targetDocumentType;
     this._toString = `businessPartnerName=${businessPartnerName}, targetDocumentType=${targetDocumentType}`;
@@ -25,25 +27,32 @@ export class PurchaseInvoice {
   }
 
   static applyPurchaseInvoice(purchaseInvoice) {
-    cy.visitWindow('183', 'NEW');
+    cy.visitWindow("183", "NEW");
 
-    cy.get('.header-breadcrumb-sitename')
-      .should('contain', new Date().getDate())
-      .should('contain', new Date().getFullYear());
+    cy.get(".header-breadcrumb-sitename")
+      .should("contain", new Date().getDate())
+      .should("contain", new Date().getFullYear());
 
-    cy.writeIntoLookupListField('C_BPartner_ID', purchaseInvoice.businessPartner, purchaseInvoice.businessPartner);
+    cy.writeIntoLookupListField(
+      "C_BPartner_ID",
+      purchaseInvoice.businessPartner,
+      purchaseInvoice.businessPartner,
+    );
 
-    cy.getStringFieldValue('M_PriceList_ID').should('not.be.empty');
-    cy.getStringFieldValue('C_Currency_ID').should('not.be.empty');
+    cy.getStringFieldValue("M_PriceList_ID").should("not.be.empty");
+    cy.getStringFieldValue("C_Currency_ID").should("not.be.empty");
     if (purchaseInvoice.priceList) {
-      cy.selectInListField('M_PriceList_ID', purchaseInvoice.priceList);
+      cy.selectInListField("M_PriceList_ID", purchaseInvoice.priceList);
     }
 
-    cy.getStringFieldValue('DocumentNo').should('be.empty');
-    cy.selectInListField('C_DocTypeTarget_ID', purchaseInvoice.targetDocumentType);
-    cy.getStringFieldValue('DocumentNo').should('not.be.empty');
+    cy.getStringFieldValue("DocumentNo").should("be.empty");
+    cy.selectInListField(
+      "C_DocTypeTarget_ID",
+      purchaseInvoice.targetDocumentType,
+    );
+    cy.getStringFieldValue("DocumentNo").should("not.be.empty");
 
-    purchaseInvoice.lines.forEach(line => {
+    purchaseInvoice.lines.forEach((line) => {
       PurchaseInvoice.applyLine(line);
     });
   }
@@ -56,26 +65,42 @@ export class PurchaseInvoice {
    * This is just a workaround though which isn't very cool to use.
    */
   static applyLine(purchaseInvoiceLine) {
-    cy.selectTab('C_InvoiceLine');
+    cy.selectTab("C_InvoiceLine");
     cy.pressAddNewButton();
 
     cy.writeIntoStringField(
-      'QtyEntered',
+      "QtyEntered",
       purchaseInvoiceLine.quantity,
       true /*modal*/,
       null /*rewriteUrl*/,
-      true /*noRequest, bc the patch response is e.g. 20 and we would be waiting for e.g. '20' */
+      true /*noRequest, bc the patch response is e.g. 20 and we would be waiting for e.g. '20' */,
     );
     // instead of waiting for the patch in writeIntoStringField, we wait for the "pending" indicator to go away
-    cy.get('.indicator-pending').should('not.exist');
+    cy.get(".indicator-pending").should("not.exist");
 
-    cy.writeIntoLookupListField('M_Product_ID', purchaseInvoiceLine.product, purchaseInvoiceLine.product, false /*typeList*/, true /*modal*/);
+    cy.writeIntoLookupListField(
+      "M_Product_ID",
+      purchaseInvoiceLine.product,
+      purchaseInvoiceLine.product,
+      false /*typeList*/,
+      true /*modal*/,
+    );
 
     if (purchaseInvoiceLine.tuQuantity) {
-      cy.writeIntoStringField('QtyEnteredTU', purchaseInvoiceLine.tuQuantity, true /*modal*/);
+      cy.writeIntoStringField(
+        "QtyEnteredTU",
+        purchaseInvoiceLine.tuQuantity,
+        true /*modal*/,
+      );
     }
     if (purchaseInvoiceLine.packingItem) {
-      cy.writeIntoLookupListField('M_HU_PI_Item_Product_ID', purchaseInvoiceLine.packingItem, purchaseInvoiceLine.packingItem, false /*typeList*/, true /*modal*/);
+      cy.writeIntoLookupListField(
+        "M_HU_PI_Item_Product_ID",
+        purchaseInvoiceLine.packingItem,
+        purchaseInvoiceLine.packingItem,
+        false /*typeList*/,
+        true /*modal*/,
+      );
     }
     cy.pressDoneButton();
   }

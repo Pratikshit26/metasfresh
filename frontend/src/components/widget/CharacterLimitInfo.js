@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import React, { Fragment } from "react";
+import classnames from "classnames";
+import PropTypes from "prop-types";
 
 const CharacterLimitInfo = ({ charsTyped, maxLength }) => {
   const NO_OF_CHARS_BEFORE_MAX_REACHED = 10;
@@ -14,9 +14,9 @@ const CharacterLimitInfo = ({ charsTyped, maxLength }) => {
         <div>
           <div
             className={classnames(
-              'float-right',
-              { 'text-muted': displayGrayedLimit && !displayErrorLimit },
-              { 'text-danger': displayErrorLimit }
+              "float-right",
+              { "text-muted": displayGrayedLimit && !displayErrorLimit },
+              { "text-danger": displayErrorLimit },
             )}
           >
             {`${charsTyped} / ${maxLength} Characters`}

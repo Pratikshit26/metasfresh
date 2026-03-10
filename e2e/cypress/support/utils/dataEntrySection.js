@@ -1,6 +1,8 @@
 export class DataEntrySection {
   constructor(name, dataEntrySubTab) {
-    cy.log(`DataEntrySection - set name = ${name}; dataEntrySubTab= ${dataEntrySubTab}`);
+    cy.log(
+      `DataEntrySection - set name = ${name}; dataEntrySubTab= ${dataEntrySubTab}`,
+    );
     this.name = name;
     this.dataEntrySubTab = dataEntrySubTab;
     this.sectionName = name;
@@ -35,7 +37,9 @@ export class DataEntrySection {
   }
 
   addDataEntryLine(dataEntryLine) {
-    cy.log(`DataEntrySection - add dataEntryLine = ${JSON.stringify(dataEntryLine)}`);
+    cy.log(
+      `DataEntrySection - add dataEntryLine = ${JSON.stringify(dataEntryLine)}`,
+    );
     this.dataEntryLines.push(dataEntryLine);
     return this;
   }
@@ -50,7 +54,7 @@ export class DataEntrySection {
 
 export class DataEntryLine {
   constructor() {
-    cy.log('DataEntryLine');
+    cy.log("DataEntryLine");
     this.seqNo = undefined;
     this.isActive = true;
   }
@@ -69,30 +73,30 @@ export class DataEntryLine {
 }
 
 function applyDataEntrySection(dataEntrySection) {
-  cy.visitWindow('540593', 'NEW');
+  cy.visitWindow("540593", "NEW");
 
   cy.writeIntoLookupListField(
-    'DataEntry_SubTab_ID',
+    "DataEntry_SubTab_ID",
     dataEntrySection.dataEntrySubTab,
-    dataEntrySection.dataEntrySubTab
+    dataEntrySection.dataEntrySubTab,
   );
 
-  cy.writeIntoStringField('Name', dataEntrySection.name);
-  cy.writeIntoStringField('SectionName', dataEntrySection.sectionName);
+  cy.writeIntoStringField("Name", dataEntrySection.name);
+  cy.writeIntoStringField("SectionName", dataEntrySection.sectionName);
 
   if (dataEntrySection.seqNo) {
-    cy.getStringFieldValue('SeqNo').then(currentValue => {
+    cy.getStringFieldValue("SeqNo").then((currentValue) => {
       if (currentValue !== dataEntrySection.seqNo) {
         cy.log(
-          `applyDataEntrySection - dataEntrySection.seqNo=${dataEntrySection.seqNo}; currentValue=${currentValue}`
+          `applyDataEntrySection - dataEntrySection.seqNo=${dataEntrySection.seqNo}; currentValue=${currentValue}`,
         );
-        cy.clearField('SeqNo');
-        cy.writeIntoStringField('SeqNo', `${dataEntrySection.seqNo}`);
+        cy.clearField("SeqNo");
+        cy.writeIntoStringField("SeqNo", `${dataEntrySection.seqNo}`);
       }
     });
   }
   if (dataEntrySection.description) {
-    cy.writeIntoTextField('Description', dataEntrySection.description);
+    cy.writeIntoTextField("Description", dataEntrySection.description);
   }
   if (!dataEntrySection.isActive) {
     cy.clickOnIsActive();
@@ -100,23 +104,32 @@ function applyDataEntrySection(dataEntrySection) {
 
   // Thx to https://stackoverflow.com/questions/16626735/how-to-loop-through-an-array-containing-objects-and-access-their-properties
   if (dataEntrySection.dataEntryLines.length > 0) {
-    dataEntrySection.dataEntryLines.forEach(function(dataEntryLine) {
+    dataEntrySection.dataEntryLines.forEach(function (dataEntryLine) {
       applyDataEntryLine(dataEntryLine);
     });
-    cy.get('table tbody tr').should('have.length', dataEntrySection.dataEntryLines.length);
+    cy.get("table tbody tr").should(
+      "have.length",
+      dataEntrySection.dataEntryLines.length,
+    );
   }
 }
 
 function applyDataEntryLine(dataEntryLine) {
-  cy.selectTab('DataEntry_Line');
+  cy.selectTab("DataEntry_Line");
   cy.pressAddNewButton();
 
   if (dataEntryLine.seqNo) {
-    cy.getStringFieldValue('SeqNo', true /*modal*/).then(currentValue => {
-      cy.log(`applyDataEntryLine - dataEntryTab.seqNo=${dataEntryLine.seqNo}; currentValue=${currentValue}`);
+    cy.getStringFieldValue("SeqNo", true /*modal*/).then((currentValue) => {
+      cy.log(
+        `applyDataEntryLine - dataEntryTab.seqNo=${dataEntryLine.seqNo}; currentValue=${currentValue}`,
+      );
       if (currentValue !== dataEntryLine.seqNo) {
-        cy.clearField('SeqNo', true /*modal*/);
-        cy.writeIntoStringField('SeqNo', `${dataEntryLine.seqNo}`, true /*modal*/);
+        cy.clearField("SeqNo", true /*modal*/);
+        cy.writeIntoStringField(
+          "SeqNo",
+          `${dataEntryLine.seqNo}`,
+          true /*modal*/,
+        );
       }
     });
   }

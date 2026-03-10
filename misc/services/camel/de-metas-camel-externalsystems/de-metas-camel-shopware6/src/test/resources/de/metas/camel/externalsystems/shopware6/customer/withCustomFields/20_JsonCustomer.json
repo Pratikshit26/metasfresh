@@ -13,9 +13,7 @@
       "defaultShippingAddressId": "customerAddressId",
       "createdAt": "2022-03-20T10:28:02.235+00:00",
       "updatedAt": "2022-05-18T12:21:05.862+00:00",
-      "vatIds": [
-        "vatId1"
-      ],
+      "vatIds": ["vatId1"],
       "defaultPaymentMethodId": "defaultPaymentMethodId",
       "salesChannelId": "salesChannelId",
       "languageId": "languageId",
@@ -57,16 +55,14 @@
         "translated": {
           "displayName": "",
           "letterName": "",
-          "customFields": [
-          ]
+          "customFields": []
         },
         "createdAt": "2022-05-25T12:10:14.797+00:00",
         "updatedAt": null,
         "extensions": {
           "foreignKeys": {
             "apiAlias": null,
-            "extensions": [
-            ]
+            "extensions": []
           }
         },
         "id": "id",
@@ -93,13 +89,11 @@
       "wishlists": null,
       "_uniqueIdentifier": "uniqueIdentifier",
       "versionId": null,
-      "translated": [
-      ],
+      "translated": [],
       "extensions": {
         "foreignKeys": {
           "apiAlias": null,
-          "extensions": [
-          ]
+          "extensions": []
         },
         "partnerMap": {
           "customer": null,
@@ -109,20 +103,17 @@
           "affiliateOrigin": null,
           "_uniqueIdentifier": "uniqueIdentifier",
           "versionId": null,
-          "translated": [
-          ],
+          "translated": [],
           "createdAt": "2022-05-07T06:46:51.000+00:00",
           "updatedAt": null,
           "extensions": {
             "foreignKeys": {
               "apiAlias": null,
-              "extensions": [
-              ]
+              "extensions": []
             },
             "internal_mapping_storage": {
               "apiAlias": null,
-              "extensions": [
-              ]
+              "extensions": []
             }
           },
           "id": "id"
@@ -132,15 +123,13 @@
           "pharmacyCustomerId": "pharmacyCustomerId",
           "_uniqueIdentifier": "uniqueIdentifier",
           "versionId": null,
-          "translated": [
-          ],
+          "translated": [],
           "createdAt": "2022-04-22T08:05:03.000+00:00",
           "updatedAt": null,
           "extensions": {
             "foreignKeys": {
               "apiAlias": null,
-              "extensions": [
-              ]
+              "extensions": []
             }
           },
           "id": "id"

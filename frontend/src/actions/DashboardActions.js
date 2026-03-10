@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export function getKPIsDashboard() {
   return axios.get(`${config.API_URL}/dashboard/kpis?silentError=true`);
@@ -6,13 +6,13 @@ export function getKPIsDashboard() {
 
 export function getTargetIndicatorsDashboard() {
   return axios.get(
-    `${config.API_URL}/dashboard/targetIndicators?silentError=true`
+    `${config.API_URL}/dashboard/targetIndicators?silentError=true`,
   );
 }
 
 export function getKPIData(id) {
   return axios.get(
-    `${config.API_URL}/dashboard/kpis/${id}/data?silentError=true`
+    `${config.API_URL}/dashboard/kpis/${id}/data?silentError=true`,
   );
 }
 
@@ -26,7 +26,7 @@ export function changeKPIItem(id, values) {
 function convertObjectToPatchRequestsArray(values) {
   if (!values) return [];
   return Object.keys(values).map((key) => ({
-    op: 'replace',
+    op: "replace",
     path: key,
     value: values[key],
   }));
@@ -37,13 +37,13 @@ export function changeTargetIndicatorsItem(id, values) {
   if (data.length <= 0) return;
   return axios.patch(
     `${config.API_URL}/dashboard/targetIndicators/${id}`,
-    values
+    values,
   );
 }
 
 export function getTargetIndicatorsData(id) {
   return axios.get(
-    `${config.API_URL}/dashboard/targetIndicators/${id}/data?silentError=true`
+    `${config.API_URL}/dashboard/targetIndicators/${id}/data?silentError=true`,
   );
 }
 
@@ -62,17 +62,17 @@ export function getAvailableKPIsToAdd() {
  */
 export function getTargetIndicatorsDetails(indicatorId) {
   return axios.get(
-    `${config.API_URL}/dashboard/targetIndicators/${indicatorId}/details`
+    `${config.API_URL}/dashboard/targetIndicators/${indicatorId}/details`,
   );
 }
 
 export function addDashboardWidget(entity, id, pos) {
-  return axios.post(config.API_URL + '/dashboard/' + entity + '/new', {
+  return axios.post(config.API_URL + "/dashboard/" + entity + "/new", {
     kpiId: id,
     position: pos,
   });
 }
 
 export function removeDashboardWidget(entity, id) {
-  return axios.delete(config.API_URL + '/dashboard/' + entity + '/' + id);
+  return axios.delete(config.API_URL + "/dashboard/" + entity + "/" + id);
 }

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Spinner from '../app/SpinnerOverlay';
-import counterpart from 'counterpart';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Spinner from "../app/SpinnerOverlay";
+import counterpart from "counterpart";
 
 class MultiSelect extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class MultiSelect extends Component {
       nextProps.selectedItems && Array.isArray(nextProps.selectedItems)
         ? nextProps.selectedItems
         : valuesPart;
-    if (selected !== null && typeof selected !== 'undefined') {
+    if (selected !== null && typeof selected !== "undefined") {
       let updatedCheckedItems = {};
       selected.map((item) => {
         if (item) {
@@ -47,7 +47,7 @@ class MultiSelect extends Component {
     let selected = null;
     let newCheckedItems = JSON.parse(JSON.stringify(this.state.checkedItems));
 
-    if (typeof this.state.checkedItems[key] === 'undefined') {
+    if (typeof this.state.checkedItems[key] === "undefined") {
       newCheckedItems[key] = { key, caption, value: true };
     } else {
       newCheckedItems[key].value = !this.state.checkedItems[key].value;
@@ -62,7 +62,7 @@ class MultiSelect extends Component {
       }
     });
 
-    this.props.onSelect(selected.filter((el) => typeof el !== 'undefined'));
+    this.props.onSelect(selected.filter((el) => typeof el !== "undefined"));
   };
 
   render() {
@@ -81,7 +81,7 @@ class MultiSelect extends Component {
                   <label
                     className="form-control-label"
                     title={item.caption}
-                    htmlFor={'chk_' + item.key}
+                    htmlFor={"chk_" + item.key}
                   >
                     {item.caption}
                   </label>
@@ -89,7 +89,7 @@ class MultiSelect extends Component {
                 <div className="col-sm-1 float-right col-chk">
                   <label className="input-checkbox">
                     <input
-                      id={'chk_' + item.key}
+                      id={"chk_" + item.key}
                       type="checkbox"
                       onChange={() => this.selectItem(item.key, item.caption)}
                       checked={
@@ -105,7 +105,7 @@ class MultiSelect extends Component {
             </div>
           ))}
           {hasMoreResults && (
-            <div>({counterpart.translate('widget.lookup.hasMoreResults')})</div>
+            <div>({counterpart.translate("widget.lookup.hasMoreResults")})</div>
           )}
         </div>
       </div>

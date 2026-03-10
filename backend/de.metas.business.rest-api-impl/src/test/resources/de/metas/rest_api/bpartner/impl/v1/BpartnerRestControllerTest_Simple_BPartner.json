@@ -1,18 +1,18 @@
-  {
-    "requestItems": [
-      {
-        "bpartnerIdentifier": "ext-1234567",
-        "bpartnerComposite": {
-          "bpartner": {
-            "code": "other12345",
-            "companyName": "otherCompanyName",
-            "parentId": null
-          }
+{
+  "requestItems": [
+    {
+      "bpartnerIdentifier": "ext-1234567",
+      "bpartnerComposite": {
+        "bpartner": {
+          "code": "other12345",
+          "companyName": "otherCompanyName",
+          "parentId": null
         }
       }
-    ],
-    "syncAdvise": {
-      "ifNotExists": "FAIL",
-      "ifExists": "UPDATE_MERGE"
     }
+  ],
+  "syncAdvise": {
+    "ifNotExists": "FAIL",
+    "ifExists": "UPDATE_MERGE"
   }
+}

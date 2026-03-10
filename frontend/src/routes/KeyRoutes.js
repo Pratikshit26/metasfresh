@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import queryString from 'query-string';
-import _ from 'lodash';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import { createWindow } from '../actions/WindowActions';
+import React, { useEffect } from "react";
+import queryString from "query-string";
+import _ from "lodash";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { createWindow } from "../actions/WindowActions";
 
-import Board from '../containers/Board.js';
-import DocList from '../containers/DocList.js';
-import MasterWindowContainer from '../containers/MasterWindowContainer.js';
+import Board from "../containers/Board.js";
+import DocList from "../containers/DocList.js";
+import MasterWindowContainer from "../containers/MasterWindowContainer.js";
 
 /**
  * @file Module holding routes that required to be a bit more specific, than the

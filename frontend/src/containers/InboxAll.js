@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import Container from '../components/Container';
-import Inbox from '../components/inbox/Inbox';
+import Container from "../components/Container";
+import Inbox from "../components/inbox/Inbox";
 
 const mapStateToProps = (state) => ({
   inbox: state.appHandler.inbox,

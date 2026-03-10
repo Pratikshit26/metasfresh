@@ -1,12 +1,12 @@
-import Moment from 'moment-timezone';
-import cx from 'classnames';
+import Moment from "moment-timezone";
+import cx from "classnames";
 
 import {
   DATE_FORMAT,
   TIME_FORMAT,
   DATE_TIMEZONE_FORMAT,
   DATE_FIELD_FORMATS,
-} from '../constants/Constants';
+} from "../constants/Constants";
 
 /*
  * Helper function returning proper date field formatting depending on the
@@ -54,21 +54,20 @@ export function getClassNames({ icon, forcedPrimary } = {}) {
   const { readonly, value, mandatory, validStatus } = widgetData[0];
 
   const ret = cx(`input-block`, {
-    'input-focused': isFocused,
-    'input-icon-container': icon,
-    'input-disabled': readonly,
-    'input-mandatory': mandatory && (value ? value.length === 0 : value !== 0),
-    'input-error':
+    "input-focused": isFocused,
+    "input-icon-container": icon,
+    "input-disabled": readonly,
+    "input-mandatory": mandatory && (value ? value.length === 0 : value !== 0),
+    "input-error":
       validStatus &&
       !validStatus.valid &&
       !validStatus.initialValue &&
       !isFocused,
     [`text-xs-${gridAlign}`]: gridAlign,
-    [`input-${
-      type === 'primary' || forcedPrimary ? 'primary' : 'secondary'
-    }`]: true,
-    [`pulse-${updated ? 'on' : 'off'}`]: true,
-    'input-table': rowId && !isModal,
+    [`input-${type === "primary" || forcedPrimary ? "primary" : "secondary"}`]:
+      true,
+    [`pulse-${updated ? "on" : "off"}`]: true,
+    "input-table": rowId && !isModal,
   });
 
   return ret;
@@ -81,9 +80,9 @@ export function getClassNames({ icon, forcedPrimary } = {}) {
  */
 export function isNumberField(widgetType) {
   switch (widgetType) {
-    case 'Integer':
-    case 'Amount':
-    case 'Quantity':
+    case "Integer":
+    case "Amount":
+    case "Quantity":
       return true;
     default:
       return false;
@@ -98,10 +97,10 @@ export function isNumberField(widgetType) {
  */
 export function formatValueByWidgetType({ widgetType, value }) {
   const numberField = isNumberField(widgetType);
-  if (widgetType === 'Quantity' && value === '') {
+  if (widgetType === "Quantity" && value === "") {
     return null;
   } else if (numberField && !value) {
-    return '0';
+    return "0";
   }
   return value;
 }
@@ -121,20 +120,20 @@ export function validatePrecision({
 }) {
   let precisionProcessed = precision;
 
-  if (fieldName === 'qtyToDeliverCatchOverride') return true; // hotfix for catchWeight
+  if (fieldName === "qtyToDeliverCatchOverride") return true; // hotfix for catchWeight
 
   if (!widgetValue) {
     return false;
   }
-  if (widgetValue && typeof widgetValue !== 'string') {
+  if (widgetValue && typeof widgetValue !== "string") {
     return false;
   }
 
-  if (widgetType === 'Integer' || widgetType === 'Quantity') {
+  if (widgetType === "Integer" || widgetType === "Quantity") {
     precisionProcessed = 0;
   }
 
-  return precisionProcessed < (widgetValue.split('.')[1] || []).length
+  return precisionProcessed < (widgetValue.split(".")[1] || []).length
     ? false
     : true;
 }
@@ -182,7 +181,7 @@ export function shouldPatch({
 }
 
 const equalsByValue = (value1, value2, widgetType) => {
-  if (widgetType === 'Quantity') {
+  if (widgetType === "Quantity") {
     // NOTE: we might consider the other number based widget types (e.g. Integer, Amount, Number, Quantity, CostPrice)
     // but for now we are checking the Quantity only because that one is in our task focus,
     // and atm that's the only one on which we are manipulating the trailing zeros
@@ -197,7 +196,7 @@ const equalsByValue = (value1, value2, widgetType) => {
 };
 
 const convertValueToNumber = (value) => {
-  if (value == null || value === '') {
+  if (value == null || value === "") {
     return null;
   }
 

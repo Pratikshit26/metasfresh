@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+var webpack = require("webpack");
 
 const plugins = [
   new webpack.NoEmitOnErrorsPlugin(),
@@ -8,38 +8,38 @@ const plugins = [
 ];
 
 module.exports = {
-  mode: 'development',
-  devtool: 'eval',
+  mode: "development",
+  devtool: "eval",
   plugins,
   module: {
     rules: [
       {
         test: /\.js|\.jsx?$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
       {
         test: /\.html$/,
-        loader: 'html-loader',
+        loader: "html-loader",
       },
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
+          "style-loader",
+          { loader: "css-loader", options: { importLoaders: 1 } },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
-              ident: 'postcss',
+              ident: "postcss",
               plugins: () => [
-                require('postcss-import')({
+                require("postcss-import")({
                   addDependencyTo: webpack,
-                  path: ['node_modules', 'src/assets'],
+                  path: ["node_modules", "src/assets"],
                 }),
-                require('postcss-color-function'),
-                require('postcss-url')(),
-                require('precss')(),
-                require('autoprefixer')({
-                  overrideBrowserslist: ['last 2 versions'],
+                require("postcss-color-function"),
+                require("postcss-url")(),
+                require("precss")(),
+                require("autoprefixer")({
+                  overrideBrowserslist: ["last 2 versions"],
                 }),
               ],
             },

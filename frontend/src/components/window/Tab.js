@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import { fetchTab } from '../../actions/WindowActions';
+import { fetchTab } from "../../actions/WindowActions";
 
 const Tab = ({
   children,

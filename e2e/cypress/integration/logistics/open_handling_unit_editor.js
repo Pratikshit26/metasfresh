@@ -9,8 +9,8 @@
  * todo: add an upper limit for how long the window is supposed to take to load
  */
 
-describe('Create test: visit handling unit editor window, https://github.com/metasfresh/metasfresh-e2e/issues/125', function() {
-  it('visit handling unit editor window', function() {
-    cy.visitWindow('540189');
+describe("Create test: visit handling unit editor window, https://github.com/metasfresh/metasfresh-e2e/issues/125", function () {
+  it("visit handling unit editor window", function () {
+    cy.visitWindow("540189");
   });
 });

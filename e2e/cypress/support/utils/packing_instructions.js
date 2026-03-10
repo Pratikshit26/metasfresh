@@ -18,9 +18,9 @@ export class PackingInstructions {
   }
 }
 function applyPackingInstructions(packingInstructions) {
-  describe('create new packing instructions', function() {
-    cy.visitWindow('540343', 'NEW');
+  describe("create new packing instructions", function () {
+    cy.visitWindow("540343", "NEW");
 
-    cy.writeIntoStringField('Name', packingInstructions.name);
+    cy.writeIntoStringField("Name", packingInstructions.name);
   });
 }

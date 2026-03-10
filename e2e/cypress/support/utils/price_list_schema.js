@@ -42,7 +42,6 @@ export class PriceListSchemaLine {
     return this;
   }
 
-
   setStandardPriceSurchargeAmount(surchargeAmount) {
     cy.log(`PriceListSchemaLine - set surchargeAmount = ${surchargeAmount}`);
     this.surchargeAmount = surchargeAmount;
@@ -51,29 +50,39 @@ export class PriceListSchemaLine {
 }
 
 function applyPriceListSchema(priceListSchema) {
-  cy.visitWindow('337', 'NEW');
+  cy.visitWindow("337", "NEW");
 
-  cy.writeIntoStringField('Name', priceListSchema.name);
-  cy.writeIntoStringField('ValidFrom', '01/01/2019', false, null, true);
-  cy.selectInListField('DiscountType', 'Pricelist'); // maybe this needs a trl and to be a parameter
+  cy.writeIntoStringField("Name", priceListSchema.name);
+  cy.writeIntoStringField("ValidFrom", "01/01/2019", false, null, true);
+  cy.selectInListField("DiscountType", "Pricelist"); // maybe this needs a trl and to be a parameter
 
-  priceListSchema.lines.forEach(line => {
+  priceListSchema.lines.forEach((line) => {
     applyPriceListSchemaLine(line);
   });
   cy.expectNumberOfRows(priceListSchema.lines.length);
 }
 
 function applyPriceListSchemaLine(schemaLine) {
-  cy.selectTab('M_DiscountSchemaLine');
+  cy.selectTab("M_DiscountSchemaLine");
   cy.pressAddNewButton();
   if (schemaLine.productCategory) {
-    cy.selectInListField('M_Product_Category_ID', schemaLine.productCategory, true);
+    cy.selectInListField(
+      "M_Product_Category_ID",
+      schemaLine.productCategory,
+      true,
+    );
   }
   if (schemaLine.surchargeAmount) {
-    cy.writeIntoStringField('Std_AddAmt', schemaLine.surchargeAmount, true);
+    cy.writeIntoStringField("Std_AddAmt", schemaLine.surchargeAmount, true);
   }
   if (schemaLine.product) {
-    cy.writeIntoLookupListField('M_Product_ID', schemaLine.product, schemaLine.product, false, true);
+    cy.writeIntoLookupListField(
+      "M_Product_ID",
+      schemaLine.product,
+      schemaLine.product,
+      false,
+      true,
+    );
   }
   cy.pressDoneButton();
 }

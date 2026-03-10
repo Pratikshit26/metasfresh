@@ -1,7 +1,7 @@
-import counterpart from 'counterpart';
-import Moment from 'moment';
-import React from 'react';
-import PropTypes from 'prop-types';
+import counterpart from "counterpart";
+import Moment from "moment";
+import React from "react";
+import PropTypes from "prop-types";
 
 const InboxItem = ({ item, onClick, onDelete }) => {
   return (
@@ -10,8 +10,8 @@ const InboxItem = ({ item, onClick, onDelete }) => {
       onKeyDown={handleKeyDown}
       tabIndex={0}
       className={
-        'inbox-item js-inbox-item pointer ' +
-        (!item.read ? 'inbox-item-unread ' : '')
+        "inbox-item js-inbox-item pointer " +
+        (!item.read ? "inbox-item-unread " : "")
       }
     >
       {item.important && (
@@ -22,7 +22,7 @@ const InboxItem = ({ item, onClick, onDelete }) => {
       <div className="inbox-item-icon">
         <i
           className={
-            'meta-icon-' +
+            "meta-icon-" +
             renderIconFromTarget(item.target && item.target.documentType)
           }
         />
@@ -30,12 +30,12 @@ const InboxItem = ({ item, onClick, onDelete }) => {
       <div className="inbox-item-content">
         <div className="inbox-item-title">{item.message}</div>
         <div className="inbox-item-footer">
-          <div title={Moment(item.timestamp).format('DD.MM.YYYY HH:mm:ss')}>
+          <div title={Moment(item.timestamp).format("DD.MM.YYYY HH:mm:ss")}>
             {Moment(item.timestamp).fromNow()}
           </div>
           <div>
             <button className="inbox-item-delete" onClick={onDelete}>
-              {counterpart.translate('window.Delete.caption')}
+              {counterpart.translate("window.Delete.caption")}
             </button>
             <span>Notification</span>
           </div>
@@ -60,10 +60,10 @@ export default InboxItem;
 
 const renderIconFromTarget = (target) => {
   switch (target) {
-    case '143':
-      return 'sales';
+    case "143":
+      return "sales";
     default:
-      return 'system';
+      return "system";
   }
 };
 
@@ -73,23 +73,23 @@ const renderIconFromTarget = (target) => {
 
 const handleKeyDown = (e) => {
   switch (e.key) {
-    case 'ArrowDown':
+    case "ArrowDown":
       e.preventDefault();
       if (document.activeElement.nextSibling) {
         document.activeElement.nextSibling?.focus?.();
       }
       break;
-    case 'ArrowUp':
+    case "ArrowUp":
       e.preventDefault();
       if (document.activeElement.previousSibling) {
         document.activeElement.previousSibling.focus();
       }
       break;
-    case 'Enter':
+    case "Enter":
       e.preventDefault();
       document.activeElement.click();
       break;
-    case 'Escape':
+    case "Escape":
       e.preventDefault();
       close && close();
       break;

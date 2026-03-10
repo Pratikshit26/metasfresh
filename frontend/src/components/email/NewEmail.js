@@ -1,13 +1,13 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-import { addNotification } from '../../actions/AppActions';
-import * as api from '../../actions/EmailActions';
-import SimpleList from '../widget/List/SimpleList';
-import Attachments from './Attachments';
-import AutocompleteField from './AutocompleteField';
+import { addNotification } from "../../actions/AppActions";
+import * as api from "../../actions/EmailActions";
+import SimpleList from "../widget/List/SimpleList";
+import Attachments from "./Attachments";
+import AutocompleteField from "./AutocompleteField";
 
 const NewEmail = ({ windowId, docId, handleCloseEmail }) => {
   const [loaded, setLoaded] = useState(false);
@@ -52,7 +52,7 @@ const NewEmail = ({ windowId, docId, handleCloseEmail }) => {
     api.sendEmail(data.emailId).then(() => {
       handleCloseEmail && handleCloseEmail();
       dispatch(
-        addNotification('Email', 'Email has been sent.', 5000, 'success')
+        addNotification("Email", "Email has been sent.", 5000, "success"),
       );
     });
   };
@@ -78,7 +78,7 @@ const NewEmail = ({ windowId, docId, handleCloseEmail }) => {
         <div className="panel-email-header-wrapper">
           <div className="panel-email-header panel-email-header-top">
             <span className="email-headline">
-              {counterpart.translate('window.email.new')}
+              {counterpart.translate("window.email.new")}
             </span>
             {availableTemplates.length > 0 && (
               <div className="email-templates">
@@ -99,11 +99,11 @@ const NewEmail = ({ windowId, docId, handleCloseEmail }) => {
           <div className="panel-email-header panel-email-bright">
             <div className="panel-email-data-wrapper">
               <span className="email-label">
-                {counterpart.translate('window.email.to')}:
+                {counterpart.translate("window.email.to")}:
               </span>
               <AutocompleteField
                 value={data?.to || []}
-                onChange={(value) => onFieldChanged('to', value, true)}
+                onChange={(value) => onFieldChanged("to", value, true)}
                 suggestValuesForQueryString={(queryString) =>
                   api.getToTypeahead(data.emailId, queryString)
                 }
@@ -113,23 +113,23 @@ const NewEmail = ({ windowId, docId, handleCloseEmail }) => {
           <div className="panel-email-header panel-email-bright">
             <div className="panel-email-data-wrapper">
               <span className="email-label">
-                {counterpart.translate('window.email.topic')}:
+                {counterpart.translate("window.email.topic")}:
               </span>
               <input
                 className="email-input email-input-msg"
                 type="text"
-                onChange={(e) => onFieldChanged('subject', e.target.value)}
-                value={data.subject ? data.subject : ''}
-                onBlur={() => syncToBackend('subject')}
+                onChange={(e) => onFieldChanged("subject", e.target.value)}
+                value={data.subject ? data.subject : ""}
+                onBlur={() => syncToBackend("subject")}
               />
             </div>
           </div>
         </div>
         <div className="panel-email-body">
           <textarea
-            value={data.message ? data.message : ''}
-            onChange={(e) => onFieldChanged('message', e.target.value)}
-            onBlur={() => syncToBackend('message')}
+            value={data.message ? data.message : ""}
+            onChange={(e) => onFieldChanged("message", e.target.value)}
+            onBlur={() => syncToBackend("message")}
           />
         </div>
         <div className="panel-email-footer">
@@ -141,7 +141,7 @@ const NewEmail = ({ windowId, docId, handleCloseEmail }) => {
             onClick={onSendButtonClicked}
             className="btn btn-meta-success btn-sm btn-submit"
           >
-            {counterpart.translate('window.email.send')}
+            {counterpart.translate("window.email.send")}
           </button>
         </div>
       </div>

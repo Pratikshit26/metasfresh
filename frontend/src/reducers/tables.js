@@ -1,13 +1,13 @@
-import { original, produce } from 'immer';
-import { difference, get } from 'lodash';
-import { createSelector } from 'reselect';
-import { merge } from 'merge-anything';
+import { original, produce } from "immer";
+import { difference, get } from "lodash";
+import { createSelector } from "reselect";
+import { merge } from "merge-anything";
 
-import * as types from '../constants/ActionTypes';
-import { SORT_TAB } from '../constants/ActionTypes';
-import { doesSelectionExist } from '../utils/documentListHelper';
-import { NUMERIC_FIELD_TYPES } from '../constants/Constants';
-import { shallowEqual, useSelector } from 'react-redux';
+import * as types from "../constants/ActionTypes";
+import { SORT_TAB } from "../constants/ActionTypes";
+import { doesSelectionExist } from "../utils/documentListHelper";
+import { NUMERIC_FIELD_TYPES } from "../constants/Constants";
+import { shallowEqual, useSelector } from "react-redux";
 
 export const initialTableState = {
   windowId: null,
@@ -54,7 +54,7 @@ export const getTableId = ({ windowId, viewId, docId, tabId }) => {
  * @summary selector function for `getTable`
  */
 const selectTableHelper = (state, id) => {
-  return get(state, ['tables', id], initialTableState);
+  return get(state, ["tables", id], initialTableState);
 };
 
 /**
@@ -282,7 +282,7 @@ const reducer = produce((draftState, action) => {
           } else {
             return row;
           }
-        }
+        },
       );
 
       return;
@@ -339,10 +339,10 @@ const reducer = produce((draftState, action) => {
         const rowsToAdd = Object.values(changed);
         if (rowsToAdd.length) {
           const orderBys = original(
-            draftState[id].orderBys ?? draftState[id].defaultOrderBys
+            draftState[id].orderBys ?? draftState[id].defaultOrderBys,
           );
           rowsToAdd.forEach((rowToAdd) =>
-            addRowToArray({ orderedRows: rows, rowToAdd, orderBys })
+            addRowToArray({ orderedRows: rows, rowToAdd, orderBys }),
           );
         }
       }
@@ -380,11 +380,11 @@ const reducer = produce((draftState, action) => {
         if (selection.length) {
           draftState[id].selected = difference(
             draftState[id].selected,
-            selection
+            selection,
           );
           draftState[id].supportAttribute = getSupportAttribute(
             draftState[id].selected,
-            rows
+            rows,
           );
         } else {
           draftState[id].selected = [];
@@ -437,7 +437,7 @@ const reducer = produce((draftState, action) => {
         draftState[id].navigationActive = active;
       } else {
         console.error(
-          `Table with ID ${id} is not present in state. Skip setting navigationActive=${active}`
+          `Table with ID ${id} is not present in state. Skip setting navigationActive=${active}`,
         );
       }
 
@@ -454,7 +454,7 @@ const reducer = produce((draftState, action) => {
         asc: ascending,
       } = action;
 
-      if (scope !== 'master') {
+      if (scope !== "master") {
         return;
       }
 

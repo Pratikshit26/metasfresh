@@ -1,21 +1,21 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import cx from 'classnames';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import cx from "classnames";
 
-import keymap from '../../shortcuts/keymap';
-import QuickActionsContextShortcuts from '../keyshortcuts/QuickActionsContextShortcuts';
+import keymap from "../../shortcuts/keymap";
+import QuickActionsContextShortcuts from "../keyshortcuts/QuickActionsContextShortcuts";
 
 import {
   getQuickActions,
   getQuickActionsId,
-} from '../../reducers/actionsHandler';
-import { openModal } from '../../actions/WindowActions';
-import { deleteQuickActions } from '../../actions/Actions';
+} from "../../reducers/actionsHandler";
+import { openModal } from "../../actions/WindowActions";
+import { deleteQuickActions } from "../../actions/Actions";
 
-import Tooltips from '../tooltips/Tooltips.js';
-import QuickActionsDropdown from './QuickActionsDropdown';
+import Tooltips from "../tooltips/Tooltips.js";
+import QuickActionsDropdown from "./QuickActionsDropdown";
 
 /**
  * @file Class based component.
@@ -79,7 +79,7 @@ export class QuickActions extends Component {
     openModal({
       title: action.caption,
       windowId: action.processId,
-      modalType: 'process',
+      modalType: "process",
       viewId,
       viewDocumentIds: selected,
       parentViewId: parentView.viewId,
@@ -152,26 +152,26 @@ export class QuickActions extends Component {
       disabled,
       className,
     } = this.props;
-    const disabledDuringProcessing = processStatus === 'pending' || pending;
+    const disabledDuringProcessing = processStatus === "pending" || pending;
 
     if (actions.length) {
       return (
         <div
-          className={cx(className, 'js-not-unselect ', {
+          className={cx(className, "js-not-unselect ", {
             disabled: disabled,
           })}
         >
           <span className="action-label spacer-right">
-            {counterpart.translate('window.quickActions.caption')}:
+            {counterpart.translate("window.quickActions.caption")}:
           </span>
           <div className="quick-actions-wrapper">
             <div
               className={
-                'tag tag-success tag-xlg spacer-right ' +
-                'quick-actions-tag ' +
+                "tag tag-success tag-xlg spacer-right " +
+                "quick-actions-tag " +
                 (actions[0].disabled || disabledDuringProcessing
-                  ? 'tag-default '
-                  : 'pointer ')
+                  ? "tag-default "
+                  : "pointer ")
               }
               onMouseEnter={this.showListTooltip}
               onMouseLeave={this.hideListTooltip}
@@ -180,19 +180,19 @@ export class QuickActions extends Component {
               {listTooltip && (
                 <Tooltips
                   name={keymap.QUICK_ACTION_POS}
-                  action={'Run action'}
-                  type={''}
+                  action={"Run action"}
+                  type={""}
                 />
               )}
               {actions[0].caption}
             </div>
             <div
               className={cx(
-                'btn-meta-outline-secondary btn-icon-sm',
-                'btn-inline btn-icon pointer tooltip-parent',
+                "btn-meta-outline-secondary btn-icon-sm",
+                "btn-inline btn-icon pointer tooltip-parent",
                 {
-                  'btn-disabled': isDropdownOpen || disabledDuringProcessing,
-                }
+                  "btn-disabled": isDropdownOpen || disabledDuringProcessing,
+                },
               )}
               onMouseEnter={this.showBtnTooltip}
               onMouseLeave={this.hideBtnTooltip}
@@ -202,8 +202,8 @@ export class QuickActions extends Component {
               {btnTooltip && (
                 <Tooltips
                   name={keymap.QUICK_ACTION_TOGGLE}
-                  action={'Toggle list'}
-                  type={''}
+                  action={"Toggle list"}
+                  type={""}
                 />
               )}
             </div>
@@ -279,5 +279,5 @@ export default connect(
   mapStateToProps,
   { openModal, deleteQuickActions },
   false,
-  { forwardRef: true }
+  { forwardRef: true },
 )(QuickActions);

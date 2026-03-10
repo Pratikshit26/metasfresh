@@ -1,7 +1,7 @@
-import counterpart from 'counterpart';
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import FileInput from './FileInput';
+import counterpart from "counterpart";
+import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import FileInput from "./FileInput";
 
 const Attachments = ({ attachments, onFileAttached }) => {
   const prevAttachments = useRef();
@@ -13,7 +13,7 @@ const Attachments = ({ attachments, onFileAttached }) => {
   }, [attachments]);
 
   const clearFile = () => {
-    document.getElementsByClassName('attachment-input')[1].value = '';
+    document.getElementsByClassName("attachment-input")[1].value = "";
   };
 
   return (
@@ -33,7 +33,7 @@ const Attachments = ({ attachments, onFileAttached }) => {
             <i className="meta-icon-attachments" />
             <FileInput
               name="myImage"
-              placeholder={counterpart.translate('window.email.addAttachment')}
+              placeholder={counterpart.translate("window.email.addAttachment")}
               className="attachment-input"
               onChange={onFileAttached}
             />

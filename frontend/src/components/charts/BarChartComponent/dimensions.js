@@ -1,10 +1,10 @@
-import boxSize from './boxSize';
+import boxSize from "./boxSize";
 
 export const getHorizontalDimensions = (
   svg,
   chartClass,
   height,
-  margin = { left: 35, right: 5 }
+  margin = { left: 35, right: 5 },
 ) => {
   const parentWidth = svg.node().parentNode.offsetWidth;
   const minWidth = height * boxSize.ratio || boxSize.minWidth;
@@ -23,7 +23,7 @@ export const getHorizontalDimensions = (
 
 export const getVerticalDimensions = (
   margin = { top: 35, bottom: 35 },
-  height
+  height,
 ) => {
   const applyingMargin = {
     top: margin.top + boxSize.padding,

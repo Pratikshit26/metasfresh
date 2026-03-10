@@ -13,6 +13,3 @@
     "JsonExternalReferenceLookupRequest": "{\"systemName\":\"ALBERTA\",\"items\":[{\"externalReference\":\"externalRef_bpartner\",\"type\":\"BPartner\"},{\"externalReference\":\"externalRef_bpLocation\",\"type\":\"BPartnerLocation\"},{\"externalReference\":\"externalRef_user\",\"type\":\"UserID\"}]}"
   }
 }
-
-
-

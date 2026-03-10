@@ -44,12 +44,12 @@ export class TaxRate {
 }
 
 function applyTaxRate(taxRate) {
-  cy.visitWindow('137', 'NEW');
-  cy.writeIntoStringField('Name', taxRate.name);
-  cy.writeIntoStringField('ValidFrom', taxRate.validFrom, false, null, true);
-  cy.selectInListField('C_TaxCategory_ID', taxRate.taxCategory);
-  cy.writeIntoStringField('Rate', taxRate.rate);
-  cy.selectInListField('C_Country_ID', 'none', false);
-  cy.selectInListField('C_Country_ID', taxRate.country, false);
-  cy.selectInListField('To_Country_ID', taxRate.countryTo, false);
+  cy.visitWindow("137", "NEW");
+  cy.writeIntoStringField("Name", taxRate.name);
+  cy.writeIntoStringField("ValidFrom", taxRate.validFrom, false, null, true);
+  cy.selectInListField("C_TaxCategory_ID", taxRate.taxCategory);
+  cy.writeIntoStringField("Rate", taxRate.rate);
+  cy.selectInListField("C_Country_ID", "none", false);
+  cy.selectInListField("C_Country_ID", taxRate.country, false);
+  cy.selectInListField("To_Country_ID", taxRate.countryTo, false);
 }

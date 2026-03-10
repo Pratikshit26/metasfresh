@@ -1,5 +1,5 @@
-import React from 'react';
-import { useWorkplaces } from '../../api/userSession';
+import React from "react";
+import { useWorkplaces } from "../../api/userSession";
 
 const ChangeCurrentWorkplace = () => {
   const {

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import Loader from '../app/Loader';
-import BarChart from './BarChartComponent';
-import Indicator from './Indicator';
-import PieChart from './PieChartComponent';
-import { URLsChart } from './URLsChart';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import Loader from "../app/Loader";
+import BarChart from "./BarChartComponent";
+import Indicator from "./Indicator";
+import PieChart from "./PieChartComponent";
+import { URLsChart } from "./URLsChart";
 
 class RawChart extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class RawChart extends Component {
       prevProps.index !== this.props.index ||
       prevProps.id !== this.props.id
     ) {
-      if (this.props.chartType !== 'Indicator') {
+      if (this.props.chartType !== "Indicator") {
         this.mounted &&
           this.setState(
             {
@@ -32,7 +32,7 @@ class RawChart extends Component {
               this.setState({
                 forceChartReRender: false,
               });
-            }
+            },
           );
       }
     }
@@ -78,7 +78,7 @@ class RawChart extends Component {
       data && data.datasets && data.datasets[0] && data.datasets[0].unit;
 
     switch (chartType) {
-      case 'BarChart':
+      case "BarChart":
         return (
           <BarChart
             {...{
@@ -92,23 +92,23 @@ class RawChart extends Component {
               chartTitle,
               noData,
             }}
-            chartClass={'chart-' + id}
+            chartClass={"chart-" + id}
             reRender={forceChartReRender}
             colors={[
-              '#89d729',
-              '#9aafbd',
-              '#7688c9',
-              '#c1ea8e',
-              '#c9d5dc',
-              '#aab5e0',
-              '#6aad18',
-              '#298216',
-              '#32520d',
-              '#605a7f',
+              "#89d729",
+              "#9aafbd",
+              "#7688c9",
+              "#c1ea8e",
+              "#c9d5dc",
+              "#aab5e0",
+              "#6aad18",
+              "#298216",
+              "#32520d",
+              "#605a7f",
             ]}
           />
         );
-      case 'PieChart':
+      case "PieChart":
         return (
           <PieChart
             {...{
@@ -120,24 +120,24 @@ class RawChart extends Component {
               isMaximized,
               chartTitle,
             }}
-            chartClass={'chart-' + id}
+            chartClass={"chart-" + id}
             responsive={true}
             reRender={forceChartReRender}
             colors={[
-              '#89d729',
-              '#9aafbd',
-              '#7688c9',
-              '#c1ea8e',
-              '#c9d5dc',
-              '#aab5e0',
-              '#6aad18',
-              '#298216',
-              '#32520d',
-              '#605a7f',
+              "#89d729",
+              "#9aafbd",
+              "#7688c9",
+              "#c1ea8e",
+              "#c9d5dc",
+              "#aab5e0",
+              "#6aad18",
+              "#298216",
+              "#32520d",
+              "#605a7f",
             ]}
           />
         );
-      case 'Indicator':
+      case "Indicator":
         return (
           <div>
             {editmode && openChartOptions && (
@@ -152,7 +152,7 @@ class RawChart extends Component {
             <Indicator
               id={id}
               zoomToDetailsAvailable={zoomToDetailsAvailable}
-              amount={noData ? '0' : dataset0[0][fields[0].fieldName]}
+              amount={noData ? "0" : dataset0[0][fields[0].fieldName]}
               unit={dataset0_unit ? dataset0_unit : fields[0].unit}
               {...{
                 caption,
@@ -162,7 +162,7 @@ class RawChart extends Component {
             />
           </div>
         );
-      case 'URLs':
+      case "URLs":
         return <URLsChart data={dataset0} />;
       default:
         return <div>{chartType}</div>;
@@ -173,17 +173,17 @@ class RawChart extends Component {
     const { chartType, data, zoomToDetailsAvailable, caption } = this.props;
 
     switch (chartType) {
-      case 'Indicator':
+      case "Indicator":
         return (
           <Indicator
-            value={'No data'}
+            value={"No data"}
             data={data}
             loader={showLoader}
             {...{ caption, zoomToDetailsAvailable }}
           />
         );
       default:
-        return <div>{showLoader ? <Loader /> : 'No data'}</div>;
+        return <div>{showLoader ? <Loader /> : "No data"}</div>;
     }
   }
 
@@ -192,7 +192,7 @@ class RawChart extends Component {
 
     if (!data) {
       return this.renderNoData(true); // loading
-    } else if (data.error && chartType !== 'Indicator') {
+    } else if (data.error && chartType !== "Indicator") {
       return this.renderError(data.error.message);
     } else if (data.datasets && data.datasets.length > 0) {
       return this.renderChart();

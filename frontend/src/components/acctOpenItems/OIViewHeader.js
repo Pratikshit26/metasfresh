@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '../../assets/css/OIViewHeader.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import "../../assets/css/OIViewHeader.scss";
 
-export const OIViewHeader_WINDOW_ID = 'SAPGLJournalSelectOpenItems';
+export const OIViewHeader_WINDOW_ID = "SAPGLJournalSelectOpenItems";
 
-const FIELDNAME_totalDebit = 'totalDebit';
-const FIELDNAME_totalCredit = 'totalCredit';
-const FIELDNAME_balance = 'balance';
+const FIELDNAME_totalDebit = "totalDebit";
+const FIELDNAME_totalCredit = "totalCredit";
+const FIELDNAME_balance = "balance";
 
 export const OIViewHeader = ({ headerProperties }) => {
   const propsGroups = headerProperties?.groups;

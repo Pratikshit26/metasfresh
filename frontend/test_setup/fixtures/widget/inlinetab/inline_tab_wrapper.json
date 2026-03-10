@@ -237,15 +237,9 @@
     "supportQuickInput": false,
     "queryOnActivate": true
   },
-  "fields": [
-    
-  ],
+  "fields": [],
   "relativeDocId": 2156425,
-  "widgetData": [
-    {
-      
-    }
-  ],
+  "widgetData": [{}],
   "activeTab": "AD_Tab-540829",
   "modalVisible": false,
   "timeZone": "Europe/Berlin",

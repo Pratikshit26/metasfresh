@@ -1,22 +1,22 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import history from '../../services/History';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import history from "../../services/History";
 import {
   cancelRedirect,
   confirmRedirect,
   resetRedirect,
   useAttemptedUrl,
   useTargetUrl,
-} from '../../reducers/redirect';
-import { useSaveStatusFlags } from '../../reducers/windowHandler';
-import { useLocation } from 'react-router';
-import { isObject } from 'lodash/lang';
-import { trl } from '../../utils/locale';
-import { markMasterDataAsChanged } from '../../actions/WindowActions';
+} from "../../reducers/redirect";
+import { useSaveStatusFlags } from "../../reducers/windowHandler";
+import { useLocation } from "react-router";
+import { isObject } from "lodash/lang";
+import { trl } from "../../utils/locale";
+import { markMasterDataAsChanged } from "../../actions/WindowActions";
 
-const isCypress = () => navigator.userAgent.includes('Cypress');
+const isCypress = () => navigator.userAgent.includes("Cypress");
 
-const MSG_DiscardChanges = 'window.discardChanges';
+const MSG_DiscardChanges = "window.discardChanges";
 
 const handleBeforeUnload = (event) => {
   const message = trl(MSG_DiscardChanges);
@@ -29,7 +29,7 @@ const confirmDiscardChanges = () => {
   return window.confirm(trl(MSG_DiscardChanges));
 };
 
-const KEY_PreviousPath = 'RedirectHandler_previousPath';
+const KEY_PreviousPath = "RedirectHandler_previousPath";
 
 const RedirectHandler = () => {
   const dispatch = useDispatch();
@@ -102,13 +102,13 @@ const RedirectHandler = () => {
   // Handle browser tab close, reload, or external navigation
   useEffect(() => {
     if (isWarnOnPageUnload) {
-      window.addEventListener('beforeunload', handleBeforeUnload);
+      window.addEventListener("beforeunload", handleBeforeUnload);
     } else {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     }
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [isWarnOnPageUnload]);
 

@@ -1,28 +1,28 @@
-import counterpart from 'counterpart';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import TetherComponent from 'react-tether';
-import ReactDOM from 'react-dom';
-import _ from 'lodash';
-import Moment from 'moment-timezone';
+import counterpart from "counterpart";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import TetherComponent from "react-tether";
+import ReactDOM from "react-dom";
+import _ from "lodash";
+import Moment from "moment-timezone";
 
-import { closeFilterBox, openFilterBox } from '../../actions/WindowActions';
+import { closeFilterBox, openFilterBox } from "../../actions/WindowActions";
 
-import { convertDateToReadable } from '../../utils/dateHelpers';
-import { isFocusableWidgetType } from '../../utils/widgetHelpers';
-import keymap from '../../shortcuts/keymap';
-import ModalContextShortcuts from '../keyshortcuts/ModalContextShortcuts';
-import { DATE_FIELD_FORMATS } from '../../constants/Constants';
+import { convertDateToReadable } from "../../utils/dateHelpers";
+import { isFocusableWidgetType } from "../../utils/widgetHelpers";
+import keymap from "../../shortcuts/keymap";
+import ModalContextShortcuts from "../keyshortcuts/ModalContextShortcuts";
+import { DATE_FIELD_FORMATS } from "../../constants/Constants";
 
-import OverlayField from '../app/OverlayField';
-import Tooltips from '../tooltips/Tooltips.js';
-import WidgetWrapper from '../../containers/WidgetWrapper';
+import OverlayField from "../app/OverlayField";
+import Tooltips from "../tooltips/Tooltips.js";
+import WidgetWrapper from "../../containers/WidgetWrapper";
 import {
   getViewFilterParameterDropdown,
   getViewFilterParameterTypeahead,
-} from '../../api/view';
-import { prepareParameterValueForBackend } from '../../utils/filterHelpers';
+} from "../../api/view";
+import { prepareParameterValueForBackend } from "../../utils/filterHelpers";
 
 /**
  * @file Class based component.
@@ -73,18 +73,18 @@ class FiltersItem extends PureComponent {
     this.mounted = true;
 
     if (this.widgetsContainer) {
-      this.widgetsContainer.addEventListener('scroll', this.handleScroll);
+      this.widgetsContainer.addEventListener("scroll", this.handleScroll);
     }
 
     if (this.props.filtersWrapper && this.widgetsContainer) {
       /* eslint-disable react/no-find-dom-node */
       const widgetElement = ReactDOM.findDOMNode(this.widgetsContainer);
-      const buttonElement = widgetElement.closest('.filter-wrapper');
+      const buttonElement = widgetElement.closest(".filter-wrapper");
       const buttonClientRect = buttonElement.getBoundingClientRect();
       const wrapperElement = ReactDOM.findDOMNode(this.props.filtersWrapper);
       /* eslint-enablereact/no-find-dom-node */
       const wrapperRight = wrapperElement.getBoundingClientRect().right;
-      const documentElement = wrapperElement.closest('.document-lists-wrapper');
+      const documentElement = wrapperElement.closest(".document-lists-wrapper");
       const documentClientRect = documentElement.getBoundingClientRect();
 
       if (parent) {
@@ -111,7 +111,7 @@ class FiltersItem extends PureComponent {
     const { closeFilterBox } = this.props;
 
     if (this.widgetsContainer) {
-      this.widgetsContainer.removeEventListener('scroll', this.handleScroll);
+      this.widgetsContainer.removeEventListener("scroll", this.handleScroll);
     }
 
     closeFilterBox();
@@ -152,7 +152,7 @@ class FiltersItem extends PureComponent {
    * @param {*} id
    * @param {*} valueTo
    */
-  setValue = (parameter, value, id, valueTo = '') => {
+  setValue = (parameter, value, id, valueTo = "") => {
     const parametersArray = toParameterValueArray(parameter, value, valueTo);
     const { filter, activeFilter } = this.mergeSingle(parametersArray, true);
 
@@ -196,18 +196,18 @@ class FiltersItem extends PureComponent {
     const updatedParameters = {};
     parameters.forEach((parameter) => {
       const parameterName = parameter.parameterName;
-      let value = '';
-      let valueTo = '';
-      let activeValue = '';
-      let activeValueTo = '';
+      let value = "";
+      let valueTo = "";
+      let activeValue = "";
+      let activeValueTo = "";
 
       // if filter has defaultValue, update local filters data to include
       // it for displaying
 
       // for active filter
       if (active) {
-        value = parameter.value != null ? parameter.value : '';
-        valueTo = parameter.valueTo != null ? parameter.valueTo : '';
+        value = parameter.value != null ? parameter.value : "";
+        valueTo = parameter.valueTo != null ? parameter.valueTo : "";
 
         // if filter has value property, use it instead of defaultValue
         activeValue =
@@ -286,8 +286,8 @@ class FiltersItem extends PureComponent {
           const { value, valueTo } = paramsMap[param.parameterName];
 
           if (
-            (value !== null && value !== '') ||
-            (valueTo !== null && valueTo !== '')
+            (value !== null && value !== "") ||
+            (valueTo !== null && valueTo !== "")
           ) {
             return {
               ...param,
@@ -297,8 +297,8 @@ class FiltersItem extends PureComponent {
           }
           return {
             ...param,
-            value: '',
-            valueTo: '',
+            value: "",
+            valueTo: "",
           };
         }
 
@@ -334,9 +334,9 @@ class FiltersItem extends PureComponent {
     } = this.state;
 
     const targetFilter = parameters.filter(
-      (item) => item.field === filterItem.parameterName
+      (item) => item.field === filterItem.parameterName,
     );
-    return targetFilter[0] ? targetFilter[0].widgetType : '';
+    return targetFilter[0] ? targetFilter[0].widgetType : "";
   };
 
   /**
@@ -373,7 +373,7 @@ class FiltersItem extends PureComponent {
 
     if (
       (filter &&
-        filter.parametersLayoutType === 'singleOverlayField' &&
+        filter.parametersLayoutType === "singleOverlayField" &&
         !filter.parameters[0].value) ||
       (filter.parameters && activeFilter === null)
     ) {
@@ -390,7 +390,7 @@ class FiltersItem extends PureComponent {
             closeFilterMenu();
             returnBackToDropdown && returnBackToDropdown();
           });
-        }
+        },
       );
     } else {
       // update the active filter with the defaultValue if value from active filter is empty
@@ -399,7 +399,7 @@ class FiltersItem extends PureComponent {
         activeFilterClone = filter;
         activeFilterClone.parameters.map((afcItem) => {
           let filterType = this.checkFilterTypeByName(afcItem);
-          if (filterType === 'YesNo') {
+          if (filterType === "YesNo") {
             // YesNo filters (checkboxes) can be either null, true or false
             afcItem.value = afcItem.defaultValue;
           }
@@ -447,8 +447,8 @@ class FiltersItem extends PureComponent {
     // shall not happen:
     if (filter?.filterId !== filterId) {
       console.warn(
-        'prepareLookupContextFromState: called with wrong filterId',
-        { filterId, filter }
+        "prepareLookupContextFromState: called with wrong filterId",
+        { filterId, filter },
       );
       return {};
     }
@@ -535,7 +535,7 @@ class FiltersItem extends PureComponent {
 
     return (
       <div>
-        {data.parametersLayoutType === 'singleOverlayField' ? (
+        {data.parametersLayoutType === "singleOverlayField" ? (
           <div className="screen-freeze js-not-unselect light">
             <OverlayField
               type={windowType}
@@ -557,12 +557,12 @@ class FiltersItem extends PureComponent {
           >
             <div className="filter-controls">
               <div>
-                {counterpart.translate('window.activeFilter.caption')}:
+                {counterpart.translate("window.activeFilter.caption")}:
                 <span className="filter-active">{panelCaption}</span>
               </div>
               {isActive && (
                 <span className="filter-clear" onClick={this.handleClear}>
-                  {counterpart.translate('window.clearFilter.caption')}
+                  {counterpart.translate("window.clearFilter.caption")}
                   <i className="meta-icon-trash" />
                 </span>
               )}
@@ -598,7 +598,7 @@ class FiltersItem extends PureComponent {
                             id,
                             valueTo,
                             filter.filterId,
-                            item.defaultValue
+                            item.defaultValue,
                           )
                         }
                         handleChange={(property, value, id, valueTo) => {
@@ -613,7 +613,7 @@ class FiltersItem extends PureComponent {
                               id,
                               valueTo,
                               filter.filterId,
-                              item.defaultValue
+                              item.defaultValue,
                             );
                           }
                         }}
@@ -645,7 +645,7 @@ class FiltersItem extends PureComponent {
               <div className="col-sm-12 text-right">
                 {notValidFields && (
                   <div className="input-error">
-                    {counterpart.translate('window.noMandatory.caption')}
+                    {counterpart.translate("window.noMandatory.caption")}
                   </div>
                 )}
               </div>
@@ -656,11 +656,11 @@ class FiltersItem extends PureComponent {
                 targetAttachment="bottom left"
                 constraints={[
                   {
-                    to: 'scrollParent',
+                    to: "scrollParent",
                   },
                   {
-                    to: 'window',
-                    pin: ['bottom'],
+                    to: "window",
+                    pin: ["bottom"],
                   },
                 ]}
                 renderTarget={(ref) =>
@@ -674,7 +674,7 @@ class FiltersItem extends PureComponent {
                       onMouseEnter={this.showTooltip}
                       onMouseLeave={this.hideTooltip}
                     >
-                      {counterpart.translate('window.apply.caption')}
+                      {counterpart.translate("window.apply.caption")}
                     </button>
                   )
                 }
@@ -684,8 +684,8 @@ class FiltersItem extends PureComponent {
                       ref={ref}
                       className="filter-tooltip"
                       name={keymap.DONE}
-                      action={counterpart.translate('window.apply.caption')}
-                      type={''}
+                      action={counterpart.translate("window.apply.caption")}
+                      type={""}
                     />
                   )
                 }

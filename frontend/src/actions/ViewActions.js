@@ -6,9 +6,9 @@ import {
   getViewLayout,
   headerPropertiesRequest,
   locationConfigRequest,
-} from '../api';
+} from "../api";
 
-import { formatFilters, populateFiltersCaptions } from '../utils/filterHelpers';
+import { formatFilters, populateFiltersCaptions } from "../utils/filterHelpers";
 import {
   ADD_VIEW_LOCATION_DATA,
   CREATE_VIEW,
@@ -32,21 +32,21 @@ import {
   UNSET_INCLUDED_VIEW,
   UPDATE_VIEW_DATA_ERROR,
   UPDATE_VIEW_DATA_SUCCESS,
-} from '../constants/ActionTypes';
+} from "../constants/ActionTypes";
 
-import { getTableId } from '../reducers/tables';
-import { getEntityRelatedId } from '../reducers/filters';
-import { getView } from '../reducers/viewHandler';
+import { getTableId } from "../reducers/tables";
+import { getEntityRelatedId } from "../reducers/filters";
+import { getView } from "../reducers/viewHandler";
 import {
   createGridTable,
   deleteTable,
   partialUpdateGridTableRows,
   updateGridTable,
-} from './TableActions';
-import { createFilter, deleteFilter } from './FiltersActions';
-import { deleteQuickActions, fetchQuickActions } from './Actions';
-import { closeModal, closeRawModal, setRawModalTitle } from './WindowActions';
-import { patchModalView } from '../api/view';
+} from "./TableActions";
+import { createFilter, deleteFilter } from "./FiltersActions";
+import { deleteQuickActions, fetchQuickActions } from "./Actions";
+import { closeModal, closeRawModal, setRawModalTitle } from "./WindowActions";
+import { patchModalView } from "../api/view";
 
 /**
  * @method resetView
@@ -371,7 +371,7 @@ export function fetchDocument({
                 filtersActive,
                 activeFiltersCaptions,
               },
-            })
+            }),
           );
         }
 
@@ -411,7 +411,7 @@ export function fetchDocument({
               viewId: includedViewId,
               viewProfileId,
               isModal,
-            })
+            }),
           );
 
           // don't fetch quick actions for parent view as we don't have
@@ -430,7 +430,7 @@ export function fetchDocument({
               viewId,
               isModal,
               viewProfileId,
-            })
+            }),
           );
         }
 
@@ -505,7 +505,7 @@ export function fetchLayout(
   windowId,
   viewType,
   viewProfileId = null,
-  isModal = false
+  isModal = false,
 ) {
   return (dispatch) => {
     dispatch(fetchLayoutPending(windowId, isModal));
@@ -608,7 +608,7 @@ export function showIncludedView({
 
     if (showIncludedView) {
       dispatch(
-        setIncludedView({ windowId, viewId, parentId: id, viewProfileId })
+        setIncludedView({ windowId, viewId, parentId: id, viewProfileId }),
       );
     }
 
@@ -630,7 +630,7 @@ export function fetchHeaderProperties({ windowId, viewId, isModal = false }) {
           headerProperties: response.data,
         };
         dispatch(
-          updateViewSuccess({ id: windowId, data: updatedData, isModal })
+          updateViewSuccess({ id: windowId, data: updatedData, isModal }),
         );
       })
       .catch((error) => {
@@ -649,9 +649,9 @@ export function patchViewAction({ windowId, viewId, rowId, fieldName, value }) {
           partialUpdateGridTableRows({
             tableId: getTableId({ windowId, viewId }),
             rowsToUpdate: [row],
-          })
+          }),
         );
-      }
+      },
     );
   };
 }
@@ -668,13 +668,13 @@ export const closeViewModal = async ({
         closeRawModal(),
         closeModal(),
         unsetIncludedView({ windowId, viewId, forceClose: true }),
-      ].map((action) => dispatch(action))
+      ].map((action) => dispatch(action)),
     );
 
     if (!modalVisible) {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
 
-    await deleteViewRequest(windowId, viewId, closeAction ?? 'DONE');
+    await deleteViewRequest(windowId, viewId, closeAction ?? "DONE");
   };
 };

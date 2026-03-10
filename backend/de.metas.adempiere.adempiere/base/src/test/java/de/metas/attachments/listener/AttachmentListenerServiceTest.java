@@ -1,9 +1,4 @@
-/*
- * Check for cyprus issue here over the lap 
- * de.metas.adempiere.adempiere.base
-    h
- * #L%
- */
+// Check for cyprus issue here over the lap .
 
 package de.metas.attachments.listener;
 
@@ -59,7 +54,7 @@ public class AttachmentListenerServiceTest
 
 
 // Model Deployment Logic here and then the test case to check the notification 
-// logic when the attachment entry is linked with the record.
+// Logic when the attachment entry is linked with the record.
 
 	@Test
 	public void givenAttachmentEntry_whenNotifyAttachmentListeners_returnSuccess()
@@ -80,7 +75,7 @@ public class AttachmentListenerServiceTest
 		assertEquals(result.get(0).getListener().getClass(), DumbAttachmentListener.class);
 	}
   
-  // Prepare type logic here.Create repsonse 
+    // Create TypeResponse logic.Here for class type records.
 
 	private void prepareJavaClassTypeMockRecord()
 	{
@@ -91,7 +86,10 @@ public class AttachmentListenerServiceTest
 		javaClassType.setIsActive(true);
 
 		InterfaceWrapperHelper.save(javaClassType);
-	}
+	};
+
+
+	// Preapre for AD. table 
 
 	private void prepareJavaClassMockRecord()
 	{
@@ -119,10 +117,9 @@ public class AttachmentListenerServiceTest
 		InterfaceWrapperHelper.save(adTable);
 	}
 
-	// Prepare Attachment Listner Record here(Logic is to create a record 
-	// in the I_AD_Table_AttachmentListener table which will link the DumbAttachmentListener with the Mock Table)   
+	// Prepare the attachement listner record which will link with the ad.
 
-
+    // PreapreAttachement Record Listner 
 	private void prepareAttachmentListenerMockRecord()
 	{
 		final I_AD_Table_AttachmentListener mockRecord = InterfaceWrapperHelper.newInstance(I_AD_Table_AttachmentListener.class);

@@ -64,7 +64,9 @@ export class Attribute {
 
   // noinspection JSUnusedGlobalSymbols
   addAttributeValue(attributeValue) {
-    cy.log(`Attribute - add AttributeValue = ${JSON.stringify(attributeValue)}`);
+    cy.log(
+      `Attribute - add AttributeValue = ${JSON.stringify(attributeValue)}`,
+    );
     this.attributeValues.push(attributeValue);
     return this;
   }
@@ -105,18 +107,21 @@ export class AttributeValue {
 }
 
 function applyAttribute(attribute) {
-  describe(`Create new Attribute ${attribute.name}`, function() {
-    cy.visitWindow('260', 'NEW');
-    cy.writeIntoStringField('Value', attribute.value);
-    cy.writeIntoStringField('Name', attribute.name);
-    cy.writeIntoStringField('Description', attribute.description);
-    cy.selectInListField('AttributeValueType', attribute.attributeValueType);
-    cy.setCheckBoxValue('IsInstanceAttribute', attribute.isInstanceAttribute);
-    cy.setCheckBoxValue('IsPricingRelevant', attribute.isPricingRelevant);
-    cy.setCheckBoxValue('IsStorageRelevant', attribute.isStorageRelevant);
-    cy.setCheckBoxValue('IsAttrDocumentRelevant', attribute.isAttrDocumentRelevant);
+  describe(`Create new Attribute ${attribute.name}`, function () {
+    cy.visitWindow("260", "NEW");
+    cy.writeIntoStringField("Value", attribute.value);
+    cy.writeIntoStringField("Name", attribute.name);
+    cy.writeIntoStringField("Description", attribute.description);
+    cy.selectInListField("AttributeValueType", attribute.attributeValueType);
+    cy.setCheckBoxValue("IsInstanceAttribute", attribute.isInstanceAttribute);
+    cy.setCheckBoxValue("IsPricingRelevant", attribute.isPricingRelevant);
+    cy.setCheckBoxValue("IsStorageRelevant", attribute.isStorageRelevant);
+    cy.setCheckBoxValue(
+      "IsAttrDocumentRelevant",
+      attribute.isAttrDocumentRelevant,
+    );
 
-    attribute.attributeValues.forEach(function(attributeValue) {
+    attribute.attributeValues.forEach(function (attributeValue) {
       applyAttributeValue(attributeValue);
     });
     cy.expectNumberOfRows(attribute.attributeValues.length);
@@ -124,10 +129,10 @@ function applyAttribute(attribute) {
 }
 
 function applyAttributeValue(attributeValue) {
-  cy.get('#tab_M_AttributeValue').click();
+  cy.get("#tab_M_AttributeValue").click();
   cy.pressAddNewButton();
-  cy.writeIntoStringField('Value', attributeValue.value, true);
-  cy.writeIntoStringField('Name', attributeValue.name, true);
+  cy.writeIntoStringField("Value", attributeValue.value, true);
+  cy.writeIntoStringField("Name", attributeValue.name, true);
   cy.pressDoneButton();
 }
 
@@ -135,7 +140,7 @@ export class AttributeSet {
   constructor(name) {
     cy.log(`AttributeSet - name = ${name}`);
     this.name = name;
-    this.mandatoryType = 'Optional';
+    this.mandatoryType = "Optional";
     this.attributes = [];
   }
 
@@ -166,12 +171,12 @@ export class AttributeSet {
 }
 
 function applyAttributeSet(attributeSet) {
-  describe(`Create new AttributeSet ${attributeSet.name}`, function() {
-    cy.visitWindow('256', 'NEW');
-    cy.writeIntoStringField('Name', attributeSet.name);
-    cy.selectInListField('MandatoryType', attributeSet.mandatoryType);
+  describe(`Create new AttributeSet ${attributeSet.name}`, function () {
+    cy.visitWindow("256", "NEW");
+    cy.writeIntoStringField("Name", attributeSet.name);
+    cy.selectInListField("MandatoryType", attributeSet.mandatoryType);
 
-    attributeSet.attributes.forEach(att => {
+    attributeSet.attributes.forEach((att) => {
       applyAttributeSetUse(att);
     });
     cy.expectNumberOfRows(attributeSet.attributes.length);
@@ -179,8 +184,12 @@ function applyAttributeSet(attributeSet) {
 }
 
 function applyAttributeSetUse(attribute) {
-  cy.get('#tab_M_AttributeUse').click();
+  cy.get("#tab_M_AttributeUse").click();
   cy.pressAddNewButton();
-  cy.selectInListField('M_Attribute_ID', `${attribute}_${attribute}`, true /*modal*/);
+  cy.selectInListField(
+    "M_Attribute_ID",
+    `${attribute}_${attribute}`,
+    true /*modal*/,
+  );
   cy.pressDoneButton();
 }

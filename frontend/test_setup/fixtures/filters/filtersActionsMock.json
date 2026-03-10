@@ -328,9 +328,7 @@
           "sortNo": 10000
         }
       ],
-      "debugProperties": {
-        
-      }
+      "debugProperties": {}
     },
     {
       "filterId": "facet-C_Order_ID",
@@ -408,7 +406,5 @@
       "sortNo": 2147480003
     }
   ],
-  "activeFiltersCaptions": {
-    
-  }
+  "activeFiltersCaptions": {}
 }

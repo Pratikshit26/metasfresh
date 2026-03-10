@@ -4,11 +4,7 @@
     "allowJs": true,
     "noEmit": true,
     "baseUrl": "../node_modules",
-    "types": [
-      "cypress"
-    ]
+    "types": ["cypress"]
   },
-  "include": [
-    "**/*.*"
-  ]
+  "include": ["**/*.*"]
 }

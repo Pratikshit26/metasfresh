@@ -1,19 +1,19 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import classnames from 'classnames';
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import classnames from "classnames";
 
-import * as api from '../../../api/attributes';
-import { formatDateWithZeros } from '../../../utils/documentListHelper';
+import * as api from "../../../api/attributes";
+import { formatDateWithZeros } from "../../../utils/documentListHelper";
 import {
   DROPDOWN_OFFSET_BIG,
   DROPUP_OFFSET_SMALL,
   DROPUP_START,
-} from '../../../constants/Constants';
-import { getTableId } from '../../../reducers/tables';
+} from "../../../constants/Constants";
+import { getTableId } from "../../../reducers/tables";
 
-import AttributesDropdown from './AttributesDropdown';
-import { useSelector } from 'react-redux';
-import { getSettingFromStateAsPositiveInt } from '../../../utils/settings';
+import AttributesDropdown from "./AttributesDropdown";
+import { useSelector } from "react-redux";
+import { getSettingFromStateAsPositiveInt } from "../../../utils/settings";
 
 /**
  * @component
@@ -76,9 +76,9 @@ const Attributes = ({
       })
       .catch((error) =>
         console.error(
-          'Failed creating a new editing attributes instance: ',
-          error.message
-        )
+          "Failed creating a new editing attributes instance: ",
+          error.message,
+        ),
       )
       .finally(() => setIsLoading(false));
   };
@@ -130,7 +130,7 @@ const Attributes = ({
   const handleFieldChange = (fieldName, value) => {
     // Add special case of formatting for the case when people input 04.7.2020 to be transformed to 04.07.2020
     value =
-      isDropdownOpen && fieldsByName[fieldName].widgetType === 'Date'
+      isDropdownOpen && fieldsByName[fieldName].widgetType === "Date"
         ? formatDateWithZeros(value)
         : value;
 
@@ -157,21 +157,21 @@ const Attributes = ({
   const handleCompletion = () => {
     if (!isLoading && fieldsByName) {
       const mandatoryFieldNames = Object.keys(fieldsByName).filter(
-        (fieldName) => fieldsByName[fieldName].mandatory
+        (fieldName) => fieldsByName[fieldName].mandatory,
       );
       const valid = !mandatoryFieldNames.filter(
-        (fieldName) => !fieldsByName[fieldName].value
+        (fieldName) => !fieldsByName[fieldName].value,
       ).length;
 
       //there are required values that are not set. just close
       if (mandatoryFieldNames.length && !valid) {
         /** we are treating the inlineTab differently - we don't show this confirmation dialog  */
-        if (disconnected === 'inlineTab') {
+        if (disconnected === "inlineTab") {
           /** TODO: here we might use a prompt explaining that the settings were not saved */
           showHideDropdown(false);
         } else {
           /** the generic case  */
-          if (window.confirm('Do you really want to leave?')) {
+          if (window.confirm("Do you really want to leave?")) {
             showHideDropdown(false);
           }
         }
@@ -201,34 +201,34 @@ const Attributes = ({
 
         openModal({
           windowId: processId,
-          modalType: 'process',
+          modalType: "process",
           viewDocumentIds: [`${documentId}`],
         });
       });
     }
   };
 
-  const buttonCaption = value?.caption || 'Edit';
+  const buttonCaption = value?.caption || "Edit";
 
   const maxHeight = useSelector((state) =>
     getSettingFromStateAsPositiveInt(
       state,
-      'widget.AttributesDropdown.maxHeight',
-      300
-    )
+      "widget.AttributesDropdown.maxHeight",
+      300,
+    ),
   );
 
   return (
-    <div className={classnames('attributes', { 'attributes-in-table': rowId })}>
+    <div className={classnames("attributes", { "attributes-in-table": rowId })}>
       <button
         tabIndex={tabIndex}
         onClick={() => showHideDropdown(true)}
         className={classnames(
-          'btn btn-block tag tag-lg tag-block tag-secondary pointer',
+          "btn btn-block tag tag-lg tag-block tag-secondary pointer",
           {
-            'tag-disabled': isDropdownOpen,
-            'tag-disabled disabled': readonly,
-          }
+            "tag-disabled": isDropdownOpen,
+            "tag-disabled disabled": readonly,
+          },
         )}
       >
         {buttonCaption}
@@ -288,7 +288,7 @@ const computeEditingSource = ({
   fieldName,
   viewId,
 }) => {
-  if (entity === 'window') {
+  if (entity === "window") {
     return {
       windowId: docType,
       documentId: dataId,
@@ -296,20 +296,20 @@ const computeEditingSource = ({
       rowId: rowId,
       fieldName: fieldName,
     };
-  } else if (entity === 'documentView') {
+  } else if (entity === "documentView") {
     return {
       viewId: viewId,
       rowId: rowId,
       fieldName: fieldName,
     };
-  } else if (entity === 'process') {
+  } else if (entity === "process") {
     return {
       processId: docType,
       documentId: dataId,
       fieldName: fieldName,
     };
   } else {
-    throw 'Unknown entity: ' + entity;
+    throw "Unknown entity: " + entity;
   }
 };
 
@@ -318,7 +318,7 @@ const mergeFieldsByNames = (existingFieldsByName, fieldsByNameToMerge) => {
 
   Object.keys(fieldsByNameToMerge).forEach((fieldName) => {
     // Skip pseudo-field "ID". We already have editingInstanceId in our state.
-    if (fieldName === 'ID') {
+    if (fieldName === "ID") {
       return;
     }
 

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { toggleOverlay } from '../../actions/WindowActions';
-import QRCode from './QRCode';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { toggleOverlay } from "../../actions/WindowActions";
+import QRCode from "./QRCode";
 
 class Overlay extends Component {
   handleKeyDown = (e) => {
     const { toggleOverlay } = this.props;
 
-    if (e.key === 'Escape') {
+    if (e.key === "Escape") {
       toggleOverlay(false);
     }
   };
@@ -17,12 +17,12 @@ class Overlay extends Component {
     const { data } = this.props;
 
     if (data) {
-      document.addEventListener('keydown', this.handleKeyDown);
+      document.addEventListener("keydown", this.handleKeyDown);
     }
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
 
   render() {

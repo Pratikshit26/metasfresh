@@ -11,22 +11,22 @@ import wfProcesses from './wfProcesses/index';
 import { getApplicationReduxReducers } from '../apps/index';
 
 const createRootReducer = (history) => {
-  const appsReducers = getApplicationReduxReducers();
+    const appsReducers = getApplicationReduxReducers();
 
-  const reducers = {
-    ...appsReducers,
-    update,
-    router: connectRouter(history),
-    appHandler,
-    headers,
-    applications,
-    launchers,
-    settings: settingsReducer,
-    wfProcesses,
-  };
+    const reducers = {
+        ...appsReducers,
+        update,
+        router: connectRouter(history),
+        appHandler,
+        headers,
+        applications,
+        launchers,
+        settings: settingsReducer,
+        wfProcesses,
+    };
 
-  console.log('Registered app reducers', appsReducers);
+    console.log('Registered app reducers', appsReducers);
 
-  return combineReducers(reducers);
+    return combineReducers(reducers);
 };
 export default createRootReducer;

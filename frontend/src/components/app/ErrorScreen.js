@@ -1,9 +1,9 @@
-import counterpart from 'counterpart';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { checkLoginRequest } from '../../api/login';
-import { CONNECTION_ERROR_RETRY_INTERVAL_MILLIS } from '../../constants/Constants';
-import { getCurrentActiveLanguage } from '../../utils/locale';
+import counterpart from "counterpart";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { checkLoginRequest } from "../../api/login";
+import { CONNECTION_ERROR_RETRY_INTERVAL_MILLIS } from "../../constants/Constants";
+import { getCurrentActiveLanguage } from "../../utils/locale";
 class ErrorScreen extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ class ErrorScreen extends Component {
           window.location.reload();
         }
       })
-      .catch((e) => console.error('checkLoginRequest error:', e));
+      .catch((e) => console.error("checkLoginRequest error:", e));
   };
 
   componentDidMount() {
@@ -26,7 +26,7 @@ class ErrorScreen extends Component {
     if (errorType) {
       this.intervalId = setInterval(
         this.pingServer,
-        CONNECTION_ERROR_RETRY_INTERVAL_MILLIS
+        CONNECTION_ERROR_RETRY_INTERVAL_MILLIS,
       );
     }
   }
@@ -39,7 +39,7 @@ class ErrorScreen extends Component {
     const { errorType } = this.props;
     const title = counterpart.translate(`window.error.${errorType}.title`);
     const description = counterpart.translate(
-      `window.error.${errorType}.description`
+      `window.error.${errorType}.description`,
     );
 
     return (

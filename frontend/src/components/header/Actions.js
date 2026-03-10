@@ -1,17 +1,17 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import cx from 'classnames';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import cx from "classnames";
 
 import {
   actionsRequest,
   rowActionsRequest,
-} from '../../actions/GenericActions';
-import { getSelection, getTableId } from '../../reducers/tables';
+} from "../../actions/GenericActions";
+import { getSelection, getTableId } from "../../reducers/tables";
 
-import Loader from '../app/Loader';
-import { findViewByViewId } from '../../reducers/viewHandler';
+import Loader from "../app/Loader";
+import { findViewByViewId } from "../../reducers/viewHandler";
 
 /**
  * @file Class based component.
@@ -29,7 +29,7 @@ class Actions extends Component {
     const { windowType, entity, docId, notfound, activeTab, selected } =
       this.props;
 
-    if (!windowType || docId === 'notfound' || notfound) {
+    if (!windowType || docId === "notfound" || notfound) {
       this.setState({
         actions: [],
       });
@@ -37,7 +37,7 @@ class Actions extends Component {
       return;
     }
 
-    if (entity === 'board') {
+    if (entity === "board") {
       this.setState({
         actions: [],
       });
@@ -87,7 +87,7 @@ class Actions extends Component {
         id: docId,
       };
 
-      if (entity === 'documentView') {
+      if (entity === "documentView") {
         request.selectedIds = selected;
       }
 
@@ -187,22 +187,22 @@ class Actions extends Component {
       if (item.tabId && item.rowId) {
         handleModal = () =>
           openModalRow(
-            item.processId + '',
-            'process',
+            item.processId + "",
+            "process",
             item.caption,
             item.tabId,
-            item.rowId
+            item.rowId,
           );
       } else {
         handleModal = () =>
           openModal(
-            item.processId + '',
-            'process',
+            item.processId + "",
+            "process",
             item.caption,
             false,
             selected,
             childViewId,
-            childViewSelectedIds
+            childViewSelectedIds,
           );
       }
 
@@ -218,8 +218,8 @@ class Actions extends Component {
         key={identifier + key}
         tabIndex={0}
         id={`headerAction_${item.internalName}`}
-        className={cx('subheader-item js-subheader-item', {
-          'subheader-item-disabled': item.disabled,
+        className={cx("subheader-item js-subheader-item", {
+          "subheader-item-disabled": item.disabled,
         })}
         onClick={handleClick}
       >
@@ -258,8 +258,8 @@ class Actions extends Component {
       <li
         key={identifier + key}
         tabIndex={0}
-        className={cx('subheader-item js-subheader-item', {
-          'subheader-item-disabled': item.disabled,
+        className={cx("subheader-item js-subheader-item", {
+          "subheader-item-disabled": item.disabled,
         })}
         onClick={handleClick}
       >
@@ -287,14 +287,14 @@ class Actions extends Component {
 
     if (numActions > 0 && numRowActions > 0) {
       retItems = [
-        ...actions.map(renderAction('actions')),
+        ...actions.map(renderAction("actions")),
         separator,
-        ...rowActions.map(renderAction('rowActions')),
+        ...rowActions.map(renderAction("rowActions")),
       ];
     } else if (numActions > 0) {
-      retItems = actions.map(renderAction('actions'));
+      retItems = actions.map(renderAction("actions"));
     } else if (numRowActions > 0) {
-      retItems = rowActions.map(renderAction('rowActions'));
+      retItems = rowActions.map(renderAction("rowActions"));
     }
 
     if (retItems.length) {
@@ -303,7 +303,7 @@ class Actions extends Component {
       if (pluginActions.length) {
         retItems.push(
           separator,
-          ...pluginActions.map(renderPluginAction('plugins'))
+          ...pluginActions.map(renderPluginAction("plugins")),
         );
       }
 
@@ -312,7 +312,7 @@ class Actions extends Component {
 
     return (
       <li className="subheader-item subheader-item-disabled">
-        {counterpart.translate('window.actions.emptyText')}
+        {counterpart.translate("window.actions.emptyText")}
       </li>
     );
   };
@@ -327,7 +327,7 @@ class Actions extends Component {
     return (
       <div className="subheader-column js-subheader-column" tabIndex={0}>
         <div className="subheader-header">
-          {counterpart.translate('window.actions.caption')}
+          {counterpart.translate("window.actions.caption")}
         </div>
         <div className="subheader-break" />
         <ul className="subheader-items">

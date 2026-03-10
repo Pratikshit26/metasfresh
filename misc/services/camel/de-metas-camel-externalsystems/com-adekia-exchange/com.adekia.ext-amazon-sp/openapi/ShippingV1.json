@@ -14,21 +14,13 @@
     }
   },
   "host": "sellingpartnerapi-na.amazon.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/shipping/v1/shipments": {
       "post": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Create a new shipment.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "createShipment",
         "parameters": [
@@ -464,9 +456,7 @@
     },
     "/shipping/v1/shipments/{shipmentId}": {
       "get": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Return the entire shipment object for the shipmentId.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getShipment",
         "parameters": [
@@ -899,9 +889,7 @@
     },
     "/shipping/v1/shipments/{shipmentId}/cancel": {
       "post": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Cancel a shipment by the given shipmentId.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "cancelShipment",
         "parameters": [
@@ -938,8 +926,7 @@
                       }
                     }
                   },
-                  "response": {
-                  }
+                  "response": {}
                 }
               ]
             }
@@ -1204,9 +1191,7 @@
     },
     "/shipping/v1/shipments/{shipmentId}/purchaseLabels": {
       "post": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Purchase shipping labels based on a given rate.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "purchaseLabels",
         "parameters": [
@@ -1602,9 +1587,7 @@
     },
     "/shipping/v1/shipments/{shipmentId}/containers/{trackingId}/label": {
       "post": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Retrieve shipping label based on the shipment id and tracking id.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "retrieveShippingLabel",
         "parameters": [
@@ -1943,9 +1926,7 @@
     },
     "/shipping/v1/purchaseShipment": {
       "post": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Purchase shipping labels.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "purchaseShipment",
         "parameters": [
@@ -2243,9 +2224,7 @@
     },
     "/shipping/v1/rates": {
       "post": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Get service rates.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getRates",
         "parameters": [
@@ -2286,9 +2265,7 @@
                     }
                   }
                 ],
-                "serviceTypes": [
-                  "Amazon Shipping Standard"
-                ]
+                "serviceTypes": ["Amazon Shipping Standard"]
               }
             }
           }
@@ -2486,9 +2463,7 @@
     },
     "/shipping/v1/account": {
       "get": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Verify if the current account is valid.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 5 | 15 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getAccount",
         "parameters": [],
@@ -2641,9 +2616,7 @@
     },
     "/shipping/v1/tracking/{trackingId}": {
       "get": {
-        "tags": [
-          "shipping"
-        ],
+        "tags": ["shipping"],
         "description": "Return the tracking information of a shipment.\n\n**Usage Plan:**\n\n| Rate (requests per second) | Burst |\n| ---- | ---- |\n| 1 | 1 |\n\nFor more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getTrackingInformation",
         "parameters": [
@@ -2862,10 +2835,7 @@
   "definitions": {
     "Error": {
       "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
+      "required": ["code", "message"],
       "properties": {
         "code": {
           "type": "string",
@@ -2956,10 +2926,7 @@
     },
     "Event": {
       "type": "object",
-      "required": [
-        "eventCode",
-        "eventTime"
-      ],
+      "required": ["eventCode", "eventTime"],
       "properties": {
         "eventCode": {
           "$ref": "#/definitions/EventCode"
@@ -3197,12 +3164,7 @@
     },
     "ServiceRate": {
       "type": "object",
-      "required": [
-        "billableWeight",
-        "promise",
-        "serviceType",
-        "totalCharge"
-      ],
+      "required": ["billableWeight", "promise", "serviceType", "totalCharge"],
       "properties": {
         "totalCharge": {
           "description": "The total charge that will be billed for the rate.",
@@ -3239,10 +3201,7 @@
     },
     "Currency": {
       "type": "object",
-      "required": [
-        "unit",
-        "value"
-      ],
+      "required": ["unit", "value"],
       "properties": {
         "value": {
           "type": "number",
@@ -3259,12 +3218,7 @@
     },
     "Dimensions": {
       "type": "object",
-      "required": [
-        "height",
-        "length",
-        "unit",
-        "width"
-      ],
+      "required": ["height", "length", "unit", "width"],
       "properties": {
         "length": {
           "type": "number",
@@ -3281,10 +3235,7 @@
         "unit": {
           "type": "string",
           "description": "The unit of these measurements.",
-          "enum": [
-            "IN",
-            "CM"
-          ],
+          "enum": ["IN", "CM"],
           "x-docgen-enum-table-extension": [
             {
               "value": "IN",
@@ -3301,20 +3252,12 @@
     },
     "Weight": {
       "type": "object",
-      "required": [
-        "unit",
-        "value"
-      ],
+      "required": ["unit", "value"],
       "properties": {
         "unit": {
           "type": "string",
           "description": "The unit of measurement.",
-          "enum": [
-            "g",
-            "kg",
-            "oz",
-            "lb"
-          ],
+          "enum": ["g", "kg", "oz", "lb"],
           "x-docgen-enum-table-extension": [
             {
               "value": "g",
@@ -3343,12 +3286,7 @@
     },
     "ContainerItem": {
       "type": "object",
-      "required": [
-        "quantity",
-        "title",
-        "unitPrice",
-        "unitWeight"
-      ],
+      "required": ["quantity", "title", "unitPrice", "unitWeight"],
       "properties": {
         "quantity": {
           "type": "number",
@@ -3383,9 +3321,7 @@
         "containerType": {
           "type": "string",
           "description": "The type of physical container being used. (always 'PACKAGE')",
-          "enum": [
-            "PACKAGE"
-          ],
+          "enum": ["PACKAGE"],
           "x-docgen-enum-table-extension": [
             {
               "value": "PACKAGE",
@@ -3427,10 +3363,7 @@
     },
     "ContainerSpecification": {
       "type": "object",
-      "required": [
-        "dimensions",
-        "weight"
-      ],
+      "required": ["dimensions", "weight"],
       "properties": {
         "dimensions": {
           "description": "The length, width, and height of the container.",
@@ -3491,17 +3424,12 @@
     },
     "LabelSpecification": {
       "type": "object",
-      "required": [
-        "labelFormat",
-        "labelStockSize"
-      ],
+      "required": ["labelFormat", "labelStockSize"],
       "properties": {
         "labelFormat": {
           "type": "string",
           "description": "The format of the label. Enum of PNG only for now.",
-          "enum": [
-            "PNG"
-          ],
+          "enum": ["PNG"],
           "x-docgen-enum-table-extension": [
             {
               "value": "PNG",
@@ -3512,9 +3440,7 @@
         "labelStockSize": {
           "type": "string",
           "description": "The label stock size specification in length and height. Enum of 4x6 only for now.",
-          "enum": [
-            "4x6"
-          ],
+          "enum": ["4x6"],
           "x-docgen-enum-table-extension": [
             {
               "value": "4x6",
@@ -3527,12 +3453,7 @@
     },
     "CreateShipmentRequest": {
       "type": "object",
-      "required": [
-        "clientReferenceId",
-        "containers",
-        "shipFrom",
-        "shipTo"
-      ],
+      "required": ["clientReferenceId", "containers", "shipFrom", "shipTo"],
       "properties": {
         "clientReferenceId": {
           "$ref": "#/definitions/ClientReferenceId"
@@ -3551,10 +3472,7 @@
     },
     "PurchaseLabelsRequest": {
       "type": "object",
-      "required": [
-        "labelSpecification",
-        "rateId"
-      ],
+      "required": ["labelSpecification", "rateId"],
       "properties": {
         "rateId": {
           "$ref": "#/definitions/RateId"
@@ -3567,9 +3485,7 @@
     },
     "RetrieveShippingLabelRequest": {
       "type": "object",
-      "required": [
-        "labelSpecification"
-      ],
+      "required": ["labelSpecification"],
       "properties": {
         "labelSpecification": {
           "$ref": "#/definitions/LabelSpecification"
@@ -3645,10 +3561,7 @@
     },
     "CreateShipmentResult": {
       "type": "object",
-      "required": [
-        "eligibleRates",
-        "shipmentId"
-      ],
+      "required": ["eligibleRates", "shipmentId"],
       "properties": {
         "shipmentId": {
           "$ref": "#/definitions/ShipmentId"
@@ -3695,11 +3608,7 @@
     },
     "PurchaseLabelsResult": {
       "type": "object",
-      "required": [
-        "acceptedRate",
-        "labelResults",
-        "shipmentId"
-      ],
+      "required": ["acceptedRate", "labelResults", "shipmentId"],
       "properties": {
         "shipmentId": {
           "$ref": "#/definitions/ShipmentId"
@@ -3718,10 +3627,7 @@
     },
     "RetrieveShippingLabelResult": {
       "type": "object",
-      "required": [
-        "labelSpecification",
-        "labelStream"
-      ],
+      "required": ["labelSpecification", "labelStream"],
       "properties": {
         "labelStream": {
           "$ref": "#/definitions/LabelStream"
@@ -3734,9 +3640,7 @@
     },
     "Account": {
       "type": "object",
-      "required": [
-        "accountId"
-      ],
+      "required": ["accountId"],
       "properties": {
         "accountId": {
           "$ref": "#/definitions/AccountId"
@@ -3746,9 +3650,7 @@
     },
     "GetRatesResult": {
       "type": "object",
-      "required": [
-        "serviceRates"
-      ],
+      "required": ["serviceRates"],
       "properties": {
         "serviceRates": {
           "$ref": "#/definitions/ServiceRateList"
@@ -3758,11 +3660,7 @@
     },
     "PurchaseShipmentResult": {
       "type": "object",
-      "required": [
-        "labelResults",
-        "serviceRate",
-        "shipmentId"
-      ],
+      "required": ["labelResults", "serviceRate", "shipmentId"],
       "properties": {
         "shipmentId": {
           "$ref": "#/definitions/ShipmentId"

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import cx from 'classnames';
-import GoogleMapReact from 'google-map-react';
-import OSMap from 'pigeon-maps';
-import Marker from 'pigeon-marker';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import cx from "classnames";
+import GoogleMapReact from "google-map-react";
+import OSMap from "pigeon-maps";
+import Marker from "pigeon-marker";
+import PropTypes from "prop-types";
 
-import MapMarker from './MapMarker';
+import MapMarker from "./MapMarker";
 
 class GeoMap extends Component {
   static defaultProps = {
@@ -28,7 +28,7 @@ class GeoMap extends Component {
             lng: data[i].longitude,
           },
         },
-        map
+        map,
       );
 
       bounds.extend(marker.getPosition());
@@ -51,14 +51,14 @@ class GeoMap extends Component {
     if (data && mapConfig) {
       return (
         <div
-          className={cx('mapComponent', {
-            'col-12': toggleState === 'map',
-            'col-6': toggleState === 'all',
-            'd-none': toggleState === 'grid' || toggleState == null,
+          className={cx("mapComponent", {
+            "col-12": toggleState === "map",
+            "col-6": toggleState === "all",
+            "d-none": toggleState === "grid" || toggleState == null,
           })}
         >
-          <div style={{ height: '100%', width: '100%' }}>
-            {mapConfig.provider === 'OpenStreetMap' ? (
+          <div style={{ height: "100%", width: "100%" }}>
+            {mapConfig.provider === "OpenStreetMap" ? (
               <OSMap
                 defaultCenter={[center.lat, center.lng]}
                 defaultZoom={zoom}

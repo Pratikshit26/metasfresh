@@ -4,6 +4,6 @@
   "externalSystemChildConfigValue": "childConfigValue",
   "externalSystemName": "GRSSignum",
   "parameters": {
-      "BasePathForExportDirectories": "/basePath"
+    "BasePathForExportDirectories": "/basePath"
   }
 }

@@ -39,6 +39,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
 **Focus:** Stabilize existing services, improve infrastructure
 
 ### Milestone 1.1: Infrastructure Modernization
+
 **Target:** End of January 2026
 
 - [ ] **Docker Optimization**
@@ -61,6 +62,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#OBS-001`
 
 ### Milestone 1.2: Testing Infrastructure
+
 **Target:** Mid-February 2026
 
 - [ ] **Frontend Testing Enhancement** (`de.metas.frontend-testing`)
@@ -76,6 +78,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#TEST-002`
 
 ### Milestone 1.3: Technical Debt Reduction
+
 **Target:** End of March 2026
 
 - [ ] **Code Quality**
@@ -100,6 +103,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
 **Focus:** New features, payment integrations, mobile enhancements
 
 ### Milestone 2.1: Mobile POS v2.0
+
 **Target:** Mid-April 2026
 
 - [ ] **Enhanced POS Core** (`de.metas.pos.base`, `de.metas.pos.rest-api`)
@@ -123,6 +127,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#POS-102`
 
 ### Milestone 2.2: Payment Gateway Hub
+
 **Target:** End of May 2026
 
 - [ ] **Payment Orchestration Layer**
@@ -152,6 +157,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#PAY-203`
 
 ### Milestone 2.3: Manufacturing Mobile UI v2.0
+
 **Target:** End of June 2026
 
 - [ ] **Enhanced Workstation Features** (`de.metas.manufacturing.webui`)
@@ -181,6 +187,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
 **Focus:** Performance, scalability, reliability
 
 ### Milestone 3.1: Performance Optimization
+
 **Target:** End of July 2026
 
 - [ ] **Backend Performance**
@@ -205,6 +212,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#PERF-402`
 
 ### Milestone 3.2: Reliability & Resilience
+
 **Target:** Mid-August 2026
 
 - [ ] **High Availability**
@@ -229,6 +237,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#SEC-600`
 
 ### Milestone 3.3: Monitoring & SRE
+
 **Target:** End of September 2026
 
 - [ ] **Advanced Monitoring**
@@ -253,6 +262,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
 **Focus:** Enterprise readiness, multi-tenancy, advanced features
 
 ### Milestone 4.1: Multi-Tenancy
+
 **Target:** End of October 2026
 
 - [ ] **Tenant Isolation**
@@ -268,6 +278,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#ENT-801`
 
 ### Milestone 4.2: Advanced Authentication & Authorization
+
 **Target:** Mid-November 2026
 
 - [ ] **Identity Management**
@@ -285,6 +296,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#API-1000`
 
 ### Milestone 4.3: White-labeling & Customization
+
 **Target:** End of December 2026
 
 - [ ] **Customization Framework**
@@ -305,6 +317,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
 ## 🔬 Research & Innovation (Ongoing)
 
 ### Artificial Intelligence & Machine Learning
+
 **Timeline:** Throughout 2026
 
 - [ ] **Predictive Analytics**
@@ -320,6 +333,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
   - Issue: `#AI-2001`
 
 ### Blockchain & Web3 (Exploratory)
+
 **Timeline:** Q3-Q4 2026
 
 - [ ] **Supply Chain Transparency**
@@ -333,6 +347,7 @@ Q1 2026 (Jan-Mar)  │ Q2 2026 (Apr-Jun)  │ Q3 2026 (Jul-Sep)  │ Q4 2026 (Oc
 ## 📦 Service-Specific Roadmaps
 
 ### Mobile POS Services
+
 ```
 de.metas.pos.base
 de.metas.pos.rest-api
@@ -343,6 +358,7 @@ de.metas.pos.rest-api
 ```
 
 ### Payment Services
+
 ```
 de.metas.payment.sumup.*
 de.metas.postfinance.*
@@ -353,6 +369,7 @@ de.metas.postfinance.*
 ```
 
 ### Manufacturing Services
+
 ```
 de.metas.manufacturing.webui
 ├─ Q1: Mobile UI improvements
@@ -362,6 +379,7 @@ de.metas.manufacturing.webui
 ```
 
 ### Banking Services
+
 ```
 de.metas.banking.*
 ├─ Q1: CAMT53 enhancements
@@ -375,6 +393,7 @@ de.metas.banking.*
 ## 📈 Success Metrics & KPIs
 
 ### Technical Metrics
+
 - **Code Quality**: Maintainability Index > 70
 - **Test Coverage**: > 80% for critical services
 - **Build Time**: < 15 minutes for full build
@@ -383,6 +402,7 @@ de.metas.banking.*
 - **Security**: Zero critical vulnerabilities
 
 ### Business Metrics
+
 - **Transaction Processing**: 10,000 TPS capacity
 - **User Adoption**: 50% increase in mobile POS usage
 - **Developer Productivity**: 30% reduction in time-to-production
@@ -394,6 +414,7 @@ de.metas.banking.*
 ## 🛠️ Technology Stack Evolution
 
 ### Current Stack (Jan 2026)
+
 - **Backend**: Java 17+, Spring Boot 2.x/3.x
 - **Frontend**: React, TypeScript
 - **Database**: PostgreSQL
@@ -401,6 +422,7 @@ de.metas.banking.*
 - **Monitoring**: Basic logging
 
 ### Target Stack (Dec 2026)
+
 - **Backend**: Java 21, Spring Boot 3.5+
 - **Frontend**: React 19, Next.js, TypeScript
 - **Database**: PostgreSQL 16+ (with read replicas)
@@ -415,18 +437,21 @@ de.metas.banking.*
 ## 👥 Team & Resource Planning
 
 ### Q1 2026
+
 - **Infrastructure Team**: 2 engineers (CI/CD, monitoring)
 - **Backend Team**: 4 engineers (bug fixes, API development)
 - **Frontend Team**: 3 engineers (testing, mobile UI)
 - **QA Team**: 2 engineers (test automation)
 
 ### Q2 2026
+
 - **Infrastructure Team**: 3 engineers (+1 for scaling)
 - **Backend Team**: 5 engineers (+1 for payment hub)
 - **Frontend Team**: 4 engineers (+1 for mobile v2)
 - **QA Team**: 3 engineers (+1 for load testing)
 
 ### Q3-Q4 2026
+
 - Add SRE team (2 engineers)
 - Add security specialist (1 engineer)
 - Add ML/AI team (2 engineers) for exploratory work
@@ -435,14 +460,14 @@ de.metas.banking.*
 
 ## 🚧 Risks & Mitigation
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Technical debt slowing development | High | Medium | Dedicate 20% sprint capacity to refactoring |
-| Third-party API changes (SumUp, PostFinance) | Medium | Low | Abstraction layer, adapter pattern |
-| Team capacity constraints | High | Medium | Prioritize ruthlessly, hire strategically |
-| Security vulnerabilities | Critical | Low | Regular audits, automated scanning |
-| Performance degradation at scale | High | Medium | Load testing, gradual rollout |
-| Migration complexity (Spring Boot 3) | Medium | High | Phased migration, comprehensive testing |
+| Risk                                         | Impact   | Probability | Mitigation                                  |
+| -------------------------------------------- | -------- | ----------- | ------------------------------------------- |
+| Technical debt slowing development           | High     | Medium      | Dedicate 20% sprint capacity to refactoring |
+| Third-party API changes (SumUp, PostFinance) | Medium   | Low         | Abstraction layer, adapter pattern          |
+| Team capacity constraints                    | High     | Medium      | Prioritize ruthlessly, hire strategically   |
+| Security vulnerabilities                     | Critical | Low         | Regular audits, automated scanning          |
+| Performance degradation at scale             | High     | Medium      | Load testing, gradual rollout               |
+| Migration complexity (Spring Boot 3)         | Medium   | High        | Phased migration, comprehensive testing     |
 
 ---
 

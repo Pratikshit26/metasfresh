@@ -507,9 +507,7 @@
     "Labels_548674": {
       "field": "Labels_548674",
       "value": {
-        "values": [
-          
-        ]
+        "values": []
       },
       "readonly": false,
       "mandatory": false,
@@ -526,9 +524,7 @@
     "Labels_554470": {
       "field": "Labels_554470",
       "value": {
-        "values": [
-          
-        ]
+        "values": []
       },
       "readonly": false,
       "mandatory": false,

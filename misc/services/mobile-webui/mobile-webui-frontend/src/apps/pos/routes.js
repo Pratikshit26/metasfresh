@@ -4,8 +4,8 @@ import POSScreen from './containers/POSScreen';
 export const posLocation = () => `/${APPLICATION_ID}`;
 
 export const posRoutes = [
-  {
-    path: posLocation(),
-    Component: POSScreen,
-  },
+    {
+        path: posLocation(),
+        Component: POSScreen,
+    },
 ];

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Autosuggest from 'react-autosuggest';
-import TagsInput from 'react-tagsinput';
-import 'react-tagsinput/react-tagsinput.css';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import Autosuggest from "react-autosuggest";
+import TagsInput from "react-tagsinput";
+import "react-tagsinput/react-tagsinput.css";
 
 const AutocompleteField = ({
   value,
@@ -25,7 +25,7 @@ const AutocompleteField = ({
 
   const resolveNewTagIfNeeded = (newTag) => {
     // Case: newTag it's a string, i.e. not already resolved
-    if (typeof newTag === 'string' || newTag instanceof String) {
+    if (typeof newTag === "string" || newTag instanceof String) {
       // If suggestions list has only one element => that's actually our match
       if (suggestions?.length === 1) {
         return suggestions[0];
@@ -48,7 +48,7 @@ const AutocompleteField = ({
   const renderSuggestion = (option) => {
     return (
       <span
-        className={classnames('autosuggest-option', {
+        className={classnames("autosuggest-option", {
           selected: tags.includes(option.caption),
         })}
       >
@@ -60,7 +60,7 @@ const AutocompleteField = ({
   const autocompleteRenderInput = ({ addTag, ...props }) => {
     const handleOnChange = (e, { method }) => {
       switch (method) {
-        case 'type':
+        case "type":
           props.onChange(e);
           break;
         default:
@@ -93,7 +93,7 @@ const AutocompleteField = ({
   }) => {
     return (
       <span key={key} className={className}>
-        {tag?.caption || ''}
+        {tag?.caption || ""}
         {!disabled && (
           <a className={classNameRemove} onClick={() => onRemove(key)} />
         )}
@@ -106,7 +106,7 @@ const AutocompleteField = ({
       className="tagsinput"
       renderInput={autocompleteRenderInput}
       renderTag={renderTag}
-      inputProps={{ placeholder: '', className: 'email-input' }}
+      inputProps={{ placeholder: "", className: "email-input" }}
       value={tags}
       onChange={onTagsChanged}
     />

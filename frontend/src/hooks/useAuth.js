@@ -1,17 +1,17 @@
-import React, { useState, useContext, createContext } from 'react';
-import { useDispatch, useStore } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useState, useContext, createContext } from "react";
+import { useDispatch, useStore } from "react-redux";
+import PropTypes from "prop-types";
 
-import { loginWithToken, checkLoginRequest, logoutRequest } from '../api/login';
+import { loginWithToken, checkLoginRequest, logoutRequest } from "../api/login";
 
-import history from '../services/History';
-import Auth from '../services/Auth';
+import history from "../services/History";
+import Auth from "../services/Auth";
 import {
   loginSuccess as loginAction,
   getNotifications,
   getNotificationsEndpoint,
-} from '../actions/AppActions';
-import useSynchronousState from './useSynchronousState';
+} from "../actions/AppActions";
+import useSynchronousState from "./useSynchronousState";
 
 const authContext = createContext();
 
@@ -99,23 +99,23 @@ function useProvideAuth() {
 
       return loginWithToken(token)
         .then(
-          async () => await login().then(() => setAuthRequestPending(false))
+          async () => await login().then(() => setAuthRequestPending(false)),
         )
         .catch((error) => {
           // user already logged in error
           if (
             error &&
             error.response &&
-            error.response.data.message.includes('User already logged in')
+            error.response.data.message.includes("User already logged in")
           ) {
             setAuthRequestPending(false);
 
             return login().then(() => {
-              history.push('/');
+              history.push("/");
             });
           } else {
             clearRedirectRoute();
-            history.push('/login');
+            history.push("/login");
 
             return Promise.reject(error);
           }
@@ -130,7 +130,7 @@ function useProvideAuth() {
    * @summary set the flags indicating user is authenticated, and store it in the localStorage
    */
   const _loginSuccess = () => {
-    localStorage.setItem('isLogged', true);
+    localStorage.setItem("isLogged", true);
     setLoggedIn(true);
 
     return Promise.resolve();
@@ -166,7 +166,7 @@ function useProvideAuth() {
   const _logoutSuccess = () => {
     auth.close();
     setLoggedIn(false);
-    localStorage.removeItem('isLogged');
+    localStorage.removeItem("isLogged");
     setAuthRequestPending(false);
   };
 

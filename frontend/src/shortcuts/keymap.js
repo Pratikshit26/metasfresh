@@ -1,4 +1,4 @@
-const mod = 'Alt';
+const mod = "Alt";
 
 const keymaps = {
   /* Global context */
@@ -11,8 +11,8 @@ const keymaps = {
   OPEN_SIDEBAR_MENU_2: `${mod}+7`,
   DOC_STATUS: `${mod}+I`,
 
-  TEXT_START: 'Home',
-  TEXT_END: 'End',
+  TEXT_START: "Home",
+  TEXT_END: "End",
 
   /* Document context */
   OPEN_ADVANCED_EDIT: `${mod}+E`,
@@ -33,18 +33,18 @@ const keymaps = {
 
   /* POS context */
   SELECT_ALL_LEAVES: `${mod}+S`,
-  EXPAND_INDENT: '+',
-  COLLAPSE_INDENT: '-',
+  EXPAND_INDENT: "+",
+  COLLAPSE_INDENT: "-",
 
   /* Table context */
   TOGGLE_QUICK_INPUT: `${mod}+Q`,
   TOGGLE_EXPAND: `${mod}++`,
 
   /* Pagination context */
-  NEXT_PAGE: 'PageDown',
-  PREV_PAGE: 'PageUp',
-  FIRST_PAGE: 'Home',
-  LAST_PAGE: 'End',
+  NEXT_PAGE: "PageDown",
+  PREV_PAGE: "PageUp",
+  FIRST_PAGE: "Home",
+  LAST_PAGE: "End",
   SELECT_ALL_ROWS: `${mod}+A`,
 
   /* Quick actions context */
@@ -56,7 +56,7 @@ const keymaps = {
 
   /* Modal context */
   DONE: `${mod}+Enter`,
-  CANCEL: 'Escape',
+  CANCEL: "Escape",
 };
 
 // Combinations that should be disabled when focus is in an input field,

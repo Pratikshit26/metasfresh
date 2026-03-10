@@ -1,27 +1,26 @@
-import { merge } from 'merge-anything';
+import { merge } from "merge-anything";
 
-import * as ACTION_TYPES from '../../constants/ActionTypes';
-import reducer, { initialState, } from '../../reducers/widgetHandler';
+import * as ACTION_TYPES from "../../constants/ActionTypes";
+import reducer, { initialState } from "../../reducers/widgetHandler";
 
-import fixtures
-  from '../../../test_setup/fixtures/independent_widgets/reducers.json';
+import fixtures from "../../../test_setup/fixtures/independent_widgets/reducers.json";
 
-const createState = function(state = {}) {
+const createState = function (state = {}) {
   return merge(
     {
       ...initialState,
     },
-    state
+    state,
   );
 };
 
-describe('WidgetHandler reducer', () => {
-  it('should return the initial state', () => {
+describe("WidgetHandler reducer", () => {
+  it("should return the initial state", () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  describe('SelectionAttributes', () => {
-    it('Should handle FETCH_ATTRIBUTES_DATA', () => {
+  describe("SelectionAttributes", () => {
+    it("Should handle FETCH_ATTRIBUTES_DATA", () => {
       const { selectionAttributesData } = fixtures;
       const fetchAction = {
         type: ACTION_TYPES.FETCH_ATTRIBUTES_DATA,
@@ -36,14 +35,16 @@ describe('WidgetHandler reducer', () => {
 
       expect(state.attributes).toEqual(
         expect.objectContaining({
-          fields: expect.objectContaining({ ...selectionAttributesData.fieldsByName }),
+          fields: expect.objectContaining({
+            ...selectionAttributesData.fieldsByName,
+          }),
           elements: [],
           dataId: selectionAttributesData.id,
-        })
+        }),
       );
     });
 
-    it('Should handle FETCH_ATTRIBUTES_LAYOUT', () => {
+    it("Should handle FETCH_ATTRIBUTES_LAYOUT", () => {
       const { selectionAttributesLayout } = fixtures;
       const fetchAction = {
         type: ACTION_TYPES.FETCH_ATTRIBUTES_LAYOUT,
@@ -57,17 +58,21 @@ describe('WidgetHandler reducer', () => {
 
       expect(state.attributes).toEqual(
         expect.objectContaining({
-          elements: expect.objectContaining({ ...selectionAttributesLayout.elements }),
+          elements: expect.objectContaining({
+            ...selectionAttributesLayout.elements,
+          }),
           fields: {},
           dataId: null,
-        })
+        }),
       );
     });
 
-    it('Should handle SET_ATTRIBUTES_DATA', () => {
+    it("Should handle SET_ATTRIBUTES_DATA", () => {
       const { selectionAttributesData, selectionAttributesPatch } = fixtures;
       const { fieldsByName, id } = selectionAttributesData;
-      const fieldName = Object.keys(selectionAttributesPatch[0].fieldsByName).reduce(k => k);
+      const fieldName = Object.keys(
+        selectionAttributesPatch[0].fieldsByName,
+      ).reduce((k) => k);
       const fieldData = fieldsByName[fieldName];
       const initialStateData = createState({
         ...initialState,
@@ -81,9 +86,9 @@ describe('WidgetHandler reducer', () => {
         type: ACTION_TYPES.SET_ATTRIBUTES_DATA,
         payload: {
           field: fieldName,
-          value: '4',
+          value: "4",
         },
-      }
+      };
       const actions = [patchAction];
       const state = actions.reduce(reducer, initialStateData);
 
@@ -91,11 +96,11 @@ describe('WidgetHandler reducer', () => {
         expect.objectContaining({
           ...fieldData,
           value: patchAction.payload.value,
-        })
+        }),
       );
     });
 
-    it('Should handle PATCH_DATA', () => {
+    it("Should handle PATCH_DATA", () => {
       const { selectionAttributesData, selectionAttributesPatch } = fixtures;
       const { fieldsByName, id } = selectionAttributesData;
       const initialStateData = createState({
@@ -105,22 +110,24 @@ describe('WidgetHandler reducer', () => {
           dataId: id,
         },
       });
-      const fieldName = Object.keys(selectionAttributesPatch[0].fieldsByName).reduce(k => k);
+      const fieldName = Object.keys(
+        selectionAttributesPatch[0].fieldsByName,
+      ).reduce((k) => k);
       const patchAction = {
         type: ACTION_TYPES.PATCH_ATTRIBUTES,
         payload: {
           data: selectionAttributesPatch[0].fieldsByName,
-        }
-      }
+        },
+      };
       const actions = [patchAction];
       const state = actions.reduce(reducer, initialStateData);
 
       expect(state.attributes.fields[fieldName].value).toEqual(
-        patchAction.payload.data[fieldName].value
+        patchAction.payload.data[fieldName].value,
       );
     });
 
-    it('Should handle DELETE_ATTRIBUTES', () => {
+    it("Should handle DELETE_ATTRIBUTES", () => {
       const initialStateData = createState({
         ...initialState,
         attributes: {
@@ -130,7 +137,7 @@ describe('WidgetHandler reducer', () => {
       });
       const deleteAction = {
         type: ACTION_TYPES.DELETE_ATTRIBUTES,
-      }
+      };
       const actions = [deleteAction];
       const state = actions.reduce(reducer, initialStateData);
 

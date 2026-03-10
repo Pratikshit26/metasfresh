@@ -2,7 +2,7 @@ import {
   UPDATE_COMMENTS_PANEL,
   UPDATE_COMMENTS_PANEL_TEXT_INPUT,
   UPDATE_COMMENTS_PANEL_OPEN_FLAG,
-} from '../constants/CommentTypes';
+} from "../constants/CommentTypes";
 
 export function updateCommentsPanel(data) {
   return {

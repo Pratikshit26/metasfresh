@@ -1,8 +1,7 @@
 {
-    "name": "TestTourVersion",
-    "tour": "TestTour",
-    "active": "true",
-    "validFrom": "01/01/2019",
-    "weekly": "true"
-
+  "name": "TestTourVersion",
+  "tour": "TestTour",
+  "active": "true",
+  "validFrom": "01/01/2019",
+  "weekly": "true"
 }

@@ -39,7 +39,7 @@
           "sapProductHierarchy": "335  81",
           "sapProductHierarchySet": true,
           "warehouseAssignments": {
-            "warehouseIdentifiers": [ "name-XXXX" ],
+            "warehouseIdentifiers": ["name-XXXX"],
             "syncAdvise": {
               "ifNotExists": "CREATE",
               "ifExists": "REPLACE"

@@ -1,9 +1,9 @@
-import counterpart from 'counterpart';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import counterpart from "counterpart";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { getImageAction, postImageAction } from '../../actions/AppActions';
-import Loader from '../app/Loader';
+import { getImageAction, postImageAction } from "../../actions/AppActions";
+import Loader from "../app/Loader";
 
 /**
  * @file Function based component.
@@ -26,7 +26,7 @@ class Image extends Component {
     super(props);
 
     this.state = {
-      imageSrc: '',
+      imageSrc: "",
       usingCamera: false,
       isLoading: false,
       stream: {},
@@ -55,8 +55,8 @@ class Image extends Component {
    */
   isCameraAvailable() {
     return (
-      (!~location.protocol.indexOf('https') ||
-        !~location.href.indexOf('localhost')) &&
+      (!~location.protocol.indexOf("https") ||
+        !~location.href.indexOf("localhost")) &&
       navigator.mediaDevices &&
       navigator.mediaDevices.getUserMedia
     );
@@ -72,7 +72,7 @@ class Image extends Component {
     const { data, handlePatch } = this.props;
 
     let fd = new FormData();
-    fd.append('file', blob);
+    fd.append("file", blob);
 
     return new Promise((resolve) => {
       this.setState(
@@ -81,7 +81,7 @@ class Image extends Component {
         },
         () => {
           resolve();
-        }
+        },
       );
     })
       .then(() => {
@@ -101,7 +101,7 @@ class Image extends Component {
             },
             () => {
               resolve();
-            }
+            },
           );
         });
       });
@@ -142,11 +142,11 @@ class Image extends Component {
     const width = this.camera.offsetWidth;
     const height = this.camera.offsetHeight;
 
-    let canvas = document.createElement('canvas');
+    let canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
 
-    let context = canvas.getContext('2d');
+    let context = canvas.getContext("2d");
     context.drawImage(this.camera, 0, 0, width, height);
 
     // upload the picture taken
@@ -174,10 +174,10 @@ class Image extends Component {
           try {
             stream.getVideoTracks()[0].stop();
           } catch (error) {
-            console.error('Got error while stopping camera', error);
+            console.error("Got error while stopping camera", error);
           }
           resolve();
-        }
+        },
       );
     });
   }
@@ -196,7 +196,7 @@ class Image extends Component {
         navigator.mediaDevices
           .getUserMedia({
             video: {
-              facingMode: 'user',
+              facingMode: "user",
               width: 400,
               height: 300,
             },
@@ -207,12 +207,12 @@ class Image extends Component {
               this.camera.play();
             };
 
-            this.camera.addEventListener('click', () => this.takeSnapshot());
+            this.camera.addEventListener("click", () => this.takeSnapshot());
             this.setState({
               stream: stream,
             });
           });
-      }
+      },
     );
   }
 
@@ -227,7 +227,7 @@ class Image extends Component {
 
   handleKeyDown = (e) => {
     switch (e.key) {
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
         this.stopUsingCamera();
         break;
@@ -242,9 +242,9 @@ class Image extends Component {
   handleClear = () => {
     const { handlePatch, data } = this.props;
     handlePatch(data.field, null);
-    this.imageInput.value = '';
+    this.imageInput.value = "";
     this.setState({
-      imageSrc: '',
+      imageSrc: "",
     });
   };
 
@@ -256,7 +256,7 @@ class Image extends Component {
   renderVideoPreview() {
     const { isLoading } = this.state;
     return (
-      <div className={'camera-preview' + (isLoading ? ' loading' : '')}>
+      <div className={"camera-preview" + (isLoading ? " loading" : "")}>
         <video ref={(c) => (this.camera = c)} />
         {isLoading && <div className="preview-loader" />}
       </div>
@@ -275,7 +275,7 @@ class Image extends Component {
         onClick={() => this.handleCamera()}
       >
         <i className="meta-icon-photo" />
-        {counterpart.translate('widget.takeFromCamera.caption')}
+        {counterpart.translate("widget.takeFromCamera.caption")}
       </div>
     );
   }
@@ -334,7 +334,7 @@ class Image extends Component {
               />
               <div className="text-content">
                 <i className="meta-icon-upload" />
-                {counterpart.translate('widget.uploadPhoto.caption')}
+                {counterpart.translate("widget.uploadPhoto.caption")}
               </div>
             </label>
             {this.isCameraAvailable() && this.renderRegularCameraControl()}
@@ -344,7 +344,7 @@ class Image extends Component {
                 onClick={() => this.handleClear()}
               >
                 <i className="meta-icon-close-alt" />
-                {counterpart.translate('widget.clearPhoto.caption')}
+                {counterpart.translate("widget.clearPhoto.caption")}
               </div>
             )}
           </div>

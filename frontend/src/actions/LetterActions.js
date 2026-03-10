@@ -1,4 +1,4 @@
-import axios, { patch } from 'axios';
+import axios, { patch } from "axios";
 
 const LETTER_API_URL = `${config.API_URL}/letter`;
 
@@ -22,7 +22,7 @@ export const getTemplates = () => {
 const patchLetter = (letterId, property, value) => {
   return patch(`${LETTER_API_URL}/${letterId}`, [
     {
-      op: 'replace',
+      op: "replace",
       path: property,
       value,
     },
@@ -31,7 +31,7 @@ const patchLetter = (letterId, property, value) => {
 
 export const applyTemplate = (letterId, templateId) => {
   return (
-    patchLetter(letterId, 'templateId', templateId)
+    patchLetter(letterId, "templateId", templateId)
       // unbox and return the current letter
       .then((axiosResponse) => axiosResponse.data)
   );
@@ -39,7 +39,7 @@ export const applyTemplate = (letterId, templateId) => {
 
 export const patchMessage = (letterId, message) => {
   return (
-    patchLetter(letterId, 'message', message)
+    patchLetter(letterId, "message", message)
       // unbox and return the current letter
       .then((axiosResponse) => axiosResponse.data)
   );

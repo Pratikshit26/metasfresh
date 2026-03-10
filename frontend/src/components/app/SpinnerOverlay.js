@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import classnames from 'classnames';
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
 
 /**
  * @file functional component
@@ -19,8 +19,8 @@ const SpinnerOverlay = (props) => {
 
   return (
     <div
-      className={classnames('screen-freeze screen-prompt-freeze spinner', {
-        'modal-spinner': spinnerType === 'modal',
+      className={classnames("screen-freeze screen-prompt-freeze spinner", {
+        "modal-spinner": spinnerType === "modal",
       })}
     >
       <i style={style} className="icon spinner" />

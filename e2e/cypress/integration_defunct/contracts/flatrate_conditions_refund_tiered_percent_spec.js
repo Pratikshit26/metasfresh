@@ -3,18 +3,21 @@
 import {
   createAndCompleteTransition,
   createAndCompleteRefundPercentConditions,
-} from '../../support/utils/contract_static';
-import { BPartner, BPartnerLocation } from '../../support/utils/bpartner';
-import { DiscountSchema, DiscountBreak } from '../../support/utils/discountschema';
-import { runProcessCreateContract } from '../../support/functions/contractFunctions';
+} from "../../support/utils/contract_static";
+import { BPartner, BPartnerLocation } from "../../support/utils/bpartner";
+import {
+  DiscountSchema,
+  DiscountBreak,
+} from "../../support/utils/discountschema";
+import { runProcessCreateContract } from "../../support/functions/contractFunctions";
 
-describe('Create tiered percent-based (TP) refund conditions', function() {
-  before(function() {
+describe("Create tiered percent-based (TP) refund conditions", function () {
+  before(function () {
     // login before each test and open the flatrate conditions window
     cy.loginByForm();
   });
 
-  it('Create tiered percent-based refund conditions and a vendor with a respective contract', function() {
+  it("Create tiered percent-based refund conditions and a vendor with a respective contract", function () {
     const timestamp = new Date().getTime(); // used in the document names, for ordering
 
     const transitionName = `Transition (TP) ${timestamp}`;
@@ -25,13 +28,15 @@ describe('Create tiered percent-based (TP) refund conditions', function() {
     createAndCompleteRefundPercentConditions(
       conditionsName,
       transitionName,
-      'T' /*Tiered / Gestaffelte Rückvergütung*/
+      "T" /*Tiered / Gestaffelte Rückvergütung*/,
     );
     cy.screenshot();
 
     const discountSchemaName = `DiscountSchema (TP) ${timestamp}`;
     new DiscountSchema(discountSchemaName)
-      .addDiscountBreak(new DiscountBreak().setBreakValue(0).setBreakDiscount(0))
+      .addDiscountBreak(
+        new DiscountBreak().setBreakValue(0).setBreakDiscount(0),
+      )
       .apply();
     cy.screenshot();
 
@@ -40,10 +45,10 @@ describe('Create tiered percent-based (TP) refund conditions', function() {
       .setVendor(true)
       .setVendorDiscountSchema(discountSchemaName)
       .addLocation(
-        new BPartnerLocation.builder('Address1')
-          .setCity('Cologne')
-          .setCountry('Deutschland')
-          .build()
+        new BPartnerLocation.builder("Address1")
+          .setCity("Cologne")
+          .setCountry("Deutschland")
+          .build(),
       )
       .build()
       .apply();

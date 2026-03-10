@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, Fragment } from 'react';
-import { callAPI } from '../../actions/WindowActions';
-import { updateCommentsPanelTextInput } from '../../actions/CommentsPanelActions';
-import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
-import { translateCaption } from '../../utils/index';
-import * as StaticModalType from '../../constants/StaticModalType';
+import React, { useEffect, useRef, Fragment } from "react";
+import { callAPI } from "../../actions/WindowActions";
+import { updateCommentsPanelTextInput } from "../../actions/CommentsPanelActions";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+import { translateCaption } from "../../utils/index";
+import * as StaticModalType from "../../constants/StaticModalType";
 
 export const CommentsPanelForm = (props) => {
   const { textInput, postComment, updateText, docId, windowId } = props;
   const textRef = useRef(null);
-  const sendButton = translateCaption('window.comments.add');
+  const sendButton = translateCaption("window.comments.add");
 
   /**
    * Focus by default on the text input
@@ -54,7 +54,7 @@ export const CommentsPanelForm = (props) => {
                       tabId: null,
                       rowId: null,
                       target: StaticModalType.Comments,
-                      verb: 'POST',
+                      verb: "POST",
                       data: textInput,
                     });
                 }}

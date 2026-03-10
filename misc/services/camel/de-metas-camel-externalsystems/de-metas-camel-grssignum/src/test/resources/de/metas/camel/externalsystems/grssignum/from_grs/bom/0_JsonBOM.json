@@ -10,7 +10,7 @@
   "METASFRESHID": "100",
   "ANHANGDATEI": "bpartnerValue/directory/Attachment.pdf",
   "BIO": 1,
-  "HALAL" : 0,
+  "HALAL": 0,
   "DETAIL": [
     {
       "ARTNR": "ProductValue1",
@@ -27,8 +27,8 @@
       "Produktion_Maschinengrößen": [
         {
           "Resource_1": null,
-          "Resource_2": 500.00000,
-          "Resource_3": 501.00000
+          "Resource_2": 500.0,
+          "Resource_3": 501.0
         }
       ],
       "Rezeptur_Angaben_GTIN": "additional_gtin",

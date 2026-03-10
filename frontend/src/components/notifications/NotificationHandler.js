@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
-import Notification from './Notification';
+import Notification from "./Notification";
 
 const EMPTY_OBJECT = { notifications: {} };
 

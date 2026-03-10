@@ -1,65 +1,65 @@
-import PropTypes from 'prop-types';
-import { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import { Component } from "react";
+import { connect } from "react-redux";
 
-import { disabledWithFocus } from '../../shortcuts/keymap';
+import { disabledWithFocus } from "../../shortcuts/keymap";
 
 const codeToKey = {
-  8: 'Backspace',
-  9: 'Tab',
-  13: 'Enter',
-  20: 'CapsLock',
-  27: 'Escape',
-  32: ' ',
-  33: 'PageUp',
-  34: 'PageDown',
-  35: 'End',
-  36: 'Home',
-  37: 'ArrowLeft',
-  38: 'ArrowUp',
-  39: 'ArrowRight',
-  40: 'ArrowDown',
-  48: '0',
-  49: '1',
-  50: '2',
-  51: '3',
-  52: '4',
-  53: '5',
-  54: '6',
-  55: '7',
-  56: '8',
-  57: '9',
-  65: 'a',
-  66: 'b',
-  67: 'c',
-  68: 'd',
-  69: 'e',
-  70: 'f',
-  71: 'g',
-  72: 'h',
-  73: 'i',
-  74: 'j',
-  75: 'k',
-  76: 'l',
-  77: 'm',
-  78: 'n',
-  79: 'o',
-  80: 'p',
-  81: 'q',
-  82: 'r',
-  83: 's',
-  84: 't',
-  85: 'u',
-  86: 'v',
-  87: 'w',
-  88: 'x',
-  89: 'y',
-  90: 'z',
-  91: 'Meta',
-  107: '+',
-  109: '-',
-  187: '+',
-  189: '-',
+  8: "Backspace",
+  9: "Tab",
+  13: "Enter",
+  20: "CapsLock",
+  27: "Escape",
+  32: " ",
+  33: "PageUp",
+  34: "PageDown",
+  35: "End",
+  36: "Home",
+  37: "ArrowLeft",
+  38: "ArrowUp",
+  39: "ArrowRight",
+  40: "ArrowDown",
+  48: "0",
+  49: "1",
+  50: "2",
+  51: "3",
+  52: "4",
+  53: "5",
+  54: "6",
+  55: "7",
+  56: "8",
+  57: "9",
+  65: "a",
+  66: "b",
+  67: "c",
+  68: "d",
+  69: "e",
+  70: "f",
+  71: "g",
+  72: "h",
+  73: "i",
+  74: "j",
+  75: "k",
+  76: "l",
+  77: "m",
+  78: "n",
+  79: "o",
+  80: "p",
+  81: "q",
+  82: "r",
+  83: "s",
+  84: "t",
+  85: "u",
+  86: "v",
+  87: "w",
+  88: "x",
+  89: "y",
+  90: "z",
+  91: "Meta",
+  107: "+",
+  109: "-",
+  187: "+",
+  189: "-",
 };
 
 // export default class ShortcutProvider extends Component {
@@ -90,15 +90,15 @@ class ShortcutProvider extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
-    document.addEventListener('keyup', this.handleKeyUp);
-    window.addEventListener('blur', this.handleBlur);
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
+    window.addEventListener("blur", this.handleBlur);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
-    document.removeEventListener('keyup', this.handleKeyUp);
-    window.removeEventListener('blur', this.handleBlur);
+    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keyup", this.handleKeyUp);
+    window.removeEventListener("blur", this.handleBlur);
   }
 
   // In case of different handlers using the same shortcut we can control which
@@ -131,11 +131,11 @@ class ShortcutProvider extends Component {
     let { keySequence } = this;
 
     if (event.altKey === true) {
-      keySequence = ['Alt'];
+      keySequence = ["Alt"];
     } else if (event.ctrlKey === true) {
-      keySequence = ['Ctrl'];
+      keySequence = ["Ctrl"];
     } else if (event.shiftKey === true) {
-      keySequence = ['Shift'];
+      keySequence = ["Shift"];
     }
 
     if (fired[key]) {
@@ -147,8 +147,8 @@ class ShortcutProvider extends Component {
     this.keySequence = [...keySequence, key];
 
     const serializedSequence = this.keySequence
-      .join('+')
-      .replace(/\s/, 'Spacebar')
+      .join("+")
+      .replace(/\s/, "Spacebar")
       .toUpperCase();
 
     if (
@@ -156,7 +156,7 @@ class ShortcutProvider extends Component {
       // some shortcuts should be disabled
       // when input field is focused (for typing)
       (activeNode &&
-        activeNode.nodeName === 'INPUT' &&
+        activeNode.nodeName === "INPUT" &&
         disabledWithFocus.indexOf(serializedSequence) > -1)
     ) {
       return;
@@ -164,13 +164,13 @@ class ShortcutProvider extends Component {
 
     const bucket = hotkeys[serializedSequence];
     const validHandlers = bucket.filter((handler) => {
-      if (typeof handler === 'function') {
+      if (typeof handler === "function") {
         return true;
       }
 
       // eslint-disable-next-line no-console
       console.warn(
-        `Handler defined for key sequence "${serializedSequence}" is not a function.`
+        `Handler defined for key sequence "${serializedSequence}" is not a function.`,
       );
       return false;
     });
@@ -188,10 +188,10 @@ class ShortcutProvider extends Component {
       return;
     }
 
-    const modifierKeys = ['Alt', 'Ctrl', 'Shift'];
+    const modifierKeys = ["Alt", "Ctrl", "Shift"];
 
     this.keySequence = this.keySequence.filter(
-      (_key) => _key !== key && modifierKeys.indexOf(_key) === -1
+      (_key) => _key !== key && modifierKeys.indexOf(_key) === -1,
     );
 
     delete this.fired[key];
@@ -254,7 +254,7 @@ class ShortcutProvider extends Component {
       // eslint-disable-next-line no-console
       console.warn(
         `The handler you are trying to unsubscribe from "${name}" has not been subscribed yet.`,
-        handler
+        handler,
       );
     }
   };

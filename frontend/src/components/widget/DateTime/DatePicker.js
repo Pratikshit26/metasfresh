@@ -1,21 +1,21 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import MomentTZ from 'moment-timezone';
-import onClickOutsideHOC from 'react-onclickoutside';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import MomentTZ from "moment-timezone";
+import onClickOutsideHOC from "react-onclickoutside";
 
-import TetheredDateTime from './TetheredDateTime';
-import { getCurrentActiveLocale } from '../../../utils/locale';
+import TetheredDateTime from "./TetheredDateTime";
+import { getCurrentActiveLocale } from "../../../utils/locale";
 import {
   DATE_FORMAT,
   DATE_TIMEZONE_FORMAT,
   TIME_FORMAT,
-} from '../../../constants/Constants';
+} from "../../../constants/Constants";
 import {
   convertMomentToTimezone,
   setMomentToEndOfDay,
   setTimezoneToMoment,
-} from '../../../utils/dateHelpers';
+} from "../../../utils/dateHelpers";
 
 class DatePicker extends PureComponent {
   constructor(props) {
@@ -98,12 +98,12 @@ class DatePicker extends PureComponent {
 
       let inputValue, selectedDate;
       if (!datePatched) {
-        inputValue = '';
+        inputValue = "";
         selectedDate = null;
       } else if (MomentTZ.isMoment(datePatched)) {
         inputValue = datePatched.isValid()
           ? datePatched.format(this.getMomentDisplayFormat())
-          : '';
+          : "";
         selectedDate = datePatched;
       } else {
         inputValue = `${datePatched}`;
@@ -214,7 +214,7 @@ class DatePicker extends PureComponent {
         value,
         this.getMomentDisplayFormat(value),
         strict,
-        this.props.timeZone
+        this.props.timeZone,
       );
       if (moment && moment.isValid()) {
         // IMPORTANT: display format might not contain timezone so make sure we set it to our timezone.
@@ -288,7 +288,7 @@ class DatePicker extends PureComponent {
   };
 
   getMomentDisplayFormat = (dateToParse = null) => {
-    let format = '';
+    let format = "";
 
     const dateFormatEffective =
       this.getMomentDisplayFormat_DatePart(dateToParse);
@@ -298,9 +298,9 @@ class DatePicker extends PureComponent {
 
     const { timeFormat } = this.props;
     if (timeFormat) {
-      const timeFormatEffective = timeFormat === true ? 'LT' : timeFormat;
-      if (format !== '') {
-        format += ' ';
+      const timeFormatEffective = timeFormat === true ? "LT" : timeFormat;
+      if (format !== "") {
+        format += " ";
       }
       format += timeFormatEffective;
     }
@@ -312,17 +312,17 @@ class DatePicker extends PureComponent {
     const { dateFormat } = this.props;
 
     if (!dateFormat) {
-      return '';
+      return "";
     }
 
     if (
       dateToParse &&
-      typeof dateToParse === 'string' &&
-      dateToParse.includes('-')
+      typeof dateToParse === "string" &&
+      dateToParse.includes("-")
     ) {
-      return 'YYYY-MM-DD';
+      return "YYYY-MM-DD";
     } else {
-      return dateFormat === true ? 'L' : dateFormat;
+      return dateFormat === true ? "L" : dateFormat;
     }
   };
 

@@ -59,19 +59,34 @@ export class PriceList {
   }
 
   static applyPriceList(priceList) {
-    describe(`Create new PriceList ${priceList.name}`, function() {
-      cy.visitWindow('540321', 'NEW', 'priceListObj');
-      cy.writeIntoStringField('Name', priceList.name);
-      cy.writeIntoLookupListField('C_Country_ID', priceList.country, priceList.country, false, false, null, true);
-      cy.resetListValue('C_Currency_ID');
-      cy.selectInListField('C_Currency_ID', priceList.currency);
-      cy.writeIntoStringField('PricePrecision', priceList.pricePrecision);
-      cy.writeIntoLookupListField('M_PricingSystem_ID', priceList.priceSystem, priceList.priceSystem);
-      cy.writeIntoStringField('Description', priceList.description);
-      cy.setCheckBoxValue('IsSOPriceList', priceList.isSalesPriceList);
+    describe(`Create new PriceList ${priceList.name}`, function () {
+      cy.visitWindow("540321", "NEW", "priceListObj");
+      cy.writeIntoStringField("Name", priceList.name);
+      cy.writeIntoLookupListField(
+        "C_Country_ID",
+        priceList.country,
+        priceList.country,
+        false,
+        false,
+        null,
+        true,
+      );
+      cy.resetListValue("C_Currency_ID");
+      cy.selectInListField("C_Currency_ID", priceList.currency);
+      cy.writeIntoStringField("PricePrecision", priceList.pricePrecision);
+      cy.writeIntoLookupListField(
+        "M_PricingSystem_ID",
+        priceList.priceSystem,
+        priceList.priceSystem,
+      );
+      cy.writeIntoStringField("Description", priceList.description);
+      cy.setCheckBoxValue("IsSOPriceList", priceList.isSalesPriceList);
 
       if (priceList.defaultTaxCategory) {
-        cy.selectInListField('Default_TaxCategory_ID', priceList.defaultTaxCategory);
+        cy.selectInListField(
+          "Default_TaxCategory_ID",
+          priceList.defaultTaxCategory,
+        );
       }
 
       priceList.priceListVersions.forEach((version) => {
@@ -83,14 +98,28 @@ export class PriceList {
 
   static applyPriceListVersion(priceListVersion, debugName) {
     describe(`Create new PriceListVersion ${debugName}`, function () {
-      cy.selectTab('M_PriceList_Version');
+      cy.selectTab("M_PriceList_Version");
       cy.pressAddNewButton();
-      cy.writeIntoStringField('ValidFrom', priceListVersion.validFrom, true, null, true);
+      cy.writeIntoStringField(
+        "ValidFrom",
+        priceListVersion.validFrom,
+        true,
+        null,
+        true,
+      );
       if (priceListVersion.discountSchema) {
-        cy.selectInListField('M_DiscountSchema_ID', priceListVersion.discountSchema, true);
+        cy.selectInListField(
+          "M_DiscountSchema_ID",
+          priceListVersion.discountSchema,
+          true,
+        );
       }
       if (priceListVersion.basisPriceListVersion) {
-        cy.selectInListField('M_Pricelist_Version_Base_ID', priceListVersion.basisPriceListVersion, true);
+        cy.selectInListField(
+          "M_Pricelist_Version_Base_ID",
+          priceListVersion.basisPriceListVersion,
+          true,
+        );
       }
       cy.pressDoneButton();
     });
@@ -105,7 +134,9 @@ export class PriceListVersion {
   }
 
   setBasisPriceListVersion(basisPriceListVersion) {
-    cy.log(`PriceListVersion - set basisPriceListVersion = ${basisPriceListVersion}`);
+    cy.log(
+      `PriceListVersion - set basisPriceListVersion = ${basisPriceListVersion}`,
+    );
     this.basisPriceListVersion = basisPriceListVersion;
     return this;
   }

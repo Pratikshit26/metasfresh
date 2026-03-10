@@ -13,7 +13,7 @@ const converters = {
     return [
       converters.fromAPIEntry(apiUpdateResult.changedEntry),
       ...apiUpdateResult.otherChangedEntries.map((entry) =>
-        converters.fromAPIEntry(entry)
+        converters.fromAPIEntry(entry),
       ),
     ];
   },

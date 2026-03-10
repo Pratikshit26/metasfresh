@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export const getUserSession = () => {
   return axios.get(`${config.API_URL}/userSession`, {
@@ -48,7 +48,7 @@ export const useWorkplaces = ({ includeAvailable }) => {
 const getWorkplaces = ({ includeAvailable }) => {
   return axios
     .get(
-      `${config.API_URL}/userSession/workplace?includeAvailable=${includeAvailable}`
+      `${config.API_URL}/userSession/workplace?includeAvailable=${includeAvailable}`,
     )
     .then((response) => response.data); // unbox
 };

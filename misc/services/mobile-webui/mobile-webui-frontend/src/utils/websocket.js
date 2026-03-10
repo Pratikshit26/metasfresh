@@ -6,36 +6,36 @@ import { stompUrl } from '../constants';
 const DEBUG = true;
 
 export const connectAndSubscribe = ({ topic, onWebsocketMessage, debug = DEBUG, headers = {} }) => {
-  const config = {
-    reconnectDelay: 5000,
-    heartbeatIncoming: 4000,
-    heartbeatOutgoing: 4000,
-  };
+    const config = {
+        reconnectDelay: 5000,
+        heartbeatIncoming: 4000,
+        heartbeatOutgoing: 4000,
+    };
 
-  if (debug) {
-    config.debug = (msg) => console.log('STOMP DEBUG: ' + msg);
-  }
+    if (debug) {
+        config.debug = (msg) => console.log('STOMP DEBUG: ' + msg);
+    }
 
-  const client = new StompJs.Client(config);
+    const client = new StompJs.Client(config);
 
-  client.webSocketFactory = () => new SockJS(stompUrl);
+    client.webSocketFactory = () => new SockJS(stompUrl);
 
-  client.onConnect = (frame) => {
-    if (debug) console.log('websocket connected: ', frame);
+    client.onConnect = (frame) => {
+        if (debug) console.log('websocket connected: ', frame);
 
-    client.subscribe(topic, onWebsocketMessage, headers);
-  };
+        client.subscribe(topic, onWebsocketMessage, headers);
+    };
 
-  client.onStompError = function (frame) {
-    console.log('Broker reported error: ' + frame.headers['message']);
-    console.log('Additional details: ' + frame.body);
-  };
+    client.onStompError = function (frame) {
+        console.log('Broker reported error: ' + frame.headers['message']);
+        console.log('Additional details: ' + frame.body);
+    };
 
-  client.activate();
+    client.activate();
 
-  return client;
+    return client;
 };
 
 export const disconnectClient = (client) => {
-  client && client.deactivate();
+    client && client.deactivate();
 };

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { BrowserBarcodeReader } from '@zxing/library';
-import { BrowserDatamatrixCodeReader } from '@zxing/library';
-import classnames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { BrowserBarcodeReader } from "@zxing/library";
+import { BrowserDatamatrixCodeReader } from "@zxing/library";
+import classnames from "classnames";
 
-import BrowserQRCodeReader from '../../../services/CustomBrowserQRCodeReader';
+import BrowserQRCodeReader from "../../../services/CustomBrowserQRCodeReader";
 
 /**
  * @file Scanner component
@@ -18,20 +18,20 @@ export default class BarcodeScanner extends Component {
 
     const barcodeScannerType = props.barcodeScannerType
       ? props.barcodeScannerType
-      : 'qrCode';
+      : "qrCode";
 
     this.state = {
       barcodeScannerType: barcodeScannerType,
     };
 
-    if (barcodeScannerType == 'qrCode') {
+    if (barcodeScannerType == "qrCode") {
       this.reader = new BrowserQRCodeReader();
-    } else if (barcodeScannerType == 'barcode') {
+    } else if (barcodeScannerType == "barcode") {
       this.reader = new BrowserBarcodeReader();
-    } else if (barcodeScannerType == 'datamatrix') {
+    } else if (barcodeScannerType == "datamatrix") {
       this.reader = new BrowserDatamatrixCodeReader();
     } else {
-      throw new Error('Unknown barcodeScannerType: ' + barcodeScannerType);
+      throw new Error("Unknown barcodeScannerType: " + barcodeScannerType);
     }
   }
 
@@ -45,7 +45,7 @@ export default class BarcodeScanner extends Component {
 
   _process = () => {
     this.reader
-      .decodeFromInputVideoDevice(undefined, 'video')
+      .decodeFromInputVideoDevice(undefined, "video")
       .then((result) => this._onDetected(result))
       .catch(() => {
         this._changeReader();
@@ -72,14 +72,14 @@ export default class BarcodeScanner extends Component {
 
     this.reader.stopStreams();
 
-    if (barcodeScannerType == 'qrCode') {
+    if (barcodeScannerType == "qrCode") {
       this.reader = new BrowserBarcodeReader();
       this.props.onClose(true);
       this.setState(
         {
-          barcodeScannerType: 'barcode',
+          barcodeScannerType: "barcode",
         },
-        () => this._process()
+        () => this._process(),
       );
     }
   };
@@ -92,7 +92,7 @@ export default class BarcodeScanner extends Component {
         <div className="scan-mode">
           Scan mode:
           <i
-            className={classnames('btn-control btn-mode', {
+            className={classnames("btn-control btn-mode", {
               [`btn-${barcodeScannerType}`]: barcodeScannerType,
             })}
             title={`Scan ${barcodeScannerType}`}

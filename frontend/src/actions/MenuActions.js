@@ -1,7 +1,7 @@
-import { HOME_MENU_USER_MAX_ITEMS } from '../constants/Constants';
+import { HOME_MENU_USER_MAX_ITEMS } from "../constants/Constants";
 
-import * as types from '../constants/MenuTypes';
-import { elementPathRequest, rootRequest } from '../api';
+import * as types from "../constants/MenuTypes";
+import { elementPathRequest, rootRequest } from "../api";
 
 export function setBreadcrumb(breadcrumb) {
   return {
@@ -19,14 +19,14 @@ export function updateBreadcrumb(node) {
 
 export function getRootBreadcrumb() {
   return rootRequest(HOME_MENU_USER_MAX_ITEMS, 10, true).then((root) => ({
-    nodeId: '0',
+    nodeId: "0",
     children: root.data.children,
   }));
 }
 
 export function setBreadcrumbByWindowId(id) {
   return (dispatch) => {
-    elementPathRequest('window', id)
+    elementPathRequest("window", id)
       .then((response) => flattenOneLine(response.data))
       .then((item) => dispatch(setBreadcrumb(item.reverse())))
       .catch(() => dispatch(setBreadcrumb([])));
@@ -37,14 +37,14 @@ export function setBreadcrumbByWindowId(id) {
 
 // UTILITIES
 
-export function flattenLastElem(node, prop = 'children') {
+export function flattenLastElem(node, prop = "children") {
   let result = [];
 
   if (node[prop]) {
     node[prop].map((child) => {
       const flat = flattenLastElem(child);
 
-      if (typeof flat === 'object') {
+      if (typeof flat === "object") {
         result = result.concat(flat);
       } else {
         result.push(flattenLastElem(child));

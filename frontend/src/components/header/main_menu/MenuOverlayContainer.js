@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import MenuOverlayItem from './MenuOverlayItem';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import MenuOverlayItem from "./MenuOverlayItem";
 
 class MenuOverlayContainer extends Component {
   render() {
@@ -33,35 +33,35 @@ class MenuOverlayContainer extends Component {
       <div
         tabIndex={0}
         onKeyDown={onKeyDown}
-        className={classnames('menu-overlay-node-container js-menu-container', {
-          'mt-0': indexOrder === 1,
-          'menu-overlay-node-spaced': deep,
-          'menu-overlay-expanded-link-spaced js-menu-main-container': !deep,
-          'menu-overlay-sitemap-col-2': menuType === 'sitemap', // we apply this only for the sitemap
+        className={classnames("menu-overlay-node-container js-menu-container", {
+          "mt-0": indexOrder === 1,
+          "menu-overlay-node-spaced": deep,
+          "menu-overlay-expanded-link-spaced js-menu-main-container": !deep,
+          "menu-overlay-sitemap-col-2": menuType === "sitemap", // we apply this only for the sitemap
         })}
       >
-        {type === 'group' && !deep && (
+        {type === "group" && !deep && (
           <div
-            className={classnames('menu-overlay-header-main', {
-              'sitemap-box-header': menuType === 'sitemap',
+            className={classnames("menu-overlay-header-main", {
+              "sitemap-box-header": menuType === "sitemap",
             })}
           >
             {caption}
           </div>
         )}
 
-        {type === 'group' && deep && (
+        {type === "group" && deep && (
           <span
-            className={classnames('menu-overlay-header', {
-              'menu-overlay-header-spaced': !printChildren,
-              'sitemap-level-one': menuType === 'sitemapLevelOne',
+            className={classnames("menu-overlay-header", {
+              "menu-overlay-header-spaced": !printChildren,
+              "sitemap-level-one": menuType === "sitemapLevelOne",
             })}
           >
             {caption}
           </span>
         )}
 
-        {type !== 'group' && (
+        {type !== "group" && (
           <MenuOverlayItem
             {...{
               showBookmarks,
@@ -90,7 +90,7 @@ class MenuOverlayContainer extends Component {
                 printChildren={true}
                 deep={true}
                 menuType={
-                  levelType === 'navigationTree' ? 'sitemapLevelOne' : ''
+                  levelType === "navigationTree" ? "sitemapLevelOne" : ""
                 }
                 {...subitem}
                 {...{
@@ -105,7 +105,7 @@ class MenuOverlayContainer extends Component {
               />
             ) : (
               this.renderSubItem(subitem, subindex)
-            )
+            ),
           )}
       </div>
     );
@@ -116,7 +116,7 @@ class MenuOverlayContainer extends Component {
 
     // In case there is no `handleClickOnFolder` function provided,
     // don't even render the sub-item group because user can do nothing with it.
-    if (subitem.type === 'group' && !handleClickOnFolder) {
+    if (subitem.type === "group" && !handleClickOnFolder) {
       return null;
     }
 

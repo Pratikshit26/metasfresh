@@ -1,5 +1,5 @@
-import { RewriteURL } from './constants';
-import { getLanguageSpecific } from './utils';
+import { RewriteURL } from "./constants";
+import { getLanguageSpecific } from "./utils";
 
 export class Warehouse {
   constructor() {
@@ -36,13 +36,17 @@ export class Warehouse {
   }
 
   setBPartnerLocation(C_BPartner_Location_ID) {
-    cy.log(`BPartnerLocation - set C_BPartner_Location_ID=${C_BPartner_Location_ID}`);
+    cy.log(
+      `BPartnerLocation - set C_BPartner_Location_ID=${C_BPartner_Location_ID}`,
+    );
     this.C_BPartner_Location_ID = C_BPartner_Location_ID;
     return this;
   }
 
   setIsQualityIssueWarehouse(isQualityIssueWarehouse) {
-    cy.log(`Warehouse - set Quality Issue Warehouse= ${isQualityIssueWarehouse}`);
+    cy.log(
+      `Warehouse - set Quality Issue Warehouse= ${isQualityIssueWarehouse}`,
+    );
     this.isQualityIssueWarehouse = isQualityIssueWarehouse;
     return this;
   }
@@ -93,7 +97,9 @@ export class WarehouseLocator {
   }
 
   setIsAfterPickingLocator(isAfterPickingLocator) {
-    cy.log(`WarehouseLocator - set isAfterPickingLocator= ${isAfterPickingLocator}`);
+    cy.log(
+      `WarehouseLocator - set isAfterPickingLocator= ${isAfterPickingLocator}`,
+    );
     this.isAfterPickingLocator = isAfterPickingLocator;
     return this;
   }
@@ -108,45 +114,53 @@ export class WarehouseRoute {
 }
 
 function applyWarehouse(warehouse) {
-  cy.visitWindow('139', 'NEW');
-  cy.writeIntoStringField('Name', warehouse.name);
+  cy.visitWindow("139", "NEW");
+  cy.writeIntoStringField("Name", warehouse.name);
   // .clearField('Value')
-  cy.writeIntoStringField('Value', warehouse.value);
+  cy.writeIntoStringField("Value", warehouse.value);
 
   if (warehouse.plant) {
-    cy.selectInListField('PP_Plant_ID', warehouse.plant);
+    cy.selectInListField("PP_Plant_ID", warehouse.plant);
   }
 
-  cy.selectNthInListField('C_BPartner_Location_ID', 1);
+  cy.selectNthInListField("C_BPartner_Location_ID", 1);
   if (warehouse.isQualityIssueWarehouse) {
-    cy.setCheckBoxValue('IsIssueWarehouse', warehouse.isQualityIssueWarehouse);
+    cy.setCheckBoxValue("IsIssueWarehouse", warehouse.isQualityIssueWarehouse);
   }
   if (warehouse.isQualityReturnWarehouse) {
-    cy.setCheckBoxValue('IsQualityReturnWarehouse', warehouse.isQualityReturnWarehouse);
+    cy.setCheckBoxValue(
+      "IsQualityReturnWarehouse",
+      warehouse.isQualityReturnWarehouse,
+    );
   }
 
-  warehouse.locators.forEach(locator => {
+  warehouse.locators.forEach((locator) => {
     applyLocator(locator);
   });
-  warehouse.routes.forEach(route => {
+  warehouse.routes.forEach((route) => {
     applyRoute(route);
   });
 }
 
 function applyLocator(locator) {
-  cy.selectTab('M_Locator');
+  cy.selectTab("M_Locator");
   cy.pressAddNewButton();
-  cy.writeIntoStringField('X', locator.x, true, null, true);
-  cy.writeIntoStringField('X1', locator.x1, true, null, true);
-  cy.writeIntoStringField('Z', locator.z, true, null, true);
-  cy.writeIntoStringField('Y', locator.y, true, null, true);
+  cy.writeIntoStringField("X", locator.x, true, null, true);
+  cy.writeIntoStringField("X1", locator.x1, true, null, true);
+  cy.writeIntoStringField("Z", locator.z, true, null, true);
+  cy.writeIntoStringField("Y", locator.y, true, null, true);
 
   if (locator.value) {
-    cy.clearField('Value', true);
-    cy.writeIntoStringField('Value', locator.value, true, null, true);
+    cy.clearField("Value", true);
+    cy.writeIntoStringField("Value", locator.value, true, null, true);
   }
   if (locator.isAfterPickingLocator) {
-    cy.setCheckBoxValue('IsAfterPickingLocator', locator.isAfterPickingLocator, true, RewriteURL.PROCESS);
+    cy.setCheckBoxValue(
+      "IsAfterPickingLocator",
+      locator.isAfterPickingLocator,
+      true,
+      RewriteURL.PROCESS,
+    );
   }
   cy.pressDoneButton();
 }
@@ -154,6 +168,10 @@ function applyLocator(locator) {
 function applyRoute(route) {
   cy.selectTab(`M_Warehouse_Routing`);
   cy.pressAddNewButton();
-  cy.selectInListField('DocBaseType', getLanguageSpecific(route, 'docBaseType'), true);
+  cy.selectInListField(
+    "DocBaseType",
+    getLanguageSpecific(route, "docBaseType"),
+    true,
+  );
   cy.pressDoneButton();
 }

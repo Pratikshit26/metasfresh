@@ -1,13 +1,13 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import SpinnerOverlay from '../app/SpinnerOverlay';
-import AttachUrl from './AttachUrl';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import SpinnerOverlay from "../app/SpinnerOverlay";
+import AttachUrl from "./AttachUrl";
 import {
   deleteAttachment,
   getAttachments,
   getAttachmentUrl,
-} from '../../api/window';
+} from "../../api/window";
 
 /**
  * @file Class based component.
@@ -32,7 +32,7 @@ class Attachments extends Component {
 
   isDocumentNotFound = () => {
     const { windowType, docId } = this.props;
-    return !windowType || docId === 'notfound';
+    return !windowType || docId === "notfound";
   };
 
   /**
@@ -57,7 +57,7 @@ class Attachments extends Component {
         });
       })
       .catch((ex) => {
-        console.log('Got error while fetching the attachments', { ex });
+        console.log("Got error while fetching the attachments", { ex });
         this.setState({ data: [] });
       });
   };
@@ -97,7 +97,7 @@ class Attachments extends Component {
   handleClickAttachment = (attachmentEntryId) => {
     const { windowType: windowId, docId: documentId } = this.props;
     const url = getAttachmentUrl({ windowId, documentId, attachmentEntryId });
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   handleDeleteAttachment = (e, attachmentEntryId) => {
@@ -105,7 +105,7 @@ class Attachments extends Component {
     e.stopPropagation();
     if (
       window.confirm(
-        `${counterpart.translate('window.attachment.deleteQuestion')}`
+        `${counterpart.translate("window.attachment.deleteQuestion")}`,
       )
     ) {
       deleteAttachment({ windowId, documentId, attachmentEntryId })
@@ -124,9 +124,9 @@ class Attachments extends Component {
     const active = document.activeElement;
 
     const keyHandler = (e, dir) => {
-      const sib = dir ? 'nextSibling' : 'previousSibling';
+      const sib = dir ? "nextSibling" : "previousSibling";
       e.preventDefault();
-      if (active.classList.contains('js-subheader-item')) {
+      if (active.classList.contains("js-subheader-item")) {
         active[sib] && active[sib].focus();
       } else {
         active.childNodes[0].focus();
@@ -134,13 +134,13 @@ class Attachments extends Component {
     };
 
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         keyHandler(e, true);
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         keyHandler(e, false);
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         document.activeElement.click();
         break;
@@ -158,7 +158,7 @@ class Attachments extends Component {
 
     return (
       <div className="subheader-attachurl" onClick={this.handleClickAttachUrl}>
-        {counterpart.translate('window.attachment.url.add')}
+        {counterpart.translate("window.attachment.url.add")}
 
         {isAttachUrlOpen && (
           <AttachUrl
@@ -219,7 +219,7 @@ class Attachments extends Component {
    */
   renderEmpty = () => (
     <div className="subheader-item subheader-item-disabled">
-      {counterpart.translate('window.sideList.attachments.empty')}
+      {counterpart.translate("window.sideList.attachments.empty")}
     </div>
   );
 
@@ -249,7 +249,7 @@ class Attachments extends Component {
       content = this.renderAttachmentSpinner();
     }
 
-    console.log('render', {
+    console.log("render", {
       content,
       actions,
       isDocumentNotFound: this.isDocumentNotFound(),

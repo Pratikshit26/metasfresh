@@ -5,10 +5,7 @@
     "AmountType": {
       "title": "Amount. Type",
       "description": "A number of monetary units specified using a given unit of currency.",
-      "required": [
-        "_",
-        "currencyID"
-      ],
+      "required": ["_", "currencyID"],
       "properties": {
         "_": {
           "type": "number"
@@ -26,10 +23,7 @@
     "BinaryObjectType": {
       "title": "Binary Object. Type",
       "description": "A set of finite-length sequences of binary octets.",
-      "required": [
-        "_",
-        "mimeCode"
-      ],
+      "required": ["_", "mimeCode"],
       "properties": {
         "_": {
           "type": "string"
@@ -59,10 +53,7 @@
     "GraphicType": {
       "title": "Graphic. Type",
       "description": "A diagram, graph, mathematical curve, or similar representation.",
-      "required": [
-        "_",
-        "mimeCode"
-      ],
+      "required": ["_", "mimeCode"],
       "properties": {
         "_": {
           "type": "string"
@@ -92,10 +83,7 @@
     "PictureType": {
       "title": "Picture. Type",
       "description": "A diagram, graph, mathematical curve, or similar representation.",
-      "required": [
-        "_",
-        "mimeCode"
-      ],
+      "required": ["_", "mimeCode"],
       "properties": {
         "_": {
           "type": "string"
@@ -125,10 +113,7 @@
     "SoundType": {
       "title": "Sound. Type",
       "description": "An audio representation.",
-      "required": [
-        "_",
-        "mimeCode"
-      ],
+      "required": ["_", "mimeCode"],
       "properties": {
         "_": {
           "type": "string"
@@ -158,10 +143,7 @@
     "VideoType": {
       "title": "Video. Type",
       "description": "A video representation.",
-      "required": [
-        "_",
-        "mimeCode"
-      ],
+      "required": ["_", "mimeCode"],
       "properties": {
         "_": {
           "type": "string"
@@ -196,9 +178,7 @@
     "DateTimeType": {
       "title": "Date Time. Type",
       "description": "A particular point in the progression of time, together with relevant supplementary information.",
-      "required": [
-        "_"
-      ],
+      "required": ["_"],
       "properties": {
         "_": {
           "type": "string",
@@ -211,9 +191,7 @@
     "DateType": {
       "title": "Date. Type",
       "description": "One calendar day according the Gregorian calendar.",
-      "required": [
-        "_"
-      ],
+      "required": ["_"],
       "properties": {
         "_": {
           "type": "string",
@@ -226,9 +204,7 @@
     "TimeType": {
       "title": "Time. Type",
       "description": "An instance of time that occurs every day.",
-      "required": [
-        "_"
-      ],
+      "required": ["_"],
       "properties": {
         "_": {
           "type": "string",
@@ -246,9 +222,7 @@
     "IndicatorType": {
       "title": "Indicator. Type",
       "description": "A list of two mutually exclusive Boolean values that express the only possible states of a property.",
-      "required": [
-        "_"
-      ],
+      "required": ["_"],
       "properties": {
         "_": {
           "type": "boolean"
@@ -260,10 +234,7 @@
     "MeasureType": {
       "title": "Measure. Type",
       "description": "A numeric value determined by measuring an object using a specified unit of measure.",
-      "required": [
-        "_",
-        "unitCode"
-      ],
+      "required": ["_", "unitCode"],
       "properties": {
         "_": {
           "type": "number"

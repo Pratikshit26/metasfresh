@@ -1,6 +1,6 @@
-* This file lists all available commands for reference
+- This file lists all available commands for reference
 
-** General (general.js)
+\*\* General (general.js)
 
 - loginViaAPI: reusable form login
 - tab: emulates tab
@@ -13,7 +13,7 @@
 - getNotificationModal: get the HTML element with notification
 - waitForFieldValue: wait for field data from request
 
-** Navigation (navigation.js)
+\*\* Navigation (navigation.js)
 
 - clickButtonWithText: click button with given text
 - clickElementWithClass: click element with given selector
@@ -21,7 +21,7 @@
 - selectSingleTabRow: select row in active tab
 - selectReference
 
-** Forms (form.js)
+\*\* Forms (form.js)
 
 - assertFieldNotShown
 - clearField
@@ -36,14 +36,14 @@
 - selectInListField
 - selectDateViaPicker: open date picker and select date (atm works for today only)
 
-** Action
+\*\* Action
 
 - clickHeaderNav
 - executeHeaderAction
 - executeHeaderActionWithDialog: execute a process/action and wait for the process-dialog
 - executeQuickAction
 
-** Test specific (test.js)
+\*\* Test specific (test.js)
 
 - editAddress
 - pressStartButton

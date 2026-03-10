@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import onClickOutside from 'react-onclickoutside';
-import { Manager, Popper, Reference } from 'react-popper';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import onClickOutside from "react-onclickoutside";
+import { Manager, Popper, Reference } from "react-popper";
 
-import iconHelp from '../../assets/images/tooltip-help.png';
-import iconText from '../../assets/images/tooltip-text.png';
+import iconHelp from "../../assets/images/tooltip-help.png";
+import iconText from "../../assets/images/tooltip-text.png";
 
 class WidgetTooltip extends PureComponent {
   handleClick = () => {
@@ -29,7 +29,7 @@ class WidgetTooltip extends PureComponent {
           <Reference>
             {({ ref }) => (
               <img
-                src={iconName === 'text' ? iconText : iconHelp}
+                src={iconName === "text" ? iconText : iconHelp}
                 onClick={this.handleClick}
                 ref={ref}
                 alt="icon"
@@ -50,10 +50,10 @@ class WidgetTooltip extends PureComponent {
         placement="right-start"
         modifiers={[
           {
-            name: 'flip',
+            name: "flip",
             enabled: true,
             options: {
-              rootBoundary: 'viewport',
+              rootBoundary: "viewport",
             },
           },
         ]}
@@ -66,7 +66,7 @@ class WidgetTooltip extends PureComponent {
             data-placement={placement}
             className="tooltip-content"
           >
-            <span>{text || ''}</span>
+            <span>{text || ""}</span>
           </div>
         )}
       </Popper>

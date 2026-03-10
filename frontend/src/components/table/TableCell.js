@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import React, { createRef, PureComponent } from 'react';
-import classnames from 'classnames';
-import counterpart from 'counterpart';
+import PropTypes from "prop-types";
+import React, { createRef, PureComponent } from "react";
+import classnames from "classnames";
+import counterpart from "counterpart";
 
 import {
   checkIfDateField,
   getSizeClass,
   getTdTitle,
-} from '../../utils/tableHelpers';
-import TableCellWidget from './TableCellWidget';
-import WidgetWrapper from '../../containers/WidgetWrapper';
-import WidgetTooltip from '../widget/WidgetTooltip';
+} from "../../utils/tableHelpers";
+import TableCellWidget from "./TableCellWidget";
+import WidgetWrapper from "../../containers/WidgetWrapper";
+import WidgetTooltip from "../widget/WidgetTooltip";
 
 /**
  * @file Class based component.
@@ -47,7 +47,7 @@ class TableCell extends PureComponent {
    */
   handleBackdropLock = (state) => {
     const { item } = this.props;
-    const widgetsList = ['ProductAttributes', 'Attributes', 'List', 'Lookup'];
+    const widgetsList = ["ProductAttributes", "Attributes", "List", "Lookup"];
 
     if (!widgetsList.includes(item.widgetType)) {
       !state && this.props.onClickOutside();
@@ -74,7 +74,7 @@ class TableCell extends PureComponent {
         event,
         property,
         readonly: isReadonly,
-        isAttributeWidget: widgetType === 'ProductAttributes',
+        isAttributeWidget: widgetType === "ProductAttributes",
       });
   };
 
@@ -99,7 +99,7 @@ class TableCell extends PureComponent {
       keyProperty,
       property,
       !!supportZoomInto,
-      supportFieldEdit
+      supportFieldEdit,
     );
   };
 
@@ -188,7 +188,7 @@ class TableCell extends PureComponent {
     const { tooltipToggled } = this.state;
     const { widgetType } = item;
     const tdTitle = getTdTitle({ item, description });
-    const isOpenDatePicker = isEdited && item.widgetType === 'Date';
+    const isOpenDatePicker = isEdited && item.widgetType === "Date";
     const isDateField = checkIfDateField({ item });
     let style = cellExtended ? { height: extendLongText * 20 } : {};
 
@@ -201,25 +201,25 @@ class TableCell extends PureComponent {
         onContextMenu={this.handleRightClick}
         onFocus={this.handleFocus}
         className={classnames(
-          'table-cell',
+          "table-cell",
           {
             [`text-${item.gridAlign}`]: item.gridAlign,
-            'cell-disabled': isReadonly,
-            'cell-mandatory': isMandatory,
+            "cell-disabled": isReadonly,
+            "cell-mandatory": isMandatory,
           },
           getSizeClass(item),
           item.widgetType,
           {
-            'pulse-on': updatedRow,
-            'pulse-off': !updatedRow,
-          }
+            "pulse-on": updatedRow,
+            "pulse-off": !updatedRow,
+          },
         )}
         data-cy={`cell-${property}`}
       >
         {hasComments && (
           <span
             className="notification-number size-sm"
-            title={counterpart.translate('window.comments.caption')}
+            title={counterpart.translate("window.comments.caption")}
           />
         )}
         {isEdited ? (
@@ -259,9 +259,9 @@ class TableCell extends PureComponent {
             handleBackdropLock={this.handleBackdropLock}
           />
         ) : (
-          <div className={classnames({ 'with-widget': tooltipWidget })}>
+          <div className={classnames({ "with-widget": tooltipWidget })}>
             <div
-              className={classnames('cell-text-wrapper', {
+              className={classnames("cell-text-wrapper", {
                 [`${item.widgetType.toLowerCase()}-cell`]: item.widgetType,
                 extended: cellExtended,
               })}

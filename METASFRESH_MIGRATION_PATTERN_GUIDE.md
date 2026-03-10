@@ -82,6 +82,7 @@ INSERT INTO AD_Column (
 ```
 
 **Key Fields:**
+
 - `AD_Reference_ID`: Defines data type
   - 10 = String
   - 11 = Integer
@@ -96,14 +97,14 @@ Support multiple languages:
 
 ```sql
 INSERT INTO AD_Column_Trl (
-    AD_Language, AD_Column_ID, Name, 
+    AD_Language, AD_Column_ID, Name,
     IsTranslated, AD_Client_ID, AD_Org_ID, ...
-) 
-SELECT l.AD_Language, t.AD_Column_ID, t.Name, 
+)
+SELECT l.AD_Language, t.AD_Column_ID, t.Name,
        'N', t.AD_Client_ID, t.AD_Org_ID, ...
-FROM AD_Language l, AD_Column t 
+FROM AD_Language l, AD_Column t
 WHERE l.IsActive='Y'
-  AND (l.IsSystemLanguage='Y' OR l.IsBaseLanguage='Y') 
+  AND (l.IsSystemLanguage='Y' OR l.IsBaseLanguage='Y')
   AND t.AD_Column_ID=591821;
 ```
 
@@ -174,14 +175,15 @@ Adjust sequences when inserting new elements:
 
 ```sql
 -- Move existing fields down to make room
-UPDATE AD_UI_Element 
+UPDATE AD_UI_Element
 SET IsDisplayedGrid='Y', SeqNoGrid=80
 WHERE AD_UI_Element_ID=548994;
 
-UPDATE AD_UI_Element 
+UPDATE AD_UI_Element
 SET IsDisplayedGrid='Y', SeqNoGrid=90
 WHERE AD_UI_Element_ID=548989;
 ```
+
 ---
 
 ## 📊 Data Dictionary Tables
@@ -200,21 +202,20 @@ AD_UI_Element (WebUI Position)
 
 ### Important Metadata Tables
 
-| Table | Purpose |
-|-------|---------|
-| `AD_Element` | Master definition (name, description shared across columns) |
-| `AD_Column` | Database column definition |
-| `AD_Table` | Database table definition |
-| `AD_Field` | UI field (links column to tab) |
-| `AD_Tab` | Tab definition (belongs to window) |
-| `AD_Window` | Window definition |
-| `AD_UI_Element` | WebUI element positioning |
-| `AD_UI_ElementGroup` | WebUI element grouping |
-| `AD_Reference` | Data type definitions |
-| `AD_Ref_List` | List values (for dropdown lists) |
+| Table                | Purpose                                                     |
+| -------------------- | ----------------------------------------------------------- |
+| `AD_Element`         | Master definition (name, description shared across columns) |
+| `AD_Column`          | Database column definition                                  |
+| `AD_Table`           | Database table definition                                   |
+| `AD_Field`           | UI field (links column to tab)                              |
+| `AD_Tab`             | Tab definition (belongs to window)                          |
+| `AD_Window`          | Window definition                                           |
+| `AD_UI_Element`      | WebUI element positioning                                   |
+| `AD_UI_ElementGroup` | WebUI element grouping                                      |
+| `AD_Reference`       | Data type definitions                                       |
+| `AD_Ref_List`        | List values (for dropdown lists)                            |
 
 ---
-
 
 ### From Dunning Candidate Window Update
 
@@ -225,7 +226,7 @@ INSERT INTO AD_Column (
     AD_Table_ID=540396,           -- C_Dunning_Candidate table
     ColumnName='C_Dunning_ID',
     AD_Reference_ID=19,           -- Type: Table ID
-    ColumnSQL='(SELECT C_Dunning_ID from C_DunningLevel 
+    ColumnSQL='(SELECT C_Dunning_ID from C_DunningLevel
                 WHERE C_DunningLevel_ID = C_Dunning_Candidate.C_DunningLevel_ID)',
     Name='Mahnung',               -- German: Dunning
     Description='Dunning Rules for overdue invoices',
@@ -241,7 +242,7 @@ INSERT INTO AD_Column_Trl (...);
 SELECT update_Column_Translation_From_AD_Element(838);
 
 -- 4. MAKE IT SEARCHABLE
-UPDATE AD_Column 
+UPDATE AD_Column
 SET IsSelectionColumn='Y', SelectionColumnSeqNo=30
 WHERE AD_Column_ID=591821;
 
@@ -266,8 +267,8 @@ INSERT INTO AD_UI_Element (
 ) VALUES (...);
 
 -- 7. REORDER OTHER ELEMENTS
-UPDATE AD_UI_Element 
-SET SeqNoGrid=80 
+UPDATE AD_UI_Element
+SET SeqNoGrid=80
 WHERE AD_UI_Element_ID=548994;   -- Dunning Level moved to 80
 ```
 
@@ -289,7 +290,7 @@ AD_Window (e.g., "Dunning Disposition")
 
 ```sql
 -- UI Section: main (primary section)
--- UI Group: default, flags, dates, org, stats,default state values over the meetng 
+-- UI Group: default, flags, dates, org, stats,default state values over the meetng
 -- UI Element: Individual fields
 
 main section
@@ -334,34 +335,39 @@ SELECT update_Sequences();
 ## 📝 Best Practices
 
 ### 1. **Always Use Unique IDs**
+
 - Use ID ranges assigned to your module
 - System IDs: < 1000000
 - Custom IDs: > 1000000
 
 ### 2. **EntityType Management**
+
 ```sql
 EntityType='de.metas.dunning'  -- Module identifier
 EntityType='D'                  -- Dictionary (core)
 ```
 
 ### 3. **Translation Support**
+
 - Always create translation records
 - Use `update_*_Translation_From_AD_Element()` functions
 
 ### 4. **Sequence Numbers**
+
 - Leave gaps (10, 20, 30...) for future insertions
 - Grid sequences separate from form sequences
 
 ### 5. **Idempotency**
+
 - Scripts should be safe to run multiple times
 - Use `IF NOT EXISTS` when possible
 
 ```sql
 -- Idempotent insert
 INSERT INTO AD_Column (...)
-SELECT ... 
+SELECT ...
 WHERE NOT EXISTS (
-    SELECT 1 FROM AD_Column 
+    SELECT 1 FROM AD_Column
     WHERE AD_Column_ID=591821
 );
 ```
@@ -398,15 +404,17 @@ backend/de.metas.ui.web.base/
 backend/de.metas.fresh/
 ```
 
-# fresh modulear 
-#erp specific 
-meta.fresh 
+# fresh modulear
+
+#erp specific
+meta.fresh
 
 #fresg odule (ERP-specific )
 
 ### Understanding by Example
 
-1. **Find a recent migration**: 
+1. **Find a recent migration**:
+
    ```bash
    ls -lt backend/*/migration/src/main/sql/postgresql/system/*/*.sql | head
    ```
@@ -429,22 +437,22 @@ meta.fresh
 
 ### Common AD_Reference_ID Values
 
-| ID | Type | Description |
-|----|------|-------------|
-| 10 | String | Text field |
-| 11 | Integer | Whole number |
-| 12 | Amount | Currency amount |
-| 13 | ID | Database ID |
-| 14 | Text | Long text |
-| 15 | Date | Date only |
-| 16 | DateTime | Date + Time |
-| 17 | List | Static dropdown |
-| 18 | Table | Foreign key |
-| 19 | TableDir | Direct table lookup |
-| 20 | Yes-No | Boolean |
-| 22 | Number | Decimal number |
-| 28 | Button | Button field |
-| 30 | Search | Searchable dropdown |
+| ID  | Type     | Description         |
+| --- | -------- | ------------------- |
+| 10  | String   | Text field          |
+| 11  | Integer  | Whole number        |
+| 12  | Amount   | Currency amount     |
+| 13  | ID       | Database ID         |
+| 14  | Text     | Long text           |
+| 15  | Date     | Date only           |
+| 16  | DateTime | Date + Time         |
+| 17  | List     | Static dropdown     |
+| 18  | Table    | Foreign key         |
+| 19  | TableDir | Direct table lookup |
+| 20  | Yes-No   | Boolean             |
+| 22  | Number   | Decimal number      |
+| 28  | Button   | Button field        |
+| 30  | Search   | Searchable dropdown |
 
 ---
 
@@ -465,7 +473,7 @@ meta.fresh
 2. **Trace a field** from AD_Column to UI
 3. **Practice writing** a simple column addition
 4. **Study AD_Element** to understand reusability
-5. **Explore WebUI** layout with AD_UI_* tables
+5. **Explore WebUI** layout with AD*UI*\* tables
 
 ---
 

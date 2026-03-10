@@ -1,4 +1,4 @@
-import { getLanguageSpecific } from './utils';
+import { getLanguageSpecific } from "./utils";
 
 export class LagerKonferenz {
   constructor({ name, ...vals }) {
@@ -18,7 +18,9 @@ export class LagerKonferenz {
   }
 
   addSettingsLine(settingsLine) {
-    cy.log(`LagerKonferenz - add settingsLine = ${JSON.stringify(settingsLine)}`);
+    cy.log(
+      `LagerKonferenz - add settingsLine = ${JSON.stringify(settingsLine)}`,
+    );
     this.settingsLines.push(settingsLine);
     return this;
   }
@@ -57,19 +59,25 @@ export class LagerKonferenzVersion {
   }
 
   setProcessingFeeProduct(processingFeeProduct) {
-    cy.log(`LagerKonferenzVersion - set processingFeeProduct = ${processingFeeProduct}`);
+    cy.log(
+      `LagerKonferenzVersion - set processingFeeProduct = ${processingFeeProduct}`,
+    );
     this.processingFeeProduct = processingFeeProduct;
     return this;
   }
 
   setWitholdingProduct(witholdingProduct) {
-    cy.log(`LagerKonferenzVersion - set witholdingProduct = ${witholdingProduct}`);
+    cy.log(
+      `LagerKonferenzVersion - set witholdingProduct = ${witholdingProduct}`,
+    );
     this.witholdingProduct = witholdingProduct;
     return this;
   }
 
   setRegularProductionProduct(regularProductionProduct) {
-    cy.log(`LagerKonferenzVersion - set regularProductionProduct = ${regularProductionProduct}`);
+    cy.log(
+      `LagerKonferenzVersion - set regularProductionProduct = ${regularProductionProduct}`,
+    );
     this.regularProductionProduct = regularProductionProduct;
     return this;
   }
@@ -81,43 +89,97 @@ export class LagerKonferenzVersion {
   }
 
   setPercentageScrapTreshhold(treshhold) {
-    cy.log(`LagerKonferenzVersion - set percentage scrap treshhold = ${treshhold}`);
+    cy.log(
+      `LagerKonferenzVersion - set percentage scrap treshhold = ${treshhold}`,
+    );
     this.treshhold = treshhold;
     return this;
   }
 }
 
 function applyQualitySettings(qualitySettings) {
-  cy.visitWindow('540230', 'NEW', 'newQualitySettings');
-  cy.writeIntoStringField('Name', qualitySettings.name);
+  cy.visitWindow("540230", "NEW", "newQualitySettings");
+  cy.writeIntoStringField("Name", qualitySettings.name);
 
   // Thx to https://stackoverflow.com/questions/16626735/how-to-loop-through-an-array-containing-objects-and-access-their-properties
 
-  qualitySettings.settingsLines.forEach(function(settingsLine) {
+  qualitySettings.settingsLines.forEach(function (settingsLine) {
     applyLine(settingsLine);
   });
   cy.expectNumberOfRows(qualitySettings.settingsLines.length);
 }
 
 function applyLine(settingsLine) {
-  cy.selectTab('M_QualityInsp_LagerKonf_Version');
+  cy.selectTab("M_QualityInsp_LagerKonf_Version");
   cy.pressAddNewButton();
-  cy.writeIntoStringField('ValidFrom', settingsLine.validFrom, true /*modal*/, undefined, true /*norequest */);
-  cy.writeIntoStringField('ValidTo', settingsLine.validTo, true /*modal*/, undefined, true /*norequest */);
+  cy.writeIntoStringField(
+    "ValidFrom",
+    settingsLine.validFrom,
+    true /*modal*/,
+    undefined,
+    true /*norequest */,
+  );
+  cy.writeIntoStringField(
+    "ValidTo",
+    settingsLine.validTo,
+    true /*modal*/,
+    undefined,
+    true /*norequest */,
+  );
 
-  cy.writeIntoLookupListField('M_Product_Scrap_ID', settingsLine.scrapProduct, settingsLine.scrapProduct, false, true /*modal*/);
-  cy.fixture('misc/misc_dictionary.json').then(miscDictionary => {
-    cy.selectInListField('C_UOM_Scrap_ID', getLanguageSpecific(miscDictionary, settingsLine.scrapUOM), true /*modal*/);
+  cy.writeIntoLookupListField(
+    "M_Product_Scrap_ID",
+    settingsLine.scrapProduct,
+    settingsLine.scrapProduct,
+    false,
+    true /*modal*/,
+  );
+  cy.fixture("misc/misc_dictionary.json").then((miscDictionary) => {
+    cy.selectInListField(
+      "C_UOM_Scrap_ID",
+      getLanguageSpecific(miscDictionary, settingsLine.scrapUOM),
+      true /*modal*/,
+    );
   });
 
-  cy.writeIntoLookupListField('M_Product_ProcessingFee_ID', settingsLine.processingFeeProduct, settingsLine.processingFeeProduct, false, true /*modal*/);
-  cy.writeIntoLookupListField('M_Product_Witholding_ID', settingsLine.witholdingProduct, settingsLine.witholdingProduct, false, true /*modal*/);
-  cy.writeIntoLookupListField('M_Product_RegularPPOrder_ID', settingsLine.regularProductionProduct, settingsLine.regularProductionProduct, false, true /*modal*/);
+  cy.writeIntoLookupListField(
+    "M_Product_ProcessingFee_ID",
+    settingsLine.processingFeeProduct,
+    settingsLine.processingFeeProduct,
+    false,
+    true /*modal*/,
+  );
+  cy.writeIntoLookupListField(
+    "M_Product_Witholding_ID",
+    settingsLine.witholdingProduct,
+    settingsLine.witholdingProduct,
+    false,
+    true /*modal*/,
+  );
+  cy.writeIntoLookupListField(
+    "M_Product_RegularPPOrder_ID",
+    settingsLine.regularProductionProduct,
+    settingsLine.regularProductionProduct,
+    false,
+    true /*modal*/,
+  );
   if (settingsLine.scrapFeeAmount) {
-    cy.writeIntoStringField('Scrap_Fee_Amt_Per_UOM', settingsLine.scrapFeeAmount, true, null, true);
+    cy.writeIntoStringField(
+      "Scrap_Fee_Amt_Per_UOM",
+      settingsLine.scrapFeeAmount,
+      true,
+      null,
+      true,
+    );
   }
   if (settingsLine.treshhold) {
-    cy.writeIntoStringField('Percentage_Scrap_Treshhold', settingsLine.treshhold, true, null, true);
+    cy.writeIntoStringField(
+      "Percentage_Scrap_Treshhold",
+      settingsLine.treshhold,
+      true,
+      null,
+      true,
+    );
   }
   cy.pressDoneButton();
 }

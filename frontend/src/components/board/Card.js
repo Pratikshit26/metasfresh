@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import { DragSource, DropTarget } from 'react-dnd';
-import PropTypes from 'prop-types';
-import Avatar from '../app/Avatar';
+import React, { PureComponent } from "react";
+import { DragSource, DropTarget } from "react-dnd";
+import PropTypes from "prop-types";
+import Avatar from "../app/Avatar";
 
 const cardTarget = {
   drop(props, monitor) {
@@ -118,8 +118,8 @@ class Card extends PureComponent {
               />
             ))}
             <span className="clearfix" />
-          </div>
-        )
+          </div>,
+        ),
       );
     }
   };
@@ -164,7 +164,7 @@ Card.propTypes = {
 };
 
 export default DragSource(
-  'CARD',
+  "CARD",
   cardSource,
-  collect
-)(DropTarget('CARD', cardTarget, connect)(Card));
+  collect,
+)(DropTarget("CARD", cardTarget, connect)(Card));

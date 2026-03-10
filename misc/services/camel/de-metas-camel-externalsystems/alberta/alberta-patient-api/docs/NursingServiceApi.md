@@ -2,13 +2,15 @@
 
 All URIs are relative to *https://virtserver.swaggerhub.com/it-labs.de/PatientWawi/1.0.1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getNewAndUpdatedNursingServices**](NursingServiceApi.md#getNewAndUpdatedNursingServices) | **GET** /nursingService | Daten der neuen und geänderten Pflegedienste abrufen
-[**getNursingService**](NursingServiceApi.md#getNursingService) | **GET** /nursingService/{_id} | Daten eines einzelnen Pflegedienstes abrufen
+| Method                                                                                      | HTTP request                   | Description                                          |
+| ------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------------------------- |
+| [**getNewAndUpdatedNursingServices**](NursingServiceApi.md#getNewAndUpdatedNursingServices) | **GET** /nursingService        | Daten der neuen und geänderten Pflegedienste abrufen |
+| [**getNursingService**](NursingServiceApi.md#getNursingService)                             | **GET** /nursingService/{\_id} | Daten eines einzelnen Pflegedienstes abrufen         |
 
 <a name="getNewAndUpdatedNursingServices"></a>
+
 # **getNewAndUpdatedNursingServices**
+
 > List&lt;NursingService&gt; getNewAndUpdatedNursingServices(albertaApiKey, updatedAfter)
 
 Daten der neuen und geänderten Pflegedienste abrufen
@@ -16,6 +18,7 @@ Daten der neuen und geänderten Pflegedienste abrufen
 Szenario - das WaWi fragt bei Alberta nach, wie ob es neue oder geänderte Pflegedienste gibt
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -23,7 +26,7 @@ Szenario - das WaWi fragt bei Alberta nach, wie ob es neue oder geänderte Pfleg
 
 
 NursingServiceApi apiInstance = new NursingServiceApi();
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 String updatedAfter = "updatedAfter_example"; // String | 2021-02-21T09:30:00.000Z (im UTC-Format)
 try {
     List<NursingService> result = apiInstance.getNewAndUpdatedNursingServices(albertaApiKey, updatedAfter);
@@ -36,10 +39,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albertaApiKey** | **String**|  |
- **updatedAfter** | **String**| 2021-02-21T09:30:00.000Z (im UTC-Format) |
+| Name              | Type       | Description                              | Notes |
+| ----------------- | ---------- | ---------------------------------------- | ----- |
+| **albertaApiKey** | **String** |                                          |
+| **updatedAfter**  | **String** | 2021-02-21T09:30:00.000Z (im UTC-Format) |
 
 ### Return type
 
@@ -51,18 +54,21 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/xml
 
 <a name="getNursingService"></a>
+
 # **getNursingService**
-> NursingService getNursingService(albertaApiKey, _id)
+
+> NursingService getNursingService(albertaApiKey, \_id)
 
 Daten eines einzelnen Pflegedienstes abrufen
 
 Szenario - das WaWi fragt bei Alberta nach, wie die Daten des Pflegedienstes mit der angegebenen Id sind
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -70,7 +76,7 @@ Szenario - das WaWi fragt bei Alberta nach, wie die Daten des Pflegedienstes mit
 
 
 NursingServiceApi apiInstance = new NursingServiceApi();
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 String _id = "_id_example"; // String | eindeutige id des Pflegedienstes
 try {
     NursingService result = apiInstance.getNursingService(albertaApiKey, _id);
@@ -83,10 +89,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albertaApiKey** | **String**|  |
- **_id** | **String**| eindeutige id des Pflegedienstes |
+| Name              | Type       | Description                      | Notes |
+| ----------------- | ---------- | -------------------------------- | ----- |
+| **albertaApiKey** | **String** |                                  |
+| **\_id**          | **String** | eindeutige id des Pflegedienstes |
 
 ### Return type
 
@@ -98,6 +104,5 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
-
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/xml

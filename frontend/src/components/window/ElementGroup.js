@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
-import ElementsLine from './ElementsLine';
+import ElementsLine from "./ElementsLine";
 
 const ElementGroup = ({
   elementGroupLayout,
@@ -39,14 +39,14 @@ const ElementGroup = ({
           requestElementGroupFocus(c);
         }
       }}
-      className={classnames('panel panel-spaced panel-distance', {
-        'panel-bordered panel-primary': elementGroupLayout.type === 'primary',
-        'panel-secondary': elementGroupLayout.type !== 'primary',
+      className={classnames("panel panel-spaced panel-distance", {
+        "panel-bordered panel-primary": elementGroupLayout.type === "primary",
+        "panel-secondary": elementGroupLayout.type !== "primary",
       })}
     >
       {elementsLinesArray.map((elementsLineLayout, elementsLineIndex) => (
         <ElementsLine
-          key={'line' + elementsLineIndex}
+          key={"line" + elementsLineIndex}
           elementsLineLayout={elementsLineLayout}
           elementsLineIndex={elementsLineIndex}
           elementGroupIndex={elementGroupIndex}

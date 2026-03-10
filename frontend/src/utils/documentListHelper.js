@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Moment from 'moment-timezone';
-import currentDevice from 'current-device';
-import { toInteger } from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import Moment from "moment-timezone";
+import currentDevice from "current-device";
+import { toInteger } from "lodash";
 
-import { deepUnfreeze, getItemsByProperty, nullToEmptyStrings } from './index';
-import { getView, viewState } from '../reducers/viewHandler';
-import { getSelection, getTable, getTableId } from '../reducers/tables';
-import { getCachedFilter, getEntityRelatedId } from '../reducers/filters';
-import { TIME_REGEX_TEST } from '../constants/Constants';
-import { getCurrentActiveLocale } from './locale';
+import { deepUnfreeze, getItemsByProperty, nullToEmptyStrings } from "./index";
+import { getView, viewState } from "../reducers/viewHandler";
+import { getSelection, getTable, getTableId } from "../reducers/tables";
+import { getCachedFilter, getEntityRelatedId } from "../reducers/filters";
+import { TIME_REGEX_TEST } from "../constants/Constants";
+import { getCurrentActiveLocale } from "./locale";
 
 const DEFAULT_PAGE_LENGTH = 20;
 
@@ -101,7 +101,7 @@ const DLmapStateToProps = (state, props) => {
   const table = getTable(state, tableId);
 
   // TODO: Check if this is still a valid solution
-  if (location.hash === '#notification') {
+  if (location.hash === "#notification") {
     viewId = null;
   }
 
@@ -152,11 +152,11 @@ const DLmapStateToProps = (state, props) => {
 
 const NO_SELECTION = [];
 const NO_VIEW = {};
-const PANEL_WIDTHS = ['1', '.2', '4'];
-const GEO_PANEL_STATES = ['grid', 'all', 'map'];
+const PANEL_WIDTHS = ["1", ".2", "4"];
+const GEO_PANEL_STATES = ["grid", "all", "map"];
 
 // for mobile devices we only want to show either map or grid
-if (currentDevice.type === 'mobile' || currentDevice.type === 'tablet') {
+if (currentDevice.type === "mobile" || currentDevice.type === "tablet") {
   GEO_PANEL_STATES.splice(1, 1);
 }
 
@@ -169,9 +169,9 @@ if (currentDevice.type === 'mobile' || currentDevice.type === 'tablet') {
 const doesSelectionExist = function ({
   data,
   selected,
-  keyProperty = 'id',
+  keyProperty = "id",
 } = {}) {
-  if (selected && selected[0] === 'all') {
+  if (selected && selected[0] === "all") {
     return true;
   }
   // if selection is empty and data exist, selection is valid
@@ -196,7 +196,7 @@ const doesSelectionExist = function ({
   );
 };
 
-const getSortingQuery = (asc, field) => (asc ? '+' : '-') + field;
+const getSortingQuery = (asc, field) => (asc ? "+" : "-") + field;
 
 export {
   DLpropTypes,
@@ -217,7 +217,7 @@ export function mergeColumnInfosIntoViewRows(columnInfosByFieldName, rows) {
   }
 
   return rows.map((row) =>
-    mergeColumnInfosIntoViewRow(columnInfosByFieldName, row)
+    mergeColumnInfosIntoViewRow(columnInfosByFieldName, row),
   );
 }
 
@@ -237,8 +237,8 @@ function mergeColumnInfosIntoViewRow(columnInfosByFieldName, row) {
     .map((viewRowField) =>
       mergeColumnInfoIntoViewRowField(
         columnInfosByFieldName[viewRowField.field],
-        viewRowField
-      )
+        viewRowField,
+      ),
     )
     .reduce((acc, viewRowField) => {
       acc[viewRowField.field] = viewRowField;
@@ -259,7 +259,7 @@ function mergeColumnInfoIntoViewRowField(columnInfo, viewRowField) {
   }
 
   if (columnInfo.widgetType) {
-    viewRowField['widgetType'] = columnInfo.widgetType;
+    viewRowField["widgetType"] = columnInfo.widgetType;
   }
 
   // NOTE: as discussed with @metas-mk, at the moment we cannot apply the maxPrecision per page,
@@ -335,7 +335,7 @@ export function mergeRows({
         rowWasChanged = true;
         resultingRow = mergeColumnInfosIntoViewRow(
           columnInfosByFieldName,
-          resultingRow
+          resultingRow,
         );
       }
     }
@@ -392,7 +392,7 @@ export function mergeRows({
 }
 
 export function getScope(isModal) {
-  return isModal ? 'modal' : 'master';
+  return isModal ? "modal" : "master";
 }
 
 export function parseItemToDisplay({ item }) {
@@ -410,7 +410,7 @@ export function parseToDisplay(fieldsByName) {
 
 export function convertTimeStringToMoment(value) {
   if (value.match(TIME_REGEX_TEST)) {
-    return Moment(value, 'hh:mm');
+    return Moment(value, "hh:mm");
   }
   return value;
 }
@@ -426,11 +426,11 @@ export function parseDateWithCurrentTimezone(value) {
     value = convertTimeStringToMoment(value);
     return Moment(value);
   }
-  return '';
+  return "";
 }
 
 function parseDateToReadable(fieldsByName) {
-  const dateParse = ['Date', 'ZonedDateTime', 'Time', 'Timestamp'];
+  const dateParse = ["Date", "ZonedDateTime", "Time", "Timestamp"];
 
   return Object.keys(fieldsByName).reduce((acc, fieldName) => {
     const field = fieldsByName[fieldName];
@@ -476,7 +476,7 @@ function formatStringWithZeroSplitBy(date, notation) {
       itemDate.length < 2 &&
       itemDate > 0 &&
       itemDate < 10
-      ? '0' + itemDate
+      ? "0" + itemDate
       : itemDate;
   });
   return frmArr.join(notation);
@@ -488,12 +488,12 @@ function formatStringWithZeroSplitBy(date, notation) {
  * @param {string} date
  */
 export function formatDateWithZeros(date) {
-  if (typeof date === 'string' && date.includes('.')) {
-    return formatStringWithZeroSplitBy(date, '.');
+  if (typeof date === "string" && date.includes(".")) {
+    return formatStringWithZeroSplitBy(date, ".");
   }
 
-  if (typeof date === 'string' && date.includes('/')) {
-    return formatStringWithZeroSplitBy(date, '/');
+  if (typeof date === "string" && date.includes("/")) {
+    return formatStringWithZeroSplitBy(date, "/");
   }
 
   return date;
@@ -533,7 +533,7 @@ export function mapIncluded(node, indent, isParentLastChild = false) {
       }
 
       result = result.concat(
-        mapIncluded(copy, ind.concat([true]), node.lastChild)
+        mapIncluded(copy, ind.concat([true]), node.lastChild),
       );
     }
   }
@@ -549,9 +549,9 @@ export function renderHeaderPropertiesGroups(groups) {
 
       acc.push(
         <span key={`${groupIdx}_${entryIdx}`} className="optional-name">
-          <p className="caption">{entry.caption}:</p>{' '}
+          <p className="caption">{entry.caption}:</p>{" "}
           <p className="value">{entry.value}</p>
-        </span>
+        </span>,
       );
 
       entryIdx++;
@@ -576,7 +576,7 @@ export function getInvalidDataItem(data) {
 }
 
 export const computePageLengthEffective = (pageLengthFromLayout) => {
-  if (currentDevice.type === 'mobile' || currentDevice.type === 'tablet') {
+  if (currentDevice.type === "mobile" || currentDevice.type === "tablet") {
     return 9999;
   }
 

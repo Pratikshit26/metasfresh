@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { getTable, getTableId } from '../../reducers/tables';
+import React from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { getTable, getTableId } from "../../reducers/tables";
 
-import '../../assets/css/DeliveryPlanningViewHeader.scss';
-import { computeNumberOfPages } from '../../utils/tableHelpers';
+import "../../assets/css/DeliveryPlanningViewHeader.scss";
+import { computeNumberOfPages } from "../../utils/tableHelpers";
 import {
   getSettingFromState,
   getSettingFromStateAsBoolean,
-} from '../../utils/settings';
+} from "../../utils/settings";
 
-const DEFAULT_WINDOW_ID = '541632';
-const FIELDNAME_PlannedLoadedQuantity = 'PlannedLoadedQuantity';
-const FIELDNAME_ActualLoadQty = 'ActualLoadQty';
-const FIELDNAME_PlannedDischargeQuantity = 'PlannedDischargeQuantity';
-const FIELDNAME_ActualDischargeQuantity = 'ActualDischargeQuantity';
+const DEFAULT_WINDOW_ID = "541632";
+const FIELDNAME_PlannedLoadedQuantity = "PlannedLoadedQuantity";
+const FIELDNAME_ActualLoadQty = "ActualLoadQty";
+const FIELDNAME_PlannedDischargeQuantity = "PlannedDischargeQuantity";
+const FIELDNAME_ActualDischargeQuantity = "ActualDischargeQuantity";
 const FIELDNAMES = [
   FIELDNAME_PlannedLoadedQuantity,
   FIELDNAME_ActualLoadQty,
@@ -29,7 +29,7 @@ export const getDeliveryPlanningViewHeaderWindowId = (state) => {
 
   const windowId = getSettingFromState(
     state,
-    'DeliveryPlanningViewHeader.windowId'
+    "DeliveryPlanningViewHeader.windowId",
   );
 
   return windowId ? String(windowId) : DEFAULT_WINDOW_ID;
@@ -38,8 +38,8 @@ export const getDeliveryPlanningViewHeaderWindowId = (state) => {
 const isDeliveryPlanningViewHeaderEnabled = (state) => {
   return getSettingFromStateAsBoolean(
     state,
-    'DeliveryPlanningViewHeader.enabled',
-    true
+    "DeliveryPlanningViewHeader.enabled",
+    true,
   );
 };
 
@@ -91,7 +91,7 @@ const computeFields = ({
   if (table?.rows?.length && selectedRowIds?.length > 0) {
     // In case user selected all rows from all pages,
     // better don't show the sums because the sums are computed only from current page.
-    const isAllRowsSelected = selectedRowIds.includes('all');
+    const isAllRowsSelected = selectedRowIds.includes("all");
     if (isAllRowsSelected && hasMoreThanOnePage) {
       return [];
     }
@@ -201,7 +201,7 @@ const addQtysIfNotNull = (qty1, qty2) => {
 };
 
 const formatQtyToString = (qty, precision) => {
-  return parseFloat(qty.value ?? 0).toFixed(precision) + ' ' + qty.uom;
+  return parseFloat(qty.value ?? 0).toFixed(precision) + " " + qty.uom;
 };
 
 //

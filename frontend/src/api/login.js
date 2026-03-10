@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export function loginRequest(username, password) {
   return axios.post(
@@ -12,7 +12,7 @@ export function loginRequest(username, password) {
         // returning true so that we can get the error message
         return true;
       },
-    }
+    },
   );
 }
 
@@ -29,7 +29,7 @@ export function login2FA(code) {
         // returning true so that we can get the error message
         return true;
       },
-    }
+    },
   );
 }
 
@@ -47,7 +47,7 @@ export function loginCompletionRequest(role) {
  */
 export function loginWithToken(token) {
   return axios.post(`${config.API_URL}/login/authenticate`, {
-    type: 'token',
+    type: "token",
     token,
   });
 }

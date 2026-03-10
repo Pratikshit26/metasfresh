@@ -17,179 +17,194 @@
   $Id: oasis-spec.css,v 1.4 2019/01/04 19:29:26 admin Exp $
 */
 
-body     {
-           margin-left: 3pc;
-           font-family: arial, helvetica, sans-serif;
-           font-size: 90%;
-         }
+body {
+  margin-left: 3pc;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 90%;
+}
 
-h1       {
-	   font-size: 250%;
-           padding-top: 0in;
-           color: #446CAA;
-         }
+h1 {
+  font-size: 250%;
+  padding-top: 0in;
+  color: #446caa;
+}
 
-h2       {
-	   font-size: 170%;
-           color: #446CAA;
-         }
+h2 {
+  font-size: 170%;
+  color: #446caa;
+}
 
-h3       {
-	   font-size: 120%;
-           color: #446CAA;
-         }
+h3 {
+  font-size: 120%;
+  color: #446caa;
+}
 
-h4       {
-           color: #446CAA;
-         }
+h4 {
+  color: #446caa;
+}
 
-h5       {
-	   font-style: italic;
-           color: #446CAA;
-         }
+h5 {
+  font-style: italic;
+  color: #446caa;
+}
 
-h6       {
-	   font-variant: small-caps;
-           color: #446CAA;
-         }
+h6 {
+  font-variant: small-caps;
+  color: #446caa;
+}
 
 .docid-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .uri-heading {
-           font-size: 12pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 12pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .loc-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .abstract-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .status-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .thisver-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .prevver-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .editor-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .author-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .contrib-heading {
-           font-size: 10pt;
-           font-weight: bold;
-           color: #446CAA;
-         }
+  font-size: 10pt;
+  font-weight: bold;
+  color: #446caa;
+}
 
 .notices-heading {
   font-size: 18pt;
   font-weight: bold;
-  color: #446CAA;
+  color: #446caa;
 }
 
 div.section h1.title {
-           padding-top: 0in;
-           color: #446CAA;
-         }
+  padding-top: 0in;
+  color: #446caa;
+}
 
-div.article h1.title { 
-           color: #446CAA;
-         }
+div.article h1.title {
+  color: #446caa;
+}
 
 pre.programlisting {
-           background-color: #E7DEEF;
-         }
+  background-color: #e7deef;
+}
 
 div.informalexample pre {
-           margin-top: 0px;
-           padding-top: 0px;
-           margin-bottom: 0px;
-           padding-bottom: 0px;
-           background-color: #E7DEEF;
-         }
+  margin-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  background-color: #e7deef;
+}
 
 div.informalexample {
-           margin-left: 2em;
-	   padding-top: 4px;
-	   padding-bottom: 4px;
-           border-top-width: 1px;
-           border-top-style: solid;
-           border-bottom-width: 1px;
-           border-bottom-style: solid;
-         }
+  margin-left: 2em;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
 
-span.underline { text-decoration: underline; }
+span.underline {
+  text-decoration: underline;
+}
 
 span.term {
-           font-weight: bold;
-          }
+  font-weight: bold;
+}
 
-tr       { border-color: #AFAFAF;
-         }
+tr {
+  border-color: #afafaf;
+}
 
-td       { border-color: #AFAFAF;
-           text-align: left;
-         }
+td {
+  border-color: #afafaf;
+  text-align: left;
+}
 
-th       { border-color: #AFAFAF;
-           text-align: left;
-         }
+th {
+  border-color: #afafaf;
+  text-align: left;
+}
 
-col      { border-color: #AFAFAF;
-         }
+col {
+  border-color: #afafaf;
+}
 
-colgroup { border-color: #AFAFAF;
-         }
+colgroup {
+  border-color: #afafaf;
+}
 
-table    { border-color: #AFAFAF;
-         }
+table {
+  border-color: #afafaf;
+}
 
-tbody    { border-color: #AFAFAF;
-         }
+tbody {
+  border-color: #afafaf;
+}
 
-thead    { border-color: #AFAFAF;
-         }
+thead {
+  border-color: #afafaf;
+}
 
-tfoot    { border-color: #AFAFAF;
-         }
+tfoot {
+  border-color: #afafaf;
+}
 
-img      { max-width: 100%;
-         }
+img {
+  max-width: 100%;
+}
 
-@media screen {  /* hide from IE3 */
-a[href]:hover { background: #ffa }
+@media screen {
+  /* hide from IE3 */
+  a[href]:hover {
+    background: #ffa;
+  }
 }
 
 /* end of file */

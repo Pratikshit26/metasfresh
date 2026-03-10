@@ -1,14 +1,14 @@
-import cx from 'classnames';
-import counterpart from 'counterpart';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import onClickOutside from 'react-onclickoutside';
-import currentDevice from 'current-device';
-import FiltersDateStepper from './FiltersDateStepper';
-import FiltersItem from './FiltersItem';
-import InlineFilterItem from './InlineFilterItem';
-import { DATE_FIELD_TYPES, TIME_FIELD_TYPES } from '../../constants/Constants';
-import { find } from 'lodash';
+import cx from "classnames";
+import counterpart from "counterpart";
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import onClickOutside from "react-onclickoutside";
+import currentDevice from "current-device";
+import FiltersDateStepper from "./FiltersDateStepper";
+import FiltersItem from "./FiltersItem";
+import InlineFilterItem from "./InlineFilterItem";
+import { DATE_FIELD_TYPES, TIME_FIELD_TYPES } from "../../constants/Constants";
+import { find } from "lodash";
 
 const mainFilterClasses = `btn btn-filter btn-meta-outline-secondary btn-sm toggle-filters`;
 
@@ -102,7 +102,7 @@ class FiltersNotIncluded extends PureComponent {
               ? activeFiltersCaptions[filter.filterId]
               : null;
 
-          if (filter.inlineRenderMode === 'button') {
+          if (filter.inlineRenderMode === "button") {
             return (
               <div className="filter-wrapper filter-inline" key={index}>
                 {dateStepper && (
@@ -116,17 +116,17 @@ class FiltersNotIncluded extends PureComponent {
                 <button
                   onClick={() => this.toggleFilter(index)}
                   className={cx(mainFilterClasses, {
-                    ['btn-select']: openFilterIdx === index,
-                    ['btn-active']: isActive && !allChildFiltersCleared,
-                    ['btn-distance']: !dateStepper,
+                    ["btn-select"]: openFilterIdx === index,
+                    ["btn-active"]: isActive && !allChildFiltersCleared,
+                    ["btn-distance"]: !dateStepper,
                   })}
                   tabIndex={modalVisible ? -1 : 0}
                 >
                   <i className="meta-icon-preview" />
                   {`${
-                    this.deviceType === 'desktop'
-                      ? counterpart.translate('window.filters.caption2')
-                      : ''
+                    this.deviceType === "desktop"
+                      ? counterpart.translate("window.filters.caption2")
+                      : ""
                   }: ${filter.caption}`}
                 </button>
 

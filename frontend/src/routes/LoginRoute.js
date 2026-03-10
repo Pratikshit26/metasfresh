@@ -1,10 +1,10 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import _ from "lodash";
 
-import { useAuth } from '../hooks/useAuth';
-import Login from '../containers/Login.js';
+import { useAuth } from "../hooks/useAuth";
+import Login from "../containers/Login.js";
 
 /**
  * @file Functional component.
@@ -15,7 +15,7 @@ const LoginRoute = (props) => {
   const auth = useAuth();
   const { isLoggedIn } = auth;
   const { location, splatPath, token } = props;
-  const splat = splatPath ? location.pathname.replace('/', '') : null;
+  const splat = splatPath ? location.pathname.replace("/", "") : null;
 
   if (isLoggedIn) {
     return <Redirect to="/" />;

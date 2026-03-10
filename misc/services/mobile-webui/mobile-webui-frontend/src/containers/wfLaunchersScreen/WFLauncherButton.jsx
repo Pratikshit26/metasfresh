@@ -14,42 +14,42 @@ import { useMobileNavigation } from '../../hooks/useMobileNavigation';
 const TEST_PROPS = ['qtyToDeliver'];
 
 const WFLauncherButton = ({ applicationId, startedWFProcessId, wfParameters, caption, showWarningSign, testId }) => {
-  const dispatch = useDispatch();
-  const history = useMobileNavigation();
-  const handleClick = () => {
-    const wfProcessPromise = startedWFProcessId
-      ? continueWorkflowRequest(startedWFProcessId)
-      : startWorkflowRequest({ wfParameters });
+    const dispatch = useDispatch();
+    const history = useMobileNavigation();
+    const handleClick = () => {
+        const wfProcessPromise = startedWFProcessId
+            ? continueWorkflowRequest(startedWFProcessId)
+            : startWorkflowRequest({ wfParameters });
 
-    wfProcessPromise
-      .then((wfProcess) => {
-        dispatch(updateWFProcess({ wfProcess, parent: null }));
-        history.push(getWFProcessScreenLocation({ applicationId, wfProcessId: wfProcess.id }));
-      })
-      .catch((axiosError) => toastError({ axiosError }));
-  };
+        wfProcessPromise
+            .then((wfProcess) => {
+                dispatch(updateWFProcess({ wfProcess, parent: null }));
+                history.push(getWFProcessScreenLocation({ applicationId, wfProcessId: wfProcess.id }));
+            })
+            .catch((axiosError) => toastError({ axiosError }));
+    };
 
-  return (
-    <ButtonWithIndicator
-      testId={testId}
-      {...toTestProps(wfParameters)}
-      additionalCssClass="wflauncher-button"
-      caption={caption}
-      showWarningSign={showWarningSign}
-      completeStatus={startedWFProcessId ? CompleteStatus.IN_PROGRESS : CompleteStatus.NOT_STARTED}
-      disabled={false}
-      onClick={handleClick}
-    />
-  );
+    return (
+        <ButtonWithIndicator
+            testId={testId}
+            {...toTestProps(wfParameters)}
+            additionalCssClass="wflauncher-button"
+            caption={caption}
+            showWarningSign={showWarningSign}
+            completeStatus={startedWFProcessId ? CompleteStatus.IN_PROGRESS : CompleteStatus.NOT_STARTED}
+            disabled={false}
+            onClick={handleClick}
+        />
+    );
 };
 
 WFLauncherButton.propTypes = {
-  applicationId: PropTypes.string.isRequired,
-  startedWFProcessId: PropTypes.string,
-  wfParameters: PropTypes.object,
-  caption: PropTypes.string.isRequired,
-  showWarningSign: PropTypes.bool,
-  testId: PropTypes.string,
+    applicationId: PropTypes.string.isRequired,
+    startedWFProcessId: PropTypes.string,
+    wfParameters: PropTypes.object,
+    caption: PropTypes.string.isRequired,
+    showWarningSign: PropTypes.bool,
+    testId: PropTypes.string,
 };
 
 export default WFLauncherButton;
@@ -62,17 +62,17 @@ export default WFLauncherButton;
 //
 
 const toTestProps = (wfParameters) => {
-  if (!wfParameters) {
-    return {};
-  }
+    if (!wfParameters) {
+        return {};
+    }
 
-  return Object.keys(wfParameters)
-    .filter((key) => TEST_PROPS.includes(key))
-    .reduce((acc, key) => {
-      const value = wfParameters[key];
-      if (value != null) {
-        acc['data-' + key.toLowerCase()] = value;
-      }
-      return acc;
-    }, {});
+    return Object.keys(wfParameters)
+        .filter((key) => TEST_PROPS.includes(key))
+        .reduce((acc, key) => {
+            const value = wfParameters[key];
+            if (value != null) {
+                acc['data-' + key.toLowerCase()] = value;
+            }
+            return acc;
+        }, {});
 };

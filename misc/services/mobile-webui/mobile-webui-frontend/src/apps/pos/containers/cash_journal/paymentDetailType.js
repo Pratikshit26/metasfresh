@@ -8,5 +8,5 @@ export const PAYMENT_DETAIL_TYPE_CASH_IN = 'CASH_IN';
 export const PAYMENT_DETAIL_TYPE_CASH_OUT = 'CASH_OUT';
 
 export const getPaymentDetailTypeCaption = (type) => {
-  return trl(`pos.closeCashJournal.details.type.${type}`);
+    return trl(`pos.closeCashJournal.details.type.${type}`);
 };

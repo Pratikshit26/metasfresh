@@ -1,8 +1,8 @@
-import update from 'immutability-helper';
-import { createSelector } from 'reselect';
-import { createCachedSelector } from 're-reselect';
-import { merge } from 'merge-anything';
-import { get } from 'lodash';
+import update from "immutability-helper";
+import { createSelector } from "reselect";
+import { createCachedSelector } from "re-reselect";
+import { merge } from "merge-anything";
+import { get } from "lodash";
 
 import {
   ACTIVATE_TAB,
@@ -58,13 +58,13 @@ import {
   UPDATE_MODAL,
   UPDATE_RAW_MODAL,
   UPDATE_TAB_LAYOUT,
-} from '../constants/ActionTypes';
+} from "../constants/ActionTypes";
 
-import { updateTab } from '../utils';
-import { shallowEqual, useSelector } from 'react-redux';
-import { getScope } from '../utils/documentListHelper';
-import * as IndicatorState from '../constants/IndicatorState';
-import * as StaticModalType from '../constants/StaticModalType';
+import { updateTab } from "../utils";
+import { shallowEqual, useSelector } from "react-redux";
+import { getScope } from "../utils/documentListHelper";
+import * as IndicatorState from "../constants/IndicatorState";
+import * as StaticModalType from "../constants/StaticModalType";
 
 const initialMasterState = {
   layout: {
@@ -82,15 +82,15 @@ const initialMasterState = {
 };
 const initialModalState = {
   visible: false,
-  type: '',
+  type: "",
   dataId: null,
   tabId: null,
   rowId: null,
   viewId: null,
   layout: {},
   data: {},
-  modalTitle: '',
-  modalType: '',
+  modalTitle: "",
+  modalType: "",
   isAdvanced: false,
   viewDocumentIds: [],
   childViewId: null,
@@ -101,7 +101,7 @@ const initialModalState = {
   validStatus: {},
   indicator: IndicatorState.SAVED,
   includedTabsInfo: {},
-  staticModalType: '',
+  staticModalType: "",
 };
 
 /**
@@ -130,12 +130,12 @@ export const initialState = {
     visible: false,
     windowType: null,
     viewId: null,
-    title: '',
-    description: '',
+    title: "",
+    description: "",
   },
   pluginModal: {
     visible: false,
-    type: '',
+    type: "",
     id: null,
   },
 
@@ -167,7 +167,7 @@ export const getData = (state, isModal = false) => {
 export const getElementLayout = (state, isModal, layoutPath) => {
   const layout = getLayoutAndData(state, isModal).layout;
   const [sectionIdx, columnIdx, elGroupIdx, elLineIdx, elIdx] =
-    layoutPath.split('_');
+    layoutPath.split("_");
 
   return layout.sections[sectionIdx].columns[columnIdx].elementGroups[
     elGroupIdx
@@ -186,7 +186,7 @@ export const getInlineTabLayout = ({
 }) => {
   const layout = state.windowHandler.inlineTab[inlineTabId].layout;
   const [sectionIdx, columnIdx, elGroupIdx, elLineIdx, elIdx] =
-    layoutPath.split('_');
+    layoutPath.split("_");
   // console.log('Section:', sectionIdx);
   // console.log('Column:', columnIdx);
   // console.log('elGroupIndex:', elGroupIdx)
@@ -243,7 +243,7 @@ const selectWidgetData = (data, layout) => {
 export const getElementWidgetData = createCachedSelector(
   getData,
   getElementLayout,
-  (data, layout) => selectWidgetData(data, layout)
+  (data, layout) => selectWidgetData(data, layout),
 )((_state_, isModal, layoutPath) => layoutPath);
 
 export const getInlineTabWidgetFields = ({ state, inlineTabId }) => {
@@ -262,7 +262,7 @@ export const getInlineTabWidgetFields = ({ state, inlineTabId }) => {
  */
 export const getElementWidgetFields = createCachedSelector(
   getElementLayout,
-  (layout) => layout.fields
+  (layout) => layout.fields,
 )((_state, isModal, layoutPath) => layoutPath);
 
 /**
@@ -276,7 +276,7 @@ export const getElementWidgetFields = createCachedSelector(
 export const getProcessWidgetData = createCachedSelector(
   getData,
   getProcessLayout,
-  (data, layout) => selectWidgetData(data, layout)
+  (data, layout) => selectWidgetData(data, layout),
 )((_state_, isModal, layoutPath) => layoutPath);
 
 /**
@@ -289,7 +289,7 @@ export const getProcessWidgetData = createCachedSelector(
  */
 export const getProcessWidgetFields = createCachedSelector(
   getProcessLayout,
-  (layout) => layout.fields
+  (layout) => layout.fields,
 )((_state, isModal, layoutPath) => layoutPath);
 
 /**
@@ -311,7 +311,7 @@ export const getMasterDocStatus = createSelector(getData, (data) => {
 export const useTopActions = ({ tabId }) => {
   return useSelector(
     (state) => selectTopActionsArray(state, tabId),
-    shallowEqual
+    shallowEqual,
   );
 };
 
@@ -388,7 +388,7 @@ export const computeSaveStatusFlags = ({
       indicator = IndicatorState.SAVED;
     }
 
-    if (modal.modalType === 'window') {
+    if (modal.modalType === "window") {
       windowId = modal.windowId;
       documentId = modal.docId;
     }
@@ -440,7 +440,7 @@ export const computeSaveStatusFlags = ({
 export const useSaveStatusFlags = () => {
   return useSelector(
     (state) => computeSaveStatusFlags({ state }),
-    shallowEqual
+    shallowEqual,
   );
 };
 
@@ -547,12 +547,12 @@ export default function windowHandler(state = initialState, action) {
         ...state,
         pluginModal: {
           visible: false,
-          type: '',
+          type: "",
           id: null,
         },
       };
     case CLOSE_PROCESS_MODAL:
-      if (state.modal.modalType === 'process') {
+      if (state.modal.modalType === "process") {
         return {
           ...state,
           modal: {
@@ -656,7 +656,7 @@ export default function windowHandler(state = initialState, action) {
                       },
                     ],
                   })
-                : tab
+                : tab,
             ),
           }),
         }),
@@ -698,7 +698,7 @@ export default function windowHandler(state = initialState, action) {
               $set: Object.assign(
                 {},
                 state[action.scope].data[action.property],
-                action.item
+                action.item,
               ),
             },
           },
@@ -708,14 +708,14 @@ export default function windowHandler(state = initialState, action) {
       const { scope, property, value } = action;
       let newValue = null;
 
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         newValue = value;
       } else if (
         [
-          'saveStatus',
-          'validStatus',
-          'hasComments',
-          'standardActions',
+          "saveStatus",
+          "validStatus",
+          "hasComments",
+          "standardActions",
         ].includes(property)
       ) {
         newValue = value;

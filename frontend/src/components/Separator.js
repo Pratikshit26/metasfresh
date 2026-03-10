@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
 /**
  * @file Function based component. The separator component allows to create collapsible sections
@@ -14,7 +14,7 @@ const Separator = (props) => {
   return (
     <div className="separator col-12">
       <span
-        className={classnames('separator-title', {
+        className={classnames("separator-title", {
           collapsible,
         })}
         onClick={() => onClick(idx, tabId)}
@@ -25,13 +25,13 @@ const Separator = (props) => {
         <div className="panel-size-button">
           <button
             className={classnames(
-              'btn btn-meta-outline-secondary btn-sm ignore-react-onclickoutside'
+              "btn btn-meta-outline-secondary btn-sm ignore-react-onclickoutside",
             )}
             onClick={() => onClick(idx, tabId)}
           >
             <i
-              className={classnames('icon meta-icon-down-1', {
-                'meta-icon-flip-horizontally': !sectionCollapsed,
+              className={classnames("icon meta-icon-down-1", {
+                "meta-icon-flip-horizontally": !sectionCollapsed,
               })}
             />
           </button>

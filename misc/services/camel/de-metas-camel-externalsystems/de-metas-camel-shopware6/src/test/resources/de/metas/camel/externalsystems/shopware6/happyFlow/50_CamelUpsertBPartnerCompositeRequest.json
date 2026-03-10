@@ -8,12 +8,12 @@
           "orgCode": "orgCode",
           "bpartner": {
             "code": "ext-Shopware6-customerNumber",
-            "name":"firstName lastName",
+            "name": "firstName lastName",
             "companyName": "company",
             "customer": true,
             "priceListId": 121,
-            "group":"test_group",
-            "groupSet":true,
+            "group": "test_group",
+            "groupSet": true,
             "vatId": "vatId12",
             "vatIdSet": true,
             "syncAdvise": {

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import RawChart from '../charts/RawChart';
-import counterpart from 'counterpart';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import RawChart from "../charts/RawChart";
+import counterpart from "counterpart";
 
 export class ChartWidget extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export class ChartWidget extends Component {
   toggleMenu = (opt) => {
     const { toggleWidgetMenu } = this.state;
     this.setState({
-      toggleWidgetMenu: typeof opt === 'boolean' ? opt : !toggleWidgetMenu,
+      toggleWidgetMenu: typeof opt === "boolean" ? opt : !toggleWidgetMenu,
     });
   };
 
@@ -53,7 +53,7 @@ export class ChartWidget extends Component {
     const { toggleWidgetMenu, height } = this.state;
     const isMaximized = idMaximized === id;
 
-    if (!isMaximized && typeof idMaximized === 'number') return false;
+    if (!isMaximized && typeof idMaximized === "number") return false;
 
     const isRenderChartContent = !framework || !!data;
 
@@ -61,8 +61,8 @@ export class ChartWidget extends Component {
       <div>
         <div
           className={
-            'draggable-widget-header ' +
-            (editmode ? 'draggable-widget-edited ' : '')
+            "draggable-widget-header " +
+            (editmode ? "draggable-widget-edited " : "")
           }
           onDoubleClick={
             editmode || !maximizeWidget
@@ -99,7 +99,7 @@ export class ChartWidget extends Component {
                     this.toggleMenu(false);
                   }}
                 >
-                  {counterpart.translate('dashboard.item.minimize')}
+                  {counterpart.translate("dashboard.item.minimize")}
                 </span>
               ) : (
                 <span
@@ -108,7 +108,7 @@ export class ChartWidget extends Component {
                     this.toggleMenu(false);
                   }}
                 >
-                  {counterpart.translate('dashboard.item.maximize')}
+                  {counterpart.translate("dashboard.item.maximize")}
                 </span>
               )}
             </div>

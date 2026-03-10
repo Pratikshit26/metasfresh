@@ -3,22 +3,26 @@
 ## 🎯 Learning Path Overview
 
 ### **Phase 1: Fundamentals (4-6 weeks)**
+
 - Basic concepts and building blocks
 - Core system design principles
 - Essential technologies
 
 ### **Phase 2: Intermediate Concepts (6-8 weeks)**
+
 - Distributed systems
 - Database design
 - Caching strategies
 
 ### **Phase 3: Advanced Topics (8-10 weeks)**
+
 - Microservices architecture
 - Real-world system examples
 - Performance optimization
 
 ### **Phase 4: Practice & Interview Prep (4-6 weeks)**
--    interviews
+
+- interviews
 - Case studies
 - Portfolio building
 
@@ -29,6 +33,7 @@
 ### **Week 1-2: Core Concepts**
 
 #### **Essential Building Blocks**
+
 ```yaml
 Scalability:
   - Vertical scaling (scale up)
@@ -52,6 +57,7 @@ Consistency:
 ```
 
 #### **Learning Resources - Week 1-2**
+
 ```yaml
 Books:
   - "Designing Data-Intensive Applications" by Martin Kleppmann (Chapters 1-3)
@@ -69,6 +75,7 @@ Practice:
 ```
 
 #### **Hands-on Exercise - Week 1-2**
+
 ```bash
 # Set up a simple web application
 # Frontend: HTML/CSS/JS
@@ -87,6 +94,7 @@ Components:
 ### **Week 3-4: Networking & Protocols**
 
 #### **Core Networking Concepts**
+
 ```yaml
 HTTP/HTTPS:
   - Request/Response cycle
@@ -107,6 +115,7 @@ Load Balancing:
 ```
 
 #### **Learning Resources - Week 3-4**
+
 ```yaml
 Books:
   - "High Performance Browser Networking" by Ilya Grigorik
@@ -122,6 +131,7 @@ Practical Labs:
 ```
 
 #### **Hands-on Exercise - Week 3-4**
+
 ```bash
 # Extend your URL shortener with load balancing
 Components to add:
@@ -143,6 +153,7 @@ Tools to learn:
 ### **Week 5-8: Database Design & Management**
 
 #### **Database Fundamentals**
+
 ```yaml
 SQL Databases:
   - ACID properties
@@ -164,6 +175,7 @@ Database Scaling:
 ```
 
 #### **CAP Theorem Deep Dive**
+
 ```yaml
 Consistency: All nodes see the same data simultaneously
 Availability: System remains operational
@@ -176,6 +188,7 @@ Real-world Examples:
 ```
 
 #### **Hands-on Exercise - Week 5-8**
+
 ```bash
 # Build a distributed blog platform
 Requirements:
@@ -196,6 +209,7 @@ Database Design:
 ### **Week 9-12: Caching & Performance**
 
 #### **Caching Strategies**
+
 ```yaml
 Client-side Caching:
   - Browser cache
@@ -220,6 +234,7 @@ Cache Patterns:
 ```
 
 #### **Performance Optimization**
+
 ```yaml
 Database Optimization:
   - Query optimization
@@ -240,6 +255,7 @@ Infrastructure Optimization:
 ```
 
 #### **Hands-on Exercise - Week 9-12**
+
 ```bash
 # Optimize your blog platform for high traffic
 Improvements to implement:
@@ -263,6 +279,7 @@ Performance Targets:
 ### **Week 13-16: Microservices Architecture**
 
 #### **Microservices Concepts**
+
 ```yaml
 Service Decomposition:
   - Domain-driven design
@@ -283,6 +300,7 @@ Data Management:
 ```
 
 #### **Microservices Challenges**
+
 ```yaml
 Service Discovery:
   - Service registry (Consul, Eureka)
@@ -302,6 +320,7 @@ Monitoring & Observability:
 ```
 
 #### **Hands-on Exercise - Week 13-16**
+
 ```bash
 # Convert blog platform to microservices
 Services to create:
@@ -322,6 +341,7 @@ Technologies to learn:
 ### **Week 17-20: Distributed Systems**
 
 #### **Distributed System Patterns**
+
 ```yaml
 Consensus Algorithms:
   - Raft consensus
@@ -341,6 +361,7 @@ Consistency Patterns:
 ```
 
 #### **Message Queues & Event Streaming**
+
 ```yaml
 Message Queue Patterns:
   - Point-to-point
@@ -356,6 +377,7 @@ Event Streaming:
 ```
 
 #### **Hands-on Exercise - Week 17-20**
+
 ```bash
 # Build an e-commerce platform
 Services to implement:
@@ -381,58 +403,61 @@ Focus on:
 ### **Week 21-22: Classic System Design Problems**
 
 #### **Essential Problems to Master**
+
 ```yaml
 1. URL Shortener (bit.ly):
-   Components: Load balancer, API servers, Database, Cache
-   Key Concepts: Base62 encoding, Database sharding
+  Components: Load balancer, API servers, Database, Cache
+  Key Concepts: Base62 encoding, Database sharding
 
 2. Chat System (WhatsApp):
-   Components: WebSocket servers, Message queue, Database
-   Key Concepts: Real-time messaging, Push notifications
+  Components: WebSocket servers, Message queue, Database
+  Key Concepts: Real-time messaging, Push notifications
 
 3. News Feed (Facebook/Twitter):
-   Components: User service, Post service, Timeline service
-   Key Concepts: Fan-out strategies, Caching
+  Components: User service, Post service, Timeline service
+  Key Concepts: Fan-out strategies, Caching
 
 4. Video Streaming (YouTube):
-   Components: Upload service, Encoding service, CDN
-   Key Concepts: Video processing, Global content delivery
+  Components: Upload service, Encoding service, CDN
+  Key Concepts: Video processing, Global content delivery
 
 5. Search Engine (Google):
-   Components: Web crawlers, Indexing service, Query service
-   Key Concepts: Distributed indexing, Ranking algorithms
+  Components: Web crawlers, Indexing service, Query service
+  Key Concepts: Distributed indexing, Ranking algorithms
 ```
 
 #### **Problem-Solving Framework**
+
 ```yaml
 1. Clarify Requirements (5-10 minutes):
-   - Functional requirements
-   - Non-functional requirements
-   - Scale expectations
-   - Constraints
+  - Functional requirements
+  - Non-functional requirements
+  - Scale expectations
+  - Constraints
 
 2. High-Level Design (10-15 minutes):
-   - Major components
-   - API design
-   - Data flow
-   - Technology choices
+  - Major components
+  - API design
+  - Data flow
+  - Technology choices
 
 3. Detailed Design (15-20 minutes):
-   - Database schema
-   - Algorithm details
-   - Caching strategy
-   - Monitoring approach
+  - Database schema
+  - Algorithm details
+  - Caching strategy
+  - Monitoring approach
 
 4. Scale & Optimize (5-10 minutes):
-   - Bottlenecks identification
-   - Scaling strategies
-   - Performance improvements
-   - Trade-offs discussion
+  - Bottlenecks identification
+  - Scaling strategies
+  - Performance improvements
+  - Trade-offs discussion
 ```
 
-### **Week 23-24:    Interviews & Portfolio**
+### **Week 23-24: Interviews & Portfolio**
 
 #### **Mock Interview Practice**
+
 ```bash
 # Schedule    interviews with:
 - Pramp.com (free peer interviews)
@@ -448,6 +473,7 @@ Focus on:
 ```
 
 #### **Build Your Portfolio**
+
 ```yaml
 GitHub Projects:
 1. Distributed URL Shortener
@@ -477,6 +503,7 @@ Documentation:
 ## 📖 Essential Learning Resources
 
 ### **Books (Priority Order)**
+
 ```yaml
 Must Read:
 1. "Designing Data-Intensive Applications" by Martin Kleppmann
@@ -492,58 +519,60 @@ Advanced Reading:
 ```
 
 ### **Online Resources**
+
 ```yaml
 Free Resources:
-- System Design Primer (GitHub)
-- High Scalability blog
-- AWS Architecture Center
-- Google Cloud Architecture Framework
+  - System Design Primer (GitHub)
+  - High Scalability blog
+  - AWS Architecture Center
+  - Google Cloud Architecture Framework
 
 Video Courses:
-- Grokking the System Design Interview
-- System Design by Gaurav Sen
-- MIT 6.824 Distributed Systems
-- Coursera: Cloud Computing Concepts
+  - Grokking the System Design Interview
+  - System Design by Gaurav Sen
+  - MIT 6.824 Distributed Systems
+  - Coursera: Cloud Computing Concepts
 
 Practice Platforms:
-- LeetCode System Design
-- InterviewBit System Design
-- Pramp
-- System Design Interview questions on GitHub
+  - LeetCode System Design
+  - InterviewBit System Design
+  - Pramp
+  - System Design Interview questions on GitHub
 ```
 
 ### **Tools & Technologies to Learn**
+
 ```yaml
 Databases:
-- PostgreSQL/MySQL (SQL)
-- MongoDB (Document)
-- Redis (Key-value)
-- Elasticsearch (Search)
+  - PostgreSQL/MySQL (SQL)
+  - MongoDB (Document)
+  - Redis (Key-value)
+  - Elasticsearch (Search)
 
 Message Queues:
-- Apache Kafka
-- RabbitMQ
-- Amazon SQS
+  - Apache Kafka
+  - RabbitMQ
+  - Amazon SQS
 
 Caching:
-- Redis
-- Memcached
-- CDN (CloudFlare, AWS CloudFront)
+  - Redis
+  - Memcached
+  - CDN (CloudFlare, AWS CloudFront)
 
 Monitoring:
-- Prometheus + Grafana
-- ELK Stack (Elasticsearch, Logstash, Kibana)
-- Jaeger (distributed tracing)
+  - Prometheus + Grafana
+  - ELK Stack (Elasticsearch, Logstash, Kibana)
+  - Jaeger (distributed tracing)
 
 Containerization:
-- Docker
-- Kubernetes
-- Docker Compose
+  - Docker
+  - Kubernetes
+  - Docker Compose
 
 Cloud Platforms:
-- AWS (EC2, RDS, S3, Lambda)
-- Google Cloud Platform
-- Microsoft Azure
+  - AWS (EC2, RDS, S3, Lambda)
+  - Google Cloud Platform
+  - Microsoft Azure
 ```
 
 ---
@@ -551,71 +580,74 @@ Cloud Platforms:
 ## 🎨 Study Techniques & Tips
 
 ### **Active Learning Strategies**
+
 ```yaml
 1. Draw Diagrams:
-   - Always sketch system architectures
-   - Use tools like draw.io or Lucidchart
-   - Practice drawing on whiteboards
+  - Always sketch system architectures
+  - Use tools like draw.io or Lucidchart
+  - Practice drawing on whiteboards
 
 2. Build Real Projects:
-   - Implement systems you're learning about
-   - Start simple, then scale up
-   - Document your decisions
+  - Implement systems you're learning about
+  - Start simple, then scale up
+  - Document your decisions
 
 3. Teach Others:
-   - Explain concepts to friends
-   - Write blog posts
-   - Create presentation slides
+  - Explain concepts to friends
+  - Write blog posts
+  - Create presentation slides
 
 4. Join Communities:
-   - Reddit: r/SystemDesign
-   - Discord: System Design communities
-   - LinkedIn: Follow system design experts
+  - Reddit: r/SystemDesign
+  - Discord: System Design communities
+  - LinkedIn: Follow system design experts
 ```
 
 ### **Time Management**
+
 ```yaml
 Daily Schedule (2-3 hours):
-- 30 minutes: Reading/theory
-- 60 minutes: Hands-on practice
-- 30 minutes: Problem solving
-- 30 minutes: Review and notes
+  - 30 minutes: Reading/theory
+  - 60 minutes: Hands-on practice
+  - 30 minutes: Problem solving
+  - 30 minutes: Review and notes
 
 Weekly Goals:
-- Complete 1 major topic
-- Build 1 small project component
-- Solve 2-3 design problems
-- Review and refine previous work
+  - Complete 1 major topic
+  - Build 1 small project component
+  - Solve 2-3 design problems
+  - Review and refine previous work
 
 Monthly Milestones:
-- Complete 1 phase of learning path
-- Build 1 complete system
-- Conduct    interviews
-- Update portfolio
+  - Complete 1 phase of learning path
+  - Build 1 complete system
+  - Conduct    interviews
+  - Update portfolio
 ```
 
 ### **Common Mistakes to Avoid**
+
 ```yaml
 1. Jumping to Solutions:
-   - Always clarify requirements first
-   - Don't start with implementation details
+  - Always clarify requirements first
+  - Don't start with implementation details
 
 2. Over-Engineering:
-   - Start with simple solutions
-   - Add complexity only when needed
+  - Start with simple solutions
+  - Add complexity only when needed
 
 3. Ignoring Trade-offs:
-   - Every design decision has pros/cons
-   - Discuss alternatives and their implications
+  - Every design decision has pros/cons
+  - Discuss alternatives and their implications
 
 4. Poor Communication:
-   - Explain your thinking process
-   - Ask clarifying questions
-   - Be open to feedback
+  - Explain your thinking process
+  - Ask clarifying questions
+  - Be open to feedback
 
 5. Neglecting Non-Functional Requirements:
-   - Consider scalability, reliability, security
-   - Discuss monitoring and maintenance
+  - Consider scalability, reliability, security
+  - Discuss monitoring and maintenance
 ```
 
 ---
@@ -623,6 +655,7 @@ Monthly Milestones:
 ## 📊 Progress Tracking
 
 ### **Weekly Assessment Checklist**
+
 ```yaml
 Week 1-4 (Fundamentals):
 □ Understand scalability concepts
@@ -654,6 +687,7 @@ Week 21-24 (Practice):
 ```
 
 ### **Self-Assessment Questions**
+
 ```yaml
 After each week, ask yourself:
 1. Can I explain this week's concepts clearly?
@@ -675,52 +709,54 @@ Monthly Review:
 ## 🎯 Interview-Specific Preparation
 
 ### **Common Interview Questions**
+
 ```yaml
 Beginner Level:
-- Design a URL shortener
-- Design a parking lot system
-- Design a simple chat system
+  - Design a URL shortener
+  - Design a parking lot system
+  - Design a simple chat system
 
 Intermediate Level:
-- Design Twitter/Facebook news feed
-- Design a web crawler
-- Design a notification system
-- Design Uber/Lyft
+  - Design Twitter/Facebook news feed
+  - Design a web crawler
+  - Design a notification system
+  - Design Uber/Lyft
 
 Advanced Level:
-- Design YouTube/Netflix
-- Design Google Search
-- Design a distributed cache
-- Design WhatsApp/Slack
+  - Design YouTube/Netflix
+  - Design Google Search
+  - Design a distributed cache
+  - Design WhatsApp/Slack
 
 System-Specific:
-- Design a rate limiter
-- Design consistent hashing
-- Design a load balancer
-- Design a database sharding system
+  - Design a rate limiter
+  - Design consistent hashing
+  - Design a load balancer
+  - Design a database sharding system
 ```
 
 ### **Interview Day Tips**
+
 ```yaml
 Preparation:
-- Practice drawing on whiteboards
-- Prepare questions about requirements
-- Review your portfolio projects
-- Practice explaining trade-offs
+  - Practice drawing on whiteboards
+  - Prepare questions about requirements
+  - Review your portfolio projects
+  - Practice explaining trade-offs
 
 During Interview:
-- Start with clarifying questions
-- Think out loud
-- Draw diagrams
-- Discuss alternatives
-- Be honest about unknowns
-- Ask for feedback
+  - Start with clarifying questions
+  - Think out loud
+  - Draw diagrams
+  - Discuss alternatives
+  - Be honest about unknowns
+  - Ask for feedback
 
 Follow-up:
-- Send thank you notes
-- Document lessons learned
-- Practice areas you struggled with
-- Update portfolio based on feedback
+  - Send thank you notes
+  - Document lessons learned
+  - Practice areas you struggled with
+  - Update portfolio based on feedback
 ```
 
 This comprehensive guide will help you master system design over 6 months. The key is consistent practice, building real systems, and gradually increasing complexity. Remember that system design is as much about communication and problem-solving as it is about technical knowledge.

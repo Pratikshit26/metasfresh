@@ -1,4 +1,4 @@
-import * as types from '../constants/MenuTypes';
+import * as types from "../constants/MenuTypes";
 
 export const initialState = {
   breadcrumb: [],
@@ -22,7 +22,7 @@ export default function menuHandler(state = initialState, action) {
         breadcrumb: state.breadcrumb.map((node) =>
           node.nodeId === action.node.nodeId
             ? { ...node, children: action.node }
-            : node
+            : node,
         ),
       };
     }

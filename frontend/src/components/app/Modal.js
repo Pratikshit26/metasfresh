@@ -1,12 +1,12 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
 
-import { startProcess } from '../../api/process';
-import { processNewRecord } from '../../actions/GenericActions';
-import { updateCommentsPanelOpenFlag } from '../../actions/CommentsPanelActions';
+import { startProcess } from "../../api/process";
+import { processNewRecord } from "../../actions/GenericActions";
+import { updateCommentsPanelOpenFlag } from "../../actions/CommentsPanelActions";
 import {
   callAPI,
   closeModal,
@@ -16,32 +16,32 @@ import {
   patch,
   printDocument,
   resetPrintingOptions,
-} from '../../actions/WindowActions';
+} from "../../actions/WindowActions";
 
-import { getSelection, getTableId } from '../../reducers/tables';
-import { findViewByViewId } from '../../reducers/viewHandler';
+import { getSelection, getTableId } from "../../reducers/tables";
+import { findViewByViewId } from "../../reducers/viewHandler";
 
-import keymap from '../../shortcuts/keymap';
-import ChangeLogModal from '../ChangeLogModal';
-import Process from '../Process';
-import SectionGroup from '../SectionGroup';
-import ModalContextShortcuts from '../keyshortcuts/ModalContextShortcuts';
-import Tooltips from '../tooltips/Tooltips.js';
-import Indicator from './Indicator';
-import OverlayField from './OverlayField';
-import CommentsPanel from '../comments/CommentsPanel';
-import PrintingOptions from './PrintingOptions';
+import keymap from "../../shortcuts/keymap";
+import ChangeLogModal from "../ChangeLogModal";
+import Process from "../Process";
+import SectionGroup from "../SectionGroup";
+import ModalContextShortcuts from "../keyshortcuts/ModalContextShortcuts";
+import Tooltips from "../tooltips/Tooltips.js";
+import Indicator from "./Indicator";
+import OverlayField from "./OverlayField";
+import CommentsPanel from "../comments/CommentsPanel";
+import PrintingOptions from "./PrintingOptions";
 
-import SockJs from 'sockjs-client';
-import Stomp from 'stompjs/lib/stomp.min.js';
+import SockJs from "sockjs-client";
+import Stomp from "stompjs/lib/stomp.min.js";
 import {
   createProcess,
   handleProcessResponse,
-} from '../../actions/ProcessActions';
-import ChangeCurrentWorkplace from './ChangeCurrentWorkplace';
-import { computeSaveStatusFlags } from '../../reducers/windowHandler';
-import * as IndicatorState from '../../constants/IndicatorState';
-import * as StaticModalType from '../../constants/StaticModalType';
+} from "../../actions/ProcessActions";
+import ChangeCurrentWorkplace from "./ChangeCurrentWorkplace";
+import { computeSaveStatusFlags } from "../../reducers/windowHandler";
+import * as IndicatorState from "../../constants/IndicatorState";
+import * as StaticModalType from "../../constants/StaticModalType";
 
 /**
  * @file Modal is an overlay view that can be opened over the main view.
@@ -58,8 +58,8 @@ class Modal extends Component {
 
     this.state = {
       scrolled: false,
-      isNew: rowId === 'NEW',
-      isNewDoc: dataId === 'NEW',
+      isNew: rowId === "NEW",
+      isNewDoc: dataId === "NEW",
       init: false,
       pending: false,
       waitingFetch: false,
@@ -87,7 +87,7 @@ class Modal extends Component {
       return;
     }
 
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     this.initEventListeners();
   }
@@ -141,7 +141,7 @@ class Modal extends Component {
           rowId,
           isModal: true,
           fetchAdvancedFields: isAdvanced,
-        })
+        }),
       );
     }
   };
@@ -167,7 +167,7 @@ class Modal extends Component {
         },
         () => {
           this.handleStart();
-        }
+        },
       );
     }
   }
@@ -186,10 +186,10 @@ class Modal extends Component {
    * @summary ToDo: Describe the method.
    */
   initEventListeners = () => {
-    const modalContent = document.querySelector('.js-panel-modal-content');
+    const modalContent = document.querySelector(".js-panel-modal-content");
 
     if (modalContent) {
-      modalContent.addEventListener('scroll', this.handleScroll);
+      modalContent.addEventListener("scroll", this.handleScroll);
     }
   };
 
@@ -198,10 +198,10 @@ class Modal extends Component {
    * @summary ToDo: Describe the method.
    */
   removeEventListeners = () => {
-    const modalContent = document.querySelector('.js-panel-modal-content');
+    const modalContent = document.querySelector(".js-panel-modal-content");
 
     if (modalContent) {
-      modalContent.removeEventListener('scroll', this.handleScroll);
+      modalContent.removeEventListener("scroll", this.handleScroll);
     }
   };
 
@@ -236,7 +236,7 @@ class Modal extends Component {
     let request = null;
 
     switch (modalType) {
-      case 'static':
+      case "static":
         {
           if (staticModalType === StaticModalType.About) {
             request = dispatch(fetchChangeLog(windowId, dataId, tabId, rowId));
@@ -249,8 +249,8 @@ class Modal extends Component {
                 tabId,
                 rowId,
                 target: staticModalType,
-                verb: 'GET',
-              })
+                verb: "GET",
+              }),
             );
           }
 
@@ -264,7 +264,7 @@ class Modal extends Component {
         }
         break;
 
-      case 'window':
+      case "window":
         try {
           await dispatch(
             createWindow({
@@ -275,7 +275,7 @@ class Modal extends Component {
               isModal: true,
               isAdvanced,
               title,
-            })
+            }),
           );
         } catch (error) {
           this.handleClose();
@@ -284,7 +284,7 @@ class Modal extends Component {
         }
         break;
 
-      case 'process':
+      case "process":
         // We have 3 cases of processes (prioritized):
         // - with viewDocumentIds: on single page with rawModal
         // - with dataId: on single document page
@@ -299,8 +299,8 @@ class Modal extends Component {
             ids: viewId
               ? modalViewDocumentIds
               : dataId
-              ? [dataId]
-              : parentSelection,
+                ? [dataId]
+                : parentSelection,
             tabId,
             rowId:
               rowId || (parentSelection.length ? parentSelection[0] : null),
@@ -328,7 +328,7 @@ class Modal extends Component {
         } catch (error) {
           this.handleClose();
 
-          if (error.toString() !== 'Error: close_modal') {
+          if (error.toString() !== "Error: close_modal") {
             throw error;
           }
         }
@@ -357,17 +357,17 @@ class Modal extends Component {
     const { isNew, isNewDoc } = this.state;
 
     if (isNewDoc) {
-      processNewRecord('window', windowId, dataId).then((response) => {
+      processNewRecord("window", windowId, dataId).then((response) => {
         dispatch(
           patch(
-            'window',
+            "window",
             documentType,
             parentDataId,
             null,
             null,
             triggerField,
-            response.data // it's OK to patch using the newly created record ID (instead of key/caption value)
-          )
+            response.data, // it's OK to patch using the newly created record ID (instead of key/caption value)
+          ),
         ).then(() => {
           this.removeModal();
         });
@@ -400,7 +400,7 @@ class Modal extends Component {
     // if you don't do this you will have COLLAPSE_INDENT issue  (see: keymap.js)
     dispatch(updateCommentsPanelOpenFlag(false));
     if (!rawModalVisible) {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
   };
 
@@ -411,11 +411,11 @@ class Modal extends Component {
   handleClose = () => {
     const { modalSaveStatus, modalType } = this.props;
 
-    if (modalType === 'process') {
+    if (modalType === "process") {
       return this.closeModal(modalSaveStatus);
     }
 
-    if (modalSaveStatus || window.confirm('Do you really want to leave?')) {
+    if (modalSaveStatus || window.confirm("Do you really want to leave?")) {
       this.closeModal(modalSaveStatus);
     }
   };
@@ -470,7 +470,7 @@ class Modal extends Component {
           this.removeModal();
         } catch (error) {
           // eslint-disable-next-line no-console
-          console.error('Modal.handleStart error: ', error);
+          console.error("Modal.handleStart error: ", error);
         } finally {
           if (this.mounted) {
             // prevent a memory leak
@@ -479,7 +479,7 @@ class Modal extends Component {
             });
           }
         }
-      }
+      },
     );
   };
 
@@ -535,7 +535,7 @@ class Modal extends Component {
     const { pending } = this.state;
 
     switch (modalType) {
-      case 'static': {
+      case "static": {
         let content = null;
         if (staticModalType === StaticModalType.About) {
           content = <ChangeLogModal data={data} />;
@@ -556,7 +556,7 @@ class Modal extends Component {
           </div>
         );
       }
-      case 'window':
+      case "window":
         return (
           <SectionGroup
             data={data}
@@ -570,7 +570,7 @@ class Modal extends Component {
             tabsInfo={null}
           />
         );
-      case 'process':
+      case "process":
         return (
           <Process
             data={data}
@@ -602,7 +602,7 @@ class Modal extends Component {
     const { scrolled, pending, isNewDoc, isTooltipShow } = this.state;
 
     let applyHandler =
-      modalType === 'process' ? this.handleStart : this.handleClose;
+      modalType === "process" ? this.handleStart : this.handleClose;
     if (staticModalType === StaticModalType.Printing)
       applyHandler = this.handlePrinting;
     const cancelHandler = isNewDoc ? this.removeModal : this.handleClose;
@@ -611,8 +611,8 @@ class Modal extends Component {
       <div className="modal-content-wrapper">
         <div className="panel panel-modal panel-modal-primary">
           <div
-            className={classnames('panel-groups-header', 'panel-modal-header', {
-              'header-shadow': scrolled,
+            className={classnames("panel-groups-header", "panel-modal-header", {
+              "header-shadow": scrolled,
             })}
           >
             <span className="panel-modal-header-title">
@@ -623,22 +623,22 @@ class Modal extends Component {
               {isNewDoc && (
                 <button
                   className={classnames(
-                    'btn btn-meta-outline-secondary btn-distance-3 btn-md',
+                    "btn btn-meta-outline-secondary btn-distance-3 btn-md",
                     {
-                      'tag-disabled disabled ': pending,
-                    }
+                      "tag-disabled disabled ": pending,
+                    },
                   )}
                   onClick={this.removeModal}
                   tabIndex={0}
                   onMouseEnter={() => this.toggleTooltip(keymap.CANCEL)}
                   onMouseLeave={this.toggleTooltip}
                 >
-                  {counterpart.translate('modal.actions.cancel')}
+                  {counterpart.translate("modal.actions.cancel")}
 
                   {isTooltipShow === keymap.CANCEL && (
                     <Tooltips
                       name={keymap.CANCEL}
-                      action={counterpart.translate('modal.actions.cancel')}
+                      action={counterpart.translate("modal.actions.cancel")}
                       type=""
                     />
                   )}
@@ -647,46 +647,46 @@ class Modal extends Component {
 
               <button
                 className={classnames(
-                  'btn btn-meta-outline-secondary btn-distance-3 btn-md',
+                  "btn btn-meta-outline-secondary btn-distance-3 btn-md",
                   {
-                    'tag-disabled disabled ': pending,
-                  }
+                    "tag-disabled disabled ": pending,
+                  },
                 )}
                 onClick={this.handleClose}
                 tabIndex={0}
                 onMouseEnter={() =>
                   this.toggleTooltip(
-                    modalType === 'process' ? keymap.CANCEL : keymap.DONE
+                    modalType === "process" ? keymap.CANCEL : keymap.DONE,
                   )
                 }
                 onMouseLeave={this.toggleTooltip}
               >
-                {modalType === 'process' ||
+                {modalType === "process" ||
                 staticModalType === StaticModalType.Printing
-                  ? counterpart.translate('modal.actions.cancel')
-                  : counterpart.translate('modal.actions.done')}
+                  ? counterpart.translate("modal.actions.cancel")
+                  : counterpart.translate("modal.actions.done")}
 
                 {isTooltipShow ===
-                  (modalType === 'process' ? keymap.CANCEL : keymap.DONE) && (
+                  (modalType === "process" ? keymap.CANCEL : keymap.DONE) && (
                   <Tooltips
-                    name={modalType === 'process' ? keymap.CANCEL : keymap.DONE}
+                    name={modalType === "process" ? keymap.CANCEL : keymap.DONE}
                     action={
-                      modalType === 'process'
-                        ? counterpart.translate('modal.actions.cancel')
-                        : counterpart.translate('modal.actions.done')
+                      modalType === "process"
+                        ? counterpart.translate("modal.actions.cancel")
+                        : counterpart.translate("modal.actions.done")
                     }
                     type=""
                   />
                 )}
               </button>
 
-              {modalType === 'process' && (
+              {modalType === "process" && (
                 <button
                   className={classnames(
-                    'btn btn-meta-outline-secondary btn-distance-3 btn-md',
+                    "btn btn-meta-outline-secondary btn-distance-3 btn-md",
                     {
-                      'tag-disabled disabled ': pending,
-                    }
+                      "tag-disabled disabled ": pending,
+                    },
                   )}
                   onClick={this.handleStart}
                   tabIndex={0}
@@ -694,12 +694,12 @@ class Modal extends Component {
                   onMouseLeave={this.toggleTooltip}
                   disabled={indicator === IndicatorState.ERROR}
                 >
-                  {counterpart.translate('modal.actions.start')}
+                  {counterpart.translate("modal.actions.start")}
 
                   {isTooltipShow === keymap.DONE && (
                     <Tooltips
                       name={keymap.DONE}
-                      action={counterpart.translate('modal.actions.start')}
+                      action={counterpart.translate("modal.actions.start")}
                       type=""
                     />
                   )}
@@ -707,26 +707,27 @@ class Modal extends Component {
               )}
 
               {/* Printing button caption value comes form the store */}
-              {staticModalType === StaticModalType.Printing && printBtnCaption && (
-                <button
-                  className={classnames(
-                    'btn btn-meta-outline-secondary btn-distance-3 btn-md',
-                    {
-                      'tag-disabled disabled ': pending,
-                    }
-                  )}
-                  onClick={this.handlePrinting}
-                  tabIndex={0}
-                >
-                  {printBtnCaption}
-                </button>
-              )}
+              {staticModalType === StaticModalType.Printing &&
+                printBtnCaption && (
+                  <button
+                    className={classnames(
+                      "btn btn-meta-outline-secondary btn-distance-3 btn-md",
+                      {
+                        "tag-disabled disabled ": pending,
+                      },
+                    )}
+                    onClick={this.handlePrinting}
+                    tabIndex={0}
+                  >
+                    {printBtnCaption}
+                  </button>
+                )}
             </div>
           </div>
 
           <Indicator
             indicator={indicator}
-            error={saveStatus?.error ? saveStatus?.reason : ''}
+            error={saveStatus?.error ? saveStatus?.reason : ""}
             exception={saveStatus?.error ? saveStatus?.exception : null}
           />
 
@@ -743,7 +744,7 @@ class Modal extends Component {
             )}
             {this.renderModalBody()}
           </div>
-          {layout.layoutType !== 'singleOverlayField' && (
+          {layout.layoutType !== "singleOverlayField" && (
             <ModalContextShortcuts
               done={applyHandler}
               cancel={cancelHandler}
@@ -766,13 +767,13 @@ class Modal extends Component {
     const { pending } = this.state;
 
     const applyHandler =
-      modalType === 'process' ? this.handleStart : this.handleClose;
+      modalType === "process" ? this.handleStart : this.handleClose;
     const cancelHandler =
-      modalType === 'process'
+      modalType === "process"
         ? this.handleClose
         : isNewDoc
-        ? this.removeModal
-        : undefined;
+          ? this.removeModal
+          : undefined;
 
     function defer() {
       let res, rej;
@@ -820,12 +821,12 @@ class Modal extends Component {
     let renderedContent = null;
 
     if (layout && Object.keys(layout) && Object.keys(layout).length) {
-      if (!layout.layoutType || layout.layoutType === 'panel') {
+      if (!layout.layoutType || layout.layoutType === "panel") {
         renderedContent = this.renderPanel();
-      } else if (layout.layoutType === 'singleOverlayField') {
+      } else if (layout.layoutType === "singleOverlayField") {
         renderedContent = this.renderOverlay();
       }
-    } else if (modalType === 'static') {
+    } else if (modalType === "static") {
       renderedContent = this.renderPanel();
     } else {
       return null;
@@ -833,8 +834,8 @@ class Modal extends Component {
 
     return (
       <div
-        className={classnames('screen-freeze js-not-unselect', {
-          light: layout.layoutType === 'singleOverlayField',
+        className={classnames("screen-freeze js-not-unselect", {
+          light: layout.layoutType === "singleOverlayField",
         })}
       >
         {renderedContent}

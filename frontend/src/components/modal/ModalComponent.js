@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Indicator from '../app/Indicator';
-import ModalContextShortcuts from '../keyshortcuts/ModalContextShortcuts';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import Indicator from "../app/Indicator";
+import ModalContextShortcuts from "../keyshortcuts/ModalContextShortcuts";
 
 /**
  * General purpose modal dialog.
@@ -28,7 +28,7 @@ const ModalComponent = ({
   };
 
   useEffect(() => {
-    const modalContent = document.querySelector('.js-panel-modal-content');
+    const modalContent = document.querySelector(".js-panel-modal-content");
     if (!modalContent) return;
 
     // Dirty solution, but use only if you need to
@@ -36,11 +36,11 @@ const ModalComponent = ({
     // because body is out of react app range
     // and css dont affect parents
     // but we have to change scope of scrollbar
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
-    modalContent.addEventListener('scroll', handleScroll);
+    modalContent.addEventListener("scroll", handleScroll);
     return () => {
-      modalContent.removeEventListener('scroll', handleScroll);
+      modalContent.removeEventListener("scroll", handleScroll);
     };
   });
 
@@ -58,12 +58,12 @@ const ModalComponent = ({
       <div className="modal-content-wrapper">
         <div className="panel panel-modal panel-modal-primary">
           <div
-            className={classnames('panel-groups-header', 'panel-modal-header', {
-              'header-shadow': scrolled,
+            className={classnames("panel-groups-header", "panel-modal-header", {
+              "header-shadow": scrolled,
             })}
           >
             <span className="panel-modal-header-title panel-modal-header-title-with-header-properties">
-              {title ? title : 'Modal'}
+              {title ? title : "Modal"}
               {description && (
                 <span className="panel-modal-description">{description}</span>
               )}

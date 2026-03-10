@@ -531,9 +531,7 @@
     ],
     "supportAttributes": false,
     "supportTree": false,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": null,
     "supportIncludedView": false,
     "supportIncludedViewOnSelect": null,
@@ -671,9 +669,7 @@
     ],
     "supportAttributes": false,
     "supportTree": false,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": {
       "openOnSelect": true,
       "blurWhenOpen": true,
@@ -735,9 +731,7 @@
         "gridAlign": "left",
         "viewEditorRenderMode": "never",
         "sortable": true,
-        "restrictToMediaTypes": [
-          "screen"
-        ],
+        "restrictToMediaTypes": ["screen"],
         "fields": [
           {
             "field": "huPackingInfo",
@@ -797,9 +791,7 @@
     "supportTree": true,
     "collapsible": true,
     "expandedDepth": 1,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": null,
     "supportIncludedView": false,
     "supportIncludedViewOnSelect": null,
@@ -1144,9 +1136,7 @@
     ],
     "supportAttributes": false,
     "supportTree": false,
-    "allowedCloseActions": [
-      "DONE"
-    ],
+    "allowedCloseActions": ["DONE"],
     "includedView": null,
     "supportIncludedView": false,
     "supportIncludedViewOnSelect": null,

@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import * as api from '../api/calendar';
+import { useEffect, useState } from "react";
+import * as api from "../api/calendar";
 
 export const useSimulationOptimizerStatus = ({ simulationId }) => {
   const [state, setState] = useState({
-    status: 'UNKNOWN ',
+    status: "UNKNOWN ",
   });
 
   useEffect(() => {
     if (simulationId == null) {
-      setState({ status: 'NOT_APPLICABLE' });
+      setState({ status: "NOT_APPLICABLE" });
     } else {
       api.getSimulationOptimizerStatus({ simulationId }).then(setState);
     }
@@ -21,7 +21,7 @@ export const useSimulationOptimizerStatus = ({ simulationId }) => {
       setState({ status: apiResponse?.status });
     },
     setStatusFromWSEvents: (wsEvents) => {
-      console.log('Got new simulation optimizer status from WS', wsEvents);
+      console.log("Got new simulation optimizer status from WS", wsEvents);
       if (wsEvents?.simulationOptimizerStatus?.status) {
         setState({ status: wsEvents.simulationOptimizerStatus.status });
       }

@@ -1,26 +1,26 @@
-import React from 'react';
-import { mount, shallow } from 'enzyme';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { merge } from 'merge-anything';
-import { act } from 'react-dom/test-utils';
+import React from "react";
+import { mount, shallow } from "enzyme";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+import { merge } from "merge-anything";
+import { act } from "react-dom/test-utils";
 
-import { ShortcutProvider } from '../../../components/keyshortcuts/ShortcutProvider';
-import { initialState as appHandlerState } from '../../../reducers/appHandler';
-import { initialState as windowHandlerState } from '../../../reducers/windowHandler';
+import { ShortcutProvider } from "../../../components/keyshortcuts/ShortcutProvider";
+import { initialState as appHandlerState } from "../../../reducers/appHandler";
+import { initialState as windowHandlerState } from "../../../reducers/windowHandler";
 
-import Filters from '../../../components/filters/Filters';
-import filtersFixtures from '../../../../test_setup/fixtures/filters.json';
-import hotkeys from '../../../../test_setup/fixtures/hotkeys.json';
-import keymap from '../../../../test_setup/fixtures/keymap.json';
-import filterData from '../../../../test_setup/fixtures/filters/filterData.json';
-import filtersActive from '../../../../test_setup/fixtures/filters/filtersActive.json';
-import filtersStoreOne from '../../../../test_setup/fixtures/filters/filtersStoreOne.json';
-import filtersStoreTwo from '../../../../test_setup/fixtures/filters/filtersStoreTwo.json';
-import filtersStoreThree from '../../../../test_setup/fixtures/filters/filtersStoreThree.json';
-import filtersStoreFour from '../../../../test_setup/fixtures/filters/filtersStoreFour.json';
-import filtersStoreFacet from '../../../../test_setup/fixtures/filters/filtersStoreFacet.json';
-import filtersStoreInline from '../../../../test_setup/fixtures/filters/filtersStoreInline.json';
+import Filters from "../../../components/filters/Filters";
+import filtersFixtures from "../../../../test_setup/fixtures/filters.json";
+import hotkeys from "../../../../test_setup/fixtures/hotkeys.json";
+import keymap from "../../../../test_setup/fixtures/keymap.json";
+import filterData from "../../../../test_setup/fixtures/filters/filterData.json";
+import filtersActive from "../../../../test_setup/fixtures/filters/filtersActive.json";
+import filtersStoreOne from "../../../../test_setup/fixtures/filters/filtersStoreOne.json";
+import filtersStoreTwo from "../../../../test_setup/fixtures/filters/filtersStoreTwo.json";
+import filtersStoreThree from "../../../../test_setup/fixtures/filters/filtersStoreThree.json";
+import filtersStoreFour from "../../../../test_setup/fixtures/filters/filtersStoreFour.json";
+import filtersStoreFacet from "../../../../test_setup/fixtures/filters/filtersStoreFacet.json";
+import filtersStoreInline from "../../../../test_setup/fixtures/filters/filtersStoreInline.json";
 
 const mockStore = configureStore([]);
 
@@ -29,11 +29,11 @@ const createStore = function (state = {}) {
     {
       appHandler: {
         ...appHandlerState,
-        me: { timeZone: 'America/Los_Angeles' },
+        me: { timeZone: "America/Los_Angeles" },
       },
       windowHandler: { ...windowHandlerState },
     },
-    state
+    state,
   );
 
   return res;
@@ -41,7 +41,7 @@ const createStore = function (state = {}) {
 
 const createInitialProps = function (
   basicFixtures = filtersFixtures.data1,
-  additionalProps = {}
+  additionalProps = {},
 ) {
   return {
     ...basicFixtures,
@@ -52,8 +52,8 @@ const createInitialProps = function (
   };
 };
 
-describe('Filters tests', () => {
-  it('renders without errors', () => {
+describe("Filters tests", () => {
+  it("renders without errors", () => {
     const dummyProps = createInitialProps();
     const initialState = createStore({
       windowHandler: {
@@ -68,17 +68,17 @@ describe('Filters tests', () => {
     const wrapper = shallow(
       <Provider store={store}>
         <Filters {...dummyProps} />
-      </Provider>
+      </Provider>,
     );
     const html = wrapper.html();
 
-    expect(html).toContain('filter-wrapper');
-    expect(html).toContain('filters-frequent');
-    expect(html).toContain('btn-filter');
-    expect(html).toContain(': Date');
+    expect(html).toContain("filter-wrapper");
+    expect(html).toContain("filters-frequent");
+    expect(html).toContain("btn-filter");
+    expect(html).toContain(": Date");
   });
 
-  it('renders active filters caption', () => {
+  it("renders active filters caption", () => {
     const dummyProps = createInitialProps(undefined, {
       filtersActive: filtersFixtures.filtersActive1,
     });
@@ -95,15 +95,15 @@ describe('Filters tests', () => {
     const wrapper = shallow(
       <Provider store={store}>
         <Filters {...dummyProps} />
-      </Provider>
+      </Provider>,
     );
 
     wrapper.find(
-      '.filter-wrapper button[title="Akontozahlung, Completed, Error"]'
+      '.filter-wrapper button[title="Akontozahlung, Completed, Error"]',
     );
   });
 
-  it('renders active filters caption for filters without parameters', () => {
+  it("renders active filters caption for filters without parameters", () => {
     const dummyProps = createInitialProps(undefined);
     const initialState = createStore({
       windowHandler: {
@@ -119,13 +119,13 @@ describe('Filters tests', () => {
     const wrapper = shallow(
       <Provider store={store}>
         <Filters {...dummyProps} />
-      </Provider>
+      </Provider>,
     );
 
-    expect(wrapper.html()).toContain('Abrechnung_offen_normal');
+    expect(wrapper.html()).toContain("Abrechnung_offen_normal");
   });
 
-  it('renders active filters caption for inline filters', () => {
+  it("renders active filters caption for inline filters", () => {
     const updateDocListListener = jest.fn();
     const dummyProps = createInitialProps(undefined);
     const initialState = createStore({
@@ -144,14 +144,14 @@ describe('Filters tests', () => {
         <div className="document-lists-wrapper">
           <Filters {...dummyProps} />
         </div>
-      </Provider>
+      </Provider>,
     );
 
-    expect(wrapper.html()).toContain('Active');
-    expect(wrapper.html()).toContain('123');
+    expect(wrapper.html()).toContain("Active");
+    expect(wrapper.html()).toContain("123");
   });
 
-  it('renders active filters caption for facet filters', () => {
+  it("renders active filters caption for facet filters", () => {
     const dummyProps = createInitialProps(undefined);
     const initialState = createStore({
       windowHandler: {
@@ -167,13 +167,13 @@ describe('Filters tests', () => {
     const wrapper = shallow(
       <Provider store={store}>
         <Filters {...dummyProps} />
-      </Provider>
+      </Provider>,
     );
 
-    expect(wrapper.html()).toContain('Shipmentdate');
+    expect(wrapper.html()).toContain("Shipmentdate");
   });
 
-  it('opens dropdown and filter details', () => {
+  it("opens dropdown and filter details", () => {
     const dummyProps = createInitialProps();
     const initialState = createStore({
       windowHandler: {
@@ -192,25 +192,25 @@ describe('Filters tests', () => {
             <Filters {...dummyProps} />
           </div>
         </Provider>
-      </ShortcutProvider>
+      </ShortcutProvider>,
     );
 
-    wrapper.find('.filters-not-frequent .btn-filter').simulate('click');
-    expect(wrapper.find('.filter-menu').length).toBe(1);
-    expect(wrapper.find('.filters-overlay').length).toBe(1);
+    wrapper.find(".filters-not-frequent .btn-filter").simulate("click");
+    expect(wrapper.find(".filter-menu").length).toBe(1);
+    expect(wrapper.find(".filters-overlay").length).toBe(1);
 
-    wrapper.find('.filter-active').simulate('click');
-    expect(wrapper.find('.filter-widget .filter-default').length).toBe(1);
+    wrapper.find(".filter-active").simulate("click");
+    expect(wrapper.find(".filter-widget .filter-default").length).toBe(1);
 
-    expect(wrapper.find('.form-field-C_BPartner_ID .focused').length).toBe(1);
+    expect(wrapper.find(".form-field-C_BPartner_ID .focused").length).toBe(1);
   });
 
   //@TODO: I expect this to be replaced by a combination of small unit and e2e tests, but
   // for now it doesn't make sense to write targeted unit tests for Filter descendant components
   // as the widgets need an architecture overhaul, and filters should be moved to redux state
-  describe('Temporary bloated filter tests', () => {
+  describe("Temporary bloated filter tests", () => {
     // // https://github.com/metasfresh/me03/issues/3649
-    it('clears list filters and applies without error', () => {
+    it("clears list filters and applies without error", () => {
       const dummyProps = createInitialProps(undefined, {
         filtersActive: filtersFixtures.filtersActive2,
       });
@@ -231,28 +231,28 @@ describe('Filters tests', () => {
               <Filters {...dummyProps} />
             </div>
           </Provider>
-        </ShortcutProvider>
+        </ShortcutProvider>,
       );
 
-      wrapper.find('.filters-not-frequent .btn-filter').simulate('click');
-      expect(wrapper.find('.filters-overlay').length).toBe(1);
-      expect(wrapper.find('.filter-option-default').length).toBe(0);
+      wrapper.find(".filters-not-frequent .btn-filter").simulate("click");
+      expect(wrapper.find(".filters-overlay").length).toBe(1);
+      expect(wrapper.find(".filter-option-default").length).toBe(0);
 
-      expect(wrapper.find('FiltersItem').state().activeFilter).toBeTruthy();
+      expect(wrapper.find("FiltersItem").state().activeFilter).toBeTruthy();
 
-      wrapper.find('.meta-icon-close-alt').simulate('click');
+      wrapper.find(".meta-icon-close-alt").simulate("click");
       wrapper.update();
 
-      expect(wrapper.find('FiltersItem').state().activeFilter).toBeTruthy();
+      expect(wrapper.find("FiltersItem").state().activeFilter).toBeTruthy();
       wrapper
-        .find('.filter-widget .filter-btn-wrapper .applyBtn')
-        .simulate('click');
+        .find(".filter-widget .filter-btn-wrapper .applyBtn")
+        .simulate("click");
 
       wrapper.update();
-      expect(wrapper.find('.filters-overlay').length).toBe(0);
+      expect(wrapper.find(".filters-overlay").length).toBe(0);
     });
 
-    it('supports `false` values for checkbox widgets', () => {
+    it("supports `false` values for checkbox widgets", () => {
       const updateDocListListener = jest.fn();
       const dummyProps = createInitialProps(undefined, {
         filtersActive: filtersFixtures.filtersActive3,
@@ -276,53 +276,53 @@ describe('Filters tests', () => {
               <Filters {...dummyProps} />
             </div>
           </Provider>
-        </ShortcutProvider>
+        </ShortcutProvider>,
       );
 
-      wrapper.find('.filters-not-frequent .btn-filter').simulate('click');
-      expect(wrapper.find('.filters-overlay').length).toBe(1);
-      expect(wrapper.find('.filter-option-default').length).toBe(0);
-      expect(wrapper.find('FiltersItem').state().activeFilter).toBeTruthy();
+      wrapper.find(".filters-not-frequent .btn-filter").simulate("click");
+      expect(wrapper.find(".filters-overlay").length).toBe(1);
+      expect(wrapper.find(".filter-option-default").length).toBe(0);
+      expect(wrapper.find("FiltersItem").state().activeFilter).toBeTruthy();
 
       expect(
-        wrapper.find('.form-field-Processed input[type="checkbox"]').length
+        wrapper.find('.form-field-Processed input[type="checkbox"]').length,
       ).toBe(1);
 
       act(() => {
         wrapper
           .find('.form-field-Processed input[type="checkbox"]')
-          .simulate('change');
+          .simulate("change");
         wrapper.update();
       });
 
       expect(
-        wrapper.find('.form-field-Processed input[type="checkbox"]').checked
+        wrapper.find('.form-field-Processed input[type="checkbox"]').checked,
       ).toBe(undefined);
 
-      expect(wrapper.find('FiltersItem').state().activeFilter).toBeTruthy();
+      expect(wrapper.find("FiltersItem").state().activeFilter).toBeTruthy();
       wrapper
-        .find('.filter-widget .filter-btn-wrapper .applyBtn')
-        .simulate('click');
+        .find(".filter-widget .filter-btn-wrapper .applyBtn")
+        .simulate("click");
 
       wrapper.update();
 
       const filterResult = [
         {
-          filterId: 'default',
+          filterId: "default",
           parameters: [
             {
-              parameterName: 'C_BPartner_ID',
+              parameterName: "C_BPartner_ID",
               value: {
-                key: '2156429',
-                caption: '1000003_TestVendor',
-                description: '1000003_TestVendor',
+                key: "2156429",
+                caption: "1000003_TestVendor",
+                description: "1000003_TestVendor",
               },
               valueTo: null,
               defaultValue: null,
               defaultValueTo: null,
             },
             {
-              parameterName: 'Processed',
+              parameterName: "Processed",
               value: false,
               valueTo: null,
               defaultValue: null,
@@ -334,7 +334,7 @@ describe('Filters tests', () => {
       expect(updateDocListListener).toBeCalledWith(filterResult);
     });
 
-    it('supports selecting filters without parameters', () => {
+    it("supports selecting filters without parameters", () => {
       const updateDocListListener = jest.fn();
       const dummyProps = createInitialProps(undefined, {
         updateDocList: updateDocListListener,
@@ -356,29 +356,29 @@ describe('Filters tests', () => {
               <Filters {...dummyProps} />
             </div>
           </Provider>
-        </ShortcutProvider>
+        </ShortcutProvider>,
       );
 
-      wrapper.find('.filters-not-frequent .btn-filter').simulate('click');
-      expect(wrapper.find('.filters-overlay').length).toBe(1);
+      wrapper.find(".filters-not-frequent .btn-filter").simulate("click");
+      expect(wrapper.find(".filters-overlay").length).toBe(1);
 
       wrapper
-        .find('.filters-overlay .filter-option-userquery-540024')
-        .simulate('click');
-      expect(wrapper.find('FiltersItem').state().activeFilter).toBeFalsy();
+        .find(".filters-overlay .filter-option-userquery-540024")
+        .simulate("click");
+      expect(wrapper.find("FiltersItem").state().activeFilter).toBeFalsy();
 
       wrapper
-        .find('.filter-widget .filter-btn-wrapper .applyBtn')
-        .simulate('click');
+        .find(".filter-widget .filter-btn-wrapper .applyBtn")
+        .simulate("click");
       wrapper.update();
 
       const filterResult = [
         {
-          filterId: 'userquery-540024',
-          caption: 'Abrechnung_offen_normal',
+          filterId: "userquery-540024",
+          caption: "Abrechnung_offen_normal",
           frequent: false,
-          inlineRenderMode: 'button',
-          parametersLayoutType: 'panel',
+          inlineRenderMode: "button",
+          parametersLayoutType: "panel",
           debugProperties: { sortNo: 20002 },
           isActive: false,
         },

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Route, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
-import queryString from 'query-string';
+import React, { useEffect, useState } from "react";
+import { Route, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import queryString from "query-string";
 
-import { clearNotifications, enableTutorial } from '../actions/AppActions';
-import { setBreadcrumb } from '../actions/MenuActions';
-import { useAuth } from '../hooks/useAuth';
-import ChildRoutes from './ChildRoutes';
+import { clearNotifications, enableTutorial } from "../actions/AppActions";
+import { setBreadcrumb } from "../actions/MenuActions";
+import { useAuth } from "../hooks/useAuth";
+import ChildRoutes from "./ChildRoutes";
 
 let hasTutorial = false;
 
@@ -25,7 +25,7 @@ const PrivateRoute = (props) => {
   const { isLoggedIn, authRequestPending } = auth;
   const { location } = props;
   const query = queryString.parse(location.search, { ignoreQueryPrefix: true });
-  hasTutorial = query && typeof query.tutorial !== 'undefined';
+  hasTutorial = query && typeof query.tutorial !== "undefined";
 
   const [firstRender, setFirstRender] = useState(true);
 
@@ -44,7 +44,7 @@ const PrivateRoute = (props) => {
           if (!authenticated) {
             auth.setRedirectRoute(url);
             setFirstRender(true);
-            history.push('/login');
+            history.push("/login");
           } else {
             auth.login();
           }
@@ -57,7 +57,7 @@ const PrivateRoute = (props) => {
     }
 
     // clear breadcrumbs on all main paths
-    if (location.pathname.indexOf('window') === -1) {
+    if (location.pathname.indexOf("window") === -1) {
       // make sure we clear the breadcrumbs once we are on the dashboard
       dispatch(setBreadcrumb([]));
     }

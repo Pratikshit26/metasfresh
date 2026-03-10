@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import _ from 'lodash';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import _ from "lodash";
 
-import { getZoomIntoWindow } from '../../api';
-import { formatDateWithZeros } from '../../utils/documentListHelper';
+import { getZoomIntoWindow } from "../../api";
+import { formatDateWithZeros } from "../../utils/documentListHelper";
 import {
   validatePrecision,
   formatValueByWidgetType,
-} from '../../utils/widgetHelpers';
-import { DATE_FIELD_TYPES, TIME_FIELD_TYPES } from '../../constants/Constants';
-import { getTableId } from '../../reducers/tables';
+} from "../../utils/widgetHelpers";
+import { DATE_FIELD_TYPES, TIME_FIELD_TYPES } from "../../constants/Constants";
+import { getTableId } from "../../reducers/tables";
 
-import RawWidget from './RawWidget';
+import RawWidget from "./RawWidget";
 
 const dateParse = [...DATE_FIELD_TYPES, ...TIME_FIELD_TYPES];
 
@@ -31,7 +31,7 @@ class MasterWidget extends PureComponent {
     this.state = {
       updated: false,
       edited: false,
-      value: value || (clearValue ? '' : widgetData[0].value),
+      value: value || (clearValue ? "" : widgetData[0].value),
       widgetData: props.widgetData, // this is used for comparison in the getDerivedStateFromProps lifecycle
     };
   }
@@ -96,8 +96,8 @@ class MasterWidget extends PureComponent {
 
     value = formatValueByWidgetType({ widgetType, value });
 
-    let entity = viewId ? 'documentView' : this.props.entity;
-    let currRowId = rowId === 'NEW' ? relativeDocId : rowId;
+    let entity = viewId ? "documentView" : this.props.entity;
+    let currRowId = rowId === "NEW" ? relativeDocId : rowId;
     let isEdit = !!viewId;
     const tableId = getTableId({
       windowId,
@@ -115,7 +115,7 @@ class MasterWidget extends PureComponent {
       entity,
       tableId,
       disconnected,
-      action: 'patch',
+      action: "patch",
     };
 
     // TODO: Leaving this for now in case this is used in some edge cases
@@ -123,9 +123,9 @@ class MasterWidget extends PureComponent {
     // *HOTFIX update*: This is used by attributes. I think we should try to rewrite the
     // Attributes component so that it won't need it anymore.
     // https://github.com/metasfresh/me03/issues/5384
-    widgetType !== 'Button' &&
+    widgetType !== "Button" &&
       !dataId &&
-      (widgetType === 'ProductAttributes' || widgetType === 'Quantity') &&
+      (widgetType === "ProductAttributes" || widgetType === "Quantity") &&
       updatePropertyValue(updateOptions);
 
     const ret = patch(
@@ -140,7 +140,7 @@ class MasterWidget extends PureComponent {
       isAdvanced,
       viewId,
       isEdit,
-      disconnected
+      disconnected,
     );
 
     // flash the row to indicate a change
@@ -148,7 +148,7 @@ class MasterWidget extends PureComponent {
     this.setState({ edited: false });
 
     /** we are using this `disconnected` flag to know when the Master widget should update the property value differently */
-    disconnected === 'inlineTab' &&
+    disconnected === "inlineTab" &&
       updatePropertyValue({ ...updateOptions, ret });
 
     return ret;
@@ -179,8 +179,8 @@ class MasterWidget extends PureComponent {
     } = this.props;
 
     // Add special case of formating for the case when people input 04.7.2020 to be transformed to 04.07.2020
-    val = widgetType === 'Date' ? formatDateWithZeros(val) : val;
-    let fieldName = widgetData[0] ? widgetData[0].field : '';
+    val = widgetType === "Date" ? formatDateWithZeros(val) : val;
+    let fieldName = widgetData[0] ? widgetData[0].field : "";
     this.setState({ edited: true, value: val }, () => {
       if (
         !dateParse.includes(widgetType) &&
@@ -193,7 +193,7 @@ class MasterWidget extends PureComponent {
       ) {
         return;
       }
-      const currRowId = rowId === 'NEW' ? relativeDocId : rowId;
+      const currRowId = rowId === "NEW" ? relativeDocId : rowId;
       const tableId = getTableId({
         windowId,
         docId: dataId,
@@ -212,7 +212,7 @@ class MasterWidget extends PureComponent {
         entity,
         tableId,
         disconnected,
-        action: 'change',
+        action: "change",
       });
     });
   };
@@ -231,7 +231,7 @@ class MasterWidget extends PureComponent {
     openModal({
       title: caption,
       windowId: buttonProcessId,
-      modalType: 'process',
+      modalType: "process",
       tabId,
       rowId,
     });
@@ -244,7 +244,7 @@ class MasterWidget extends PureComponent {
    */
   handleZoomInto = (field) => {
     const { dataId, windowId, tabId, rowId, entity } = this.props;
-    const fallBackEntity = entity ? entity : 'window';
+    const fallBackEntity = entity ? entity : "window";
 
     getZoomIntoWindow(
       fallBackEntity,
@@ -252,11 +252,11 @@ class MasterWidget extends PureComponent {
       dataId,
       tabId,
       rowId,
-      field
+      field,
     ).then((res) => {
       const url = `/${fallBackEntity}/${res.data.documentPath.windowId}/${res.data.documentPath.documentId}`;
 
-      res && res.data && window.open(url, '_blank');
+      res && res.data && window.open(url, "_blank");
     });
   };
 

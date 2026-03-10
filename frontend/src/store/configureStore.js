@@ -1,8 +1,8 @@
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import promiseMiddleware from 'redux-promise';
+import { applyMiddleware, compose, createStore } from "redux";
+import thunk from "redux-thunk";
+import promiseMiddleware from "redux-promise";
 
-import { createRootReducer } from '../reducers';
+import { createRootReducer } from "../reducers";
 
 export default function configureStore() {
   const composeEnhancer =
@@ -18,18 +18,18 @@ export default function configureStore() {
   const store = createStore(
     reducer,
     {},
-    composeEnhancer(applyMiddleware(thunk, promiseMiddleware))
+    composeEnhancer(applyMiddleware(thunk, promiseMiddleware)),
   );
 
   if (module.hot) {
-    module.hot.accept('../reducers', () => {
+    module.hot.accept("../reducers", () => {
       const nextReducer = createRootReducer();
       store.replaceReducer(nextReducer);
     });
   }
 
   if (window.Cypress) {
-    window.Cypress.emit('emit:reduxStore', store);
+    window.Cypress.emit("emit:reduxStore", store);
   }
 
   return store;

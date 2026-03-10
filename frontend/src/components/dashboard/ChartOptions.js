@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import counterpart from 'counterpart';
+import React, { useCallback, useState } from "react";
+import counterpart from "counterpart";
 import {
   changeKPIItem,
   changeTargetIndicatorsItem,
-} from '../../actions/DashboardActions';
-import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
+} from "../../actions/DashboardActions";
+import PropTypes from "prop-types";
+import { debounce } from "lodash";
 
 export const ChartOptions = ({
   id,
@@ -23,11 +23,11 @@ export const ChartOptions = ({
   };
   const patchDashboardItemDebounced = useCallback(
     debounce(patchDashboardItem, 500),
-    []
+    [],
   );
 
   const setState = (path, value) => {
-    if (path === 'caption') setCaption(value);
+    if (path === "caption") setCaption(value);
   };
 
   const onFieldChanged = (path, value) => {
@@ -41,12 +41,12 @@ export const ChartOptions = ({
         <div className="chart-options">
           <div className="form-group">
             <label>
-              {counterpart.translate('dashboard.item.settings.caption')}
+              {counterpart.translate("dashboard.item.settings.caption")}
             </label>
             <input
               className="input-options input-secondary"
               value={caption}
-              onChange={(e) => onFieldChanged('caption', e.target.value)}
+              onChange={(e) => onFieldChanged("caption", e.target.value)}
             />
           </div>
         </div>

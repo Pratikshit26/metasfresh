@@ -2,11 +2,11 @@
  * Date conversions/transforms used across the app should reside in this file
  */
 
-import { DATE_FIELDS } from '../constants/Constants';
+import { DATE_FIELDS } from "../constants/Constants";
 
-import { parseDateWithCurrentTimezone } from './documentListHelper';
-import MomentTZ from 'moment-timezone';
-import moment from 'moment';
+import { parseDateWithCurrentTimezone } from "./documentListHelper";
+import MomentTZ from "moment-timezone";
+import moment from "moment";
 
 /**
  * @method convertDateToReadable
@@ -34,9 +34,9 @@ export const setTimezoneToMoment = (moment, timeZone) => {
     }
   } else {
     const momentWithTZ = MomentTZ(
-      moment.format('YYYY-MM-DDTHH:mm:ss.SSS'),
-      'YYYY-MM-DDTHH:mm:ss.SSS',
-      true
+      moment.format("YYYY-MM-DDTHH:mm:ss.SSS"),
+      "YYYY-MM-DDTHH:mm:ss.SSS",
+      true,
     );
     return momentWithTZ.tz(timeZone, true);
   }
@@ -56,9 +56,9 @@ export const convertMomentToTimezone = (momentDate, timeZone) => {
   } else {
     const actualMoment = moment(momentDate);
     const momentWithTZ = MomentTZ(
-      actualMoment.format('YYYY-MM-DDTHH:mm:ss.SSS'),
-      'YYYY-MM-DDTHH:mm:ss.SSS',
-      true
+      actualMoment.format("YYYY-MM-DDTHH:mm:ss.SSS"),
+      "YYYY-MM-DDTHH:mm:ss.SSS",
+      true,
     );
     return momentWithTZ.tz(timeZone, false);
   }

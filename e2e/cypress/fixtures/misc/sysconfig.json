@@ -1,5 +1,5 @@
 {
-    "sysConfigName": "SysConfig",
-    "sysConfigValue": "Value",
-    "sysConfigDescription": "Description"
+  "sysConfigName": "SysConfig",
+  "sysConfigValue": "Value",
+  "sysConfigDescription": "Description"
 }

@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import counterpart from 'counterpart';
+import React from "react";
+import PropTypes from "prop-types";
+import counterpart from "counterpart";
 
 const SimulationOptimizerButton = ({
   simulationId,
@@ -17,16 +17,16 @@ const SimulationOptimizerButton = ({
   }
 
   switch (status) {
-    case 'STARTED':
+    case "STARTED":
       return (
         <button onClick={() => onStop({ simulationId })}>
           Stop optimization
         </button>
       );
-    case 'STOPPED':
+    case "STOPPED":
       return (
         <button onClick={() => onStart({ simulationId })}>
-          {counterpart.translate('calendar.button.start.optimization')}
+          {counterpart.translate("calendar.button.start.optimization")}
         </button>
       );
     default:

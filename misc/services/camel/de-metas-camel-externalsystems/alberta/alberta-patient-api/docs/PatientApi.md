@@ -2,14 +2,16 @@
 
 All URIs are relative to *https://virtserver.swaggerhub.com/it-labs.de/PatientWawi/1.0.1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**addPatient**](PatientApi.md#addPatient) | **POST** /patient | Patient hinzufügen
-[**getCreatedPatients**](PatientApi.md#getCreatedPatients) | **GET** /patient | Patienten je nach Status abrufen
-[**updatePatient**](PatientApi.md#updatePatient) | **PUT** /patient | Patient ändern
+| Method                                                     | HTTP request      | Description                      |
+| ---------------------------------------------------------- | ----------------- | -------------------------------- |
+| [**addPatient**](PatientApi.md#addPatient)                 | **POST** /patient | Patient hinzufügen               |
+| [**getCreatedPatients**](PatientApi.md#getCreatedPatients) | **GET** /patient  | Patienten je nach Status abrufen |
+| [**updatePatient**](PatientApi.md#updatePatient)           | **PUT** /patient  | Patient ändern                   |
 
 <a name="addPatient"></a>
+
 # **addPatient**
+
 > ArrayOfMappings addPatient(body, albertaApiKey)
 
 Patient hinzufügen
@@ -17,6 +19,7 @@ Patient hinzufügen
 Szenario - ein Patient wurde im WaWi angelegt und soll in Alberta übertragen werden
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -25,7 +28,7 @@ Szenario - ein Patient wurde im WaWi angelegt und soll in Alberta übertragen we
 
 PatientApi apiInstance = new PatientApi();
 Patient body = new Patient(); // Patient | Der Patient
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 try {
     ArrayOfMappings result = apiInstance.addPatient(body, albertaApiKey);
     System.out.println(result);
@@ -37,10 +40,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**Patient**](Patient.md)| Der Patient |
- **albertaApiKey** | **String**|  |
+| Name              | Type                      | Description | Notes |
+| ----------------- | ------------------------- | ----------- | ----- |
+| **body**          | [**Patient**](Patient.md) | Der Patient |
+| **albertaApiKey** | **String**                |             |
 
 ### Return type
 
@@ -52,11 +55,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/xml
- - **Accept**: application/json, application/xml
+- **Content-Type**: application/json, application/xml
+- **Accept**: application/json, application/xml
 
 <a name="getCreatedPatients"></a>
+
 # **getCreatedPatients**
+
 > ArrayOfPatients getCreatedPatients(albertaApiKey, status, updatedAfter)
 
 Patienten je nach Status abrufen
@@ -64,6 +69,7 @@ Patienten je nach Status abrufen
 Szenario - das WaWi fragt in einem bestimmten Intervall bei Alberta nach, ob es neu angelegte, geänderte oder archivierte Patienten gibt ----- Aufruf &#x3D;&gt; patient/?status&#x3D;[status]&amp;updatedAfter&#x3D;[updatedAfter]
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -71,7 +77,7 @@ Szenario - das WaWi fragt in einem bestimmten Intervall bei Alberta nach, ob es 
 
 
 PatientApi apiInstance = new PatientApi();
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 String status = "status_example"; // String | created, updated oder archived -
 String updatedAfter = "updatedAfter_example"; // String | 2018-02-21T09:30:00.000Z (im UTC-Format)
 try {
@@ -85,11 +91,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albertaApiKey** | **String**|  |
- **status** | **String**| created, updated oder archived - |
- **updatedAfter** | **String**| 2018-02-21T09:30:00.000Z (im UTC-Format) |
+| Name              | Type       | Description                              | Notes |
+| ----------------- | ---------- | ---------------------------------------- | ----- |
+| **albertaApiKey** | **String** |                                          |
+| **status**        | **String** | created, updated oder archived -         |
+| **updatedAfter**  | **String** | 2018-02-21T09:30:00.000Z (im UTC-Format) |
 
 ### Return type
 
@@ -101,11 +107,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/xml
 
 <a name="updatePatient"></a>
+
 # **updatePatient**
+
 > CustomerMapping updatePatient(body, albertaApiKey, id)
 
 Patient ändern
@@ -113,6 +121,7 @@ Patient ändern
 Szenario - ein Patient wurde im WaWi geändert und diese Änderungen sollen in Alberta übertragen werden ----- Aufruf &#x3D;&gt; patient/[patientenId]
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -121,7 +130,7 @@ Szenario - ein Patient wurde im WaWi geändert und diese Änderungen sollen in A
 
 PatientApi apiInstance = new PatientApi();
 Patient body = new Patient(); // Patient | Der Patient
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 String id = "id_example"; // String | die Id des zu ändernden Patienten
 try {
     CustomerMapping result = apiInstance.updatePatient(body, albertaApiKey, id);
@@ -134,11 +143,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**Patient**](Patient.md)| Der Patient |
- **albertaApiKey** | **String**|  |
- **id** | **String**| die Id des zu ändernden Patienten |
+| Name              | Type                      | Description                       | Notes |
+| ----------------- | ------------------------- | --------------------------------- | ----- |
+| **body**          | [**Patient**](Patient.md) | Der Patient                       |
+| **albertaApiKey** | **String**                |                                   |
+| **id**            | **String**                | die Id des zu ändernden Patienten |
 
 ### Return type
 
@@ -150,6 +159,5 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/xml
- - **Accept**: application/json, application/xml
-
+- **Content-Type**: application/json, application/xml
+- **Accept**: application/json, application/xml

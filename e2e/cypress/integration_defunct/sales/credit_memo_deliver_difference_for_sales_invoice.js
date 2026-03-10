@@ -7,11 +7,14 @@
 
 /// <reference types="Cypress" />
 
-import { salesInvoices } from '../../page_objects/sales_invoices';
-import { SalesInvoice, SalesInvoiceLine } from '../../support/utils/sales_invoice';
-import { DocumentStatusKey, RewriteURL } from '../../support/utils/constants';
+import { salesInvoices } from "../../page_objects/sales_invoices";
+import {
+  SalesInvoice,
+  SalesInvoiceLine,
+} from "../../support/utils/sales_invoice";
+import { DocumentStatusKey, RewriteURL } from "../../support/utils/constants";
 
-describe('Create a Credit memo deliver difference for Sales Invoice', function() {
+describe("Create a Credit memo deliver difference for Sales Invoice", function () {
   let creditMemoDeliverDiff;
   let originalSalesInvoiceNumber;
   let originalPriceList;
@@ -26,144 +29,184 @@ describe('Create a Credit memo deliver difference for Sales Invoice', function()
   let salesInvoiceTargetDocumentType;
   let originalQuantity;
 
-  it('Read the fixture', function() {
-    cy.fixture('sales/credit_memo_deliver_difference_for_sales_invoice.json').then(f => {
-      newQuantity = f['newQuantity'];
-      salesInvoiceTargetDocumentType = f['salesInvoiceTargetDocumentType'];
-      originalQuantity = f['originalQuantity'];
-      creditMemoDeliverDiff = f['creditMemoDeliverDiff'];
+  it("Read the fixture", function () {
+    cy.fixture(
+      "sales/credit_memo_deliver_difference_for_sales_invoice.json",
+    ).then((f) => {
+      newQuantity = f["newQuantity"];
+      salesInvoiceTargetDocumentType = f["salesInvoiceTargetDocumentType"];
+      originalQuantity = f["originalQuantity"];
+      creditMemoDeliverDiff = f["creditMemoDeliverDiff"];
     });
   });
 
-  it('Prepare sales invoice', function() {
-    new SalesInvoice('Test Lieferant 1', salesInvoiceTargetDocumentType)
-      .addLine(new SalesInvoiceLine().setProduct('Convenience Salat 250g').setQuantity(originalQuantity))
+  it("Prepare sales invoice", function () {
+    new SalesInvoice("Test Lieferant 1", salesInvoiceTargetDocumentType)
+      .addLine(
+        new SalesInvoiceLine()
+          .setProduct("Convenience Salat 250g")
+          .setQuantity(originalQuantity),
+      )
       .apply();
     cy.completeDocument();
   });
 
-  it('Sales Invoice is Completed', function() {
+  it("Sales Invoice is Completed", function () {
     cy.expectDocumentStatus(DocumentStatusKey.Completed);
   });
 
-  it('Sales Invoice is not paid', function() {
-    cy.getCheckboxValue('IsPaid').then(checkBoxValue => {
+  it("Sales Invoice is not paid", function () {
+    cy.getCheckboxValue("IsPaid").then((checkBoxValue) => {
       cy.log(`IsPaid = ${checkBoxValue}`);
       assert.equal(checkBoxValue, false);
     });
   });
 
-  it('Save values needed for the next step', function() {
-    cy.getCurrentWindowRecordId().then(id => (originalSalesInvoiceID = id));
+  it("Save values needed for the next step", function () {
+    cy.getCurrentWindowRecordId().then((id) => (originalSalesInvoiceID = id));
 
-    cy.getStringFieldValue('DocumentNo').then(documentNumber => {
+    cy.getStringFieldValue("DocumentNo").then((documentNumber) => {
       originalSalesInvoiceNumber = documentNumber;
     });
 
-    cy.getStringFieldValue('M_PriceList_ID').then(priceList => {
+    cy.getStringFieldValue("M_PriceList_ID").then((priceList) => {
       originalPriceList = priceList;
     });
 
-    cy.getStringFieldValue('C_Currency_ID').then(currency => {
+    cy.getStringFieldValue("C_Currency_ID").then((currency) => {
       originalCurrency = currency;
     });
 
-    cy.selectTab('C_InvoiceLine');
+    cy.selectTab("C_InvoiceLine");
     cy.selectSingleTabRow();
     cy.openAdvancedEdit();
-    cy.getStringFieldValue('M_Product_ID', true).then(product => {
+    cy.getStringFieldValue("M_Product_ID", true).then((product) => {
       originalProduct = product;
     });
 
-    cy.get('.header-breadcrumb-sitename').then(si => {
-      originalSalesInvoiceTotalAmount = parseFloat(si.html().split(' ')[2]); // the format is "DOC_NO MM/DD/YYYY total"
+    cy.get(".header-breadcrumb-sitename").then((si) => {
+      originalSalesInvoiceTotalAmount = parseFloat(si.html().split(" ")[2]); // the format is "DOC_NO MM/DD/YYYY total"
     });
     cy.pressDoneButton();
   });
 
-  it('Create the Credit Memo Deliver Diff', function() {
-    cy.executeHeaderActionWithDialog('C_Invoice_Create_CreditMemo');
+  it("Create the Credit Memo Deliver Diff", function () {
+    cy.executeHeaderActionWithDialog("C_Invoice_Create_CreditMemo");
 
-    cy.selectInListField('C_DocType_ID', creditMemoDeliverDiff, true, null, true);
+    cy.selectInListField(
+      "C_DocType_ID",
+      creditMemoDeliverDiff,
+      true,
+      null,
+      true,
+    );
 
     // ensure all the checkboxes are ok
-    cy.setCheckBoxValue('CompleteIt', false, true, RewriteURL.PROCESS);
-    cy.setCheckBoxValue('IsReferenceOriginalOrder', true, true, RewriteURL.PROCESS);
-    cy.setCheckBoxValue('IsReferenceInvoice', true, true, RewriteURL.PROCESS);
-    cy.setCheckBoxValue('IsCreditedInvoiceReinvoicable', false, true, RewriteURL.PROCESS);
+    cy.setCheckBoxValue("CompleteIt", false, true, RewriteURL.PROCESS);
+    cy.setCheckBoxValue(
+      "IsReferenceOriginalOrder",
+      true,
+      true,
+      RewriteURL.PROCESS,
+    );
+    cy.setCheckBoxValue("IsReferenceInvoice", true, true, RewriteURL.PROCESS);
+    cy.setCheckBoxValue(
+      "IsCreditedInvoiceReinvoicable",
+      false,
+      true,
+      RewriteURL.PROCESS,
+    );
 
     cy.pressStartButton(100);
     cy.getNotificationModal(/Created.*Document No/);
   });
 
-  it('Open the Referenced Sales Invoice documents', function() {
-    cy.openReferencedDocuments('AD_RelationType_ID-540184');
+  it("Open the Referenced Sales Invoice documents", function () {
+    cy.openReferencedDocuments("AD_RelationType_ID-540184");
   });
 
-  it('Ensure there is only 1 Sales Invoice row and open it', function() {
-    salesInvoices.getRows().should('have.length', 1);
+  it("Ensure there is only 1 Sales Invoice row and open it", function () {
+    salesInvoices.getRows().should("have.length", 1);
 
     // select the first Table Row and click it (open it)
-    salesInvoices
-      .getRows()
-      .eq(0)
-      .dblclick();
+    salesInvoices.getRows().eq(0).dblclick();
   });
 
-  it('The Sales Invoice is a Credit Memo - Deliver diff', function() {
+  it("The Sales Invoice is a Credit Memo - Deliver diff", function () {
     cy.expectDocumentStatus(DocumentStatusKey.InProgress);
-    cy.getStringFieldValue('C_DocTypeTarget_ID').should('be.equal', creditMemoDeliverDiff);
+    cy.getStringFieldValue("C_DocTypeTarget_ID").should(
+      "be.equal",
+      creditMemoDeliverDiff,
+    );
   });
 
-  it('Has the same properties and reference to the original', function() {
-    cy.getStringFieldValue('DocumentNo').should('not.be.equal', originalSalesInvoiceNumber);
-    cy.getStringFieldValue('M_PriceList_ID').should('be.equal', originalPriceList);
-    cy.getStringFieldValue('C_Currency_ID').should('be.equal', originalCurrency);
+  it("Has the same properties and reference to the original", function () {
+    cy.getStringFieldValue("DocumentNo").should(
+      "not.be.equal",
+      originalSalesInvoiceNumber,
+    );
+    cy.getStringFieldValue("M_PriceList_ID").should(
+      "be.equal",
+      originalPriceList,
+    );
+    cy.getStringFieldValue("C_Currency_ID").should(
+      "be.equal",
+      originalCurrency,
+    );
   });
 
-  it('Has the same properties and reference to the original -- Advanced edit', function() {
+  it("Has the same properties and reference to the original -- Advanced edit", function () {
     cy.openAdvancedEdit();
-    cy.getStringFieldValue('Ref_Invoice_ID', true).should('be.equal', originalSalesInvoiceNumber);
+    cy.getStringFieldValue("Ref_Invoice_ID", true).should(
+      "be.equal",
+      originalSalesInvoiceNumber,
+    );
     cy.pressDoneButton();
   });
 
-  it('Has the same properties and reference to the original -- Line advanced edit', function() {
-    cy.selectTab('C_InvoiceLine');
+  it("Has the same properties and reference to the original -- Line advanced edit", function () {
+    cy.selectTab("C_InvoiceLine");
     cy.selectSingleTabRow();
     cy.openAdvancedEdit();
-    cy.getStringFieldValue('M_Product_ID', true).should('be.equal', originalProduct);
-    cy.getStringFieldValue('QtyEntered', true).should('be.equal', originalQuantity.toString(10));
+    cy.getStringFieldValue("M_Product_ID", true).should(
+      "be.equal",
+      originalProduct,
+    );
+    cy.getStringFieldValue("QtyEntered", true).should(
+      "be.equal",
+      originalQuantity.toString(10),
+    );
     cy.pressDoneButton();
   });
 
-  it('Set a different price for that product (Price rectification)', function() {
-    cy.selectTab('C_InvoiceLine');
+  it("Set a different price for that product (Price rectification)", function () {
+    cy.selectTab("C_InvoiceLine");
     cy.selectSingleTabRow();
     cy.openAdvancedEdit();
-    cy.writeIntoStringField('QtyEntered', newQuantity, true, null, true);
+    cy.writeIntoStringField("QtyEntered", newQuantity, true, null, true);
     cy.pressDoneButton(200);
   });
 
-  it('Complete the Credit Memo SI', function() {
+  it("Complete the Credit Memo SI", function () {
     cy.completeDocument();
   });
 
-  it('Total amount should be lower than the original SI', function() {
-    cy.getSalesInvoiceTotalAmount().then(newTotalAmount => {
+  it("Total amount should be lower than the original SI", function () {
+    cy.getSalesInvoiceTotalAmount().then((newTotalAmount) => {
       expect(newTotalAmount).lessThan(originalSalesInvoiceTotalAmount);
     });
   });
 
-  it('Credit Memo SI is paid', function() {
-    cy.getCheckboxValue('IsPaid').then(checkBoxValue => {
+  it("Credit Memo SI is paid", function () {
+    cy.getCheckboxValue("IsPaid").then((checkBoxValue) => {
       cy.log(`IsPaid = ${checkBoxValue}`);
       assert.equal(checkBoxValue, true);
     });
   });
 
-  it('Original Sales Invoice is not paid', function() {
-    cy.visitWindow('167', originalSalesInvoiceID);
-    cy.getCheckboxValue('IsPaid').then(checkBoxValue => {
+  it("Original Sales Invoice is not paid", function () {
+    cy.visitWindow("167", originalSalesInvoiceID);
+    cy.getCheckboxValue("IsPaid").then((checkBoxValue) => {
       cy.log(`IsPaid = ${checkBoxValue}`);
       assert.equal(checkBoxValue, false);
     });

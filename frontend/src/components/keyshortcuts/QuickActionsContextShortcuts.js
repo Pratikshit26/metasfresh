@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { Shortcut } from '../keyshortcuts';
+import { Shortcut } from "../keyshortcuts";
 
 /**
  * @file Class based component.

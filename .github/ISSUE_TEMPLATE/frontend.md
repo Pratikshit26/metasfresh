@@ -1,10 +1,9 @@
 ---
 name: Frontend
 about: This template shall help with our standard issue workflow
-title: ''
+title: ""
 labels: cmp:frontend
-assignees: ''
-
+assignees: ""
 ---
 
 ### Is this a bug or feature request?

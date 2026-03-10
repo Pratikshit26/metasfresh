@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { isEmpty } from 'lodash';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { isEmpty } from "lodash";
 
 import {
   openModal,
@@ -10,10 +10,10 @@ import {
   updatePropertyValue,
   allowShortcut,
   disableShortcut,
-} from '../actions/WindowActions';
-import { setTableNavigation } from '../actions/TableActions';
-import { getCellWidgetData } from '../utils/tableHelpers';
-import { getTable } from '../reducers/tables';
+} from "../actions/WindowActions";
+import { setTableNavigation } from "../actions/TableActions";
+import { getCellWidgetData } from "../utils/tableHelpers";
+import { getTable } from "../reducers/tables";
 import {
   getData,
   getElementWidgetData,
@@ -23,11 +23,11 @@ import {
   getProcessWidgetFields,
   getInlineTabLayout,
   getInlineTabWidgetFields,
-} from '../reducers/windowHandler';
+} from "../reducers/windowHandler";
 
-import MasterWidget from '../components/widget/MasterWidget';
-import RawWidget from '../components/widget/RawWidget';
-import InlineTabWrapper from '../components/widget/InlineTabWrapper';
+import MasterWidget from "../components/widget/MasterWidget";
+import RawWidget from "../components/widget/RawWidget";
+import InlineTabWrapper from "../components/widget/InlineTabWrapper";
 
 const EMPTY_WIDGET_DATA = [{}];
 
@@ -57,7 +57,7 @@ class WidgetWrapper extends PureComponent {
     //console.log('WidgetWrapper.render', { props: this.props });
     const { renderMaster, widgetType } = this.props;
 
-    if (widgetType === 'InlineTab') {
+    if (widgetType === "InlineTab") {
       return <InlineTabWrapper {...this.props} />;
     } else if (renderMaster) {
       return <MasterWidget ref={this.childRef} {...this.props} />;
@@ -86,24 +86,24 @@ const mapStateToProps = (state, props) => {
   let fieldsCopy = null;
 
   switch (dataSource) {
-    case 'doc-status': {
+    case "doc-status": {
       widgetData = getMasterDocStatus(state);
 
       break;
     }
 
-    case 'filter-item':
-    case 'overlay-field':
-    case 'attributes-dropdown':
-    case 'quick-input':
-    case 'selection-attributes': {
+    case "filter-item":
+    case "overlay-field":
+    case "attributes-dropdown":
+    case "quick-input":
+    case "selection-attributes": {
       widgetData = props.widgetData;
 
       break;
     }
 
-    case 'modal':
-    case 'element': {
+    case "modal":
+    case "element": {
       /** forming the fieldsCopy and widgetData for the disconnected case - ex: when is `inlineTab`, other future types can be added as well */
       if (props.disconnected) {
         if (!isEmpty(state.windowHandler.inlineTab)) {
@@ -129,14 +129,14 @@ const mapStateToProps = (state, props) => {
       break;
     }
 
-    case 'process': {
+    case "process": {
       widgetData = getProcessWidgetData(state, true, layoutId);
       fieldsCopy = getProcessWidgetFields(state, true, layoutId);
 
       break;
     }
 
-    case 'table': {
+    case "table": {
       const table = getTable(state, tableId);
       const rows = table.rows;
       const cells = rows[rowIndex].fieldsByName;
@@ -146,7 +146,7 @@ const mapStateToProps = (state, props) => {
         cells,
         columnItem,
         isEditable,
-        supportFieldEdit
+        supportFieldEdit,
       );
 
       break;
@@ -227,7 +227,7 @@ export default connect(
     setTableNavigation,
   },
   null,
-  { forwardRef: true }
+  { forwardRef: true },
 )(WidgetWrapper);
 
 export { WidgetWrapper };

@@ -1,8 +1,8 @@
-import queryString from 'query-string';
-import counterpart from 'counterpart';
-import { updateLastBackPage } from '../actions/AppActions';
-import history from '../services/History';
-import * as StaticModalType from '../constants/StaticModalType';
+import queryString from "query-string";
+import counterpart from "counterpart";
+import { updateLastBackPage } from "../actions/AppActions";
+import history from "../services/History";
+import * as StaticModalType from "../constants/StaticModalType";
 
 /**
  * @method updateUri
@@ -39,7 +39,7 @@ export function historyDoubleBackOnPopstate(store) {
 
   if (
     lastBackPage &&
-    lastBackPage.includes('viewId') &&
+    lastBackPage.includes("viewId") &&
     lastBackPage === document.location.href
   ) {
     window.history.back(-2);
@@ -53,7 +53,7 @@ export function historyDoubleBackOnPopstate(store) {
  * @summary Stringifies URL with 'query-string', formatting query and escaping unwanted characters
  */
 export const getQueryString = (query) => {
-  return queryString.stringify(query, { arrayFormat: 'comma', skipNull: true });
+  return queryString.stringify(query, { arrayFormat: "comma", skipNull: true });
 };
 
 export const buildURL = (baseUrl, query) => {
@@ -65,20 +65,20 @@ export const buildURL = (baseUrl, query) => {
 export const createPatchRequestPayload = (property, value) => {
   if (Array.isArray(property) && Array.isArray(value)) {
     return property.map((item, index) => ({
-      op: 'replace',
+      op: "replace",
       path: item,
       value: value[index],
     }));
   } else if (Array.isArray(property) && value !== undefined) {
     return property.map((item) => ({
-      op: 'replace',
+      op: "replace",
       path: item.field,
       value,
     }));
   } else if (property && value !== undefined) {
     return [
       {
-        op: 'replace',
+        op: "replace",
         path: property,
         value,
       },
@@ -90,7 +90,7 @@ export const createPatchRequestPayload = (property, value) => {
 };
 
 export const toSingleFieldPatchRequest = (fieldName, value) => ({
-  op: 'replace',
+  op: "replace",
   path: fieldName,
   value,
 });
@@ -140,7 +140,7 @@ export function nullToEmptyStrings(fieldsByName) {
   return Object.keys(fieldsByName).reduce((acc, fieldName) => {
     acc[fieldName] =
       fieldsByName[fieldName].value === null
-        ? { ...fieldsByName[fieldName], value: '' }
+        ? { ...fieldsByName[fieldName], value: "" }
         : fieldsByName[fieldName];
     return acc;
   }, {});
@@ -163,7 +163,7 @@ export function getItemsByProperty(arr, prop, value) {
 export function translateCaption(caption) {
   const translatedString = counterpart.translate(caption);
   // show a default placeholder in case translation is missing such that the BE would know what specific key they need to add
-  return !translatedString.includes('{') ? translatedString : `${caption}`;
+  return !translatedString.includes("{") ? translatedString : `${caption}`;
 }
 
 /**
@@ -189,7 +189,7 @@ export function preFormatPostDATA({ target, postData }) {
  */
 export function openInNewTab({ urlPath, dispatch, actionName }) {
   dispatch(actionName());
-  let newTabBrowser = window.open(urlPath, '_blank');
+  let newTabBrowser = window.open(urlPath, "_blank");
   newTabBrowser.focus();
 }
 
@@ -252,10 +252,10 @@ const unfreezeProp = (prop) => {
 export function deepUnfreeze(obj) {
   if (obj != null) {
     if (
-      obj.constructor.name !== 'Date' &&
+      obj.constructor.name !== "Date" &&
       !Array.isArray(obj) &&
-      typeof obj !== 'function' &&
-      typeof obj === 'object'
+      typeof obj !== "function" &&
+      typeof obj === "object"
     ) {
       return Object.getOwnPropertyNames(obj)
         .map((prop) => {
@@ -267,7 +267,7 @@ export function deepUnfreeze(obj) {
         .reduce((leftObj, rightObj) => Object.assign({}, leftObj, rightObj));
     } else if (Array.isArray(obj)) {
       return obj.map((item) => unfreezeProp(item));
-    } else if (typeof obj === 'function') {
+    } else if (typeof obj === "function") {
       const target = function () {
         obj.call(this, ...arguments);
       };
@@ -284,7 +284,7 @@ export function deepUnfreeze(obj) {
  * @param {string} str
  */
 export function leftTrim(str) {
-  return str.replace(/^\s+/, '');
+  return str.replace(/^\s+/, "");
 }
 
 export const isBlank = (str) => {

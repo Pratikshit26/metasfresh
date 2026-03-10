@@ -1,7 +1,7 @@
-import React from 'react';
-import { useDrag, useDrop } from 'react-dnd';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React from "react";
+import { useDrag, useDrop } from "react-dnd";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
 const DndWidget = (props) => {
   const {
@@ -55,9 +55,9 @@ const DndWidget = (props) => {
   return connectDragSource(
     connectDropTarget(
       <div
-        className={classnames(className, 'dnd-widget', {
+        className={classnames(className, "dnd-widget", {
           dragging: isDragging,
-          'dnd-placeholder': placeholder,
+          "dnd-placeholder": placeholder,
         })}
       >
         {!placeholder && onRemove && (
@@ -67,8 +67,8 @@ const DndWidget = (props) => {
           />
         )}
         {children}
-      </div>
-    )
+      </div>,
+    ),
   );
 };
 

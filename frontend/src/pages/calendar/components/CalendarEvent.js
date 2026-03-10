@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './CalendarEvent.scss';
+import "./CalendarEvent.scss";
 
 export const getEventClassNames = (params) => {
   if (params.event.extendedProps.conflict) {
-    return ['has-conflict'];
+    return ["has-conflict"];
   }
 };
 

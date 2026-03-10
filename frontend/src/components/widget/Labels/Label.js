@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 const noOp = () => {};
 
@@ -46,8 +46,8 @@ class Label extends PureComponent {
       <span className="labels-label" onClick={this.handleClick}>
         {label.caption}
         <span className="labels-label-remove" onClick={this.handleRemove}>
-          {' '}
-          {!hideCloseIcon ? '✕' : ''}
+          {" "}
+          {!hideCloseIcon ? "✕" : ""}
         </span>
       </span>
     );

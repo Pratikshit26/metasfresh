@@ -9,38 +9,38 @@ import { appLaunchersLocation } from '../../routes/launchers';
 import { useScreenDefinition } from '../../hooks/useScreenDefinition';
 
 const WFLaunchersFiltersScreen = () => {
-  const { url, applicationId, history } = useScreenDefinition({
-    screenId: 'WFLaunchersFiltersScreen',
-    back: appLaunchersLocation,
-  });
-  const dispatch = useDispatch();
+    const { url, applicationId, history } = useScreenDefinition({
+        screenId: 'WFLaunchersFiltersScreen',
+        back: appLaunchersLocation,
+    });
+    const dispatch = useDispatch();
 
-  const { showFilterByDocumentNo } = useApplicationInfo({ applicationId });
-  const filterByDocumentNo = useSelector((state) => getApplicationLaunchersFilterByDocumentNo(state, applicationId));
-  const activeFacetIds = useSelector((state) => getApplicationLaunchersFacetIds(state, applicationId), shallowEqual);
+    const { showFilterByDocumentNo } = useApplicationInfo({ applicationId });
+    const filterByDocumentNo = useSelector((state) => getApplicationLaunchersFilterByDocumentNo(state, applicationId));
+    const activeFacetIds = useSelector((state) => getApplicationLaunchersFacetIds(state, applicationId), shallowEqual);
 
-  useEffect(() => {
-    dispatch(
-      updateHeaderEntry({
-        location: url,
-      })
+    useEffect(() => {
+        dispatch(
+            updateHeaderEntry({
+                location: url,
+            }),
+        );
+    }, [url]);
+
+    return (
+        <div className="container filters-container">
+            <WFLaunchersFilters
+                applicationId={applicationId}
+                showFilterByDocumentNo={showFilterByDocumentNo}
+                filterByDocumentNo={filterByDocumentNo}
+                activeFacetIds={activeFacetIds}
+                onDone={({ facets, filterByDocumentNo }) => {
+                    dispatch(setActiveFilters({ applicationId, facets, filterByDocumentNo }));
+                    history.goBack();
+                }}
+            />
+        </div>
     );
-  }, [url]);
-
-  return (
-    <div className="container filters-container">
-      <WFLaunchersFilters
-        applicationId={applicationId}
-        showFilterByDocumentNo={showFilterByDocumentNo}
-        filterByDocumentNo={filterByDocumentNo}
-        activeFacetIds={activeFacetIds}
-        onDone={({ facets, filterByDocumentNo }) => {
-          dispatch(setActiveFilters({ applicationId, facets, filterByDocumentNo }));
-          history.goBack();
-        }}
-      />
-    </div>
-  );
 };
 
 export default WFLaunchersFiltersScreen;

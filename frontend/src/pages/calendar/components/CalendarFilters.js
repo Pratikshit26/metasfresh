@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './CalendarFilters.scss';
+import "./CalendarFilters.scss";
 
 const CalendarFilters = ({ resolvedQuery }) => {
   const items = convertResolvedQueryToItemData(resolvedQuery);

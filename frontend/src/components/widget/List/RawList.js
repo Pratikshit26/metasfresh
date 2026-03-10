@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import onClickOutsideHOC from 'react-onclickoutside';
-import TetherComponent from 'react-tether';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { findIndex, isEqual, pullAt } from 'lodash';
-import counterpart from 'counterpart';
-import SelectionDropdown from '../SelectionDropdown';
-import MultiSelect from '../MultiSelect';
+import React, { PureComponent } from "react";
+import onClickOutsideHOC from "react-onclickoutside";
+import TetherComponent from "react-tether";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { findIndex, isEqual, pullAt } from "lodash";
+import counterpart from "counterpart";
+import SelectionDropdown from "../SelectionDropdown";
+import MultiSelect from "../MultiSelect";
 
 /*
  * We want the selected option to be displayed first,
@@ -26,14 +26,14 @@ const setSelectedValue = function (dropdownList, selected, defaultValue) {
 
     idx = findIndex(
       dropdownList,
-      (item) => item.caption === selectedOption.caption
+      (item) => item.caption === selectedOption.caption,
     );
 
     if (idx === -1) {
       if (defaultValue) {
         idx = findIndex(
           dropdownList,
-          (item) => item.caption === defaultValue.caption
+          (item) => item.caption === defaultValue.caption,
         );
       }
     }
@@ -71,7 +71,7 @@ export class RawList0 extends PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleTab);
+    window.addEventListener("keydown", this.handleTab);
 
     //
     // On initial focus gained when component was created first time
@@ -81,7 +81,7 @@ export class RawList0 extends PureComponent {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleTab);
+    window.removeEventListener("keydown", this.handleTab);
   }
 
   componentDidUpdate(prevProps) {
@@ -178,7 +178,7 @@ export class RawList0 extends PureComponent {
       // was clicked and we skip over it
       if (
         target.classList &&
-        target.classList.contains('input-dropdown-list')
+        target.classList.contains("input-dropdown-list")
       ) {
         return;
       }
@@ -236,11 +236,11 @@ export class RawList0 extends PureComponent {
     const { onSelect, list, loading, readonly, isToggled, onOpenDropdown } =
       this.props;
 
-    if (e.key === 'Tab') {
+    if (e.key === "Tab") {
       if (isToggled && list.length === 0 && !readonly && !loading) {
         onSelect(null);
       }
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === "ArrowDown") {
       if (!isToggled) {
         e.preventDefault();
         e.stopPropagation();
@@ -252,7 +252,7 @@ export class RawList0 extends PureComponent {
   handleTab = (e) => {
     const { isToggled, isFocused, onCloseDropdown } = this.props;
 
-    if (e.key === 'Tab' && isFocused) {
+    if (e.key === "Tab" && isFocused) {
       if (isToggled) {
         e.preventDefault();
         onCloseDropdown();
@@ -302,8 +302,8 @@ export class RawList0 extends PureComponent {
       wrapperElement,
     } = this.props;
 
-    let value = '';
-    let placeholder = '';
+    let value = "";
+    let placeholder = "";
     const widgetData =
       compositeWidgetData &&
       compositeWidgetData.filter((itemWidgetData) => {
@@ -316,10 +316,10 @@ export class RawList0 extends PureComponent {
     const emptyCompositeLookup =
       compositeWidgetData &&
       compositeWidgetData.every(
-        (widgetDataItem) => widgetDataItem.value === ''
+        (widgetDataItem) => widgetDataItem.value === "",
       );
 
-    if (typeof defaultValue === 'string') {
+    if (typeof defaultValue === "string") {
       placeholder = defaultValue;
     } else {
       placeholder = defaultValue && defaultValue.caption;
@@ -349,11 +349,11 @@ export class RawList0 extends PureComponent {
         targetAttachment="bottom left"
         constraints={[
           {
-            to: 'scrollParent',
+            to: "scrollParent",
           },
           {
-            to: 'window',
-            pin: ['bottom'],
+            to: "window",
+            pin: ["bottom"],
           },
         ]}
         renderTarget={(ref) => {
@@ -361,16 +361,16 @@ export class RawList0 extends PureComponent {
             <div ref={ref} className={this.props.className}>
               <div
                 ref={(ref) => (this.inputContainerElement = ref)}
-                className={classnames('input-dropdown-container', {
-                  'input-disabled': readonly,
-                  'input-dropdown-container-static': rowId,
-                  'input-table': rowId && !isModal,
-                  'input-empty': !value,
-                  'lookup-dropdown': lookupList,
-                  'select-dropdown': !lookupList,
+                className={classnames("input-dropdown-container", {
+                  "input-disabled": readonly,
+                  "input-dropdown-container-static": rowId,
+                  "input-table": rowId && !isModal,
+                  "input-empty": !value,
+                  "lookup-dropdown": lookupList,
+                  "select-dropdown": !lookupList,
                   focused: isFocused,
                   opened: isToggled,
-                  'input-mandatory':
+                  "input-mandatory":
                     (!lookupList && mandatory && !selected) ||
                     (!widgetDataValidStatus &&
                       mandatory &&
@@ -384,11 +384,11 @@ export class RawList0 extends PureComponent {
                 onKeyUp={this.handleKeyUp}
               >
                 <div
-                  className={classnames('input-dropdown input-block', {
-                    'input-secondary': rank,
+                  className={classnames("input-dropdown input-block", {
+                    "input-secondary": rank,
                     pulse: updated,
-                    'input-mandatory': mandatory && !selected,
-                    'input-error':
+                    "input-mandatory": mandatory && !selected,
+                    "input-error":
                       validStatus &&
                       !validStatus.valid &&
                       !validStatus.initialValue &&
@@ -397,25 +397,25 @@ export class RawList0 extends PureComponent {
                 >
                   <div
                     className={classnames(
-                      'input-editable input-dropdown-focused',
+                      "input-editable input-dropdown-focused",
                       {
                         [`text-${align}`]: align,
-                      }
+                      },
                     )}
                   >
                     <input
                       type="text"
                       className={classnames(
-                        'input-field js-input-field',
-                        'font-weight-semibold',
+                        "input-field js-input-field",
+                        "font-weight-semibold",
                         {
-                          'input-disabled': disabled,
-                        }
+                          "input-disabled": disabled,
+                        },
                       )}
                       readOnly
                       tabIndex={-1}
                       placeholder={placeholder}
-                      value={value ? value.replace(/\n/g, ' ') : ''}
+                      value={value ? value.replace(/\n/g, " ") : ""}
                       disabled={readonly || disabled}
                     />
                   </div>
@@ -442,7 +442,7 @@ export class RawList0 extends PureComponent {
               listHash={listHash}
               loading={loading}
               options={this.state.dropdownList}
-              empty={`${counterpart.translate('widget.list.hasNoResults')}`}
+              empty={`${counterpart.translate("widget.list.hasNoResults")}`}
               selected={this.state.selected}
               width={width}
               onChange={this.handleTemporarySelection}

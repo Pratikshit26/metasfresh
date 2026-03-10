@@ -6,7 +6,7 @@ import {
   getTabRequest,
   getZoomIntoWindow,
   topActionsRequest,
-} from './window';
+} from "./window";
 import {
   advSearchRequest,
   browseViewRequest,
@@ -29,8 +29,8 @@ import {
   patchRequest,
   patchViewAttributesRequest,
   quickActionsRequest,
-} from './view';
-import { getResetPasswordInfo, resetPasswordComplete } from './login';
+} from "./view";
+import { getResetPasswordInfo, resetPasswordComplete } from "./login";
 import {
   breadcrumbRequest,
   elementPathRequest,
@@ -40,7 +40,7 @@ import {
   pathRequest,
   queryPathsRequest,
   rootRequest,
-} from './app';
+} from "./app";
 
 export {
   advSearchRequest,

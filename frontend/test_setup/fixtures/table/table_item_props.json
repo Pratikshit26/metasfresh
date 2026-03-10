@@ -695,13 +695,7 @@
       "error": false,
       "reason": "just loaded"
     },
-    "standardActions": [
-      "new",
-      "advancedEdit",
-      "email",
-      "letter",
-      "delete"
-    ],
+    "standardActions": ["new", "advancedEdit", "email", "letter", "delete"],
     "websocketEndpoint": "/document/143/1000000",
     "entity": "window",
     "cols": [
@@ -1246,9 +1240,7 @@
         ]
       }
     ],
-    "selected": [
-      null
-    ],
+    "selected": [null],
     "docId": "1000000",
     "tabIndex": 3,
     "item": {
@@ -1946,13 +1938,7 @@
         "error": false,
         "reason": "just loaded"
       },
-      "standardActions": [
-        "new",
-        "advancedEdit",
-        "email",
-        "letter",
-        "delete"
-      ],
+      "standardActions": ["new", "advancedEdit", "email", "letter", "delete"],
       "websocketEndpoint": "/document/143/1000000"
     },
     "modalVisible": false,
@@ -2661,13 +2647,7 @@
       "error": false,
       "reason": "just loaded"
     },
-    "standardActions": [
-      "new",
-      "advancedEdit",
-      "email",
-      "letter",
-      "delete"
-    ],
+    "standardActions": ["new", "advancedEdit", "email", "letter", "delete"],
     "websocketEndpoint": "/document/143/1000000",
     "entity": "window",
     "cols": [
@@ -3212,9 +3192,7 @@
         ]
       }
     ],
-    "selected": [
-      null
-    ],
+    "selected": [null],
     "docId": "1000000",
     "tabIndex": 3,
     "item": {
@@ -3912,13 +3890,7 @@
         "error": false,
         "reason": "just loaded"
       },
-      "standardActions": [
-        "new",
-        "advancedEdit",
-        "email",
-        "letter",
-        "delete"
-      ],
+      "standardActions": ["new", "advancedEdit", "email", "letter", "delete"],
       "websocketEndpoint": "/document/143/1000000"
     },
     "modalVisible": false,

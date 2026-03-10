@@ -1,4 +1,4 @@
-import isTabbable from './isTabbable';
+import isTabbable from "./isTabbable";
 
 /**
  * Returns the next element that would received focus using Tab key navigation.
@@ -6,16 +6,17 @@ import isTabbable from './isTabbable';
  * Note: this uses a naive/simplified algorithm adapted from jQuery UI. It does not support image
  * maps, disabled fieldsets, among other things.
  */
-export default function nextTabbable($referenceElement, direction = 'forward') {
-  if (!(direction === 'forward' || direction === 'backward')) {
-    throw new Error('Expected direction to be forward or backward');
+export default function nextTabbable($referenceElement, direction = "forward") {
+  if (!(direction === "forward" || direction === "backward")) {
+    throw new Error("Expected direction to be forward or backward");
   }
 
   const stack = [];
   let element;
 
   // Queue up all siblings and our ancestor's siblings.
-  const siblingProp = direction === 'forward' ? 'nextElementSibling' : 'previousElementSibling';
+  const siblingProp =
+    direction === "forward" ? "nextElementSibling" : "previousElementSibling";
   element = $referenceElement.get(0);
   while (element) {
     let sibling = element[siblingProp];
@@ -36,10 +37,10 @@ export default function nextTabbable($referenceElement, direction = 'forward') {
     }
 
     let children = Array.from(element.children);
-    if (direction === 'forward') {
+    if (direction === "forward") {
       children = children.reverse();
     }
-    children.forEach(child => {
+    children.forEach((child) => {
       stack.push(child);
     });
   }

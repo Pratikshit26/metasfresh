@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { getAvatar } from '../../api/login';
-import defaultAvatar from '../../assets/images/default-avatar.png';
+import React from "react";
+import PropTypes from "prop-types";
+import { getAvatar } from "../../api/login";
+import defaultAvatar from "../../assets/images/default-avatar.png";
 
 const Avatar = ({ size, className, id, title }) => {
   return (
@@ -9,9 +9,9 @@ const Avatar = ({ size, className, id, title }) => {
       src={id ? getAvatar(id) : defaultAvatar}
       title={title}
       className={
-        'avatar img-fluid rounded-circle ' +
-        (size ? 'avatar-' + size + ' ' : '') +
-        (className ? className : '')
+        "avatar img-fluid rounded-circle " +
+        (size ? "avatar-" + size + " " : "") +
+        (className ? className : "")
       }
       alt="avatar"
     />

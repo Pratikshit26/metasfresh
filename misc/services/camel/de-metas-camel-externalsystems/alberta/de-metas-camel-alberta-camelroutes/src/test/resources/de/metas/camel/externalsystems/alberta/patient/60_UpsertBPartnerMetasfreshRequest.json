@@ -1005,11 +1005,7 @@
                 "purchaseDefaultSet": false,
                 "subjectMatter": null,
                 "subjectMatterSet": false,
-                "birthday": [
-                  1950,
-                  1,
-                  15
-                ],
+                "birthday": [1950, 1, 15],
                 "birthdaySet": true,
                 "syncAdvise": null,
                 "syncAdviseSet": false

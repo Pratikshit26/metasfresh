@@ -18,8 +18,16 @@ export class ProductProcurementContracts {
   }
 }
 function applyProduct(product) {
-  describe(`Create new ProductProcurementContracts ${product.name}`, function() {
-    cy.visitWindow('540288', 'NEW');
-    cy.writeIntoLookupListField('M_Product_ID', product.name, product.name, false, false, null, true);
+  describe(`Create new ProductProcurementContracts ${product.name}`, function () {
+    cy.visitWindow("540288", "NEW");
+    cy.writeIntoLookupListField(
+      "M_Product_ID",
+      product.name,
+      product.name,
+      false,
+      false,
+      null,
+      true,
+    );
   });
 }

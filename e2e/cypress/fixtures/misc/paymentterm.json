@@ -1,5 +1,5 @@
 {
-    "name": "ListPaymentTermName",
-    "netDays": 5,
-    "graceDays": 3
+  "name": "ListPaymentTermName",
+  "netDays": 5,
+  "graceDays": 3
 }

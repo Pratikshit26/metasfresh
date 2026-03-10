@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Element from './Element';
+import Element from "./Element";
 
 const ElementsLine = ({
   elementsLineLayout,
@@ -33,7 +33,7 @@ const ElementsLine = ({
     <div className="elements-line">
       {elementsLineLayout.elements.map((elementLayout, elementIndex) => (
         <Element
-          key={'element' + elementIndex}
+          key={"element" + elementIndex}
           elementLayout={elementLayout}
           elementIndex={elementIndex}
           elementsLineIndex={elementsLineIndex}

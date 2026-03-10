@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const getProcessLayout = (processId) => {
   return axios.get(`${config.API_URL}/process/${processId}/layout`);
@@ -6,7 +6,7 @@ export const getProcessLayout = (processId) => {
 
 export const startProcess = (processId, pinstanceId) => {
   return axios.get(
-    `${config.API_URL}/process/${processId}/${pinstanceId}/start`
+    `${config.API_URL}/process/${processId}/${pinstanceId}/start`,
   );
 };
 
@@ -65,8 +65,8 @@ export const getProcessData = ({
 };
 
 export const getProcessFileUrl = ({ processId, pinstanceId, filename }) => {
-  let filenameNorm = filename ? filename : 'report.pdf';
-  filenameNorm = filenameNorm.replace(/[/\\?%*:|"<>]/g, '-');
+  let filenameNorm = filename ? filename : "report.pdf";
+  filenameNorm = filenameNorm.replace(/[/\\?%*:|"<>]/g, "-");
   filenameNorm = encodeURIComponent(filenameNorm);
 
   return `${config.API_URL}/process/${processId}/${pinstanceId}/print/${filenameNorm}`;

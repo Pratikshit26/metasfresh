@@ -1,18 +1,18 @@
-import { indexEntriesById } from './indexEntriesById';
+import { indexEntriesById } from "./indexEntriesById";
 
 export const updateResourcesFromConflicts = ({
   resources,
   conflicts,
   entries,
 }) => {
-  console.groupCollapsed('updateResourcesFromConflicts', {
+  console.groupCollapsed("updateResourcesFromConflicts", {
     resources,
     conflicts,
     entries,
   });
 
   if (!resources) {
-    console.log('=> empty resources, returning empty');
+    console.log("=> empty resources, returning empty");
     console.groupEnd();
 
     return resources;
@@ -22,12 +22,12 @@ export const updateResourcesFromConflicts = ({
     entries,
     conflicts,
   });
-  console.log('conflictCountsByResourceId', conflictCountsByResourceId);
+  console.log("conflictCountsByResourceId", conflictCountsByResourceId);
 
   const entriesCountsByResourceId = computeEntriesCountsByResourceId({
     entries,
   });
-  console.log('entriesCountsByResourceId', entriesCountsByResourceId);
+  console.log("entriesCountsByResourceId", entriesCountsByResourceId);
 
   const changedResources = [];
   let hasChanges = false;
@@ -42,7 +42,7 @@ export const updateResourcesFromConflicts = ({
     }
   });
 
-  console.log('=> returning', { changedResources, hasChanges });
+  console.log("=> returning", { changedResources, hasChanges });
   console.groupEnd();
 
   return hasChanges ? changedResources : resources;
@@ -57,7 +57,7 @@ const computeConflictCountsByResourceId = ({ entries, conflicts }) => {
 
   const conflictCountsByResourceId = {};
   conflicts
-    .filter((conflict) => conflict.status === 'CONFLICT')
+    .filter((conflict) => conflict.status === "CONFLICT")
     .forEach((conflict) => {
       const resourceId1 = entriesById[conflict.entryId1]?.resourceId;
 
@@ -92,7 +92,7 @@ const computeEntriesCountsByResourceId = ({ entries }) => {
 };
 
 const updateResource = (resource, { conflictsCount, entriesCount }) => {
-  console.log('updateResource', { resource, conflictsCount, entriesCount });
+  console.log("updateResource", { resource, conflictsCount, entriesCount });
   return resource.conflictsCount !== conflictsCount ||
     resource.entriesCount !== entriesCount
     ? { ...resource, conflictsCount, entriesCount }

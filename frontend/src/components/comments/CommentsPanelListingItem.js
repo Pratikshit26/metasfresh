@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react';
-import { translateCaption } from '../../utils/index';
-import PropTypes from 'prop-types';
-import Moment from 'moment';
-import { DATE_FIELD_FORMATS } from '../../constants/Constants';
+import React, { Fragment } from "react";
+import { translateCaption } from "../../utils/index";
+import PropTypes from "prop-types";
+import Moment from "moment";
+import { DATE_FIELD_FORMATS } from "../../constants/Constants";
 
 const CommentsPanelListingItem = (props) => {
   const { createdBy, text, created } = props.data;
 
   const elementRender = ({ labelText, actualValue }) => {
-    const withNewLines = actualValue.split('\n').map((item, key) => {
+    const withNewLines = actualValue.split("\n").map((item, key) => {
       return (
         <Fragment key={key}>
           {item}
@@ -50,15 +50,15 @@ const CommentsPanelListingItem = (props) => {
     <div className="col-12">
       <div className="panel panel-spaced panel-distance panel-bordered panel-primary">
         {elementRender({
-          labelText: translateCaption('window.comments.created'),
-          actualValue: Moment(created).format(DATE_FIELD_FORMATS['DateTime']),
+          labelText: translateCaption("window.comments.created"),
+          actualValue: Moment(created).format(DATE_FIELD_FORMATS["DateTime"]),
         })}
         {elementRender({
-          labelText: translateCaption('window.comments.createdBy'),
+          labelText: translateCaption("window.comments.createdBy"),
           actualValue: createdBy,
         })}
         {elementRender({
-          labelText: '',
+          labelText: "",
           actualValue: text,
         })}
       </div>

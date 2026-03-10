@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const MAIL_API_URL = `${config.API_URL}/mail`;
 
@@ -26,7 +26,7 @@ export const sendEmail = (emailId) => {
  */
 export const addAttachment = (emailId, file) => {
   const data = new FormData();
-  data.append('file', file);
+  data.append("file", file);
 
   return axios
     .post(`${MAIL_API_URL}/${emailId}/field/attachments`, data)
@@ -51,7 +51,7 @@ export const getAvailableTemplatesArray = () => {
 export const patchEmail = (emailId, property, value) => {
   return axios
     .patch(`${MAIL_API_URL}/${emailId}`, [
-      { op: 'replace', path: `${property}`, value },
+      { op: "replace", path: `${property}`, value },
     ])
     .then((axiosResponse) => axiosResponse.data);
 };
@@ -62,7 +62,7 @@ export const patchEmail = (emailId, property, value) => {
  * @return {Promise<object>} email data (subject, to etc)
  */
 export const applyTemplate = (emailId, template) => {
-  return patchEmail(emailId, 'templateId', template);
+  return patchEmail(emailId, "templateId", template);
 };
 /**
  * @param {string} emailId
@@ -73,8 +73,8 @@ export const getToTypeahead = (emailId, query) => {
   return axios
     .get(
       `${MAIL_API_URL}/${emailId}/field/to/typeahead?query=${encodeURIComponent(
-        query
-      )}`
+        query,
+      )}`,
     )
     .then((axiosResponse) => axiosResponse.data.values);
 };

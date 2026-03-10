@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import cx from 'classnames';
-import * as IndicatorState from '../../constants/IndicatorState';
+import PropTypes from "prop-types";
+import React from "react";
+import cx from "classnames";
+import * as IndicatorState from "../../constants/IndicatorState";
 
 /**
  * @file Indicator is a component that shows the save status to user in form of a save progress
@@ -18,7 +18,7 @@ const Indicator = ({
     if (!error) return;
 
     let message = error;
-    message += '\n';
+    message += "\n";
     message += `\nLocation: ${window.location.href}`;
 
     if (exception) {
@@ -42,7 +42,7 @@ const Indicator = ({
 
   return (
     <div className="window-indicator-container">
-      <div className={cx('bar', indicator)} />
+      <div className={cx("bar", indicator)} />
       {indicator === IndicatorState.ERROR && error ? (
         <div className="container-fluid message-bar" title={error}>
           <span className="text">{error}</span>

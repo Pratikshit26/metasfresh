@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 const FLOAT_NUMBER_REGEX_FORMAT = /^-?[0-9]*[.,]?[0-9]*$/;
 
@@ -9,7 +9,7 @@ const FLOAT_NUMBER_REGEX_FORMAT = /^-?[0-9]*[.,]?[0-9]*$/;
  */
 export default class NumberInput extends Component {
   state = {
-    value: '',
+    value: "",
     initDone: false,
   };
 

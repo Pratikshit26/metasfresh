@@ -14,26 +14,26 @@
  *  - data sync with the redux store is done via fetchInlineTabWrapperData action
  *  - inlineTab items keys are formed using ${windowId}_${tabId}_${rowId} pattern
  */
-import React, { PureComponent } from 'react';
-import InlineTab from './InlineTab';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import counterpart from 'counterpart';
-import classnames from 'classnames';
+import React, { PureComponent } from "react";
+import InlineTab from "./InlineTab";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import counterpart from "counterpart";
+import classnames from "classnames";
 
-import { INLINE_TAB_SHOW_MORE_FROM } from '../../constants/Constants';
-import { deleteRequest } from '../../api';
+import { INLINE_TAB_SHOW_MORE_FROM } from "../../constants/Constants";
+import { deleteRequest } from "../../api";
 import {
   createWindow,
   updateDataValidStatus,
   updateDataIncludedTabsInfo,
-} from '../../actions/WindowActions';
+} from "../../actions/WindowActions";
 import {
   fetchInlineTabWrapperData,
   setInlineTabAddNew,
   setInlineTabShowMore,
-} from '../../actions/InlineTabActions';
-import SectionGroup from '../SectionGroup';
+} from "../../actions/InlineTabActions";
+import SectionGroup from "../SectionGroup";
 
 class InlineTabWrapper extends PureComponent {
   constructor(props) {
@@ -47,7 +47,7 @@ class InlineTabWrapper extends PureComponent {
    * @summary does a refresh of the table data
    */
   updateTable = (postDeletion = false) => {
-    const query = '';
+    const query = "";
     const {
       inlineTab: { windowId, tabId },
       dataId: docId,
@@ -79,10 +79,10 @@ class InlineTabWrapper extends PureComponent {
       windowId,
       docId,
       tabId,
-      rowId: 'NEW',
+      rowId: "NEW",
       isModal: true,
       isAdvanced: false,
-      disconnected: 'inlineTab',
+      disconnected: "inlineTab",
     });
   };
 
@@ -112,14 +112,14 @@ class InlineTabWrapper extends PureComponent {
       setInlineTabAddNew({ visible: false, windowId, docId, tabId, rowId });
       if (!valid && !isDocumentValid) {
         // perform deletion
-        deleteRequest('window', windowId, docId, tabId, rowId).then(
+        deleteRequest("window", windowId, docId, tabId, rowId).then(
           (deleteResponse) => {
             let { validStatus, includedTabsInfo } = deleteResponse.data[0];
-            updateDataValidStatus('master', validStatus || { valid: true });
+            updateDataValidStatus("master", validStatus || { valid: true });
             this.updateTable(true);
             includedTabsInfo &&
-              updateDataIncludedTabsInfo('master', includedTabsInfo);
-          }
+              updateDataIncludedTabsInfo("master", includedTabsInfo);
+          },
         );
       } else {
         this.updateTable();
@@ -198,8 +198,8 @@ class InlineTabWrapper extends PureComponent {
 
     return (
       <div
-        className={classnames('inline-tab-wrapper', {
-          'tabs-fullscreen container-fluid inline-tab-fullscreen-top-offset':
+        className={classnames("inline-tab-wrapper", {
+          "tabs-fullscreen container-fluid inline-tab-fullscreen-top-offset":
             (!showMore &&
               !addNewFormVisible &&
               tabData.length > INLINE_TAB_SHOW_MORE_FROM) ||
@@ -253,7 +253,7 @@ class InlineTabWrapper extends PureComponent {
                   className="btn btn-meta-outline-secondary btn-distance btn-sm"
                   onClick={this.showAddNewForm}
                 >
-                  {counterpart.translate('window.addNew.caption')}
+                  {counterpart.translate("window.addNew.caption")}
                 </button>
                 <div className="clearfix" />
               </div>
@@ -276,7 +276,7 @@ class InlineTabWrapper extends PureComponent {
               <div className="inline-tab-content">
                 <div>
                   <div className="inlinetab-form-header">
-                    {counterpart.translate('window.addNew.caption')}
+                    {counterpart.translate("window.addNew.caption")}
                   </div>
                   <div className="inlinetab-close">
                     <i

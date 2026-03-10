@@ -29,31 +29,31 @@ const createState = (state = {}) =>
       windowHandler: windowState,
       appHandler: appInitialState,
     },
-    state
+    state,
   );
 
-describe('WindowActions thunks', () => {
+describe("WindowActions thunks", () => {
   const mockStore = configureStore([thunk]);
 
-  describe('init', () => {
+  describe("init", () => {
     it(`dispatches 'INIT_WINDOW' and 'INIT_DATA_SUCCESS' actions`, () => {
       nock(config.API_URL)
-          .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-          .get(`/window/143/layout`)
-          .reply(200, {
-            windowId: '143',
-            type: '143',
-            caption: 'Sales Order',
-            documentSummaryElement: { caption: '' },
-            docActionElement: { caption: '' },
-            sections: [{ columns: [{}], closableMode: 'ALWAYS_OPEN' }],
-            tabs: [],
-          });
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .get(`/window/143/layout`)
+        .reply(200, {
+          windowId: "143",
+          type: "143",
+          caption: "Sales Order",
+          documentSummaryElement: { caption: "" },
+          docActionElement: { caption: "" },
+          sections: [{ columns: [{}], closableMode: "ALWAYS_OPEN" }],
+          tabs: [],
+        });
 
       nock(config.API_URL)
-          .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-          .get(`/window/143/1000000/`)
-          .reply(200, [{ fieldsByName: {} }]);
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+        .get(`/window/143/1000000/`)
+        .reply(200, [{ fieldsByName: {} }]);
 
       const store = mockStore();
       return store
@@ -64,48 +64,48 @@ describe('WindowActions thunks', () => {
             tabId: undefined,
             rowId: undefined,
             isModal: false,
-          })
+          }),
         )
         .then(() => {
           expect(store.getActions()).toEqual(
             expect.arrayContaining([
-                { type: ACTION_TYPES.INIT_WINDOW },
-                {
-                  type: ACTION_TYPES.INIT_DATA_SUCCESS,
+              { type: ACTION_TYPES.INIT_WINDOW },
+              {
+                type: ACTION_TYPES.INIT_DATA_SUCCESS,
+                windowId: "143",
+                data: {},
+                docId: undefined,
+                hasComments: undefined,
+                includedTabsInfo: undefined,
+                notFoundMessage: undefined,
+                notFoundMessageDetail: undefined,
+                saveStatus: undefined,
+                scope: "master",
+                standardActions: undefined,
+                validStatus: undefined,
+                websocket: undefined,
+              },
+              {
+                type: "INIT_LAYOUT_SUCCESS",
+                layout: {
                   windowId: "143",
-                  data: {},
-                  docId: undefined,
-                  hasComments: undefined,
-                  includedTabsInfo: undefined,
-                  notFoundMessage: undefined,
-                  notFoundMessageDetail: undefined,
-                  saveStatus: undefined,
-                  scope: 'master',
-                  standardActions: undefined,
-                  validStatus: undefined,
-                  websocket: undefined,
+                  type: "143",
+                  caption: "Sales Order",
+                  documentSummaryElement: { caption: "" },
+                  docActionElement: { caption: "" },
+                  sections: [{ closableMode: "ALWAYS_OPEN", columns: [{}] }],
+                  tabs: [],
                 },
-                {
-                  type: 'INIT_LAYOUT_SUCCESS',
-                  layout: {
-                    windowId: '143',
-                    type: '143',
-                    caption: 'Sales Order',
-                    documentSummaryElement: {caption: ""},
-                    docActionElement: {caption: ""},
-                    sections: [{closableMode: "ALWAYS_OPEN", columns: [{}]}],
-                    tabs: []
-                  },
-                  scope: 'master'
-                }
-            ])
+                scope: "master",
+              },
+            ]),
           );
         });
     });
 
     it(`'handler response error in initWindow when layout not found'`, () => {
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get(`/window/123/layout`)
         .reply(404);
 
@@ -113,12 +113,12 @@ describe('WindowActions thunks', () => {
       return store
         .dispatch(
           createWindow({
-            windowId: '123',
-            docId: '1000000',
+            windowId: "123",
+            docId: "1000000",
             tabId: undefined,
             rowId: undefined,
             isModal: false,
-          })
+          }),
         )
         .then(() => {
           expect(store.getActions()).toEqual([
@@ -126,9 +126,9 @@ describe('WindowActions thunks', () => {
             {
               type: ACTION_TYPES.INIT_DATA_SUCCESS,
               data: {},
-              docId: 'notfound',
+              docId: "notfound",
               includedTabsInfo: {},
-              scope: 'master',
+              scope: "master",
               saveStatus: { saved: true },
               standardActions: [],
               validStatus: {},
@@ -139,21 +139,21 @@ describe('WindowActions thunks', () => {
 
     it(`'handler response error in initWindow when data not found'`, () => {
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get(`/window/143/layout`)
         .reply(200, {
-          windowId: '143',
-          type: '143',
-          caption: 'Sales Order',
-          documentSummaryElement: { caption: '' },
-          docActionElement: { caption: '' },
-          notFoundMessage: 'Not Found Title',
-          notFoundMessageDetail: 'Not Found Detail',
-          sections: [{ columns: [{}], closableMode: 'ALWAYS_OPEN' }],
+          windowId: "143",
+          type: "143",
+          caption: "Sales Order",
+          documentSummaryElement: { caption: "" },
+          docActionElement: { caption: "" },
+          notFoundMessage: "Not Found Title",
+          notFoundMessageDetail: "Not Found Detail",
+          sections: [{ columns: [{}], closableMode: "ALWAYS_OPEN" }],
           tabs: [],
         });
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get(`/window/143/999/`)
         .reply(404);
 
@@ -161,12 +161,12 @@ describe('WindowActions thunks', () => {
       return store
         .dispatch(
           createWindow({
-            windowId: '143',
-            docId: '999',
+            windowId: "143",
+            docId: "999",
             tabId: undefined,
             rowId: undefined,
             isModal: false,
-          })
+          }),
         )
         .then(() => {
           expect(store.getActions()).toEqual([
@@ -174,16 +174,16 @@ describe('WindowActions thunks', () => {
             {
               type: ACTION_TYPES.INIT_DATA_SUCCESS,
               data: {},
-              docId: 'notfound',
+              docId: "notfound",
               hasComments: undefined,
               includedTabsInfo: {},
-              notFoundMessage: 'Not Found Title',
-              notFoundMessageDetail: 'Not Found Detail',
+              notFoundMessage: "Not Found Title",
+              notFoundMessageDetail: "Not Found Detail",
               saveStatus: { saved: true },
-              scope: 'master',
+              scope: "master",
               standardActions: [],
               validStatus: {},
-              websocket: undefined
+              websocket: undefined,
             },
           ]);
         });
@@ -197,17 +197,17 @@ describe('WindowActions thunks', () => {
       const layoutResponse = layoutFixtures.layout1;
       const tabId = layoutResponse.tabs[0].tabId;
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get(`/window/${windowId}/${docId}/`)
         .reply(200, dataResponse);
 
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get(`/window/${windowId}/layout`)
         .reply(200, layoutResponse);
 
       nock(config.API_URL)
-        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get(`/window/${windowId}/${docId}/${tabId}/`)
         .reply(200, [
           {
@@ -215,12 +215,12 @@ describe('WindowActions thunks', () => {
             id: docId,
             tabId: tabId,
             tabid: tabId,
-            rowId: '1',
+            rowId: "1",
             fieldsByName: {},
             validStatus: {},
             saveStatus: {},
             standardActions: [],
-            websocketEndpoint: '',
+            websocketEndpoint: "",
           },
         ]);
 
@@ -233,7 +233,7 @@ describe('WindowActions thunks', () => {
             tabId: undefined,
             rowId: undefined,
             isModal: false,
-          })
+          }),
         )
         .then(() => {
           expect(store.getActions()).toEqual(
@@ -251,7 +251,7 @@ describe('WindowActions thunks', () => {
                 includedTabsInfo: dataResponse[0].includedTabsInfo,
                 websocket: dataResponse[0].websocketEndpoint,
               },
-            ])
+            ]),
           );
         });
     });
@@ -263,8 +263,8 @@ describe('WindowActions thunks', () => {
     //@ TODO: loading top actions
   });
 
-  describe('Printing Actions', () => {
-    it('setting printing options in the store', () => {
+  describe("Printing Actions", () => {
+    it("setting printing options in the store", () => {
       const state = createState();
       const store = mockStore(state);
       const expectedAction = [
@@ -275,7 +275,7 @@ describe('WindowActions thunks', () => {
       expect(store.getActions()).toEqual(expectedAction);
     });
 
-    it('reset printing options is called', () => {
+    it("reset printing options is called", () => {
       const state = createState();
       const store = mockStore(state);
       const expectedAction = [{ type: ACTION_TYPES.RESET_PRINTING_OPTIONS }];
@@ -284,21 +284,21 @@ describe('WindowActions thunks', () => {
       expect(store.getActions()).toEqual(expectedAction);
     });
 
-    it('triggers action to toggle the printing option', () => {
+    it("triggers action to toggle the printing option", () => {
       const state = createState();
       const store = mockStore(state);
       const expectedAction = [
         {
           type: ACTION_TYPES.TOGGLE_PRINTING_OPTION,
-          payload: 'PRINTER_OPTS_IsPrintLogo',
+          payload: "PRINTER_OPTS_IsPrintLogo",
         },
       ];
 
-      store.dispatch(togglePrintingOption('PRINTER_OPTS_IsPrintLogo'));
+      store.dispatch(togglePrintingOption("PRINTER_OPTS_IsPrintLogo"));
       expect(store.getActions()).toEqual(expectedAction);
     });
 
-    it('triggers action to set the showSpinner option', () => {
+    it("triggers action to set the showSpinner option", () => {
       const state = createState();
       const store = mockStore(state);
       const expectedAction = [

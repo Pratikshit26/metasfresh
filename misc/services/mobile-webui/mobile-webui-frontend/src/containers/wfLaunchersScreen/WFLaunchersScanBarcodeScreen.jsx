@@ -11,24 +11,24 @@ import { useScreenDefinition } from '../../hooks/useScreenDefinition';
 import { appLaunchersLocation } from '../../routes/launchers';
 
 const WFLaunchersScanBarcodeScreen = () => {
-  const { applicationId, history } = useScreenDefinition({ back: appLaunchersLocation });
+    const { applicationId, history } = useScreenDefinition({ back: appLaunchersLocation });
 
-  const dispatch = useDispatch();
-  const onBarcodeScanned = ({ scannedBarcode }) => {
-    startWorkflowRequest({
-      wfParameters: {
-        applicationId,
-        startByBarcode: scannedBarcode,
-      },
-    })
-      .then((wfProcess) => {
-        dispatch(updateWFProcess({ wfProcess }));
-        history.push(getWFProcessScreenLocation({ applicationId, wfprocessId: wfProcess.id }));
-      })
-      .catch((axiosError) => toastError({ axiosError }));
-  };
+    const dispatch = useDispatch();
+    const onBarcodeScanned = ({ scannedBarcode }) => {
+        startWorkflowRequest({
+            wfParameters: {
+                applicationId,
+                startByBarcode: scannedBarcode,
+            },
+        })
+            .then((wfProcess) => {
+                dispatch(updateWFProcess({ wfProcess }));
+                history.push(getWFProcessScreenLocation({ applicationId, wfprocessId: wfProcess.id }));
+            })
+            .catch((axiosError) => toastError({ axiosError }));
+    };
 
-  return <BarcodeScannerComponent onResolvedResult={onBarcodeScanned} />;
+    return <BarcodeScannerComponent onResolvedResult={onBarcodeScanned} />;
 };
 
 export default WFLaunchersScanBarcodeScreen;

@@ -1,6 +1,6 @@
-import React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import PropTypes from 'prop-types';
+import React from "react";
+import { CSSTransition } from "react-transition-group";
+import PropTypes from "prop-types";
 
 /**
  * @file Fnct component.
@@ -13,8 +13,8 @@ const Loader = (props) => {
     <div
       className={
         loaderType
-          ? 'd-flex justify-content-center'
-          : 'order-list-loader text-center'
+          ? "d-flex justify-content-center"
+          : "order-list-loader text-center"
       }
     >
       {!loaderType && (
@@ -26,7 +26,7 @@ const Loader = (props) => {
           </div>
         </CSSTransition>
       )}
-      {loaderType && loaderType === 'bootstrap' && (
+      {loaderType && loaderType === "bootstrap" && (
         <div className="spinner-border text-success" role="status">
           <span className="sr-only">Loading...</span>
         </div>

@@ -1,34 +1,34 @@
-import axios from 'axios';
-import counterpart from 'counterpart';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import axios from "axios";
+import counterpart from "counterpart";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
-import '../assets/css/styles.scss';
+import "../assets/css/styles.scss";
 import {
   initCurrentActiveLocale,
   setCurrentActiveLocale,
-} from '../utils/locale';
+} from "../utils/locale";
 import {
   addNotification,
   setProcessSaved,
   initHotkeys,
   initKeymap,
   setLanguages,
-} from '../actions/AppActions';
-import { getAvailableLang } from '../api/login';
-import { connectionError } from '../actions/AppActions';
+} from "../actions/AppActions";
+import { getAvailableLang } from "../api/login";
+import { connectionError } from "../actions/AppActions";
 // import PluginsRegistry from '../services/PluginsRegistry';
-import { useAuth } from '../hooks/useAuth';
-import useConstructor from '../hooks/useConstructor';
-import history from '../services/History';
-import Routes from '../routes';
-import { NO_CONNECTION_ERROR } from '../constants/Constants';
-import { generateHotkeys, ShortcutProvider } from '../components/keyshortcuts';
-import Translation from '../components/Translation';
-import NotificationHandler from '../components/notifications/NotificationHandler';
-import blacklist from '../shortcuts/blacklist';
-import keymap from '../shortcuts/keymap';
-import { getDocSummaryDataFromState } from '../reducers/windowHandlerUtils';
+import { useAuth } from "../hooks/useAuth";
+import useConstructor from "../hooks/useConstructor";
+import history from "../services/History";
+import Routes from "../routes";
+import { NO_CONNECTION_ERROR } from "../constants/Constants";
+import { generateHotkeys, ShortcutProvider } from "../components/keyshortcuts";
+import Translation from "../components/Translation";
+import NotificationHandler from "../components/notifications/NotificationHandler";
+import blacklist from "../shortcuts/blacklist";
+import keymap from "../shortcuts/keymap";
+import { getDocSummaryDataFromState } from "../reducers/windowHandlerUtils";
 
 const hotkeys = generateHotkeys({ keymap, blacklist });
 
@@ -44,15 +44,15 @@ const computeTitleFromState = (state) => {
         let title = caption;
         const docSummary = getDocSummaryDataFromState(state)?.value;
         if (docSummary) {
-          title += ' / ' + docSummary;
+          title += " / " + docSummary;
         }
         return title;
       }
     }
 
-    return 'metasfresh';
+    return "metasfresh";
   } else {
-    return 'Login';
+    return "Login";
   }
 };
 
@@ -75,7 +75,7 @@ const App = () => {
     // window.META_HOST_APP = this;
 
     axios.defaults.withCredentials = true;
-    axios.defaults.headers.common['Content-Type'] = 'application/json';
+    axios.defaults.headers.common["Content-Type"] = "application/json";
 
     initCurrentActiveLocale();
 
@@ -105,7 +105,7 @@ const App = () => {
          */
         if (error.response.status == 401) {
           if (
-            !location.pathname.includes('login') &&
+            !location.pathname.includes("login") &&
             !auth.authRequestPending()
           ) {
             dispatch(setProcessSaved());
@@ -116,15 +116,15 @@ const App = () => {
             // (ie user logged out in another window, or session timed out)
             if (auth.isLoggedIn || store.getState().appHandler.isLogged) {
               auth.logout().finally(() => {
-                history.push('/login');
+                history.push("/login");
               });
             } else {
-              history.push('/login');
+              history.push("/login");
             }
           }
         } else if (
           error.response.status === 500 &&
-          error.response.data.path.includes('/authenticate')
+          error.response.data.path.includes("/authenticate")
         ) {
           /*
            * User already logged in on the backend side or wrong
@@ -133,14 +133,14 @@ const App = () => {
 
           // if user types in incorrect token, there's no way for us to tell if he's
           // already authenticated or not. So it's safest to reset the login process
-          if (error.response.data.message.includes('Invalid token')) {
+          if (error.response.data.message.includes("Invalid token")) {
             return auth
               .logout()
               .then(() => {
-                history.push('/login');
+                history.push("/login");
               })
               .catch((err) => {
-                console.error('App.checkAuthentication error: ', err);
+                console.error("App.checkAuthentication error: ", err);
               });
           }
 
@@ -161,21 +161,21 @@ const App = () => {
             const errorMessenger = (code) => {
               switch (code) {
                 case 500:
-                  return 'Server error';
+                  return "Server error";
                 case 400:
-                  return 'Client error';
+                  return "Client error";
               }
             };
             const { data, status } = error.response;
             const errorTitle = errorMessenger(status);
-            const message = data.message ? data.message : '';
+            const message = data.message ? data.message : "";
 
             // eslint-disable-next-line no-console
             console.log(`Got error: ${message}`, { error });
 
             // Chart disabled notifications
             if (
-              error.response.request.responseURL.includes('silentError=true')
+              error.response.request.responseURL.includes("silentError=true")
             ) {
               return;
             }
@@ -183,38 +183,38 @@ const App = () => {
             if (data.userFriendlyError) {
               dispatch(
                 addNotification(
-                  'Error: ' + message.split(' ', 4).join(' ') + '...',
+                  "Error: " + message.split(" ", 4).join(" ") + "...",
                   data.message,
                   5000,
-                  'error',
-                  errorTitle
-                )
+                  "error",
+                  errorTitle,
+                ),
               );
             }
           }
         }
 
         //reset password errors
-        if (error.response.request.responseURL.includes('resetPassword')) {
+        if (error.response.request.responseURL.includes("resetPassword")) {
           return Promise.reject(error.response);
         }
 
-        if (error.response.request.responseURL.includes('showError=true')) {
+        if (error.response.request.responseURL.includes("showError=true")) {
           const { data } = error.response;
 
           dispatch(
             addNotification(
-              'Error: ' + data.message.split(' ', 4).join(' ') + '...',
+              "Error: " + data.message.split(" ", 4).join(" ") + "...",
               data.message,
               5000,
-              'error',
-              ''
-            )
+              "error",
+              "",
+            ),
           );
         } else {
           return Promise.reject(error);
         }
-      }
+      },
     );
 
     getAvailableLang().then((response) => {
@@ -232,7 +232,7 @@ const App = () => {
       setCurrentActiveLocale(lang);
     });
 
-    counterpart.setMissingEntryGenerator(() => '');
+    counterpart.setMissingEntryGenerator(() => "");
 
     dispatch(initKeymap(keymap));
     dispatch(initHotkeys(hotkeys));

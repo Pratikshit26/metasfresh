@@ -1,5 +1,5 @@
-import { BrowserQRCodeReader } from '@zxing/library';
-import Timer from 'timer-machine';
+import { BrowserQRCodeReader } from "@zxing/library";
+import Timer from "timer-machine";
 
 class ScannerError extends Error {}
 
@@ -26,6 +26,6 @@ export default class CustomBrowserQRCodeReader extends BrowserQRCodeReader {
     }
 
     this.timer.destroy();
-    throw new ScannerError('No QR Code found.');
+    throw new ScannerError("No QR Code found.");
   }
 }

@@ -1,7 +1,9 @@
 {
-    "name": "Spinnen Test",
-    "value": "Spinnen",
-    "performanceType": [{
-        "name": "Quality performance"
-    }]
+  "name": "Spinnen Test",
+  "value": "Spinnen",
+  "performanceType": [
+    {
+      "name": "Quality performance"
+    }
+  ]
 }

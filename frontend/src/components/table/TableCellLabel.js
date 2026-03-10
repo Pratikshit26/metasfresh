@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import Label from '../../components/widget/Labels/Label';
-import PropTypes from 'prop-types';
-import { TBL_CELL_LABEL_MAX } from '../../constants/Constants';
+import React, { PureComponent } from "react";
+import Label from "../../components/widget/Labels/Label";
+import PropTypes from "prop-types";
+import { TBL_CELL_LABEL_MAX } from "../../constants/Constants";
 class TableCellLabel extends PureComponent {
   /**
    * @method chopLabel
@@ -22,8 +22,8 @@ class TableCellLabel extends PureComponent {
     const tableCellValues = tableCellData.value.values;
     const commaSeparatedList =
       tableCellValues.length > 1
-        ? tableCellValues.map((item) => item.caption).join(', ')
-        : '';
+        ? tableCellValues.map((item) => item.caption).join(", ")
+        : "";
 
     return (
       <div className="table-cell-label-container">
@@ -35,7 +35,7 @@ class TableCellLabel extends PureComponent {
             <Label
               label={this.chopLabel(
                 tableCellData.value.values[0],
-                TBL_CELL_LABEL_MAX
+                TBL_CELL_LABEL_MAX,
               )}
               readonly={true}
               hideCloseIcon={true}

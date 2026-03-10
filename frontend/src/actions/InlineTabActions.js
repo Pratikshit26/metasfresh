@@ -1,6 +1,6 @@
-import { fetchTab } from './WindowActions';
-import { getLayout, getData } from '../api';
-import { INLINE_TAB_SHOW_MORE_FROM } from '../constants/Constants';
+import { fetchTab } from "./WindowActions";
+import { getLayout, getData } from "../api";
+import { INLINE_TAB_SHOW_MORE_FROM } from "../constants/Constants";
 import {
   UPDATE_INLINE_TAB_ITEM_FIELDS,
   UPDATE_INLINE_TAB_WRAPPER_FIELDS,
@@ -10,7 +10,7 @@ import {
   SET_INLINE_TAB_SHOW_MORE,
   SET_INLINE_TAB_ITEM_PROP,
   UPDATE_INLINE_TAB_DATA,
-} from '../constants/ActionTypes';
+} from "../constants/ActionTypes";
 
 /*
  * @method updateInlineTabItemFields
@@ -119,7 +119,7 @@ export function fetchInlineTabWrapperData({
       const inlineTabWrapperSelector = `${windowId}_${tabId}_${docId}`;
       if (rowId && !postDeletion) {
         const lastAdditionIndex = tabData.findIndex(
-          (item) => item.rowId === rowId
+          (item) => item.rowId === rowId,
         );
         if (lastAdditionIndex) {
           const tempData = tabData[lastAdditionIndex];
@@ -130,7 +130,7 @@ export function fetchInlineTabWrapperData({
           setInlineTabShowMore({
             inlineTabWrapperId: inlineTabWrapperSelector,
             showMore: false,
-          })
+          }),
         );
       }
 
@@ -138,7 +138,7 @@ export function fetchInlineTabWrapperData({
         setInlineTabWrapperData({
           inlineTabWrapperId: inlineTabWrapperSelector,
           data: tabData,
-        })
+        }),
       );
       /** when we don't have the rowId then we are in the case of the normal rendering, we set the flag to show more (if criteria is met) */
       !rowId &&
@@ -146,7 +146,7 @@ export function fetchInlineTabWrapperData({
           setInlineTabShowMore({
             inlineTabWrapperId: inlineTabWrapperSelector,
             showMore: tabData.length > INLINE_TAB_SHOW_MORE_FROM ? true : false,
-          })
+          }),
         );
     });
   };
@@ -163,10 +163,10 @@ export function fetchInlineTabWrapperData({
  */
 export function getInlineTabLayoutAndData({ windowId, tabId, docId, rowId }) {
   return (dispatch) => {
-    getLayout('window', windowId, tabId, null, null, false).then(
+    getLayout("window", windowId, tabId, null, null, false).then(
       ({ data: layoutData }) => {
         getData({
-          entity: 'window',
+          entity: "window",
           docType: windowId,
           docId,
           tabId,
@@ -178,10 +178,10 @@ export function getInlineTabLayoutAndData({ windowId, tabId, docId, rowId }) {
             setInlineTabLayoutAndData({
               inlineTabId: `${windowId}_${tabId}_${rowId}`,
               data: { layout: layoutData, data: wantedData[0] },
-            })
+            }),
           );
         });
-      }
+      },
     );
   };
 }
@@ -199,7 +199,7 @@ export function inlineTabAfterGetLayout({ data, disconnectedData }) {
       setInlineTabLayoutAndData({
         inlineTabId: inlineTabTargetId,
         data: { layout: data, data: disconnectedData },
-      })
+      }),
     );
     dispatch(
       setInlineTabAddNew({
@@ -208,7 +208,7 @@ export function inlineTabAfterGetLayout({ data, disconnectedData }) {
         windowId: disconnectedData.windowId,
         tabId: disconnectedData.tabId,
         rowId: disconnectedData.rowId,
-      })
+      }),
     );
   };
 }
@@ -240,7 +240,7 @@ export function patchInlineTab({ ret, windowId, tabId, docId, rowId }) {
                 inlineTabId,
                 data: { validStatus },
               },
-            })
+            }),
           );
         }
 
@@ -249,13 +249,13 @@ export function patchInlineTab({ ret, windowId, tabId, docId, rowId }) {
             inlineTabWrapperId: `${windowId}_${tabId}_${docId}`,
             rowId,
             response: respDocuments[0],
-          })
+          }),
         );
         dispatch(
           updateInlineTabItemFields({
             inlineTabId: `${windowId}_${tabId}_${rowId}`,
             fieldsByName: respDocuments[0].fieldsByName,
-          })
+          }),
         );
       }
     });

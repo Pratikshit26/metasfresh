@@ -1,4 +1,4 @@
-import { quickActionsRequest, topActionsRequest } from '../api';
+import { quickActionsRequest, topActionsRequest } from "../api";
 import {
   DELETE_QUICK_ACTIONS,
   TOP_ACTIONS_DELETE,
@@ -8,11 +8,11 @@ import {
   TOP_ACTIONS_LOADING,
   TOP_ACTIONS_FAILURE,
   TOP_ACTIONS_SUCCESS,
-} from '../constants/ActionTypes';
+} from "../constants/ActionTypes";
 
-import { getQuickActionsId, getQuickActions } from '../reducers/actionsHandler';
-import { getTable, getTableId } from '../reducers/tables';
-import { findViewByViewId, getView } from '../reducers/viewHandler';
+import { getQuickActionsId, getQuickActions } from "../reducers/actionsHandler";
+import { getTable, getTableId } from "../reducers/tables";
+import { findViewByViewId, getView } from "../reducers/viewHandler";
 
 /*
  * @method fetchQuickActions
@@ -52,7 +52,7 @@ export function fetchQuickActions({
             viewProfileId,
             isModal,
             isParent,
-          })
+          }),
         );
 
         actionPromises = [].concat(requests);
@@ -71,7 +71,7 @@ export function fetchQuickActions({
           viewId,
           selectedIds: table.selected,
           viewProfileId,
-        })
+        }),
       ),
     ];
 
@@ -148,8 +148,8 @@ function getQuickActionRequests({
           selectedIds: parentTable.selected,
           parentView: null,
           childView,
-        })
-      )
+        }),
+      ),
     );
 
     // construct child request
@@ -162,8 +162,8 @@ function getQuickActionRequests({
           selectedIds: childTable.selected,
           parentView,
           childView: null,
-        })
-      )
+        }),
+      ),
     );
 
     return requestPromises;

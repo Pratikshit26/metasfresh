@@ -1,25 +1,26 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { merge } from 'merge-anything';
+import React from "react";
+import { shallow } from "enzyme";
+import { merge } from "merge-anything";
 
-import Password from '../../../components/widget/Password';
-import fixtures from '../../../../test_setup/fixtures/widget/password.json';
+import Password from "../../../components/widget/Password";
+import fixtures from "../../../../test_setup/fixtures/widget/password.json";
 
-const createDummyProps = function(props) {
+const createDummyProps = function (props) {
   return {
     onSetWidgetType: jest.fn(),
     getClassNames: jest.fn(),
     ...props,
     widgetProperties: merge(
-    {
-      onChange: jest.fn(),
-    },
-    props.widgetProperties)
+      {
+        onChange: jest.fn(),
+      },
+      props.widgetProperties,
+    ),
   };
 };
 
-describe('Password component', () => {
-  it('renders without errors', () => {
+describe("Password component", () => {
+  it("renders without errors", () => {
     const props = createDummyProps({
       ...fixtures.props1,
     });
@@ -27,10 +28,10 @@ describe('Password component', () => {
     const wrapper = shallow(<Password {...props} />);
     const html = wrapper.html();
 
-    expect(html).toContain('input-inner-container');
-    expect(html).toContain('meta-icon-edit');
-    expect(html).toEqual(expect.not.stringContaining('meta-icon-show'));
+    expect(html).toContain("input-inner-container");
+    expect(html).toContain("meta-icon-edit");
+    expect(html).toEqual(expect.not.stringContaining("meta-icon-show"));
   });
 
-  it.todo('renders password as text');
+  it.todo("renders password as text");
 });

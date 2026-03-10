@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import BarcodeScanner from '../BarcodeScanner/BarcodeScannerWidget';
+import React, { Component } from "react";
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import BarcodeScanner from "../BarcodeScanner/BarcodeScannerWidget";
 
 class BarcodeScannerBtn extends Component {
   render() {
@@ -22,7 +22,7 @@ class BarcodeScannerBtn extends Component {
           className="btn btn-sm btn-meta-success btn-scanner"
           onClick={() => onScanBarcode(true)}
         >
-          {counterpart.translate('widget.scanFromCamera.caption')}
+          {counterpart.translate("widget.scanFromCamera.caption")}
         </button>
       </div>
     );

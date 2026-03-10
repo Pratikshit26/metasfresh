@@ -1,10 +1,10 @@
-import React from 'react';
-import { isEqual } from 'lodash';
-import PropTypes from 'prop-types';
-import { useStore } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import { isEqual } from "lodash";
+import PropTypes from "prop-types";
+import { useStore } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from "../hooks/useAuth";
 
 /**
  * @file Function component.
@@ -21,7 +21,7 @@ const TokenRoute = ({ match }) => {
 
   if (!auth.authRequestPending() && !state.appHandler.isLogged) {
     auth.tokenLogin(tokenId).then(() => {
-      history.push('/');
+      history.push("/");
     });
   }
 

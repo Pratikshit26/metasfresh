@@ -8,18 +8,14 @@
       "name": "admin",
       "password_hash": "4SVCbIxjOepWw/dVp0HrHsWtluP5DyP5X50zpzQ7kmQ/P+sO",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
-      "tags": [
-        "administrator"
-      ],
+      "tags": ["administrator"],
       "limits": {}
     },
     {
       "name": "guest",
       "password_hash": "NejQAhJBXePoOF5nkhxym6s7BjIKEyBkPJF3kcSFBhIZkOMI",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
-      "tags": [
-        "administrator"
-      ],
+      "tags": ["administrator"],
       "limits": {}
     }
   ],

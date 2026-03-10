@@ -16,16 +16,16 @@ const checkIfWindowCanExecuteActions = () => {
    *
    * This match is needed because cypress is so fast that it may press the action button before any viewId is available, and the system will error out.
    */
-  cy.url().should('matches', new RegExp(`window/[0-9]+(/[0-9]+|.*viewId=)`));
+  cy.url().should("matches", new RegExp(`window/[0-9]+(/[0-9]+|.*viewId=)`));
 
-  cy.url().then(url => {
+  cy.url().then((url) => {
     const listViewRegexp = new RegExp(`window/[0-9]+.*viewId=`);
     // const singleViewRegexp = new RegExp(`window/[0-9]+/[0-9]+`);
 
     if (url.match(listViewRegexp)) {
-      cy.get('.table-flex-wrapper').should('exist');
+      cy.get(".table-flex-wrapper").should("exist");
     } else {
-      cy.get('.panel .row').should('exist');
+      cy.get(".panel .row").should("exist");
     }
   });
 };

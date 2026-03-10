@@ -13,15 +13,15 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-import 'cypress-skip-and-only-ui/support';
-import 'cypress-localstorage-commands';
-import './commands/general';
-import './commands/navigation';
-import './commands/form';
-import './commands/action';
-import './commands/test';
+import "cypress-skip-and-only-ui/support";
+import "cypress-localstorage-commands";
+import "./commands/general";
+import "./commands/navigation";
+import "./commands/form";
+import "./commands/action";
+import "./commands/test";
 
-Cypress.on('uncaught:exception', () => {
+Cypress.on("uncaught:exception", () => {
   //(err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
@@ -33,17 +33,17 @@ Cypress.on('uncaught:exception', () => {
 //   return false
 // });
 
-Cypress.on('emit:counterpartTranslations', (messages) => {
+Cypress.on("emit:counterpartTranslations", (messages) => {
   Cypress.messages = messages;
 });
 
-Cypress.on('window:alert', (text) => {
+Cypress.on("window:alert", (text) => {
   cy.log(`Alert modal confirmed: ${text}`);
 });
 
 before(function () {
   // use the login routine only for the e2e tests, this will not be used for the component testing(independent)
-  if (Cypress.testingType !== 'component') {
+  if (Cypress.testingType !== "component") {
     cy.clearLocalStorageSnapshot();
 
     // cy.loginViaAPI().then(() => {
@@ -58,7 +58,7 @@ before(function () {
     });
 
     Cypress.Cookies.defaults({
-      preserve: ['SESSION', 'isLogged'],
+      preserve: ["SESSION", "isLogged"],
     });
   }
 });
@@ -67,10 +67,10 @@ beforeEach(() => {
   cy.restoreLocalStorage();
 });
 
-Cypress.on('scrolled', ($el) => {
+Cypress.on("scrolled", ($el) => {
   $el.get(0).scrollIntoView({
-    block: 'center',
-    inline: 'center',
+    block: "center",
+    inline: "center",
   });
 });
 

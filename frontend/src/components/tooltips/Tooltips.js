@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React, { forwardRef, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 // NOTE: we need to forward the ref because we are using it in TetherComponent (see FiltersItem.render)
 const Tooltips = forwardRef(
@@ -14,7 +14,7 @@ const Tooltips = forwardRef(
       tooltipOnFirstlevelPositionLeft,
       type,
     },
-    ref
+    ref,
   ) => {
     const [opacity, setOpacity] = useState(0);
 
@@ -23,7 +23,7 @@ const Tooltips = forwardRef(
         () => {
           setOpacity(1);
         },
-        delay ? delay : 1000
+        delay ? delay : 1000,
       );
 
       return () => {
@@ -32,24 +32,24 @@ const Tooltips = forwardRef(
     }, []);
 
     const cx = classNames(
-      'tooltip-wrapp',
+      "tooltip-wrapp",
       { [`tooltip-${type}`]: type },
       { [`${extraClass}`]: extraClass },
-      { [`${className}`]: className }
+      { [`${className}`]: className },
     );
 
     return (
       <div ref={ref} style={{ opacity: opacity }}>
         <div
           className={cx}
-          style={{ left: tooltipOnFirstlevelPositionLeft + 'px' }}
+          style={{ left: tooltipOnFirstlevelPositionLeft + "px" }}
         >
           <div className="tooltip-shortcut">{name}</div>
           <div className="tooltip-name">{action}</div>
         </div>
       </div>
     );
-  }
+  },
 );
 
 /**

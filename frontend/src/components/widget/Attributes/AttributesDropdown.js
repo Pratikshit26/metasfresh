@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import FocusTrap from 'focus-trap-react';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import FocusTrap from "focus-trap-react";
 
-import { DROPUP_START } from '../../../constants/Constants';
-import WidgetWrapper from '../../../containers/WidgetWrapper';
+import { DROPUP_START } from "../../../constants/Constants";
+import WidgetWrapper from "../../../containers/WidgetWrapper";
 
-import onClickOutsideHOC from 'react-onclickoutside';
+import onClickOutsideHOC from "react-onclickoutside";
 
 export class AttributesDropdown extends PureComponent {
   constructor(props) {
@@ -17,7 +17,7 @@ export class AttributesDropdown extends PureComponent {
   handleClickOutside = () => this.props.onCompletion();
 
   handleKeyDown = (event) => {
-    if ((event.key === 'Enter' && event.altKey) || event.key === 'Escape') {
+    if ((event.key === "Enter" && event.altKey) || event.key === "Escape") {
       event.stopPropagation();
       event.preventDefault();
       this.props.onCompletion();
@@ -26,7 +26,7 @@ export class AttributesDropdown extends PureComponent {
 
   extractWidgetData = (elementLayout) => {
     return elementLayout.fields.map(
-      (fieldLayout) => this.props.fieldsByName[fieldLayout.field] || -1
+      (fieldLayout) => this.props.fieldsByName[fieldLayout.field] || -1,
     );
   };
 
@@ -55,8 +55,8 @@ export class AttributesDropdown extends PureComponent {
       >
         <div
           className={classnames(
-            'attributes-dropdown panel-shadowed panel-primary panel-bordered panel-spaced',
-            { 'attributes-dropup': rowIndex > DROPUP_START }
+            "attributes-dropdown panel-shadowed panel-primary panel-bordered panel-spaced",
+            { "attributes-dropup": rowIndex > DROPUP_START },
           )}
           style={maxHeight && maxHeight > 0 ? { maxHeight } : {}}
           onKeyDown={this.handleKeyDown}

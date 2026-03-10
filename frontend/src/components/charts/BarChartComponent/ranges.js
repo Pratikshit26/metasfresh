@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 export const getX0Range = (width, data, groupBy) => {
   return d3

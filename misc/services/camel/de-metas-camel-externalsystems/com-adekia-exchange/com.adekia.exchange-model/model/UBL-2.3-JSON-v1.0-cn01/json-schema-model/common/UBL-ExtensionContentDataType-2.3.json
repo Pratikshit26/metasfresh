@@ -5,6 +5,6 @@
     "ExtensionContent": {
       "description": "A user-defined repository of additional content",
       "type": "object"
-      }
     }
   }
+}

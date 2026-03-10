@@ -1,15 +1,15 @@
-import React from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
-import queryString from 'query-string';
+import React from "react";
+import { Route, Router, Switch } from "react-router-dom";
+import queryString from "query-string";
 
-import history from '../services/History';
-import PrivateRoute from './PrivateRoute';
-import TokenRoute from './TokenRoute';
-import LoginRoute from './LoginRoute';
-import ResetPasswordRoute from './ResetPasswordRoute';
+import history from "../services/History";
+import PrivateRoute from "./PrivateRoute";
+import TokenRoute from "./TokenRoute";
+import LoginRoute from "./LoginRoute";
+import ResetPasswordRoute from "./ResetPasswordRoute";
 
 // import PluginContainer, { pluginWrapper } from './components/PluginContainer';
-import PaypalReservationConfirm from '../containers/PaypalReservationConfirm.js';
+import PaypalReservationConfirm from "../containers/PaypalReservationConfirm.js";
 
 /**
  * this is the part of the application that activates the plugins from the plugins array found in - plugins.js

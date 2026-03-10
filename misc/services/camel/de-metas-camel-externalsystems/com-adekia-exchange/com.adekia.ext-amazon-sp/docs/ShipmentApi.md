@@ -2,19 +2,20 @@
 
 All URIs are relative to *https://sellingpartnerapi-na.amazon.com/*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**updateShipmentStatus**](ShipmentApi.md#updateShipmentStatus) | **POST** /orders/v0/orders/{orderId}/shipment | 
+| Method                                                          | HTTP request                                  | Description |
+| --------------------------------------------------------------- | --------------------------------------------- | ----------- |
+| [**updateShipmentStatus**](ShipmentApi.md#updateShipmentStatus) | **POST** /orders/v0/orders/{orderId}/shipment |
 
 <a name="updateShipmentStatus"></a>
+
 # **updateShipmentStatus**
+
 > updateShipmentStatus(body, orderId)
-
-
 
 Update the shipment status.
 
 ### Example
+
 ```java
 // Import classes:
 //import com.adekia.exchange.amazonsp.client.ApiException;
@@ -34,10 +35,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**UpdateShipmentStatusRequest**](UpdateShipmentStatusRequest.md)| Request to update the shipment status. |
- **orderId** | **String**| An Amazon-defined order identifier, in 3-7-7 format. |
+| Name        | Type                                                              | Description                                          | Notes |
+| ----------- | ----------------------------------------------------------------- | ---------------------------------------------------- | ----- |
+| **body**    | [**UpdateShipmentStatusRequest**](UpdateShipmentStatusRequest.md) | Request to update the shipment status.               |
+| **orderId** | **String**                                                        | An Amazon-defined order identifier, in 3-7-7 format. |
 
 ### Return type
 
@@ -49,6 +50,5 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
-
+- **Content-Type**: application/json
+- **Accept**: application/json

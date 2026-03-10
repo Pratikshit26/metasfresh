@@ -1,14 +1,14 @@
-import Metasfresh from './page';
+import Metasfresh from "./page";
 
 class InvoiceCandidates extends Metasfresh {
   constructor() {
     super();
 
     this.windowId = 540092;
-    this.tableRows = '.table-flex-wrapper-row';
-    this.rowSelector = 'tbody tr';
-    this.listHeader = '.document-list-header';
-    this.selectedRows = '.row-selected';
+    this.tableRows = ".table-flex-wrapper-row";
+    this.rowSelector = "tbody tr";
+    this.listHeader = ".document-list-header";
+    this.selectedRows = ".row-selected";
   }
 
   visit() {

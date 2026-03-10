@@ -1,28 +1,25 @@
 /// <reference types="cypress" />
 
-import {DocumentStatusKey, RewriteURL} from "./utils/constants";
-import {ColumnAndValue} from "./commands/navigation";
+import { DocumentStatusKey, RewriteURL } from "./utils/constants";
+import { ColumnAndValue } from "./commands/navigation";
 
 declare namespace Cypress {
-
   // noinspection JSUnusedGlobalSymbols
   interface Chainable<Subject> {
-
     /**
      * Asserts that a particular filed is not shown (e.g. because of a display rule)
      *
      * @param fieldName - name of the field is question
      * @param modal - optional, default = false - use true if the field is in a modal overlay
      */
-    assertFieldNotShown(fieldName: string, modal?: boolean): Chainable<any>
-
+    assertFieldNotShown(fieldName: string, modal?: boolean): Chainable<any>;
 
     /**
      * Fire header action with a certain name and expect a modal dialog to pop up within 10 secs
      *
      * @param actionName internal name of the action to be executed
      */
-    executeHeaderActionWithDialog(actionName: string): Chainable<any>
+    executeHeaderActionWithDialog(actionName: string): Chainable<any>;
 
     /**
      * This command runs a quick actions.
@@ -31,7 +28,11 @@ declare namespace Cypress {
      * @param modal - optional, default = false - use true if the field is in a modal overlay; required if the underlying window has a field with the same name.
      * @param isDialogExpected - optional, default true - use false if this action does not open any dialog
      */
-    executeQuickAction(actionName: string, modal?: boolean, isDialogExpected ?: boolean): Chainable<any>
+    executeQuickAction(
+      actionName: string,
+      modal?: boolean,
+      isDialogExpected?: boolean,
+    ): Chainable<any>;
 
     /**
      * Run a quickAction inside a modal which opens a table on the right side.
@@ -43,7 +44,7 @@ declare namespace Cypress {
      * // Run the action "Open HU selection" window inside the window Picking Terminal (Prototype)
      * cy.executeQuickActionWithRightSideTable('WEBUI_PP_Order_HUEditor_Launcher');
      */
-    executeQuickActionWithRightSideTable(actionName: string): Chainable<any>
+    executeQuickActionWithRightSideTable(actionName: string): Chainable<any>;
 
     /**
      * Get the value of a field as a string.
@@ -54,8 +55,7 @@ declare namespace Cypress {
      * @example
      * cy.getStringFieldValue('C_BPartner_ID').should('contain', businessPartnerName);
      */
-    getStringFieldValue(fieldName: string, modal?: boolean): Chainable<any>
-
+    getStringFieldValue(fieldName: string, modal?: boolean): Chainable<any>;
 
     /**
      * Used for reading text fields such as the `Description` field.
@@ -66,8 +66,7 @@ declare namespace Cypress {
      * @example
      * cy.getTextFieldValue('Description').should('contain', originalDocumentDescription);
      */
-    getTextFieldValue(fieldName: string, modal?: boolean): Chainable<any>
-
+    getTextFieldValue(fieldName: string, modal?: boolean): Chainable<any>;
 
     /**
      * @param fieldName - name of the field is question
@@ -78,7 +77,7 @@ declare namespace Cypress {
      *  cy.log(`IsDefault = ${checkBoxValue}`)
      * });
      */
-    getCheckboxValue(fieldName: string, modal?: boolean): Chainable<any>
+    getCheckboxValue(fieldName: string, modal?: boolean): Chainable<any>;
 
     /**
      * Select the current record ID from the URL.
@@ -90,8 +89,7 @@ declare namespace Cypress {
      *     theRecordId = recordId;
      * });
      */
-    getCurrentWindowRecordId(): Chainable<any>
-
+    getCurrentWindowRecordId(): Chainable<any>;
 
     /**
      * Select the total amount from Sales Invoice's header
@@ -105,7 +103,7 @@ declare namespace Cypress {
      *   });
      * });
      */
-    getSalesInvoiceTotalAmount(): Chainable<any>
+    getSalesInvoiceTotalAmount(): Chainable<any>;
 
     /**
      * Better use {@link setCheckBoxValue} instead!
@@ -121,13 +119,18 @@ declare namespace Cypress {
      * cy.clickOnCheckBox('CompleteIt', true, true, '/rest/api/process/');
      *
      */
-    clickOnCheckBox(fieldName: string, expectedPatchValue: string, modal?: boolean, rewriteUrl ?: string, skipRequest ?: boolean): Chainable<any>
-
+    clickOnCheckBox(
+      fieldName: string,
+      expectedPatchValue: string,
+      modal?: boolean,
+      rewriteUrl?: string,
+      skipRequest?: boolean,
+    ): Chainable<any>;
 
     /**
      * Open the advanced edit overlay via ALT+E shortcut
      */
-    openAdvancedEdit(): Chainable<any>
+    openAdvancedEdit(): Chainable<any>;
 
     /**
      * Presses a single document's add-new-button to create a new subrow / included document
@@ -141,7 +144,7 @@ declare namespace Cypress {
      * // close the modal dialog
      * cy.pressDoneButton()
      */
-    pressAddNewButton(): Chainable<any>
+    pressAddNewButton(): Chainable<any>;
 
     /**
      *
@@ -151,7 +154,7 @@ declare namespace Cypress {
      * @example
      * cy.processDocument('Complete', 'Completed');
      */
-    processDocument(action: string, expectedStatus?: string)
+    processDocument(action: string, expectedStatus?: string);
 
     /**
      * Select an item in a list field
@@ -166,7 +169,13 @@ declare namespace Cypress {
      * // select a certain flatrate condition is a process dialog
      * cy.selectInListField('C_Flatrate_Conditions_ID', conditionsName, true, '/rest/api/process/');
      */
-    selectInListField(fieldName: string, stringValue: string, modal?: boolean, rewriteUrl?: string, skipRequest ?: boolean): Chainable<any>
+    selectInListField(
+      fieldName: string,
+      stringValue: string,
+      modal?: boolean,
+      rewriteUrl?: string,
+      skipRequest?: boolean,
+    ): Chainable<any>;
 
     /**
      * Opens a new single document window
@@ -182,7 +191,10 @@ declare namespace Cypress {
      *   cy.log('Creating Bpartner with id: ' + id);
      * });
      */
-    visitWindow(windowId: string | number, recordId?: string | number): Chainable<any>;
+    visitWindow(
+      windowId: string | number,
+      recordId?: string | number,
+    ): Chainable<any>;
 
     /**
      * Wait for the response to a particular patch where a particular field value was set
@@ -192,8 +204,11 @@ declare namespace Cypress {
      * @param fieldName ???? [help with docu]
      * @param fieldValue ???? [help with docu]
      */
-    waitForFieldValue(alias: String, fieldName: String, fieldValue: String): Chainable<any>
-
+    waitForFieldValue(
+      alias: String,
+      fieldName: String,
+      fieldValue: String,
+    ): Chainable<any>;
 
     /**
      *
@@ -205,8 +220,15 @@ declare namespace Cypress {
      * @param rewriteUrl optional, default = null; specify to which URL the command expects the frontend to patch.
      * @param skipRequest optional, default false - if set to true, cypress won't expect a request to the server and won't wait for it
      */
-    writeIntoLookupListField(fieldName: String, partialValue: String, expectedListValue: String, typeList?: boolean, modal?: boolean, rewriteUrl?: String, skipRequest ?: boolean): Chainable<any>
-
+    writeIntoLookupListField(
+      fieldName: String,
+      partialValue: String,
+      expectedListValue: String,
+      typeList?: boolean,
+      modal?: boolean,
+      rewriteUrl?: String,
+      skipRequest?: boolean,
+    ): Chainable<any>;
 
     /**
      * Write a string into an input field. Assert that the frontend performs a PATCH request with the given value.
@@ -223,7 +245,13 @@ declare namespace Cypress {
      * // This will fail if the field in question is *not* in a modal dialog
      * cy.writeIntoStringField('Description', 'myname', true)
      */
-    writeIntoStringField(fieldName: string, value: string | number, modal?: boolean, rewriteUrl?: string, skipRequest?: boolean): Chainable<any>
+    writeIntoStringField(
+      fieldName: string,
+      value: string | number,
+      modal?: boolean,
+      rewriteUrl?: string,
+      skipRequest?: boolean,
+    ): Chainable<any>;
 
     /**
      * Write a string into a text area
@@ -242,15 +270,20 @@ declare namespace Cypress {
      * // This will fail if the field in question is *not* in a modal dialog
      * cy.writeIntoTextField('Description', 'myname', true)
      */
-    writeIntoTextField(fieldName: string, stringValue: string, modal?: boolean, rewriteUrl?: RewriteURL, skipRequest?: boolean): Chainable<any>
-
+    writeIntoTextField(
+      fieldName: string,
+      stringValue: string,
+      modal?: boolean,
+      rewriteUrl?: RewriteURL,
+      skipRequest?: boolean,
+    ): Chainable<any>;
 
     /**
      * Press an overlay's "Done" button. Fail if there is a confirm dialog since that means the record could not be saved.
      *
      * @param waitBeforePress - optional; if truthy, call cy.wait with the given parameter first
      */
-    pressDoneButton(waitBeforePress?: number): Chainable<any>
+    pressDoneButton(waitBeforePress?: number): Chainable<any>;
 
     /**
      * Select a tab by its name.
@@ -258,13 +291,12 @@ declare namespace Cypress {
      * @param tabName the name of the tab
      * @param force optional, default = false;
      */
-    selectTab(tabName: string, force?: boolean): Chainable<any>
-
+    selectTab(tabName: string, force?: boolean): Chainable<any>;
 
     /**
      * Select the only row in the currently selected tab
      */
-    selectSingleTabRow(): Chainable<any>
+    selectSingleTabRow(): Chainable<any>;
 
     /**
      * Expect a number of unread notifications to be displayed in the header alert element.
@@ -272,25 +304,23 @@ declare namespace Cypress {
      * Waits at most 15 seconds for a notification to appear.
      *
      */
-    expectNumberOfDOMNotifications(expectedNumber: number): Chainable<any>
-
+    expectNumberOfDOMNotifications(expectedNumber: number): Chainable<any>;
 
     /**
      * Opens the inbox notification with the given text
      * @param text - String to search for in the notification
      */
-    openInboxNotificationWithText(text?: string): Chainable<any>
+    openInboxNotificationWithText(text?: string): Chainable<any>;
 
     /**
      * Mark all current notifications as read in the API and reset counter.
      */
-    readAllNotifications(): Chainable<any>
-
+    readAllNotifications(): Chainable<any>;
 
     /**
      * @param waitBeforePress optional, default 0 - wait this many milliseconds before pressing the start button
      */
-    pressStartButton(waitBeforePress ?: number): Chainable<any>
+    pressStartButton(waitBeforePress?: number): Chainable<any>;
 
     /**
      * Get the notification modal from the top-right of the screen
@@ -309,8 +339,7 @@ declare namespace Cypress {
      * // This will work as String.contains('Tibi'):
      * cy.getNotificationModal('Tibi');
      */
-    getNotificationModal(containsText?: string | RegExp)
-
+    getNotificationModal(containsText?: string | RegExp);
 
     /**
      * Change the current value of a checkBox (Yes/No box) to the desired state (checked (true) or not checked (false)).
@@ -322,8 +351,13 @@ declare namespace Cypress {
      * @param rewriteUrl - optional, default = null - specify to which URL the command expects the frontend to patch
      * @param skipRequest - optional, default = false - if set to true, cypress won't expect a request to the server and won't wait for it
      */
-    setCheckBoxValue(fieldName: string, isChecked: boolean, modal ?: boolean, rewriteUrl ?: RewriteURL, skipRequest ?: boolean): Chainable<any>
-
+    setCheckBoxValue(
+      fieldName: string,
+      isChecked: boolean,
+      modal?: boolean,
+      rewriteUrl?: RewriteURL,
+      skipRequest?: boolean,
+    ): Chainable<any>;
 
     /**
      * Wait until the current value of a checkBox (Yes/No box) is in the desired state (checked (true) or not checked (false).
@@ -332,8 +366,11 @@ declare namespace Cypress {
      * @param isChecked if true the checkbox should be in checked state, if false the checkbox should be unchecked
      * @param modal - optional, default = false - use true if the field is in a modal overlay
      */
-    expectCheckboxValue(fieldName: string, isChecked: boolean, modal?: boolean): Chainable<any>
-
+    expectCheckboxValue(
+      fieldName: string,
+      isChecked: boolean,
+      modal?: boolean,
+    ): Chainable<any>;
 
     /**
      * Unset the value of a list.
@@ -343,8 +380,11 @@ declare namespace Cypress {
      * @param modal - optional, default = false - use true if the field is in a modal overlay
      * @param rewriteUrl - optional, default = null - specify to which URL the command expects the frontend to patch
      */
-    resetListValue(fieldName: string, modal?: boolean, rewriteUrl?: RewriteURL): Chainable<any>
-
+    resetListValue(
+      fieldName: string,
+      modal?: boolean,
+      rewriteUrl?: RewriteURL,
+    ): Chainable<any>;
 
     /**
      * Erase the contents of this field.
@@ -352,8 +392,7 @@ declare namespace Cypress {
      * @param fieldName - name of the field is question
      * @param modal - optional, default = false - use true if the field is in a modal overlay
      */
-    clearField(fieldName: string, modal?: boolean): Chainable<any>
-
+    clearField(fieldName: string, modal?: boolean): Chainable<any>;
 
     /**
      * Expect specific document status
@@ -365,22 +404,21 @@ declare namespace Cypress {
      * @example
      * cy.expectDocumentStatus(DocumentStatusKey.InProgress);
      */
-    expectDocumentStatus(expectedDocumentStatus: DocumentStatusKey): Chainable<any>;
-
+    expectDocumentStatus(
+      expectedDocumentStatus: DocumentStatusKey,
+    ): Chainable<any>;
 
     /**
      * Press the batch entry button
      * @param waitBeforePress - optional; if truthy, call cy.wait with the given parameter first
      */
-    pressBatchEntryButton(waitBeforePress?: number): Chainable<any>
-
+    pressBatchEntryButton(waitBeforePress?: number): Chainable<any>;
 
     /**
      * Close the batch entry quickInput
      * @param waitBeforePress - optional; if truthy, call cy.wait with the given parameter first
      */
-    closeBatchEntry(waitBeforePress?: number): Chainable<any>
-
+    closeBatchEntry(waitBeforePress?: number): Chainable<any>;
 
     /**
      * Basic command for clicking an element with certain selector.
@@ -388,8 +426,7 @@ declare namespace Cypress {
      * @param selector - string used to query for the element
      * @param force - use force clicking or normal clicking
      */
-    clickElementWithClass(selector, force): Chainable<any>
-
+    clickElementWithClass(selector, force): Chainable<any>;
 
     /**
      * This command allows waiting for the breadcrumb in the header to be visible, which
@@ -405,8 +442,7 @@ declare namespace Cypress {
      *
      * [@TheBestPessimist]: i have no idea how to use this.
      */
-    waitForHeader(pageName, breadcrumbNr): Chainable<any>
-
+    waitForHeader(pageName, breadcrumbNr): Chainable<any>;
 
     /**
      * Open the referenced documents sidebar then click a reference.
@@ -428,8 +464,7 @@ declare namespace Cypress {
      * // Open the sidebar and select a specific document
      * cy.openReferencedDocuments('AD_RelationType_ID-540150');
      */
-    openReferencedDocuments(referenceId?: string): Chainable<any>
-
+    openReferencedDocuments(referenceId?: string): Chainable<any>;
 
     /**
      * Select the option with a given index from a static list. This command does not wait for response from the server.
@@ -438,8 +473,11 @@ declare namespace Cypress {
      * @param index - index of the item to select
      * @param modal - optional, default = false - use true if the field is in a modal overlay
      */
-    selectNthInListField(fieldName: string, index: number, modal?: boolean): Chainable<any>
-
+    selectNthInListField(
+      fieldName: string,
+      index: number,
+      modal?: boolean,
+    ): Chainable<any>;
 
     ////////////////////////////////
     ////////////////////////////////
@@ -451,8 +489,7 @@ declare namespace Cypress {
      *
      * from cypress/support/commands/action.js
      */
-    clickHeaderNav(navName): Chainable<any>
-
+    clickHeaderNav(navName): Chainable<any>;
 
     /**
      * Please help with documentation!
@@ -460,8 +497,7 @@ declare namespace Cypress {
      *
      * from cypress/support/commands/action.js
      */
-    executeHeaderAction(actionName): Chainable<any>
-
+    executeHeaderAction(actionName): Chainable<any>;
 
     /**
      * Please help with documentation!
@@ -469,8 +505,7 @@ declare namespace Cypress {
      *
      * from cypress/support/commands/form.js
      */
-    clickOnIsActive(modal): Chainable<any>
-
+    clickOnIsActive(modal): Chainable<any>;
 
     /**
      * It selects the current date from the picker
@@ -478,8 +513,7 @@ declare namespace Cypress {
      * @modal - optional, default false, set to true is the date field is in a modal
      * from cypress/support/commands/form.js
      */
-    selectDateViaPicker(fieldName: string, modal?: boolean): Chainable<any>
-
+    selectDateViaPicker(fieldName: string, modal?: boolean): Chainable<any>;
 
     /**Selects a date in the picker
      * should not be used for offsets larger than a couple of days
@@ -487,16 +521,11 @@ declare namespace Cypress {
      * @param {number} dayOffset - the number of days before/after today;
      * @param {boolean} modal - optional, default false, use true, if the field is in a modal overlay; required if the underlying window has a field with the same name
      */
-    selectOffsetDateViaPicker(fieldName: string, dayOffset: number, modal?: boolean): Chainable<any>
-
-
-    /**
-     * Please help with documentation!
-     * The file where this function is declared appears below, however the parameters in this definition may be wrong. Please adjust as needed.
-     *
-     * cypress/support/commands/general.js
-     */
-    loginViaAPI(username, password, redirect): Chainable<any>
+    selectOffsetDateViaPicker(
+      fieldName: string,
+      dayOffset: number,
+      modal?: boolean,
+    ): Chainable<any>;
 
     /**
      * Please help with documentation!
@@ -504,17 +533,7 @@ declare namespace Cypress {
      *
      * cypress/support/commands/general.js
      */
-    tab(prevSubject, subject, direction, options): Chainable<any>
-
-
-    /**
-     * Please help with documentation!
-     * The file where this function is declared appears below, however the parameters in this definition may be wrong. Please adjust as needed.
-     *
-     * cypress/support/commands/general.js
-     */
-    active(options): Chainable<any>
-
+    loginViaAPI(username, password, redirect): Chainable<any>;
 
     /**
      * Please help with documentation!
@@ -522,8 +541,23 @@ declare namespace Cypress {
      *
      * cypress/support/commands/general.js
      */
-    readAllNotifications(): Chainable<any>
+    tab(prevSubject, subject, direction, options): Chainable<any>;
 
+    /**
+     * Please help with documentation!
+     * The file where this function is declared appears below, however the parameters in this definition may be wrong. Please adjust as needed.
+     *
+     * cypress/support/commands/general.js
+     */
+    active(options): Chainable<any>;
+
+    /**
+     * Please help with documentation!
+     * The file where this function is declared appears below, however the parameters in this definition may be wrong. Please adjust as needed.
+     *
+     * cypress/support/commands/general.js
+     */
+    readAllNotifications(): Chainable<any>;
 
     /**
      * Please help with documentation!
@@ -532,15 +566,13 @@ declare namespace Cypress {
      * from cypress/support/commands/navigation.js
      */
 
-
     /**
      * Please help with documentation!
      * The file where this function is declared appears below, however the parameters in this definition may be wrong. Please adjust as needed.
      *
      * from cypress/support/commands/navigation.js
      */
-    clickButtonWithText(text): Chainable<any>
-
+    clickButtonWithText(text): Chainable<any>;
 
     /**
      * Please help with documentation!
@@ -548,15 +580,14 @@ declare namespace Cypress {
      *
      * from cypress/support/commands/test.js
      */
-    editAddress(fieldName, addressFunction): Chainable<any>
+    editAddress(fieldName, addressFunction): Chainable<any>;
 
     /**
      * Wait until a process is finished.
      *
      * Currently it just waits for 10 seconds, but maybe in the future backend will announce when a process is finished, and we will wait for that.
      */
-    waitUntilProcessIsFinished(): Chainable<any>
-
+    waitUntilProcessIsFinished(): Chainable<any>;
 
     /**
      * Select the nth row in a list. Starts from 0.
@@ -565,8 +596,11 @@ declare namespace Cypress {
      * @param modal - optional, default = false - use true if the field is in a modal overlay
      * @param force - optional, default = false - use true when no checks should be done if the selection was successful;
      */
-    selectNthRow(rowNumber: number, modal?: boolean, force ?: boolean): Chainable<any>
-
+    selectNthRow(
+      rowNumber: number,
+      modal?: boolean,
+      force?: boolean,
+    ): Chainable<any>;
 
     /**
      * Expect the table to have a specific number of rows
@@ -574,36 +608,38 @@ declare namespace Cypress {
      * @param numberOfRows - the number of rows
      * @param modal - optional, default = false - use true if the table is in a modal overlay
      */
-    expectNumberOfRows(numberOfRows: number, modal?: boolean): Chainable<any>
+    expectNumberOfRows(numberOfRows: number, modal?: boolean): Chainable<any>;
 
     /**
      * Complete the current document
      */
-    completeDocument(): Chainable<any>
+    completeDocument(): Chainable<any>;
 
     /**
      * Reactivate the current document
      */
-    reactivateDocument(): Chainable<any>
+    reactivateDocument(): Chainable<any>;
 
     /**
      * Reverse the current document
      */
-    reverseDocument(): Chainable<any>
+    reverseDocument(): Chainable<any>;
 
     /**
      * Wait until everything is saved and all requests are finished.
      *
      * @param expectIndicator - optional, default false - if true, expect the ".indicator-pending" save bar to exist then disappear
      */
-    waitForSaveIndicator(expectIndicator ?: boolean): Chainable<any>
+    waitForSaveIndicator(expectIndicator?: boolean): Chainable<any>;
 
     /**
      * Open the notifications inbox/bell and select the first notification containing the expected value.
      *
      * @param expectedValue - the expected text of the notification. Can be string or RegExp
      */
-    selectNotificationContaining(expectedValue: string | RegExp): Chainable<any>
+    selectNotificationContaining(
+      expectedValue: string | RegExp,
+    ): Chainable<any>;
 
     /**
      * Open the notifications inbox/bell and click the first notification containing the expected value.
@@ -612,20 +648,22 @@ declare namespace Cypress {
      * @param expectedValue - the expected text of the notification. Can be string or RegExp
      * @param destinationWindowID - the expected window where the notification redirects
      */
-    openNotificationContaining(expectedValue: string | RegExp, destinationWindowID: string | number): Chainable<any>
+    openNotificationContaining(
+      expectedValue: string | RegExp,
+      destinationWindowID: string | number,
+    ): Chainable<any>;
 
     /**
      * Expect the table rows to be greater than a given number
      *
      * @param numberOfRows - the number of rows
      */
-    expectNumberOfRowsToBeGreaterThan(numberOfRows: number): Chainable<any>
-
+    expectNumberOfRowsToBeGreaterThan(numberOfRows: number): Chainable<any>;
 
     /**
      * Select the left table from a modal dialog with 2 tables side by side.
      */
-    selectLeftTable(): Chainable<any>
+    selectLeftTable(): Chainable<any>;
 
     /**
      * Searches and selects a HU using the Barcode Filter.
@@ -652,13 +690,16 @@ declare namespace Cypress {
      *   cy.selectItemUsingBarcodeFilter(columnAndValue, false, true).click();
      * });
      */
-    selectItemUsingBarcodeFilter(columnAndValue: ColumnAndValue, modal ?: boolean, force ?: boolean): Chainable<any>
+    selectItemUsingBarcodeFilter(
+      columnAndValue: ColumnAndValue,
+      modal?: boolean,
+      force?: boolean,
+    ): Chainable<any>;
 
     /**
      * Select the right table from a modal dialog with 2 tables side by side.
      */
-    selectRightTable(): Chainable<any>
-
+    selectRightTable(): Chainable<any>;
 
     /**
      * Searches and selects one or multiple rows of a table by using column's `data-cy` attribute and the expected value of that column.
@@ -695,17 +736,21 @@ declare namespace Cypress {
      *   cy.selectRowByColumnAndValue(columnAndValue, false, true).click();
      * });
      */
-    selectRowByColumnAndValue(columnAndValue: ColumnAndValue | ColumnAndValue[], modal ?: boolean, force ?: boolean, single ?: boolean): Chainable<any>
+    selectRowByColumnAndValue(
+      columnAndValue: ColumnAndValue | ColumnAndValue[],
+      modal?: boolean,
+      force?: boolean,
+      single?: boolean,
+    ): Chainable<any>;
 
     /**
      * Select all rows on the current page
      */
-    selectAllRowsOnCurrentPage(): Chainable<any>
+    selectAllRowsOnCurrentPage(): Chainable<any>;
 
     /**
      * Count all rows from all pages
      */
-    countAllRows(): Chainable<any>
+    countAllRows(): Chainable<any>;
   }
-
 }

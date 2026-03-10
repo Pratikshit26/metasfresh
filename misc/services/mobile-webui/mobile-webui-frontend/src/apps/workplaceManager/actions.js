@@ -23,8 +23,8 @@
 import { SET_WORKPLACE } from './actionTypes';
 
 export const setWorkplace = ({ workplaceInfo }) => {
-  return {
-    type: SET_WORKPLACE,
-    payload: workplaceInfo,
-  };
+    return {
+        type: SET_WORKPLACE,
+        payload: workplaceInfo,
+    };
 };

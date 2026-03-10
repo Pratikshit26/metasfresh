@@ -1,4 +1,3 @@
-
 # Welcome
 
 Thank you very much for your interest contributing to the **metasfresh webui frontend** which is implemented in [react.js](https://facebook.github.io/react/).
@@ -24,12 +23,12 @@ We are allowed to use it for metasfresh under the GPL version two, three, or any
 
 # How to contribute
 
-* If you don't yet have one, create a github account for yourself.
-* Create a fork of the metasfresh repository you want to contribute to.
-  * **Important** please fork from the `master` branch. If you need to fork from any other branch, please consult with us first, in order to avoid possible problems down the road
-  * Note that if you are a frequent contributor, we will grant commit rights to our repository, so you can actually branch instead of forking each time.
-* Make your contribution and create a pull request.
-* We will review and comment on the pull request. We may suggest some changes or improvements or alternatives. We will always thread your work and of course also yourself with respect, even in case we choose not to incorporate it into metasfresh.
+- If you don't yet have one, create a github account for yourself.
+- Create a fork of the metasfresh repository you want to contribute to.
+  - **Important** please fork from the `master` branch. If you need to fork from any other branch, please consult with us first, in order to avoid possible problems down the road
+  - Note that if you are a frequent contributor, we will grant commit rights to our repository, so you can actually branch instead of forking each time.
+- Make your contribution and create a pull request.
+- We will review and comment on the pull request. We may suggest some changes or improvements or alternatives. We will always thread your work and of course also yourself with respect, even in case we choose not to incorporate it into metasfresh.
 
 The process of creating and maintaning a fork with git and github is explained in [this article](https://help.github.com/articles/fork-a-repo/). Note that at that article's end, there is also a link to [this article](https://help.github.com/articles/using-pull-requests/) about pull requests.
 
@@ -37,15 +36,15 @@ If you need help, don't hesitate to contact us, for example on our [metasfresh-w
 
 # Aim for efficient and clean code
 
-* Avoid creating redundant properties
-  * negative example: we have both of `disableAutoFocus`, `enableAutoFocus`
+- Avoid creating redundant properties
+  - negative example: we have both of `disableAutoFocus`, `enableAutoFocus`
 
-* only mutate the state if it's actually needed
+- only mutate the state if it's actually needed
 
-* Follow the documentation and best practice. In particular the documentation about:
-  * [state-and-lifecycle](https://facebook.github.io/react/docs/state-and-lifecycle.html)
-  * [optimizing-performance](https://facebook.github.io/react/docs/optimizing-performance.html)
+- Follow the documentation and best practice. In particular the documentation about:
+  - [state-and-lifecycle](https://facebook.github.io/react/docs/state-and-lifecycle.html)
+  - [optimizing-performance](https://facebook.github.io/react/docs/optimizing-performance.html)
 
 # How to get help
 
-* We have a gitter chat dedicated to this repository. You can enter it at https://gitter.im/metasfresh/metasfresh-webui-frontend
+- We have a gitter chat dedicated to this repository. You can enter it at https://gitter.im/metasfresh/metasfresh-webui-frontend

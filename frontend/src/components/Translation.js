@@ -1,27 +1,27 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
-import counterpart from 'counterpart';
-import deepForceUpdate from 'react-deep-force-update';
-import { connect } from 'react-redux';
-import offline_de from '../utils/offlineTranslations/offline_de.js';
-import offline_en from '../utils/offlineTranslations/offline_en.js';
-import { getMessages } from '../actions/AppActions';
-import { getCurrentActiveLanguage } from '../utils/locale';
+import { Component } from "react";
+import PropTypes from "prop-types";
+import counterpart from "counterpart";
+import deepForceUpdate from "react-deep-force-update";
+import { connect } from "react-redux";
+import offline_de from "../utils/offlineTranslations/offline_de.js";
+import offline_en from "../utils/offlineTranslations/offline_en.js";
+import { getMessages } from "../actions/AppActions";
+import { getCurrentActiveLanguage } from "../utils/locale";
 
 // Fake singleton
 let INSTANCE = null;
 
 const generateEntryFromKey = (key) => {
   if (!key) {
-    return '';
+    return "";
   }
 
   let sourceText = key;
   while (sourceText) {
-    const idx = sourceText.lastIndexOf('.');
+    const idx = sourceText.lastIndexOf(".");
     if (idx > 0) {
       const entry = sourceText.substring(idx + 1);
-      if (entry !== 'caption') {
+      if (entry !== "caption") {
         return entry;
       } else {
         sourceText = sourceText.substring(0, idx);
@@ -47,15 +47,15 @@ class Translation extends Component {
         error: parsedLangs[activeLang],
       },
     };
-    counterpart.registerTranslations('lang', offlineMessages);
+    counterpart.registerTranslations("lang", offlineMessages);
 
     return getMessages().then((response) => {
       if (window.Cypress) {
-        window.Cypress.emit('emit:counterpartTranslations', response.data);
+        window.Cypress.emit("emit:counterpartTranslations", response.data);
       }
 
-      counterpart.registerTranslations('lang', response.data);
-      counterpart.setLocale('lang');
+      counterpart.registerTranslations("lang", response.data);
+      counterpart.setLocale("lang");
       counterpart.setMissingEntryGenerator(function (key) {
         const entry = generateEntryFromKey(key);
 
@@ -98,7 +98,7 @@ Translation.propTypes = {
 };
 
 const mapStateToProps = ({ appHandler: { me } }) => {
-  const language = me.language ? me.language.key : 'de_DE';
+  const language = me.language ? me.language.key : "de_DE";
 
   return {
     language: language,

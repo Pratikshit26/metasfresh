@@ -1,12 +1,12 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { clearAllFilters } from '../../../actions/FiltersActions';
-import keymap from '../../../shortcuts/keymap';
-import Tooltips from '../../tooltips/Tooltips';
-import MenuOverlay from '../main_menu/MenuOverlay';
-import { requestRedirect } from '../../../reducers/redirect';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { clearAllFilters } from "../../../actions/FiltersActions";
+import keymap from "../../../shortcuts/keymap";
+import Tooltips from "../../tooltips/Tooltips";
+import MenuOverlay from "../main_menu/MenuOverlay";
+import { requestRedirect } from "../../../reducers/redirect";
 
 class Breadcrumb extends Component {
   constructor(props) {
@@ -36,11 +36,11 @@ class Breadcrumb extends Component {
 
   toggleTooltipOnFirstLevel = (showTooltip) => {
     const breadcrumbWrapper = document.getElementsByClassName(
-      'header-breadcrumb-wrapper'
+      "header-breadcrumb-wrapper",
     )[0];
     const breadcrumbWrapperLeft =
       breadcrumbWrapper && breadcrumbWrapper.getBoundingClientRect().left;
-    const elem = document.getElementsByClassName('header-item-last-level')[0];
+    const elem = document.getElementsByClassName("header-item-last-level")[0];
     const elemWidth = elem && elem.offsetWidth;
     const elemLeft = elem && elem.getBoundingClientRect().left;
 
@@ -68,19 +68,19 @@ class Breadcrumb extends Component {
     const { handleMenuOverlay, windowType, filters, dispatch } = this.props;
     const { type } = menu;
 
-    if (!filters.clearAll && type && type === 'window') {
+    if (!filters.clearAll && type && type === "window") {
       dispatch(clearAllFilters(true));
     }
 
     const noChildNodes =
       menu &&
-      (menu.type === 'window' ||
-        menu.type === 'board' ||
+      (menu.type === "window" ||
+        menu.type === "board" ||
         (menu.children && menu.children.length === 0));
 
     if (menu && (menu.elementId || noChildNodes)) {
       if (windowType) {
-        if (menu.type === 'board') {
+        if (menu.type === "board") {
           this.linkToEntityPage(menu.type, windowType);
         } else {
           this.linkToPage(windowType);
@@ -104,7 +104,7 @@ class Breadcrumb extends Component {
       docId,
     } = this.props;
 
-    if (menu.type === 'page') {
+    if (menu.type === "page") {
       return this.renderSummaryBreadcrumb(menu.caption);
     }
 
@@ -114,19 +114,19 @@ class Breadcrumb extends Component {
         <div className="header-btn tooltip-parent">
           <div
             className={
-              'header-item-container pointer ' +
-              (menuOverlay === menu.nodeId ? 'header-item-open ' : '') +
-              (!index ? 'header-item-container-static ' : '') +
+              "header-item-container pointer " +
+              (menuOverlay === menu.nodeId ? "header-item-open " : "") +
+              (!index ? "header-item-container-static " : "") +
               (breadcrumb && index === breadcrumb.length
-                ? 'header-item-last-level'
-                : '')
+                ? "header-item-last-level"
+                : "")
             }
             onClick={(e) => this.handleClick(e, menu)}
             onMouseEnter={
               index
                 ? () =>
                     this.toggleTooltipOnFirstLevel(
-                      breadcrumb && index === breadcrumb.length
+                      breadcrumb && index === breadcrumb.length,
                     )
                 : () => this.toggleTooltip(true)
             }
@@ -136,21 +136,22 @@ class Breadcrumb extends Component {
               {index ? menu.caption : <i className="meta-icon-menu" />}
             </span>
           </div>
-          {menuOverlay === menu.nodeId && typeof menuOverlay !== 'undefined' && (
-            <MenuOverlay
-              {...{
-                siteName,
-                handleMenuOverlay,
-                openModal,
-                windowType,
-                docId,
-              }}
-              nodeId={menu.nodeId}
-              node={menu}
-              onClickOutside={(e) => handleMenuOverlay(e, '')}
-              disableOnClickOutside={menuOverlay !== menu.nodeId}
-            />
-          )}
+          {menuOverlay === menu.nodeId &&
+            typeof menuOverlay !== "undefined" && (
+              <MenuOverlay
+                {...{
+                  siteName,
+                  handleMenuOverlay,
+                  openModal,
+                  windowType,
+                  docId,
+                }}
+                nodeId={menu.nodeId}
+                node={menu}
+                onClickOutside={(e) => handleMenuOverlay(e, "")}
+                disableOnClickOutside={menuOverlay !== menu.nodeId}
+              />
+            )}
         </div>
       </div>
     );
@@ -194,29 +195,29 @@ class Breadcrumb extends Component {
           <Tooltips
             extraClass="tooltip-home-menu"
             name={keymap.OPEN_NAVIGATION_MENU}
-            action={counterpart.translate('mainScreen.navigation.tooltip')}
-            type={''}
+            action={counterpart.translate("mainScreen.navigation.tooltip")}
+            type={""}
           />
         )}
         {tooltipOnFirstlevel && (
           <Tooltips
             {...{ tooltipOnFirstlevelPositionLeft }}
             name=""
-            action={'Go to default documents list'}
-            type={''}
+            action={"Go to default documents list"}
+            type={""}
           />
         )}
 
         <div className="header-breadcrumb">
-          {this.renderBtn({ nodeId: '0' }, 0)}
+          {this.renderBtn({ nodeId: "0" }, 0)}
 
           {breadcrumb &&
             breadcrumb.map((item, index) => this.renderBtn(item, index + 1))}
 
           {docSummaryData &&
             this.renderSummaryBreadcrumb(docSummaryData.value, {
-              isReadOnly: docSummaryData['readonly'],
-              reason: docSummaryData['readonly-reason'],
+              isReadOnly: docSummaryData["readonly"],
+              reason: docSummaryData["readonly-reason"],
             })}
 
           {siteName && <div className="divider">/</div>}

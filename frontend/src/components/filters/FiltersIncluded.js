@@ -1,10 +1,10 @@
-import counterpart from 'counterpart';
-import React, { PureComponent, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import onClickOutside from 'react-onclickoutside';
-import classnames from 'classnames';
-import { getItemsByProperty } from '../../utils';
-import FiltersItem from './FiltersItem';
+import counterpart from "counterpart";
+import React, { PureComponent, Fragment } from "react";
+import PropTypes from "prop-types";
+import onClickOutside from "react-onclickoutside";
+import classnames from "classnames";
+import { getItemsByProperty } from "../../utils";
+import FiltersItem from "./FiltersItem";
 
 /**
  * @file Class based component.
@@ -24,7 +24,7 @@ class FiltersIncluded extends PureComponent {
     const { widgetShown, allowOutsideClick } = this.props;
     const { isOpenDropdown } = this.state;
 
-    if (target.classList && target.classList.contains('input-dropdown-list')) {
+    if (target.classList && target.classList.contains("input-dropdown-list")) {
       return;
     }
 
@@ -47,7 +47,7 @@ class FiltersIncluded extends PureComponent {
 
     if (active !== null) {
       const foundInActive = active.filter((activeItem) =>
-        toCheckAgainst.includes(activeItem.filterId)
+        toCheckAgainst.includes(activeItem.filterId),
       );
       openFilterIdValue =
         foundInActive.length && active ? active[0].filterId : null;
@@ -98,7 +98,7 @@ class FiltersIncluded extends PureComponent {
     } = this.props;
 
     const { isOpenDropdown, openFilterId } = this.state;
-    const openFilter = getItemsByProperty(data, 'filterId', openFilterId)[0];
+    const openFilter = getItemsByProperty(data, "filterId", openFilterId)[0];
     const activeFilters = data.filter((filter) => filter.isActive);
     const activeFilter = activeFilters.length && activeFilters[0];
 
@@ -107,11 +107,11 @@ class FiltersIncluded extends PureComponent {
         activeFiltersCaptions &&
         activeFiltersCaptions[activeFilter.filterId]) ||
       [];
-    let panelCaption = activeFilter.isActive ? activeFilter.caption : '';
+    let panelCaption = activeFilter.isActive ? activeFilter.caption : "";
     let buttonCaption = activeFilter.isActive
       ? activeFilter.caption
-      : counterpart.translate('window.filters.noActiveFilter.caption', {
-          fallback: 'Filter',
+      : counterpart.translate("window.filters.noActiveFilter.caption", {
+          fallback: "Filter",
         });
 
     if (captions.length) {
@@ -126,12 +126,12 @@ class FiltersIncluded extends PureComponent {
         <button
           onClick={() => this.toggleDropdown(!isOpenDropdown)}
           className={classnames(
-            'btn btn-filter btn-meta-outline-secondary toggle-filters',
-            'btn-distance btn-sm',
+            "btn btn-filter btn-meta-outline-secondary toggle-filters",
+            "btn-distance btn-sm",
             {
-              'btn-select': isOpenDropdown,
-              'btn-active': isActive,
-            }
+              "btn-select": isOpenDropdown,
+              "btn-active": isActive,
+            },
           )}
           title={buttonCaption}
           tabIndex={modalVisible ? -1 : 0}
@@ -147,12 +147,12 @@ class FiltersIncluded extends PureComponent {
               </Fragment>
             ) : (
               `${counterpart.translate(
-                'window.filters.caption2'
+                "window.filters.caption2",
               )}: ${buttonCaption}`
             )
           ) : (
-            `${counterpart.translate('window.filters.noActiveFilter.caption', {
-              fallback: 'Filter',
+            `${counterpart.translate("window.filters.noActiveFilter.caption", {
+              fallback: "Filter",
             })}`
           )}
         </button>

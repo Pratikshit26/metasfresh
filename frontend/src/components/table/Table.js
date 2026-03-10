@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import currentDevice from 'current-device';
-import { ARROW_DOWN_KEY, ARROW_UP_KEY } from '../../constants/Constants';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import currentDevice from "current-device";
+import { ARROW_DOWN_KEY, ARROW_UP_KEY } from "../../constants/Constants";
 import {
   componentPropTypes,
   handleCopy,
   isShowCommentsMarker,
-} from '../../utils/tableHelpers';
-import TableHeader from './TableHeader';
-import TableRow from './TableRow';
-import Spinner from '../app/SpinnerOverlay';
-import { connect } from 'react-redux';
+} from "../../utils/tableHelpers";
+import TableHeader from "./TableHeader";
+import TableRow from "./TableRow";
+import Spinner from "../app/SpinnerOverlay";
+import { connect } from "react-redux";
 
 const MOBILE_TABLE_SIZE_LIMIT = 30; // subjective number, based on empiric testing
 const isMobileOrTablet =
-  currentDevice.type === 'mobile' || currentDevice.type === 'tablet';
+  currentDevice.type === "mobile" || currentDevice.type === "tablet";
 
 class Table extends PureComponent {
   constructor(props) {
@@ -135,7 +135,7 @@ class Table extends PureComponent {
   handleClick = (e, item) => {
     const { keyProperty, selected, onSelect, onDeselect, featureType } =
       this.props;
-    const disableMultiSel = featureType === 'SEARCH';
+    const disableMultiSel = featureType === "SEARCH";
     const id = item[keyProperty];
 
     this.clearMultiSelectionStartIdx();
@@ -197,7 +197,7 @@ class Table extends PureComponent {
 
     const selectRange = e.shiftKey;
     const nodeList = Array.prototype.slice.call(
-      document.activeElement.parentElement.children
+      document.activeElement.parentElement.children,
     );
     const idActive = nodeList.indexOf(document.activeElement);
     let idFocused = null;
@@ -221,7 +221,7 @@ class Table extends PureComponent {
             false,
             idFocused,
             showSelectedIncludedView &&
-              showSelectedIncludedView([allRowIds[currentIdx + 1]])
+              showSelectedIncludedView([allRowIds[currentIdx + 1]]),
           );
           this.clearMultiSelectionStartIdx();
         } else {
@@ -229,13 +229,13 @@ class Table extends PureComponent {
 
           const downShiftSel = allRowIds.slice(
             this.multiSelectionStartIdx > 0 ? this.multiSelectionStartIdx : 0,
-            currentIdx + 2 // +2 because we want to slice up to the next row and include it
+            currentIdx + 2, // +2 because we want to slice up to the next row and include it
           );
           handleSelect(
             downShiftSel,
             false,
             idFocused,
-            showSelectedIncludedView && showSelectedIncludedView(downShiftSel)
+            showSelectedIncludedView && showSelectedIncludedView(downShiftSel),
           );
         }
         break;
@@ -253,7 +253,7 @@ class Table extends PureComponent {
             idFocused,
             false,
             showSelectedIncludedView &&
-              showSelectedIncludedView([allRowIds[currentIdx - 1]])
+              showSelectedIncludedView([allRowIds[currentIdx - 1]]),
           );
           this.clearMultiSelectionStartIdx();
         } else {
@@ -261,30 +261,30 @@ class Table extends PureComponent {
 
           const upShiftSel = allRowIds.slice(
             currentIdx - 1,
-            this.multiSelectionStartIdx + 1
+            this.multiSelectionStartIdx + 1,
           );
           handleSelect(
             upShiftSel,
             false,
             idFocused,
-            showSelectedIncludedView && showSelectedIncludedView(upShiftSel)
+            showSelectedIncludedView && showSelectedIncludedView(upShiftSel),
           );
         }
         break;
       }
-      case 'ArrowLeft':
+      case "ArrowLeft":
         e.preventDefault();
         if (document.activeElement.previousSibling) {
           document.activeElement.previousSibling.focus();
         }
         break;
-      case 'ArrowRight':
+      case "ArrowRight":
         e.preventDefault();
         if (document.activeElement.nextSibling) {
           document.activeElement.nextSibling.focus();
         }
         break;
-      case 'Tab':
+      case "Tab":
         if (mainTable) {
           if (document.activeElement.nextSibling) {
             e.preventDefault();
@@ -298,10 +298,10 @@ class Table extends PureComponent {
               handleSelect(allRowIds[currentIdx + 1], false, 0);
 
               const focusedElem =
-                document.getElementsByClassName('js-attributes')[0];
+                document.getElementsByClassName("js-attributes")[0];
 
               if (focusedElem) {
-                focusedElem.getElementsByTagName('input')[0].focus();
+                focusedElem.getElementsByTagName("input")[0].focus();
               }
             } else {
               // TODO: How we should handle tabbing when we're out of rows ?
@@ -318,14 +318,14 @@ class Table extends PureComponent {
           }
         }
         break;
-      case 'Enter':
+      case "Enter":
         if (selected.length <= 1 && readonly) {
           e.preventDefault();
 
           this.handleDoubleClick(selected[selected.length - 1]);
         }
         break;
-      case 'Escape':
+      case "Escape":
         closeOverlays && closeOverlays();
         break;
     }
@@ -413,8 +413,8 @@ class Table extends PureComponent {
           isShowComments,
         }}
         cols={columns}
-        key={`row-${i}${viewId ? `-${viewId}` : ''}`}
-        dataKey={`row-${i}${viewId ? `-${viewId}` : ''}`}
+        key={`row-${i}${viewId ? `-${viewId}` : ""}`}
+        dataKey={`row-${i}${viewId ? `-${viewId}` : ""}`}
         collapsed={
           !!(
             collapsedParentRows.length &&
@@ -443,13 +443,13 @@ class Table extends PureComponent {
         newRow={i === rows.length - 1 ? newRow : false}
         isSelected={
           selected.indexOf(item[keyProperty]) > -1 ||
-          selected[0] === 'all' ||
+          selected[0] === "all" ||
           (!selected[0] && focusOnFieldName && i === 0)
         }
         updateHeight={this.updateHeight}
         handleSelect={onSelect}
         contextType={item.type}
-        caption={item.caption ? item.caption : ''}
+        caption={item.caption ? item.caption : ""}
         colspan={item.colspan}
         notSaved={item.saveStatus && !item.saveStatus.saved}
         hasComments={item.hasComments}
@@ -468,8 +468,8 @@ class Table extends PureComponent {
       return (
         <div className="empty-info-text">
           <div>
-            <h5>{!pending ? emptyText : ''}</h5>
-            <p>{!pending ? emptyHint : ''}</p>
+            <h5>{!pending ? emptyText : ""}</h5>
+            <p>{!pending ? emptyHint : ""}</p>
           </div>
         </div>
       );
@@ -513,12 +513,12 @@ class Table extends PureComponent {
       <div
         ref={(ref) => (this.tableContainer = ref)}
         className={classnames(
-          'panel panel-primary panel-bordered',
-          'panel-bordered-force table-flex-wrapper',
-          'document-list-table js-not-unselect',
+          "panel panel-primary panel-bordered",
+          "panel-bordered-force table-flex-wrapper",
+          "document-list-table js-not-unselect",
           {
-            'table-content-empty': !rows.length,
-          }
+            "table-content-empty": !rows.length,
+          },
         )}
       >
         {pending && !hasIncluded && (
@@ -530,13 +530,13 @@ class Table extends PureComponent {
         )}
         <table
           className={classnames(
-            'table table-bordered-vertically',
-            'table-striped js-table',
+            "table table-bordered-vertically",
+            "table-striped js-table",
             {
-              'table-read-only': readonly,
-              'table-fade-out': hasIncluded && blurOnIncludedView,
-              'layout-fix': tableRefreshToggle,
-            }
+              "table-read-only": readonly,
+              "table-fade-out": hasIncluded && blurOnIncludedView,
+              "layout-fix": tableRefreshToggle,
+            },
           )}
           onKeyDown={this.handleKeyDown}
           ref={this.setTableRef}
@@ -584,5 +584,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, null, null, { forwardRef: true })(
-  Table
+  Table,
 );

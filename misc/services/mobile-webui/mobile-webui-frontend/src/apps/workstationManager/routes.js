@@ -27,8 +27,8 @@ import { toUrl } from '../../utils';
 export const appLocation = ({ qrCode, parent } = {}) => toUrl(`/${APPLICATION_ID}`, { qrCode, parent });
 
 export const routes = [
-  {
-    path: appLocation(),
-    Component: AppScreen,
-  },
+    {
+        path: appLocation(),
+        Component: AppScreen,
+    },
 ];

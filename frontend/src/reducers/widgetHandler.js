@@ -1,4 +1,4 @@
-import { original, produce } from 'immer';
+import { original, produce } from "immer";
 
 import {
   DELETE_ATTRIBUTES,
@@ -6,8 +6,8 @@ import {
   FETCH_ATTRIBUTES_LAYOUT,
   PATCH_ATTRIBUTES,
   SET_ATTRIBUTES_DATA,
-} from '../constants/ActionTypes';
-import { parseToDisplay } from '../utils/documentListHelper';
+} from "../constants/ActionTypes";
+import { parseToDisplay } from "../utils/documentListHelper";
 
 // @VisibleForTesting
 export const initialState = {

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { Shortcut } from '../keyshortcuts';
-import { arePropTypesIdentical } from '../../utils';
+import { Shortcut } from "../keyshortcuts";
+import { arePropTypesIdentical } from "../../utils";
 
 const noOp = () => {};
 
@@ -46,12 +46,12 @@ export default class GlobalContextShortcuts extends Component {
     OPEN_AVATAR_MENU: (event) => {
       event.preventDefault();
 
-      this.props.closeOverlays('isUDOpen', this.props.handleUDToggle);
+      this.props.closeOverlays("isUDOpen", this.props.handleUDToggle);
     },
     OPEN_ACTIONS_MENU: (event) => {
       event.preventDefault();
 
-      this.props.closeOverlays('isSubheaderShow');
+      this.props.closeOverlays("isSubheaderShow");
     },
     OPEN_NAVIGATION_MENU: (event) => {
       event.preventDefault();
@@ -61,26 +61,26 @@ export default class GlobalContextShortcuts extends Component {
     OPEN_INBOX_MENU: (event) => {
       event.preventDefault();
 
-      this.props.closeOverlays('isInboxOpen', this.props.handleInboxToggle);
+      this.props.closeOverlays("isInboxOpen", this.props.handleInboxToggle);
     },
     OPEN_SIDEBAR_MENU_0: (event) => {
       event.preventDefault();
 
-      this.props.closeOverlays('isSideListShow', () => {
+      this.props.closeOverlays("isSideListShow", () => {
         this.props.handleSidelistToggle(0);
       });
     },
     OPEN_SIDEBAR_MENU_1: (event) => {
       event.preventDefault();
 
-      this.props.closeOverlays('isSideListShow', () => {
+      this.props.closeOverlays("isSideListShow", () => {
         this.props.handleSidelistToggle(1);
       });
     },
     OPEN_SIDEBAR_MENU_2: (event) => {
       event.preventDefault();
 
-      this.props.closeOverlays('isSideListShow', () => {
+      this.props.closeOverlays("isSideListShow", () => {
         this.props.handleSidelistToggle(2);
       });
     },
@@ -124,7 +124,7 @@ export default class GlobalContextShortcuts extends Component {
     DOC_STATUS: (event) => {
       event.preventDefault();
 
-      this.props.closeOverlays('dropdown', this.props.handleDocStatusToggle);
+      this.props.closeOverlays("dropdown", this.props.handleDocStatusToggle);
     },
     OPEN_COMMENTS: (event) => {
       event.preventDefault();
@@ -145,10 +145,10 @@ export default class GlobalContextShortcuts extends Component {
 
       if (
         activeElement &&
-        ((activeElement.nodeName === 'INPUT' &&
-          activeElement.type === 'text') ||
-          (activeElement.nodeName === 'TEXTAREA' &&
-            activeElement.type === 'textarea'))
+        ((activeElement.nodeName === "INPUT" &&
+          activeElement.type === "text") ||
+          (activeElement.nodeName === "TEXTAREA" &&
+            activeElement.type === "textarea"))
       ) {
         this.setCaretPosition(activeElement, 0);
 
@@ -162,10 +162,10 @@ export default class GlobalContextShortcuts extends Component {
 
       if (
         activeElement &&
-        ((activeElement.nodeName === 'INPUT' &&
-          activeElement.type === 'text') ||
-          (activeElement.nodeName === 'TEXTAREA' &&
-            activeElement.type === 'textarea'))
+        ((activeElement.nodeName === "INPUT" &&
+          activeElement.type === "text") ||
+          (activeElement.nodeName === "TEXTAREA" &&
+            activeElement.type === "textarea"))
       ) {
         this.setCaretPosition(activeElement, activeElement.value.length);
 

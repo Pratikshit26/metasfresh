@@ -1,16 +1,16 @@
-  {
-    "requestItems": [
-      {
-        "bpartnerIdentifier": "ext-ALBERTA-12345",
-        "bpartnerComposite": {
-          "bpartner": {
-            "code": "12345_updated"
-          }
+{
+  "requestItems": [
+    {
+      "bpartnerIdentifier": "ext-ALBERTA-12345",
+      "bpartnerComposite": {
+        "bpartner": {
+          "code": "12345_updated"
         }
       }
-    ],
-    "syncAdvise": {
-      "ifNotExists": "FAIL",
-      "ifExists": "UPDATE_MERGE"
     }
+  ],
+  "syncAdvise": {
+    "ifNotExists": "FAIL",
+    "ifExists": "UPDATE_MERGE"
   }
+}

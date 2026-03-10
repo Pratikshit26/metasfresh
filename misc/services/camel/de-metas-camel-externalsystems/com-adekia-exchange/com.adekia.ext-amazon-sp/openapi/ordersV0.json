@@ -14,21 +14,13 @@
     }
   },
   "host": "sellingpartnerapi-na.amazon.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/orders/v0/orders": {
       "get": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Returns orders created or updated during the time frame indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned. If NextToken is present, that will be used to retrieve the orders instead of other criteria.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getOrders",
         "parameters": [
@@ -192,10 +184,7 @@
                       "NumberOfItemsShipped": 0,
                       "NumberOfItemsUnshipped": 0,
                       "PaymentMethod": "Other",
-                      "PaymentMethodDetails": [
-                        "CreditCard",
-                        "GiftCerificate"
-                      ],
+                      "PaymentMethodDetails": ["CreditCard", "GiftCerificate"],
                       "MarketplaceId": "ATVPDKIKX0DER",
                       "ShipmentServiceLevelCategory": "Standard",
                       "OrderType": "StandardOrder",
@@ -247,9 +236,7 @@
                         "value": "TEST_CASE_200"
                       },
                       "MarketplaceIds": {
-                        "value": [
-                          "ATVPDKIKX0DER"
-                        ]
+                        "value": ["ATVPDKIKX0DER"]
                       }
                     }
                   },
@@ -272,9 +259,7 @@
                           "NumberOfItemsShipped": 0,
                           "NumberOfItemsUnshipped": 1,
                           "PaymentMethod": "Other",
-                          "PaymentMethodDetails": [
-                            "Standard"
-                          ],
+                          "PaymentMethodDetails": ["Standard"],
                           "IsReplacementOrder": false,
                           "MarketplaceId": "ATVPDKIKX0DER",
                           "ShipmentServiceLevelCategory": "Standard",
@@ -322,9 +307,7 @@
                           "NumberOfItemsShipped": 0,
                           "NumberOfItemsUnshipped": 1,
                           "PaymentMethod": "Other",
-                          "PaymentMethodDetails": [
-                            "Standard"
-                          ],
+                          "PaymentMethodDetails": ["Standard"],
                           "IsReplacementOrder": false,
                           "MarketplaceId": "ATVPDKIKX0DER",
                           "ShipmentServiceLevelCategory": "Standard",
@@ -351,9 +334,7 @@
                         "value": "TEST_CASE_200_NEXT_TOKEN"
                       },
                       "MarketplaceIds": {
-                        "value": [
-                          "ATVPDKIKX0DER"
-                        ]
+                        "value": ["ATVPDKIKX0DER"]
                       }
                     }
                   },
@@ -397,9 +378,7 @@
                         "value": "TEST_CASE_200_NEXT_TOKEN"
                       },
                       "MarketplaceIds": {
-                        "value": [
-                          "ATVPDKIKX0DER"
-                        ]
+                        "value": ["ATVPDKIKX0DER"]
                       },
                       "NextToken": {
                         "value": "2YgYW55IGNhcm5hbCBwbGVhc3VyZS4"
@@ -559,9 +538,7 @@
     },
     "/orders/v0/orders/{orderId}": {
       "get": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Returns the order indicated by the specified order ID.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getOrder",
         "parameters": [
@@ -590,10 +567,7 @@
                   "NumberOfItemsShipped": 0,
                   "NumberOfItemsUnshipped": 0,
                   "PaymentMethod": "Other",
-                  "PaymentMethodDetails": [
-                    "CreditCard",
-                    "GiftCerificate"
-                  ],
+                  "PaymentMethodDetails": ["CreditCard", "GiftCerificate"],
                   "MarketplaceId": "ATVPDKIKX0DER",
                   "ShipmentServiceLevelCategory": "Standard",
                   "OrderType": "StandardOrder",
@@ -677,9 +651,7 @@
                       "NumberOfItemsShipped": 0,
                       "NumberOfItemsUnshipped": 1,
                       "PaymentMethod": "Other",
-                      "PaymentMethodDetails": [
-                        "Standard"
-                      ],
+                      "PaymentMethodDetails": ["Standard"],
                       "IsReplacementOrder": false,
                       "MarketplaceId": "ATVPDKIKX0DER",
                       "ShipmentServiceLevelCategory": "Standard",
@@ -738,9 +710,7 @@
                       "NumberOfItemsShipped": 1,
                       "NumberOfItemsUnshipped": 0,
                       "PaymentMethod": "Other",
-                      "PaymentMethodDetails": [
-                        "Invoice"
-                      ],
+                      "PaymentMethodDetails": ["Invoice"],
                       "IsReplacementOrder": false,
                       "MarketplaceId": "A1PA6795UKMFR9",
                       "ShipmentServiceLevelCategory": "Standard",
@@ -896,9 +866,7 @@
     },
     "/orders/v0/orders/{orderId}/buyerInfo": {
       "get": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Returns buyer information for the specified order.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getOrderBuyerInfo",
         "parameters": [
@@ -1078,9 +1046,7 @@
     },
     "/orders/v0/orders/{orderId}/address": {
       "get": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Returns the shipping address for the specified order.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getOrderAddress",
         "parameters": [
@@ -1270,9 +1236,7 @@
     },
     "/orders/v0/orders/{orderId}/orderItems": {
       "get": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Returns detailed order item information for the order indicated by the specified order ID. If NextToken is provided, it's used to retrieve the next page of order items.\n\nNote: When an order is in the Pending state (the order has been placed but payment has not been authorized), the getOrderItems operation does not return information about pricing, taxes, shipping charges, gift status or promotions for the order items in the order. After an order leaves the Pending state (this occurs when payment has been authorized) and enters the Unshipped, Partially Shipped, or Shipped state, the getOrderItems operation returns information about pricing, taxes, shipping charges, gift status and promotions for the order items in the order.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getOrderItems",
         "parameters": [
@@ -1362,9 +1326,7 @@
                         "CurrencyCode": "JPY",
                         "Amount": "17.95"
                       },
-                      "PromotionIds": [
-                        "FREESHIP"
-                      ],
+                      "PromotionIds": ["FREESHIP"],
                       "ConditionId": "Used",
                       "ConditionSubtypeId": "Mint",
                       "ConditionNote": "Example ConditionNote",
@@ -1573,9 +1535,7 @@
     },
     "/orders/v0/orders/{orderId}/orderItems/buyerInfo": {
       "get": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Returns buyer information for the order items in the specified order.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getOrderItemsBuyerInfo",
         "parameters": [
@@ -1776,9 +1736,7 @@
     },
     "/orders/v0/orders/{orderId}/shipment": {
       "post": {
-        "tags": [
-          "shipment"
-        ],
+        "tags": ["shipment"],
         "description": "Update the shipment status.",
         "operationId": "updateShipmentStatus",
         "parameters": [
@@ -1957,9 +1915,7 @@
     },
     "/orders/v0/orders/{orderId}/regulatedInfo": {
       "get": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Returns regulated information for the order indicated by the specified order ID.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "getOrderRegulatedInfo",
         "parameters": [
@@ -2261,9 +2217,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "ordersV0"
-        ],
+        "tags": ["ordersV0"],
         "description": "Updates (approves or rejects) the verification status of an order containing regulated products.\n\n**Usage Plans:**\n\n| Plan type | Rate (requests per second) | Burst |\n| ---- | ---- | ---- |\n|Default| 0.0055 | 20 |\n|Selling partner specific| Variable | Variable |\n\nThe x-amzn-RateLimit-Limit response header returns the usage plan rate limits that were applied to the requested operation. Rate limits for some selling partners will vary from the default rate and burst shown in the table above. For more information, see \"Usage Plans and Rate Limits\" in the Selling Partner API documentation.",
         "operationId": "updateVerificationStatus",
         "parameters": [
@@ -2501,10 +2455,7 @@
           "$ref": "#/definitions/OrderItems"
         }
       },
-      "required": [
-        "marketplaceId",
-        "shipmentStatus"
-      ]
+      "required": ["marketplaceId", "shipmentStatus"]
     },
     "UpdateVerificationStatusRequest": {
       "description": "Request to update the verification status of an order containing regulated products.",
@@ -2515,9 +2466,7 @@
           "$ref": "#/definitions/UpdateVerificationStatusRequestBody"
         }
       },
-      "required": [
-        "regulatedOrderVerificationStatus"
-      ]
+      "required": ["regulatedOrderVerificationStatus"]
     },
     "UpdateVerificationStatusRequestBody": {
       "description": "The updated values of the VerificationStatus field.",
@@ -2526,10 +2475,7 @@
         "status": {
           "description": "The new verification status of the order.",
           "type": "string",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
+          "enum": ["Approved", "Rejected"],
           "x-docgen-enum-table-extension": [
             {
               "value": "Approved",
@@ -2550,10 +2496,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "status",
-        "externalReviewerId"
-      ]
+      "required": ["status", "externalReviewerId"]
     },
     "MarketplaceId": {
       "description": "the unobfuscated marketplace ID",
@@ -2562,11 +2505,7 @@
     "ShipmentStatus": {
       "description": "the status of the shipment of the order to be updated",
       "type": "string",
-      "enum": [
-        "ReadyForPickup",
-        "PickedUp",
-        "RefusedPickup"
-      ]
+      "enum": ["ReadyForPickup", "PickedUp", "RefusedPickup"]
     },
     "OrderItems": {
       "description": "the list of order items and quantities when the seller wants to partially update the shipment status of the order",
@@ -2705,9 +2644,7 @@
     },
     "OrdersList": {
       "type": "object",
-      "required": [
-        "Orders"
-      ],
+      "required": ["Orders"],
       "properties": {
         "Orders": {
           "$ref": "#/definitions/OrderList"
@@ -2810,10 +2747,7 @@
         "FulfillmentChannel": {
           "type": "string",
           "description": "Whether the order was fulfilled by Amazon (AFN) or by the seller (MFN).",
-          "enum": [
-            "MFN",
-            "AFN"
-          ],
+          "enum": ["MFN", "AFN"],
           "x-docgen-enum-table-extension": [
             {
               "value": "MFN",
@@ -2856,11 +2790,7 @@
         "PaymentMethod": {
           "type": "string",
           "description": "The payment method for the order. This property is limited to Cash On Delivery (COD) and Convenience Store (CVS) payment methods. Unless you need the specific COD payment information provided by the PaymentExecutionDetailItem object, we recommend using the PaymentMethodDetails property to get payment method information.",
-          "enum": [
-            "COD",
-            "CVS",
-            "Other"
-          ],
+          "enum": ["COD", "CVS", "Other"],
           "x-docgen-enum-table-extension": [
             {
               "value": "COD",
@@ -2991,10 +2921,7 @@
         },
         "BuyerInvoicePreference": {
           "type": "string",
-          "enum": [
-            "INDIVIDUAL",
-            "BUSINESS"
-          ],
+          "enum": ["INDIVIDUAL", "BUSINESS"],
           "x-docgen-enum-table-extension": [
             {
               "value": "INDIVIDUAL",
@@ -3046,9 +2973,7 @@
     },
     "OrderBuyerInfo": {
       "type": "object",
-      "required": [
-        "AmazonOrderId"
-      ],
+      "required": ["AmazonOrderId"],
       "properties": {
         "AmazonOrderId": {
           "type": "string",
@@ -3108,22 +3033,12 @@
     "RegulatedOrderVerificationStatus": {
       "type": "object",
       "description": "The verification status of the order along with associated approval or rejection metadata.",
-      "required": [
-        "Status",
-        "RequiresMerchantAction",
-        "ValidRejectionReasons"
-      ],
+      "required": ["Status", "RequiresMerchantAction", "ValidRejectionReasons"],
       "properties": {
         "Status": {
           "type": "string",
           "description": "The verification status of the order.",
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Expired",
-            "Cancelled"
-          ],
+          "enum": ["Pending", "Approved", "Rejected", "Expired", "Cancelled"],
           "x-docgen-enum-table-extension": [
             {
               "value": "Pending",
@@ -3175,10 +3090,7 @@
     "RejectionReason": {
       "type": "object",
       "description": "The reason for rejecting the order's regulated information. Not present if the order isn't rejected.",
-      "required": [
-        "RejectionReasonId",
-        "RejectionReasonDescription"
-      ],
+      "required": ["RejectionReasonId", "RejectionReasonDescription"],
       "properties": {
         "RejectionReasonId": {
           "type": "string",
@@ -3193,9 +3105,7 @@
     "RegulatedInformation": {
       "type": "object",
       "description": "The regulated information collected during purchase and used to verify the order.",
-      "required": [
-        "Fields"
-      ],
+      "required": ["Fields"],
       "properties": {
         "Fields": {
           "type": "array",
@@ -3208,12 +3118,7 @@
     },
     "RegulatedInformationField": {
       "type": "object",
-      "required": [
-        "FieldId",
-        "FieldLabel",
-        "FieldType",
-        "FieldValue"
-      ],
+      "required": ["FieldId", "FieldLabel", "FieldType", "FieldValue"],
       "description": "A field collected from the regulatory form.",
       "properties": {
         "FieldId": {
@@ -3227,10 +3132,7 @@
         "FieldType": {
           "type": "string",
           "description": "The type of field the field.",
-          "enum": [
-            "Text",
-            "FileAttachment"
-          ],
+          "enum": ["Text", "FileAttachment"],
           "x-docgen-enum-table-extension": [
             {
               "value": "Text",
@@ -3250,9 +3152,7 @@
     },
     "OrderAddress": {
       "type": "object",
-      "required": [
-        "AmazonOrderId"
-      ],
+      "required": ["AmazonOrderId"],
       "properties": {
         "AmazonOrderId": {
           "type": "string",
@@ -3266,9 +3166,7 @@
     },
     "Address": {
       "type": "object",
-      "required": [
-        "Name"
-      ],
+      "required": ["Name"],
       "properties": {
         "Name": {
           "type": "string",
@@ -3321,10 +3219,7 @@
         "AddressType": {
           "type": "string",
           "description": "The address type of the shipping address.",
-          "enum": [
-            "Residential",
-            "Commercial"
-          ],
+          "enum": ["Residential", "Commercial"],
           "x-docgen-enum-table-extension": [
             {
               "value": "Residential",
@@ -3369,10 +3264,7 @@
     },
     "PaymentExecutionDetailItem": {
       "type": "object",
-      "required": [
-        "Payment",
-        "PaymentMethod"
-      ],
+      "required": ["Payment", "PaymentMethod"],
       "properties": {
         "Payment": {
           "$ref": "#/definitions/Money"
@@ -3434,10 +3326,7 @@
     },
     "OrderItemsList": {
       "type": "object",
-      "required": [
-        "AmazonOrderId",
-        "OrderItems"
-      ],
+      "required": ["AmazonOrderId", "OrderItems"],
       "properties": {
         "OrderItems": {
           "$ref": "#/definitions/OrderItemList"
@@ -3462,11 +3351,7 @@
     },
     "OrderItem": {
       "type": "object",
-      "required": [
-        "ASIN",
-        "OrderItemId",
-        "QuantityOrdered"
-      ],
+      "required": ["ASIN", "OrderItemId", "QuantityOrdered"],
       "properties": {
         "ASIN": {
           "type": "string",
@@ -3594,10 +3479,7 @@
         "DeemedResellerCategory": {
           "type": "string",
           "description": "The category of deemed reseller. This applies to selling partners that are not based in the EU and is used to help them meet the VAT Deemed Reseller tax laws in the EU and UK.",
-          "enum": [
-            "IOSS",
-            "UOSS"
-          ],
+          "enum": ["IOSS", "UOSS"],
           "x-docgen-enum-table-extension": [
             {
               "value": "IOSS",
@@ -3621,10 +3503,7 @@
     },
     "OrderItemsBuyerInfoList": {
       "type": "object",
-      "required": [
-        "AmazonOrderId",
-        "OrderItems"
-      ],
+      "required": ["AmazonOrderId", "OrderItems"],
       "properties": {
         "OrderItems": {
           "$ref": "#/definitions/OrderItemBuyerInfoList"
@@ -3649,9 +3528,7 @@
     },
     "OrderItemBuyerInfo": {
       "type": "object",
-      "required": [
-        "OrderItemId"
-      ],
+      "required": ["OrderItemId"],
       "properties": {
         "OrderItemId": {
           "type": "string",
@@ -3727,9 +3604,7 @@
         "Model": {
           "type": "string",
           "description": "The tax collection model applied to the item.",
-          "enum": [
-            "MarketplaceFacilitator"
-          ],
+          "enum": ["MarketplaceFacilitator"],
           "x-docgen-enum-table-extension": [
             {
               "value": "MarketplaceFacilitator",
@@ -3740,9 +3615,7 @@
         "ResponsibleParty": {
           "type": "string",
           "description": "The party responsible for withholding the taxes and remitting them to the taxing authority.",
-          "enum": [
-            "Amazon Services, Inc."
-          ],
+          "enum": ["Amazon Services, Inc."],
           "x-docgen-enum-table-extension": [
             {
               "value": "Amazon Services, Inc.",
@@ -3878,10 +3751,7 @@
     },
     "Error": {
       "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
+      "required": ["code", "message"],
       "properties": {
         "code": {
           "type": "string",

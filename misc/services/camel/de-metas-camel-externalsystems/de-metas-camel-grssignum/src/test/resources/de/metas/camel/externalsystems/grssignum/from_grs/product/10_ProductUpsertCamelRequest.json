@@ -102,9 +102,7 @@
             }
           ],
           "qualityAttributes": {
-            "qualityAttributeLabels": [
-              "HALAL"
-            ],
+            "qualityAttributeLabels": ["HALAL"],
             "syncAdvise": {
               "ifNotExists": "CREATE",
               "ifExists": "REPLACE"

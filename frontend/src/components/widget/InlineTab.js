@@ -7,23 +7,23 @@
  *  - second click on the row it will close the edit mode
  *
  */
-import React, { PureComponent, Fragment } from 'react';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import counterpart from 'counterpart';
+import React, { PureComponent, Fragment } from "react";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import counterpart from "counterpart";
 
-import { deleteRequest } from '../../api';
-import { updateDataValidStatus } from '../../actions/WindowActions';
+import { deleteRequest } from "../../api";
+import { updateDataValidStatus } from "../../actions/WindowActions";
 import {
   getInlineTabLayoutAndData,
   setInlineTabItemProp,
-} from '../../actions/InlineTabActions';
-import { isGermanLanguage } from '../../utils/locale';
-import { fieldValueToString } from '../../utils/tableHelpers';
+} from "../../actions/InlineTabActions";
+import { isGermanLanguage } from "../../utils/locale";
+import { fieldValueToString } from "../../utils/tableHelpers";
 
-import Prompt from '../app/Prompt';
-import SectionGroup from '../SectionGroup';
+import Prompt from "../app/Prompt";
+import SectionGroup from "../SectionGroup";
 
 class InlineTab extends PureComponent {
   /**
@@ -46,7 +46,7 @@ class InlineTab extends PureComponent {
       docId,
       rowId,
     });
-    this.setProperty({ targetProp: 'isOpen', targetValue: !isOpen });
+    this.setProperty({ targetProp: "isOpen", targetValue: !isOpen });
   };
 
   /**
@@ -69,7 +69,7 @@ class InlineTab extends PureComponent {
    * @summary this shows the confirm dialog box
    */
   handleDelete = () => {
-    this.setProperty({ targetProp: 'promptOpen', targetValue: true });
+    this.setProperty({ targetProp: "promptOpen", targetValue: true });
   };
 
   /**
@@ -77,7 +77,7 @@ class InlineTab extends PureComponent {
    * @summary closes the confirmation dialog by setting the local state flag to false
    */
   handlePromptCancel = () => {
-    this.setProperty({ targetProp: 'promptOpen', targetValue: false });
+    this.setProperty({ targetProp: "promptOpen", targetValue: false });
   };
 
   /**
@@ -86,7 +86,7 @@ class InlineTab extends PureComponent {
    *            when the promisse is fulfilled it refreshes the table data
    */
   handlePromptDelete = () => {
-    this.setProperty({ targetProp: 'promptOpen', targetValue: false });
+    this.setProperty({ targetProp: "promptOpen", targetValue: false });
     const {
       windowId,
       id: docId,
@@ -95,12 +95,12 @@ class InlineTab extends PureComponent {
       updateTable,
       updateDataValidStatus,
     } = this.props;
-    deleteRequest('window', windowId, docId, tabId, rowId).then(
+    deleteRequest("window", windowId, docId, tabId, rowId).then(
       (deleteResponse) => {
         updateTable(true); /** we set the postDeletion to `true` */
         let { validStatus } = deleteResponse.data[0];
-        updateDataValidStatus('master', validStatus || { valid: true });
-      }
+        updateDataValidStatus("master", validStatus || { valid: true });
+      },
     );
   };
 
@@ -135,10 +135,10 @@ class InlineTab extends PureComponent {
       <div>
         <div
           className={classnames(
-            { 'inline-tab': !isOpen },
-            { 'inline-tab-active': isOpen },
-            { 'form-control-label': true },
-            { 'row-not-saved': !valid }
+            { "inline-tab": !isOpen },
+            { "inline-tab-active": isOpen },
+            { "form-control-label": true },
+            { "row-not-saved": !valid },
           )}
           onClick={this.toggleOpen}
         >
@@ -191,7 +191,7 @@ class InlineTab extends PureComponent {
                           className="btn btn-meta-outline-secondary btn-sm btn-pull-right"
                           onClick={() => this.handleDelete(rowId)}
                         >
-                          {counterpart.translate('window.Delete.caption')}
+                          {counterpart.translate("window.Delete.caption")}
                         </button>
                         <div className="clearfix" />
                       </div>
@@ -200,11 +200,11 @@ class InlineTab extends PureComponent {
                   {/* These prompt strings are hardcoded because they need to be provided by the BE */}
                   {promptOpen && (
                     <Prompt
-                      title={counterpart.translate('window.Delete.caption')}
-                      text={counterpart.translate('window.delete.message')}
+                      title={counterpart.translate("window.Delete.caption")}
+                      text={counterpart.translate("window.delete.message")}
                       buttons={{
-                        submit: counterpart.translate('window.delete.confirm'),
-                        cancel: counterpart.translate('window.delete.cancel'),
+                        submit: counterpart.translate("window.delete.confirm"),
+                        cancel: counterpart.translate("window.delete.cancel"),
                       }}
                       onCancelClick={this.handlePromptCancel}
                       selected={rowId}

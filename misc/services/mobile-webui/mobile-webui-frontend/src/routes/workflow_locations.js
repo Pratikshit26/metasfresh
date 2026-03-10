@@ -3,5 +3,5 @@
 import { toUrl } from '../utils';
 
 export const getWFProcessScreenLocation = ({ applicationId, wfProcessId, back }) => {
-  return toUrl(`/${applicationId}/wf/${wfProcessId}`, { back });
+    return toUrl(`/${applicationId}/wf/${wfProcessId}`, { back });
 };

@@ -105,10 +105,10 @@ export class BPartner {
   }
 
   static applyBank(bank) {
-    cy.selectTab('C_BP_BankAccount');
+    cy.selectTab("C_BP_BankAccount");
     cy.pressAddNewButton();
-    cy.writeIntoLookupListField('C_Bank_ID', bank, bank, false, true);
-    cy.writeIntoStringField('A_Name', 'Test Account', true);
+    cy.writeIntoLookupListField("C_Bank_ID", bank, bank, false, true);
+    cy.writeIntoStringField("A_Name", "Test Account", true);
     cy.pressDoneButton();
   }
 }
@@ -158,51 +158,79 @@ export class BPartnerContact {
 
 function applyBPartner(bPartner) {
   describe(`Create new bPartner ${bPartner.name}`, function () {
-    cy.get('.avatar').then(() => {
-      cy.visitWindow('123', 'NEW');
-      cy.writeIntoStringField('CompanyName', bPartner.name);
-      cy.writeIntoStringField('Name2', bPartner.name);
-      if (bPartner.isVendor || bPartner.vendorDiscountSchema || bPartner.vendorPricingSystem) {
-        cy.selectTab('Vendor');
+    cy.get(".avatar").then(() => {
+      cy.visitWindow("123", "NEW");
+      cy.writeIntoStringField("CompanyName", bPartner.name);
+      cy.writeIntoStringField("Name2", bPartner.name);
+      if (
+        bPartner.isVendor ||
+        bPartner.vendorDiscountSchema ||
+        bPartner.vendorPricingSystem
+      ) {
+        cy.selectTab("Vendor");
         cy.selectSingleTabRow();
 
         cy.openAdvancedEdit();
-        cy.getCheckboxValue('IsVendor').then((isVendorValue) => {
+        cy.getCheckboxValue("IsVendor").then((isVendorValue) => {
           if (bPartner.isVendor && !isVendorValue) {
-            cy.clickOnCheckBox('IsVendor', true, true /*modal*/);
+            cy.clickOnCheckBox("IsVendor", true, true /*modal*/);
           }
         });
         if (bPartner.vendorPricingSystem) {
-          cy.writeIntoLookupListField('PO_PricingSystem_ID', bPartner.vendorPricingSystem, bPartner.vendorPricingSystem, false, true);
+          cy.writeIntoLookupListField(
+            "PO_PricingSystem_ID",
+            bPartner.vendorPricingSystem,
+            bPartner.vendorPricingSystem,
+            false,
+            true,
+          );
         }
         if (bPartner.vendorDiscountSchema) {
-          cy.selectInListField('PO_DiscountSchema_ID', bPartner.vendorDiscountSchema, true /*modal*/);
+          cy.selectInListField(
+            "PO_DiscountSchema_ID",
+            bPartner.vendorDiscountSchema,
+            true /*modal*/,
+          );
         }
         cy.pressDoneButton();
       }
 
       if (bPartner.isCustomer || bPartner.customerPricingSystem) {
-        cy.selectTab('Customer');
+        cy.selectTab("Customer");
         cy.selectSingleTabRow();
 
         cy.openAdvancedEdit();
-        cy.getCheckboxValue('IsCustomer').then((isCustomerValue) => {
+        cy.getCheckboxValue("IsCustomer").then((isCustomerValue) => {
           if (bPartner.isCustomer && !isCustomerValue) {
-            cy.clickOnCheckBox('IsCustomer', true, true /*modal*/);
+            cy.clickOnCheckBox("IsCustomer", true, true /*modal*/);
           }
         });
         if (bPartner.customerDiscountSchema) {
-          cy.selectInListField('M_DiscountSchema_ID', bPartner.customerDiscountSchema, true /*modal*/);
+          cy.selectInListField(
+            "M_DiscountSchema_ID",
+            bPartner.customerDiscountSchema,
+            true /*modal*/,
+          );
         }
         if (bPartner.customerPricingSystem) {
-          cy.writeIntoLookupListField('M_PricingSystem_ID', bPartner.customerPricingSystem, bPartner.customerPricingSystem, false, true);
+          cy.writeIntoLookupListField(
+            "M_PricingSystem_ID",
+            bPartner.customerPricingSystem,
+            bPartner.customerPricingSystem,
+            false,
+            true,
+          );
         }
         if (bPartner.customerDunning) {
-          cy.selectInListField('C_Dunning_ID', bPartner.customerDunning, true /*modal*/);
+          cy.selectInListField(
+            "C_Dunning_ID",
+            bPartner.customerDunning,
+            true /*modal*/,
+          );
         }
         if (bPartner.paymentTerm) {
           // cy.selectInListField('C_PaymentTerm_ID', getLanguageSpecific(bPartner, 'paymentTerm'), true); // todo this doesn't work. it breaks the login. WHYYYYYYYYYYYYY????
-          cy.selectInListField('C_PaymentTerm_ID', bPartner.paymentTerm, true);
+          cy.selectInListField("C_PaymentTerm_ID", bPartner.paymentTerm, true);
         }
         cy.pressDoneButton();
       }
@@ -212,13 +240,19 @@ function applyBPartner(bPartner) {
         bPartner.bPartnerLocations.forEach(function (bPartnerLocation) {
           applyLocation(bPartnerLocation);
         });
-        cy.get('table tbody tr').should('have.length', bPartner.bPartnerLocations.length);
+        cy.get("table tbody tr").should(
+          "have.length",
+          bPartner.bPartnerLocations.length,
+        );
       }
       if (bPartner.contacts.length > 0) {
         bPartner.contacts.forEach(function (bPartnerContact) {
           applyContact(bPartnerContact);
         });
-        cy.get('table tbody tr').should('have.length', bPartner.contacts.length);
+        cy.get("table tbody tr").should(
+          "have.length",
+          bPartner.contacts.length,
+        );
       }
       if (bPartner.bank) {
         BPartner.applyBank(bPartner.bank);
@@ -228,29 +262,50 @@ function applyBPartner(bPartner) {
 }
 
 function applyLocation(bPartnerLocation) {
-  cy.selectTab('C_BPartner_Location');
+  cy.selectTab("C_BPartner_Location");
   cy.pressAddNewButton();
   cy.log(`applyLocation - bPartnerLocation.name = ${bPartnerLocation.name}`);
-  cy.writeIntoStringField('Name', `${bPartnerLocation.name}`, true /*modal*/, false, true);
-  cy.get('.panel-modal-header-title').click();
+  cy.writeIntoStringField(
+    "Name",
+    `${bPartnerLocation.name}`,
+    true /*modal*/,
+    false,
+    true,
+  );
+  cy.get(".panel-modal-header-title").click();
 
-  cy.editAddress('C_Location_ID', function (url) {
-    cy.writeIntoStringField('Address1', ' ', null, url);
-    cy.writeIntoStringField('City', bPartnerLocation.city, null, url);
-    cy.writeIntoLookupListField('C_Country_ID', bPartnerLocation.country, bPartnerLocation.country, false /*typeList */, false /*modal THIS MUST BE FALSE EVEN IF IT'S A MODAL!*/, url);
+  cy.editAddress("C_Location_ID", function (url) {
+    cy.writeIntoStringField("Address1", " ", null, url);
+    cy.writeIntoStringField("City", bPartnerLocation.city, null, url);
+    cy.writeIntoLookupListField(
+      "C_Country_ID",
+      bPartnerLocation.country,
+      bPartnerLocation.country,
+      false /*typeList */,
+      false /*modal THIS MUST BE FALSE EVEN IF IT'S A MODAL!*/,
+      url,
+    );
   });
-  cy.get('.form-field-Address').should('contain', bPartnerLocation.city);
+  cy.get(".form-field-Address").should("contain", bPartnerLocation.city);
   cy.pressDoneButton();
 }
 
 function applyContact(bPartnerContact) {
-  cy.selectTab('AD_User');
+  cy.selectTab("AD_User");
   cy.pressAddNewButton();
-  cy.writeIntoStringField('Firstname', bPartnerContact.firstName, true /*modal*/);
-  cy.writeIntoStringField('Lastname', bPartnerContact.lastName, true /*modal*/);
+  cy.writeIntoStringField(
+    "Firstname",
+    bPartnerContact.firstName,
+    true /*modal*/,
+  );
+  cy.writeIntoStringField("Lastname", bPartnerContact.lastName, true /*modal*/);
 
   if (bPartnerContact.isDefaultContact) {
-    cy.clickOnCheckBox('IsDefaultContact', true /*expectedPatchValue*/, true /*modal*/);
+    cy.clickOnCheckBox(
+      "IsDefaultContact",
+      true /*expectedPatchValue*/,
+      true /*modal*/,
+    );
   }
   cy.pressDoneButton();
 }

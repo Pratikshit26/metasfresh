@@ -1,20 +1,20 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { connect } from 'react-redux';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { connect } from "react-redux";
 
-import { getTable, getTableId } from '../../reducers/tables';
-import { updateTableRowProperty } from '../../actions/TableActions';
+import { getTable, getTableId } from "../../reducers/tables";
+import { updateTableRowProperty } from "../../actions/TableActions";
 import {
   allowShortcut,
   disableShortcut,
   openModal,
   patch,
   updatePropertyValue,
-} from '../../actions/WindowActions';
+} from "../../actions/WindowActions";
 
-import WidgetTooltip from '../widget/WidgetTooltip';
-import MasterWidget from '../widget/MasterWidget';
+import WidgetTooltip from "../widget/WidgetTooltip";
+import MasterWidget from "../widget/MasterWidget";
 
 /**
  * @file Class based component.
@@ -85,13 +85,13 @@ class EntryTable extends PureComponent {
         const elem = rowLayout.cols[i];
 
         if (elem && elem.fields && elem.fields.length) {
-          const fieldName = elem.fields ? elem.fields[0].field : '';
+          const fieldName = elem.fields ? elem.fields[0].field : "";
           const widgetData = [rows[0].fieldsByName[fieldName]];
           const relativeDocId = data.ID && data.ID.value;
           let tooltipData = null;
           let tooltipWidget = elem.fields
             ? elem.fields.find((field) => {
-                if (field.type === 'Tooltip') {
+                if (field.type === "Tooltip") {
                   tooltipData = rows[0].fieldsByName[field.field];
 
                   if (tooltipData && tooltipData.value) {
@@ -109,10 +109,10 @@ class EntryTable extends PureComponent {
                 `col-sm-${colWidth}`,
                 {
                   [`text-${widgetData.gridAlign}`]: widgetData.gridAlign,
-                  'cell-disabled': widgetData[0].readonly,
-                  'cell-mandatory': widgetData[0].mandatory,
+                  "cell-disabled": widgetData[0].readonly,
+                  "cell-mandatory": widgetData[0].mandatory,
                 },
-                `field-${widgetData[0].widgetType}`
+                `field-${widgetData[0].widgetType}`,
               )}
             >
               <MasterWidget
@@ -151,7 +151,7 @@ class EntryTable extends PureComponent {
                   }
                 />
               )}
-            </td>
+            </td>,
           );
         } else {
           renderedArray.push(<td key={`__-cell-${i}`} />);

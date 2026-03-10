@@ -1,9 +1,7 @@
 {
   "props": {
     "processStatus": "saved",
-    "selected": [
-      "1001147"
-    ],
+    "selected": ["1001147"],
     "viewId": "540485-G",
     "windowId": "540485",
     "disabled": null,
@@ -19,9 +17,7 @@
       "processId": "ADP_541007",
       "caption": "Pick",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "evaluateDuration": "1.670 ms",
@@ -31,9 +27,7 @@
       "processId": "ADP_541203",
       "caption": "Print Pick list",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "evaluateDuration": "4.737 ms",
@@ -43,9 +37,7 @@
       "processId": "ADP_541013",
       "caption": "Unlock",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "evaluateDuration": "1.503 ms",
@@ -55,9 +47,7 @@
       "processId": "ADP_541014",
       "caption": "Unlock all",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "evaluateDuration": "1.557 ms",
@@ -82,9 +72,7 @@
       "processId": "ADP_541007",
       "caption": "Pick",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,
@@ -96,9 +84,7 @@
       "processId": "ADP_541203",
       "caption": "Print Pick list",
       "description": "",
-      "displayPlaces": [
-        "ViewQuickActions"
-      ],
+      "displayPlaces": ["ViewQuickActions"],
       "quickAction": true,
       "defaultQuickAction": false,
       "disabled": true,

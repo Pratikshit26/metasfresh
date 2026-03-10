@@ -1,25 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import counterpart from 'counterpart';
+import React from "react";
+import PropTypes from "prop-types";
+import counterpart from "counterpart";
 
-export const BlankPage = ({ what = 'Document', title, description }) => {
+export const BlankPage = ({ what = "Document", title, description }) => {
   let titleEffective;
   let descriptionEffective;
   if (title) {
     titleEffective = title;
     descriptionEffective = description;
   } else {
-    let whatEffective = what ? what : 'Document';
+    let whatEffective = what ? what : "Document";
     whatEffective =
       whatEffective.charAt(0).toUpperCase() + whatEffective.slice(1); // capitalize
-    titleEffective = counterpart.translate('window.notFound.title', {
+    titleEffective = counterpart.translate("window.notFound.title", {
       what: whatEffective,
     });
     descriptionEffective = counterpart.translate(
-      'window.notFound.description',
+      "window.notFound.description",
       {
         what: whatEffective,
-      }
+      },
     );
   }
 
@@ -45,7 +45,7 @@ const normalizeMessage = (message) => {
 
   let messageNorm = message.trim();
   if (!messageNorm) return null;
-  if (messageNorm === '-') return null;
+  if (messageNorm === "-") return null;
 
   return messageNorm;
 };

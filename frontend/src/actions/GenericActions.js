@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { getQueryString } from '../utils';
+import axios from "axios";
+import { getQueryString } from "../utils";
 import {
   allActionsRequest,
   getViewFieldDropdown,
   getViewFilterParameterDropdown,
   getViewFilterParameterTypeahead,
-} from '../api/view';
+} from "../api/view";
 
 // IMPORTANT GENERIC METHODS TO HANDLE LAYOUTS, DATA, COMMITS
 // @TODO: Everything should be moved to api
@@ -41,7 +41,7 @@ export function autocompleteRequest({
   // NOTE: following cases are already handled elsewhere:
   // * view attributes
 
-  if (entity === 'documentView' && subentity === 'filter') {
+  if (entity === "documentView" && subentity === "filter") {
     return getViewFilterParameterTypeahead({
       windowId: docType,
       viewId: viewId ?? docId, // NOTE in case of Labels widget, we really get the viewId. In the other cases we get the viewId as "docId".
@@ -51,13 +51,13 @@ export function autocompleteRequest({
     });
   } else {
     return axios.get(`${config.API_URL}/${entity}${
-      docType ? `/${docType}` : ''
-    }${viewId ? `/${viewId}` : ''}${docId ? `/${docId}` : ''}${
-      tabId ? `/${tabId}` : ''
-    }${rowId ? `/${rowId}` : ''}${subentity ? `/${subentity}` : ''}${
-      subentityId ? `/${subentityId}` : ''
+      docType ? `/${docType}` : ""
+    }${viewId ? `/${viewId}` : ""}${docId ? `/${docId}` : ""}${
+      tabId ? `/${tabId}` : ""
+    }${rowId ? `/${rowId}` : ""}${subentity ? `/${subentity}` : ""}${
+      subentityId ? `/${subentityId}` : ""
     }${
-      attribute ? '/attribute/' : '/field/'
+      attribute ? "/attribute/" : "/field/"
     }${propertyName}/typeahead?query=${encodeURIComponent(query)}
   `);
   }
@@ -74,10 +74,10 @@ export function autocompleteModalRequest({
   tabId,
   viewId,
 }) {
-  return axios.get(`${config.API_URL}/${entity}${docType ? `/${docType}` : ''}${
-    viewId ? `/${viewId}` : ''
-  }${docId ? `/${docId}` : ''}${tabId ? `/${tabId}` : ''}${
-    rowId ? `/${rowId}` : ''
+  return axios.get(`${config.API_URL}/${entity}${docType ? `/${docType}` : ""}${
+    viewId ? `/${viewId}` : ""
+  }${docId ? `/${docId}` : ""}${tabId ? `/${tabId}` : ""}${
+    rowId ? `/${rowId}` : ""
   }/edit/${propertyName}/typeahead?query=${encodeURIComponent(query)}
   `);
 }
@@ -95,8 +95,8 @@ export function dropdownRequest({
   tabId,
   viewId,
 }) {
-  if (entity === 'documentView') {
-    if (subentity === 'filter') {
+  if (entity === "documentView") {
+    if (subentity === "filter") {
       return getViewFilterParameterDropdown({
         windowId: docType,
         viewId,
@@ -113,13 +113,13 @@ export function dropdownRequest({
     }
   } else {
     return axios.get(`
-    ${config.API_URL}/${entity}${docType ? `/${docType}` : ''}${
-      viewId ? `/${viewId}` : ''
-    }${docId ? `/${docId}` : ''}${tabId ? `/${tabId}` : ''}${
-      rowId ? `/${rowId}` : ''
-    }${subentity ? `/${subentity}` : ''}${
-      subentityId ? `/${subentityId}` : ''
-    }${attribute ? '/attribute/' : '/field/'}${propertyName}/dropdown`);
+    ${config.API_URL}/${entity}${docType ? `/${docType}` : ""}${
+      viewId ? `/${viewId}` : ""
+    }${docId ? `/${docId}` : ""}${tabId ? `/${tabId}` : ""}${
+      rowId ? `/${rowId}` : ""
+    }${subentity ? `/${subentity}` : ""}${
+      subentityId ? `/${subentityId}` : ""
+    }${attribute ? "/attribute/" : "/field/"}${propertyName}/dropdown`);
   }
 }
 
@@ -138,11 +138,11 @@ export function dropdownModalRequest({
 export function duplicateRequest(entity, docType, docId) {
   return axios.post(
     config.API_URL +
-      '/' +
+      "/" +
       entity +
-      (docType ? '/' + docType : '') +
-      (docId ? '/' + docId : '') +
-      '/duplicate'
+      (docType ? "/" + docType : "") +
+      (docId ? "/" + docId : "") +
+      "/duplicate",
   );
 }
 
@@ -166,7 +166,7 @@ export function actionsRequest({
   }
   //
   // View Actions:
-  else if (entity === 'documentView') {
+  else if (entity === "documentView") {
     return allActionsRequest({
       windowId: type,
       viewId: id,
@@ -190,8 +190,8 @@ export function actionsRequest({
 
     return axios.get(
       `${config.API_URL}/${entity}/${type}/${id}/actions${
-        query ? '?' + query : ''
-      }`
+        query ? "?" + query : ""
+      }`,
     );
   }
 }
@@ -199,26 +199,26 @@ export function actionsRequest({
 export function rowActionsRequest({ windowId, documentId, tabId, rowId }) {
   return axios.get(
     config.API_URL +
-      '/window/' +
+      "/window/" +
       windowId +
-      '/' +
+      "/" +
       documentId +
-      '/' +
+      "/" +
       tabId +
-      '/' +
+      "/" +
       rowId +
-      '/actions'
+      "/actions",
   );
 }
 
 export function processNewRecord(entity, docType, docId) {
   return axios.get(
-    `${config.API_URL}/${entity}/${docType}/${docId}/processNewRecord`
+    `${config.API_URL}/${entity}/${docType}/${docId}/processNewRecord`,
   );
 }
 
 export function getRequest() {
-  const url = config.API_URL + '/' + Array.from(arguments).join('/');
+  const url = config.API_URL + "/" + Array.from(arguments).join("/");
 
   return axios.get(url);
 }

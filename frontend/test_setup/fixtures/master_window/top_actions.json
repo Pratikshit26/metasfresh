@@ -5,9 +5,7 @@
         "processId": "ADP_541038",
         "caption": "Products Proposal",
         "description": "",
-        "displayPlaces": [
-          "IncludedTabTopActionsMenu"
-        ],
+        "displayPlaces": ["IncludedTabTopActionsMenu"],
         "quickAction": false,
         "defaultQuickAction": false,
         "shortcut": "Alt-Z",

@@ -1,12 +1,12 @@
-import cx from 'classnames';
-import Moment from 'moment';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import cx from "classnames";
+import Moment from "moment";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import { DATE_FORMAT } from '../../constants/Constants';
+import { DATE_FORMAT } from "../../constants/Constants";
 
 const classes =
-  'btn btn-filter btn-meta-outline-secondary btn-sm btn-empty btn-active';
+  "btn btn-filter btn-meta-outline-secondary btn-sm btn-empty btn-active";
 
 export default class FiltersDateStepper extends Component {
   static propTypes = {
@@ -54,9 +54,9 @@ export default class FiltersDateStepper extends Component {
     return (
       <button
         onClick={this.handleClick}
-        className={cx(classes, { ['btn-distance']: next })}
+        className={cx(classes, { ["btn-distance"]: next })}
       >
-        <i className={next ? 'meta-icon-right' : 'meta-icon-left'} />
+        <i className={next ? "meta-icon-right" : "meta-icon-left"} />
       </button>
     );
   }

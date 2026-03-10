@@ -78,22 +78,24 @@ export class DunningTypeEntryLine {
 }
 
 function applyDunningType(dunningType) {
-
   describe(`Create new Dunning Type ${dunningType.name}`, function () {
-    cy.visitWindow('159', 'NEW');
+    cy.visitWindow("159", "NEW");
 
-    cy.writeIntoStringField('Name', `${dunningType.name}`);
-    cy.setCheckBoxValue('IsDefault', dunningType.isDefault);
+    cy.writeIntoStringField("Name", `${dunningType.name}`);
+    cy.setCheckBoxValue("IsDefault", dunningType.isDefault);
 
     cy.openAdvancedEdit();
-    cy.selectInListField('C_Currency_ID', dunningType.currency, true);
+    cy.selectInListField("C_Currency_ID", dunningType.currency, true);
     cy.pressDoneButton();
 
     if (dunningType.entryLine.length > 0) {
       dunningType.entryLine.forEach(function (dunningEntryLine) {
         applyDunningTypeEntryLine(dunningEntryLine);
       });
-      cy.get('table tbody tr').should('have.length', dunningType.entryLine.length);
+      cy.get("table tbody tr").should(
+        "have.length",
+        dunningType.entryLine.length,
+      );
     }
   });
 }
@@ -101,11 +103,11 @@ function applyDunningType(dunningType) {
 const applyDunningTypeEntryLine = (dunningEntry) => {
   cy.pressAddNewButton();
 
-  cy.writeIntoStringField('Name', dunningEntry.name, true);
-  cy.writeIntoStringField('PrintName', dunningEntry.printName, true);
-  cy.writeIntoStringField('DaysBetweenDunning', dunningEntry.days, true);
-  cy.writeIntoTextField('NoteHeader', dunningEntry.header, true);
-  cy.writeIntoTextField('Note', dunningEntry.note, true);
+  cy.writeIntoStringField("Name", dunningEntry.name, true);
+  cy.writeIntoStringField("PrintName", dunningEntry.printName, true);
+  cy.writeIntoStringField("DaysBetweenDunning", dunningEntry.days, true);
+  cy.writeIntoTextField("NoteHeader", dunningEntry.header, true);
+  cy.writeIntoTextField("Note", dunningEntry.note, true);
 
   cy.pressDoneButton();
 };

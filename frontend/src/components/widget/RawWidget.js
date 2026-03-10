@@ -1,21 +1,21 @@
-import React, { createRef, PureComponent } from 'react';
-import { CSSTransition } from 'react-transition-group';
-import Moment from 'moment';
-import classnames from 'classnames';
+import React, { createRef, PureComponent } from "react";
+import { CSSTransition } from "react-transition-group";
+import Moment from "moment";
+import classnames from "classnames";
 
-import { getWidgetField, shouldPatch } from '../../utils/widgetHelpers';
-import { DATE_TIMEZONE_FORMAT } from '../../constants/Constants';
-import BarcodeScannerBtn from '../../components/widget/BarcodeScanner/BarcodeScannerBtn';
-import WidgetRenderer from './WidgetRenderer';
-import DevicesWidget from './Devices/DevicesWidget';
-import Tooltips from '../tooltips/Tooltips';
-import PropTypes from 'prop-types';
+import { getWidgetField, shouldPatch } from "../../utils/widgetHelpers";
+import { DATE_TIMEZONE_FORMAT } from "../../constants/Constants";
+import BarcodeScannerBtn from "../../components/widget/BarcodeScanner/BarcodeScannerBtn";
+import WidgetRenderer from "./WidgetRenderer";
+import DevicesWidget from "./Devices/DevicesWidget";
+import Tooltips from "../tooltips/Tooltips";
+import PropTypes from "prop-types";
 
 const computeWidgetTypeClass = (widgetType, fieldsCount) => {
   if (fieldsCount > 1) {
-    return 'widgetType-Composed widgetType-Composed-' + fieldsCount;
+    return "widgetType-Composed widgetType-Composed-" + fieldsCount;
   } else {
-    return 'widgetType-' + widgetType;
+    return "widgetType-" + widgetType;
   }
 };
 
@@ -181,7 +181,7 @@ export class RawWidget extends PureComponent {
     // - commented out because if you focus on an item and you disable the shourtcuts
     // you won't be able to use any shortcut assigned to that specific item/widget
     // - see issue https://github.com/metasfresh/metasfresh/issues/7119
-    widgetType === 'LongText' && disableShortcut();
+    widgetType === "LongText" && disableShortcut();
 
     listenOnKeysFalse && listenOnKeysFalse();
 
@@ -275,14 +275,14 @@ export class RawWidget extends PureComponent {
 
     // for number fields submit them automatically on up/down arrow pressed and blur the field
     const NumberWidgets = [
-      'Integer',
-      'Amount',
-      'Quantity',
-      'Number',
-      'CostPrice',
+      "Integer",
+      "Amount",
+      "Quantity",
+      "Number",
+      "CostPrice",
     ];
     if (
-      (key === 'ArrowUp' || key === 'ArrowDown') &&
+      (key === "ArrowUp" || key === "ArrowDown") &&
       NumberWidgets.includes(widgetType)
     ) {
       closeTableField?.();
@@ -291,12 +291,12 @@ export class RawWidget extends PureComponent {
       return this.handlePatch(widgetField, value, id, valueTo, true);
     }
 
-    if ((key === 'Enter' || key === 'Tab') && !e.shiftKey) {
-      if (key === 'Enter' && !propagateEnterKeyEvent) {
+    if ((key === "Enter" || key === "Tab") && !e.shiftKey) {
+      if (key === "Enter" && !propagateEnterKeyEvent) {
         e.preventDefault();
       }
 
-      return key === 'Tab'
+      return key === "Tab"
         ? this.handleBlur(e)
         : this.handlePatch(widgetField, value, id, valueTo);
     }
@@ -341,7 +341,7 @@ export class RawWidget extends PureComponent {
       widgetData,
     });
 
-    if (widgetType === 'LongText' || widgetType === 'Text') {
+    if (widgetType === "LongText" || widgetType === "Text") {
       value = value.substring(0, maxLength);
       this.updateTypedCharacters(value);
     }
@@ -349,7 +349,7 @@ export class RawWidget extends PureComponent {
     // Do patch only when value is not equal state
     // or cache is set and it is not equal value
     if ((isForce || willPatch) && handlePatch && !inProgress) {
-      if (widgetType === 'ZonedDateTime' && Moment.isMoment(value)) {
+      if (widgetType === "ZonedDateTime" && Moment.isMoment(value)) {
         value = Moment(value).format(DATE_TIMEZONE_FORMAT);
       }
 
@@ -390,7 +390,7 @@ export class RawWidget extends PureComponent {
    */
   renderErrorPopup = (reason) => {
     return (
-      <div className="input-error-popup">{reason ? reason : 'Input error'}</div>
+      <div className="input-error-popup">{reason ? reason : "Input error"}</div>
     );
   };
 
@@ -419,12 +419,12 @@ export class RawWidget extends PureComponent {
 
     let widgetValue = data != null ? data : widgetData[0].value;
     if (widgetValue === null) {
-      widgetValue = '';
+      widgetValue = "";
     }
 
     // TODO: API SHOULD RETURN THE SAME PROPERTIES FOR FILTERS
     let widgetField = filterWidget ? fields[0].parameterName : fields[0].field;
-    if (!widgetField && this.props.widgetType === 'Switch') {
+    if (!widgetField && this.props.widgetType === "Switch") {
       widgetField = fields[0].fields[0].field;
     }
 
@@ -436,18 +436,18 @@ export class RawWidget extends PureComponent {
 
     // TODO: this logic should be removed and adapted below after widgetType === 'MultiListValue' is added
     const isMultiselect = !!(
-      widgetData[0].widgetType === 'List' && widgetData[0].multiListValue
+      widgetData[0].widgetType === "List" && widgetData[0].multiListValue
     );
 
     // dev-note: avoid displaying value when hovering over password widget
     const widgetTitle =
-      widgetData[0].widgetType === 'Password' ? null : widgetValue;
+      widgetData[0].widgetType === "Password" ? null : widgetValue;
 
     const widgetProperties = {
       //autocomplete=new-password did not work in chrome for non password fields anymore,
       //switched to autocomplete=off instead
-      autoComplete: 'off',
-      className: 'input-field js-input-field',
+      autoComplete: "off",
+      className: "input-field js-input-field",
       value: widgetValue,
       defaultValue,
       placeholder: fields[0].emptyText,
@@ -493,7 +493,7 @@ export class RawWidget extends PureComponent {
    */
   isScanQRbuttonPanel = () => {
     const { barcodeScannerType, layoutType } = this.props;
-    return barcodeScannerType === 'qrCode' && layoutType === 'panel';
+    return barcodeScannerType === "qrCode" && layoutType === "panel";
   };
 
   /**
@@ -501,7 +501,7 @@ export class RawWidget extends PureComponent {
    * @returns adaptive size for the case when we have barcodeScannerType and `panel` layout type
    */
   getAdaptedFieldColSize = () =>
-    this.isScanQRbuttonPanel() ? 'col-sm-7' : 'col-sm-9';
+    this.isScanQRbuttonPanel() ? "col-sm-7" : "col-sm-9";
 
   /**
    * @method onDetectedQR
@@ -538,20 +538,20 @@ export class RawWidget extends PureComponent {
       this.state;
     const widgetBody = this.renderWidget();
     const { validStatus, warning } = widgetData[0];
-    const quickInput = subentity === 'quickInput';
+    const quickInput = subentity === "quickInput";
 
     // We have to hardcode that exception in case of having
     // wrong two line rendered one line widgets
     const oneLineException =
-      ['Switch', 'YesNo', 'Label', 'Button'].indexOf(widgetType) > -1;
+      ["Switch", "YesNo", "Label", "Button"].indexOf(widgetType) > -1;
 
     // Unsupported widget type
     if (!widgetBody) {
       // eslint-disable-next-line no-console
       console.warn(
-        'The %c' + widgetType,
-        'font-weight:bold;',
-        'is unsupported type of widget.'
+        "The %c" + widgetType,
+        "font-weight:bold;",
+        "is unsupported type of widget.",
       );
 
       return false;
@@ -567,30 +567,30 @@ export class RawWidget extends PureComponent {
         : null;
 
     const widgetFieldsName = fields
-      .map((field) => 'form-field-' + field.field)
-      .join(' ');
+      .map((field) => "form-field-" + field.field)
+      .join(" ");
 
-    let labelClass = '';
-    let fieldClass = '';
+    let labelClass = "";
+    let fieldClass = "";
     if (quickInput) {
-      labelClass = '';
-      fieldClass = '';
+      labelClass = "";
+      fieldClass = "";
     } else if (dataEntry) {
-      labelClass = 'col-sm-5';
-      fieldClass = 'col-sm-7';
-    } else if ((type === 'primary' || noLabel) && !oneLineException) {
-      labelClass = !noLabel ? 'col-sm-12 panel-title' : '';
-      fieldClass = 'col-sm-12';
-    } else if (type === 'primaryLongLabels') {
-      labelClass = 'col-sm-6';
-      fieldClass = 'col-sm-6';
+      labelClass = "col-sm-5";
+      fieldClass = "col-sm-7";
+    } else if ((type === "primary" || noLabel) && !oneLineException) {
+      labelClass = !noLabel ? "col-sm-12 panel-title" : "";
+      fieldClass = "col-sm-12";
+    } else if (type === "primaryLongLabels") {
+      labelClass = "col-sm-6";
+      fieldClass = "col-sm-6";
     } else {
-      labelClass = 'col-sm-3';
+      labelClass = "col-sm-3";
       fieldClass = fieldColSize;
     }
 
     if (fields[0].devices) {
-      fieldClass += ' form-group-flex';
+      fieldClass += " form-group-flex";
     }
 
     const labelProps = {};
@@ -601,21 +601,21 @@ export class RawWidget extends PureComponent {
     return (
       <div
         className={classnames(
-          'form-group',
+          "form-group",
           {
             row: !quickInput,
-            'form-group-table': rowId && !isModal,
+            "form-group-table": rowId && !isModal,
           },
           computeWidgetTypeClass(widgetType, fields.length),
-          widgetSize ? 'widgetSize-' + widgetSize : '',
-          widgetFieldsName
+          widgetSize ? "widgetSize-" + widgetSize : "",
+          widgetFieldsName,
         )}
       >
         {captionElement || null}
         {!noLabel && caption && (
           <label
-            className={classnames('form-control-label', labelClass, {
-              'zoom-into': fields[0].supportZoomInto,
+            className={classnames("form-control-label", labelClass, {
+              "zoom-into": fields[0].supportZoomInto,
             })}
             title={description || caption}
             {...labelProps}
@@ -632,9 +632,9 @@ export class RawWidget extends PureComponent {
         >
           {!clearedFieldWarning && warning && (
             <div
-              className={classnames('field-warning', {
-                'field-warning-message': warning,
-                'field-error-message': warning && warning.error,
+              className={classnames("field-warning", {
+                "field-warning-message": warning,
+                "field-error-message": warning && warning.error,
               })}
               onMouseEnter={() => this.toggleTooltip(true)}
               onMouseLeave={() => this.toggleTooltip(false)}
@@ -651,7 +651,7 @@ export class RawWidget extends PureComponent {
           )}
 
           <div
-            className={classnames('input-body-container', {
+            className={classnames("input-body-container", {
               focused: isFocused,
             })}
             title={valueDescription}

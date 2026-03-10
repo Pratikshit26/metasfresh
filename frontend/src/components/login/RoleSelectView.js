@@ -20,10 +20,10 @@
  * #L%
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import counterpart from 'counterpart';
-import RawList from '../widget/List/RawList';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from "react";
+import counterpart from "counterpart";
+import RawList from "../widget/List/RawList";
+import PropTypes from "prop-types";
 
 export const RoleSelectView = ({ roles, onSubmit }) => {
   const roleRef = useRef(null);
@@ -31,7 +31,7 @@ export const RoleSelectView = ({ roles, onSubmit }) => {
   const [role, setRole] = useState(null);
   const [dropdownToggled, setDropdownToggled] = useState(false);
   const [dropdownFocused, setDropdownFocused] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setRole(roles?.[0] ?? null);
@@ -53,14 +53,14 @@ export const RoleSelectView = ({ roles, onSubmit }) => {
   return (
     <div
       onKeyUp={(e) => {
-        if (!pending && e.key === 'Enter') {
+        if (!pending && e.key === "Enter") {
           fireOnSubmit(role);
         }
       }}
     >
       {error && <div className="input-error">{error}</div>}
       <div className="form-control-label">
-        <small>{counterpart.translate('login.selectRole.caption')}</small>
+        <small>{counterpart.translate("login.selectRole.caption")}</small>
       </div>
       <RawList
         ref={roleRef}
@@ -85,7 +85,7 @@ export const RoleSelectView = ({ roles, onSubmit }) => {
           onClick={() => fireOnSubmit(role)}
           disabled={pending}
         >
-          {counterpart.translate('login.send.caption')}
+          {counterpart.translate("login.send.caption")}
         </button>
       </div>
     </div>

@@ -26,8 +26,8 @@ import { APPLICATION_ID } from './constants';
 export const appLocation = () => `/${APPLICATION_ID}`;
 
 export const routes = [
-  {
-    path: appLocation(),
-    Component: AppScreen,
-  },
+    {
+        path: appLocation(),
+        Component: AppScreen,
+    },
 ];

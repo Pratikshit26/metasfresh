@@ -6,17 +6,17 @@ import { posReducer } from './reducers';
 import { push } from 'connected-react-router';
 
 export const applicationDescriptor = {
-  applicationId: APPLICATION_ID,
-  routes: posRoutes,
-  messages: {
-    en: messages_en,
-    de: messages_de,
-  },
-  isFullScreen: true,
-  startApplication: () => {
-    return (dispatch) => {
-      dispatch(push(posLocation()));
-    };
-  },
-  reduxReducer: posReducer,
+    applicationId: APPLICATION_ID,
+    routes: posRoutes,
+    messages: {
+        en: messages_en,
+        de: messages_de,
+    },
+    isFullScreen: true,
+    startApplication: () => {
+        return (dispatch) => {
+            dispatch(push(posLocation()));
+        };
+    },
+    reduxReducer: posReducer,
 };

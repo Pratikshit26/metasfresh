@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Card from './Card';
+import React from "react";
+import PropTypes from "prop-types";
+import Card from "./Card";
 
 const Lane = (props) => {
   const {
@@ -25,8 +25,8 @@ const Lane = (props) => {
       <div className="board-lane-header">{caption}</div>
       <div
         className={
-          'board-draggable-wrapper ' +
-          (!cards.length ? 'board-draggable-placeholder ' : '')
+          "board-draggable-wrapper " +
+          (!cards.length ? "board-draggable-placeholder " : "")
         }
       >
         {!cards.length && (

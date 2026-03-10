@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from 'axios';
  * @param date <string>
  */
 export function fetchDailyReport(date: string): Promise<AxiosResponse> {
-  return axios.get(`/rest/dailyReport/${date}`);
+    return axios.get(`/rest/dailyReport/${date}`);
 }
 
 /**
@@ -26,7 +26,7 @@ export function fetchDailyReport(date: string): Promise<AxiosResponse> {
  *        }
  */
 export function postDailyReport(data: unknown): Promise<AxiosResponse> {
-  return axios.post(`/rest/dailyReport`, data);
+    return axios.post(`/rest/dailyReport`, data);
 }
 
 /**
@@ -36,7 +36,7 @@ export function postDailyReport(data: unknown): Promise<AxiosResponse> {
  * @summary gets the current active language and a messages object containing key value pairs with the translated strings
  */
 export function getMessages(): Promise<AxiosResponse> {
-  return axios.get('/rest/i18n/messages');
+    return axios.get('/rest/i18n/messages');
 }
 
 /**
@@ -46,7 +46,7 @@ export function getMessages(): Promise<AxiosResponse> {
  * @summary gets the existing info messages which then are displayed pre-formatated preserving <b>, <i>
  */
 export function infoMessages(): Promise<AxiosResponse> {
-  return axios.get(`/rest/infoMessages`);
+    return axios.get(`/rest/infoMessages`);
 }
 
 /**
@@ -62,7 +62,7 @@ export function infoMessages(): Promise<AxiosResponse> {
  *        }
  */
 export function favoriteAdd(data: Array<string>): Promise<AxiosResponse> {
-  return axios.post(`/rest/products/favorite/add`, { productIds: data });
+    return axios.post(`/rest/products/favorite/add`, { productIds: data });
 }
 
 /**
@@ -78,7 +78,7 @@ export function favoriteAdd(data: Array<string>): Promise<AxiosResponse> {
  *        }
  */
 export function favoriteRemove(data: Array<string>): Promise<AxiosResponse> {
-  return axios.post(`/rest/products/favorite/remove`, { productIds: data });
+    return axios.post(`/rest/products/favorite/remove`, { productIds: data });
 }
 
 /**
@@ -88,7 +88,7 @@ export function favoriteRemove(data: Array<string>): Promise<AxiosResponse> {
  * @summary get the products that are not favorite
  */
 export function getNotFavorite(): Promise<AxiosResponse> {
-  return axios.get(`/rest/products/notFavorite`);
+    return axios.get(`/rest/products/notFavorite`);
 }
 
 /**
@@ -99,7 +99,7 @@ export function getNotFavorite(): Promise<AxiosResponse> {
  * @param string - `weekYear` - format i.e: 05.2021
  */
 export function fetchWeeklyReport(weekYear: string): Promise<AxiosResponse> {
-  return axios.get(`/rest/weeklyReport/${weekYear}`);
+    return axios.get(`/rest/weeklyReport/${weekYear}`);
 }
 
 /**
@@ -110,7 +110,7 @@ export function fetchWeeklyReport(weekYear: string): Promise<AxiosResponse> {
  * @param object - data { productId: string; trend: string; week: string }
  */
 export function postNextWeekTrend(data: { productId: string; trend: string; week: string }): Promise<AxiosResponse> {
-  return axios.post(`/rest/weeklyReport/nextWeekTrend`, data);
+    return axios.post(`/rest/weeklyReport/nextWeekTrend`, data);
 }
 
 /**
@@ -125,21 +125,21 @@ export function postNextWeekTrend(data: { productId: string; trend: string; week
  *                 }
  */
 export function postRfQ(data: {
-  price?: number;
-  quantities?: { date: string; qtyPromised: number }[];
-  rfqId: string;
+    price?: number;
+    quantities?: { date: string; qtyPromised: number }[];
+    rfqId: string;
 }): Promise<AxiosResponse> {
-  // patch - case when NaN
-  if (isNaN(data.price) && !data.quantities) data.price = 0;
-  // patch - case when qtyPromised is null
-  data.quantities &&
-    data.quantities.length &&
-    data.quantities.map((item) => {
-      if (isNaN(item.qtyPromised)) item.qtyPromised = 0;
-      return item;
-    });
+    // patch - case when NaN
+    if (isNaN(data.price) && !data.quantities) data.price = 0;
+    // patch - case when qtyPromised is null
+    data.quantities &&
+        data.quantities.length &&
+        data.quantities.map((item) => {
+            if (isNaN(item.qtyPromised)) item.qtyPromised = 0;
+            return item;
+        });
 
-  return axios.post(`/rest/rfq`, data);
+    return axios.post(`/rest/rfq`, data);
 }
 
 /**
@@ -149,7 +149,7 @@ export function postRfQ(data: {
  * @summary retrieve the existing Requests for Quotation entries
  */
 export function fetchRFQuotations(): Promise<AxiosResponse> {
-  return axios.get(`/rest/rfq`);
+    return axios.get(`/rest/rfq`);
 }
 
 /**
@@ -159,7 +159,7 @@ export function fetchRFQuotations(): Promise<AxiosResponse> {
  * @summary confirm the data that was introduced (Save)
  */
 export function saveUnconfirmed(): Promise<AxiosResponse> {
-  return axios.post(`/rest/session/confirmDataEntry`);
+    return axios.post(`/rest/session/confirmDataEntry`);
 }
 
 /**
@@ -169,7 +169,7 @@ export function saveUnconfirmed(): Promise<AxiosResponse> {
  * @summary invalidate the session, user logout
  */
 export function logoutRequest(): Promise<AxiosResponse> {
-  return axios.get(`/rest/session/logout`);
+    return axios.get(`/rest/session/logout`);
 }
 
 /**
@@ -181,10 +181,10 @@ export function logoutRequest(): Promise<AxiosResponse> {
  * @param string `password`
  */
 export function loginRequest(username: string, password: string): Promise<AxiosResponse> {
-  return axios.post(`/rest/session/login`, {
-    email: username,
-    password,
-  });
+    return axios.post(`/rest/session/login`, {
+        email: username,
+        password,
+    });
 }
 
 /**
@@ -195,13 +195,13 @@ export function loginRequest(username: string, password: string): Promise<AxiosR
  * @param string `email`
  */
 export function passwordResetRequest(email: string): Promise<AxiosResponse> {
-  return axios.get(`/rest/session/resetUserPassword?email=${email}`, {
-    validateStatus: () => {
-      // returning true so that we can get the error message
-      // TODO: This is temporary, as in the final solution we will have 400's for errors - not 500
-      return true;
-    },
-  });
+    return axios.get(`/rest/session/resetUserPassword?email=${email}`, {
+        validateStatus: () => {
+            // returning true so that we can get the error message
+            // TODO: This is temporary, as in the final solution we will have 400's for errors - not 500
+            return true;
+        },
+    });
 }
 
 /**
@@ -212,9 +212,9 @@ export function passwordResetRequest(email: string): Promise<AxiosResponse> {
  * @param string `token`
  */
 export function passwordResetConfirm(token: string): Promise<AxiosResponse> {
-  return axios.get(`/rest/session/resetUserPasswordConfirm?token=${token}`, {
-    validateStatus: () => true,
-  });
+    return axios.get(`/rest/session/resetUserPasswordConfirm?token=${token}`, {
+        validateStatus: () => true,
+    });
 }
 
 /**
@@ -224,5 +224,5 @@ export function passwordResetConfirm(token: string): Promise<AxiosResponse> {
  * @summary fetches the session data, on success you get in here the count of unconfirmed entries, loggedIn value aso
  */
 export function getUserSession(): Promise<AxiosResponse> {
-  return axios.get(`/rest/session/`);
+    return axios.get(`/rest/session/`);
 }

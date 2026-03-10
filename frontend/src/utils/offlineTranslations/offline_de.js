@@ -1,11 +1,11 @@
 module.exports = {
   badGateway: {
-    title: 'Instanz ist nicht verfügbar',
-    description: 'Es treten Verbindungsprobleme auf.',
+    title: "Instanz ist nicht verfügbar",
+    description: "Es treten Verbindungsprobleme auf.",
   },
   noStatus: {
-    title: 'Verbindung unterbrochen',
+    title: "Verbindung unterbrochen",
     description:
-      'Es treten Verbindungsprobleme auf. Bitte kontrolliere die Verbindung und lade die Seite neu.',
+      "Es treten Verbindungsprobleme auf. Bitte kontrolliere die Verbindung und lade die Seite neu.",
   },
 };

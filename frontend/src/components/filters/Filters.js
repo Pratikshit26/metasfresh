@@ -1,27 +1,27 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import deepUnfreeze from 'deep-unfreeze';
-import { getCachedFilter, getEntityRelatedId } from '../../reducers/filters';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import deepUnfreeze from "deep-unfreeze";
+import { getCachedFilter, getEntityRelatedId } from "../../reducers/filters";
 import {
   clearAllFilters,
   updateActiveFilters,
   updateFilterWidgetShown,
   updateNotValidFields,
-} from '../../actions/FiltersActions';
+} from "../../actions/FiltersActions";
 import {
   annotateFilters,
   isFilterValid,
   normalizeFilterValue,
   setNewFiltersActive,
-} from '../../utils/filterHelpers';
+} from "../../utils/filterHelpers";
 
-import FiltersNotIcluded from './FiltersNotIncluded';
-import FiltersIncluded from './FiltersIncluded';
+import FiltersNotIcluded from "./FiltersNotIncluded";
+import FiltersIncluded from "./FiltersIncluded";
 
 const EMPTY_ARRAY = [];
-const FILTERS_TYPE_NOT_INCLUDED = 'NotIncluded';
+const FILTERS_TYPE_NOT_INCLUDED = "NotIncluded";
 
 /**
  * @file Class based component.
@@ -143,7 +143,7 @@ class Filters extends PureComponent {
         ref={(c) => (this.filtersWrapper = c)}
       >
         <span className="filter-caption">
-          {`${counterpart.translate('window.filters.caption')}: `}
+          {`${counterpart.translate("window.filters.caption")}: `}
         </span>
         <div className="filter-wrapper">
           {allFilters.map((item) => {
@@ -153,7 +153,7 @@ class Filters extends PureComponent {
               dropdownFilters = deepUnfreeze(dropdownFilters);
               dropdownFilters.map((dropdownFilterItem) => {
                 dropdownFilterItem.isActive = flatActiveFilterIds.includes(
-                  dropdownFilterItem.filterId
+                  dropdownFilterItem.filterId,
                 );
                 if (dropdownFilterItem.isActive) {
                   activeFilterId = dropdownFilterItem.filterId;
@@ -310,7 +310,7 @@ const isActiveFilterCleared = ({
   if (!filtersActive || filtersActive.length === 0) return false;
 
   let activeFilter = filtersActive.filter(
-    (item) => item.filterId === activeFilterId
+    (item) => item.filterId === activeFilterId,
   );
 
   if (activeFilter?.length) {
@@ -321,7 +321,7 @@ const isActiveFilterCleared = ({
         isFilterParameterCleared({
           filterParameter,
           filterType,
-        })
+        }),
       );
     }
   }
@@ -339,7 +339,7 @@ const isFilterParameterCleared = ({ filterParameter, filterType }) => {
   } else {
     return (
       filterParameter.value === null &&
-      (filterParameter.valueTo === null || filterParameter.valueTo === '')
+      (filterParameter.valueTo === null || filterParameter.valueTo === "")
     );
   }
 };

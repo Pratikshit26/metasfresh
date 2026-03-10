@@ -1,15 +1,15 @@
-import axios from 'axios';
-import MomentTZ from 'moment-timezone';
-import numeral from 'numeral';
+import axios from "axios";
+import MomentTZ from "moment-timezone";
+import numeral from "numeral";
 
-import * as types from '../constants/ActionTypes';
-import { setCurrentActiveLocale } from '../utils/locale';
+import * as types from "../constants/ActionTypes";
+import { setCurrentActiveLocale } from "../utils/locale";
 import {
   getNotificationsEndpointRequest,
   getNotificationsRequest,
-} from '../api';
-import { updateDefaultPrecisionsFromUserSettings } from '../utils/tableHelpers';
-import { getUserSession } from '../api/userSession';
+} from "../api";
+import { updateDefaultPrecisionsFromUserSettings } from "../utils/tableHelpers";
+import { getUserSession } from "../api/userSession";
 
 // TODO: All requests should be moved to API
 
@@ -28,7 +28,7 @@ export function deleteUserNotification(id) {
 export function getImageAction(id) {
   return axios({
     url: `${config.API_URL}/image/${id}?maxWidth=200&maxHeight=200`,
-    responseType: 'blob',
+    responseType: "blob",
   }).then((response) => response.data);
 }
 
@@ -39,31 +39,31 @@ export function postImageAction(data) {
 }
 
 export function getMessages(lang) {
-  return axios.get(`${config.API_URL}/i18n/messages${lang ? '?=' + lang : ''}`);
+  return axios.get(`${config.API_URL}/i18n/messages${lang ? "?=" + lang : ""}`);
 }
 
 export function createUrlAttachment({ windowId, documentId, name, url }) {
   return axios.post(
     `${config.API_URL}/window/${windowId}/${documentId}/attachments/addUrl`,
-    { name, url }
+    { name, url },
   );
 }
 
 function initNumeralLocales(lang, locale) {
   const language = lang.toLowerCase();
   const LOCAL_NUMERAL_FORMAT = {
-    defaultFormat: '0,0.00[000]',
+    defaultFormat: "0,0.00[000]",
     delimiters: {
-      thousands: locale.numberGroupingSeparator || ',',
-      decimal: locale.numberDecimalSeparator || '.',
+      thousands: locale.numberGroupingSeparator || ",",
+      decimal: locale.numberDecimalSeparator || ".",
     },
   };
 
-  if (typeof numeral.locales[language] === 'undefined') {
-    numeral.register('locale', language, LOCAL_NUMERAL_FORMAT);
+  if (typeof numeral.locales[language] === "undefined") {
+    numeral.register("locale", language, LOCAL_NUMERAL_FORMAT);
   }
 
-  if (typeof numeral.locales[language] !== 'undefined') {
+  if (typeof numeral.locales[language] !== "undefined") {
     numeral.locale(language);
 
     if (LOCAL_NUMERAL_FORMAT.defaultFormat) {
@@ -94,7 +94,7 @@ export function addNotification(
   time,
   notifType,
   shortMsg,
-  onCancel
+  onCancel,
 ) {
   return {
     type: types.ADD_NOTIFICATION,
@@ -266,37 +266,40 @@ export function getNotificationsEndpoint(auth) {
       auth.initNotificationClient(topic, (msg) => {
         const notification = JSON.parse(msg.body);
 
-        if (notification.eventType === 'Read') {
+        if (notification.eventType === "Read") {
           dispatch(
             readNotification(
               notification.notificationId,
-              notification.unreadCount
-            )
+              notification.unreadCount,
+            ),
           );
-        } else if (notification.eventType === 'ReadAll') {
+        } else if (notification.eventType === "ReadAll") {
           dispatch(readAllNotifications());
-        } else if (notification.eventType === 'Delete') {
+        } else if (notification.eventType === "Delete") {
           dispatch(
             removeNotification(
               notification.notificationId,
-              notification.unreadCount
-            )
+              notification.unreadCount,
+            ),
           );
-        } else if (notification.eventType === 'DeleteAll') {
+        } else if (notification.eventType === "DeleteAll") {
           dispatch(deleteAllNotifications());
-        } else if (notification.eventType === 'New') {
+        } else if (notification.eventType === "New") {
           dispatch(
-            newNotification(notification.notification, notification.unreadCount)
+            newNotification(
+              notification.notification,
+              notification.unreadCount,
+            ),
           );
           const notif = notification.notification;
           if (notif.important) {
             dispatch(
               addNotification(
-                'Important notification',
+                "Important notification",
                 notif.message,
                 5000,
-                'primary'
-              )
+                "primary",
+              ),
             );
           }
         }
@@ -320,8 +323,8 @@ export function getNotifications() {
         dispatch(
           getNotificationsSuccess(
             response.data.notifications,
-            response.data.unreadCount
-          )
+            response.data.unreadCount,
+          ),
         );
       })
       .catch((e) => e);
@@ -339,8 +342,8 @@ export function loginSuccess(auth) {
         .then(({ data }) => {
           dispatch(userSessionInit(data));
 
-          setCurrentActiveLocale(data.language['key']);
-          initNumeralLocales(data.language['key'], data.locale);
+          setCurrentActiveLocale(data.language["key"]);
+          initNumeralLocales(data.language["key"], data.locale);
           MomentTZ.tz.setDefault(data.timeZone);
           updateDefaultPrecisionsFromUserSettings(data.settings);
 
@@ -348,13 +351,13 @@ export function loginSuccess(auth) {
             const me = JSON.parse(msg.body);
             dispatch(userSessionUpdate(me));
 
-            me.language && setCurrentActiveLocale(me.language['key']);
-            me.locale && initNumeralLocales(me.language['key'], me.locale);
+            me.language && setCurrentActiveLocale(me.language["key"]);
+            me.locale && initNumeralLocales(me.language["key"], me.locale);
 
             dispatch(getNotifications());
           });
         })
-        .catch((e) => e)
+        .catch((e) => e),
     );
 
     requests.push(dispatch(getNotificationsEndpoint(auth)));

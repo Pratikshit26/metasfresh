@@ -18,8 +18,8 @@ export class Tour {
   }
 }
 function applyTour(tour) {
-  describe(`Create new Tour ${tour.name}`, function() {
-    cy.visitWindow(540331, 'NEW');
-    cy.writeIntoStringField('Name', tour.name);
+  describe(`Create new Tour ${tour.name}`, function () {
+    cy.visitWindow(540331, "NEW");
+    cy.writeIntoStringField("Name", tour.name);
   });
 }

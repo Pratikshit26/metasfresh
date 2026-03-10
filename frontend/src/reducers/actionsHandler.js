@@ -1,13 +1,13 @@
-import { produce, original } from 'immer';
-import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import { produce, original } from "immer";
+import { createSelector } from "reselect";
+import { get } from "lodash";
 
 import {
   DELETE_QUICK_ACTIONS,
   FETCH_QUICK_ACTIONS,
   FETCH_QUICK_ACTIONS_FAILURE,
   FETCH_QUICK_ACTIONS_SUCCESS,
-} from '../constants/ActionTypes';
+} from "../constants/ActionTypes";
 
 export const initialState = {};
 export const initialSingleActionsState = {
@@ -24,14 +24,14 @@ export const initialSingleActionsState = {
 };
 
 export const getQuickActionsId = ({ windowId, viewId }) =>
-  `${windowId}${viewId ? `-${viewId}` : ''}`;
+  `${windowId}${viewId ? `-${viewId}` : ""}`;
 
 const getQuickActionsData = (state, key) =>
-  get(state, ['actionsHandler', key], initialSingleActionsState);
+  get(state, ["actionsHandler", key], initialSingleActionsState);
 
 export const getQuickActions = createSelector(
   [getQuickActionsData],
-  (actions) => actions
+  (actions) => actions,
 );
 
 const reducer = produce((draftState, action) => {

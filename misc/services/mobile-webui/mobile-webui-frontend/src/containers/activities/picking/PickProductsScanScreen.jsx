@@ -10,42 +10,42 @@ import { useScreenDefinition } from '../../../hooks/useScreenDefinition';
 import { getWFProcessScreenLocation } from '../../../routes/workflow_locations';
 
 const PickProductsScanScreen = () => {
-  const { applicationId, wfProcessId, activityId, history } = useScreenDefinition({
-    screenId: 'PickProductsScanScreen',
-    captionKey: 'activities.picking.scanQRCode',
-    back: getWFProcessScreenLocation,
-  });
+    const { applicationId, wfProcessId, activityId, history } = useScreenDefinition({
+        screenId: 'PickProductsScanScreen',
+        captionKey: 'activities.picking.scanQRCode',
+        back: getWFProcessScreenLocation,
+    });
 
-  const { activity } = useSelector((state) => getPropsFromState({ state, wfProcessId, activityId }), shallowEqual);
+    const { activity } = useSelector((state) => getPropsFromState({ state, wfProcessId, activityId }), shallowEqual);
 
-  const onBarcodeScanned = ({ scannedBarcode }) => {
-    const qrCode = parseQRCodeString(scannedBarcode);
-    const line = getNextEligibleLineToPick({ activity, productId: qrCode.productId });
-    if (!line) {
-      throw 'No matching lines found'; // TODO trl
-    }
+    const onBarcodeScanned = ({ scannedBarcode }) => {
+        const qrCode = parseQRCodeString(scannedBarcode);
+        const line = getNextEligibleLineToPick({ activity, productId: qrCode.productId });
+        if (!line) {
+            throw 'No matching lines found'; // TODO trl
+        }
 
-    const lineId = line.pickingLineId;
-    console.log('onBarcodeScanned', { lineId, line, scannedBarcode });
+        const lineId = line.pickingLineId;
+        console.log('onBarcodeScanned', { lineId, line, scannedBarcode });
 
-    history.push(
-      pickingLineScanScreenLocation({
-        applicationId,
-        wfProcessId,
-        activityId,
-        lineId,
-        qrCode: scannedBarcode,
-        next: NEXT_PickingJob,
-      })
-    );
-  };
+        history.push(
+            pickingLineScanScreenLocation({
+                applicationId,
+                wfProcessId,
+                activityId,
+                lineId,
+                qrCode: scannedBarcode,
+                next: NEXT_PickingJob,
+            }),
+        );
+    };
 
-  return <BarcodeScannerComponent onResolvedResult={onBarcodeScanned} continuousRunning={true} />;
+    return <BarcodeScannerComponent onResolvedResult={onBarcodeScanned} continuousRunning={true} />;
 };
 
 const getPropsFromState = ({ state, wfProcessId, activityId }) => {
-  const activity = getActivityById(state, wfProcessId, activityId);
-  return { activity };
+    const activity = getActivityById(state, wfProcessId, activityId);
+    return { activity };
 };
 
 export default PickProductsScanScreen;

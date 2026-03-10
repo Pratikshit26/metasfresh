@@ -23,10 +23,10 @@ export class StockControlPurchase {
   }
 
   static applyStockControlPurchase(stockControlPurchase) {
-    cy.visitWindow('540253');
-    cy.clickHeaderNav('new');
+    cy.visitWindow("540253");
+    cy.clickHeaderNav("new");
 
-    cy.writeIntoStringField('Description', stockControlPurchase.description);
+    cy.writeIntoStringField("Description", stockControlPurchase.description);
 
     stockControlPurchase.products.forEach((product) => {
       StockControlPurchase.applyProduct(product);
@@ -35,10 +35,15 @@ export class StockControlPurchase {
 
   static applyProduct(product) {
     cy.pressAddNewButton();
-    cy.writeIntoLookupListField('M_Product_ID', product.product, product.product, true);
+    cy.writeIntoLookupListField(
+      "M_Product_ID",
+      product.product,
+      product.product,
+      true,
+    );
 
-    cy.writeIntoStringField('QtyCount', product.qty, true);
-    cy.selectInListField('M_Warehouse_ID', product.warehouse, true);
+    cy.writeIntoStringField("QtyCount", product.qty, true);
+    cy.selectInListField("M_Warehouse_ID", product.warehouse, true);
     cy.pressDoneButton();
   }
 }

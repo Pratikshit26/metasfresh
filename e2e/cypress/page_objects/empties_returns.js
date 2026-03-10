@@ -5,17 +5,17 @@
  * #L%
  */
 
-import Metasfresh from './page';
+import Metasfresh from "./page";
 
 class _EmptiesReturn extends Metasfresh {
   constructor() {
     super();
 
-    this.windowId = '540322';
-    this.tableRows = '.table-flex-wrapper-row';
-    this.rowSelector = 'tbody tr';
-    this.listHeader = '.document-list-header';
-    this.selectedRows = '.row-selected';
+    this.windowId = "540322";
+    this.tableRows = ".table-flex-wrapper-row";
+    this.rowSelector = "tbody tr";
+    this.listHeader = ".document-list-header";
+    this.selectedRows = ".row-selected";
   }
 
   visit() {

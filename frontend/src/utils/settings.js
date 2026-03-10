@@ -1,7 +1,7 @@
 export const getSettingFromStateAsBoolean = (
   state,
   name,
-  defaultValue = false
+  defaultValue = false,
 ) => {
   const value = getSettingFromState(state, name);
   return toBoolean(value, defaultValue);
@@ -17,13 +17,13 @@ const toBoolean = (value, defaultValue) => {
     return defaultValue;
   }
 
-  return value === 'Y' || value === true;
+  return value === "Y" || value === true;
 };
 
 export const getSettingFromStateAsPositiveInt = (
   state,
   name,
-  defaultValue = 0
+  defaultValue = 0,
 ) => {
   const value = getSettingFromState(state, name);
   return value && value > 0 ? Number(value) : defaultValue;

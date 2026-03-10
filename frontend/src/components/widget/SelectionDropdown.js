@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { CSSTransition } from 'react-transition-group';
-import classnames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
+import classnames from "classnames";
 
 /**
  * @file Is the component that handles the main functionality of List (RawList) and Lookup (RawLookup)
@@ -30,13 +30,13 @@ class SelectionDropdown extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-    window.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener("keydown", this.handleKeyDown);
+    window.addEventListener("keyup", this.handleKeyUp);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-    window.removeEventListener('keyup', this.handleKeyUp);
+    window.removeEventListener("keydown", this.handleKeyDown);
+    window.removeEventListener("keyup", this.handleKeyUp);
   }
 
   UNSAFE_componentWillReceiveProps(propsNext) {
@@ -124,7 +124,7 @@ class SelectionDropdown extends Component {
       (item) =>
         item.caption &&
         item.caption.length &&
-        item.caption[0].toUpperCase() === char.toUpperCase()
+        item.caption[0].toUpperCase() === char.toUpperCase(),
     );
 
     const selectedIndex = items.indexOf(selected);
@@ -161,19 +161,19 @@ class SelectionDropdown extends Component {
       this.navigateToAlphanumeric(event.key);
     } else {
       switch (event.key) {
-        case 'ArrowUp':
+        case "ArrowUp":
           event.preventDefault();
           navigate(true);
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           event.preventDefault();
           navigate(false);
           break;
-        case 'Escape':
+        case "Escape":
           event.preventDefault();
           onCancel();
           break;
-        case 'Enter':
+        case "Enter":
           event.preventDefault();
           onSelect(selected);
           break;
@@ -248,10 +248,10 @@ class SelectionDropdown extends Component {
         key={`${key}-${idx}-${caption}`}
         data-test-id={`${key}${caption}`}
         className={classnames(
-          'input-dropdown-list-option ignore-react-onclickoutside',
+          "input-dropdown-list-option ignore-react-onclickoutside",
           {
-            'input-dropdown-list-option-key-on': option === selected,
-          }
+            "input-dropdown-list-option-key-on": option === selected,
+          },
         )}
         title={description ? description : null}
         onMouseEnter={() => this.handleMouseEnter(option)}
@@ -275,7 +275,7 @@ class SelectionDropdown extends Component {
           <i className="meta-icon-settings" />
         </div>
       </div>
-    </CSSTransition>
+    </CSSTransition>,
   );
 
   setRef = (ref) => (this.wrapper = ref);
@@ -285,7 +285,7 @@ class SelectionDropdown extends Component {
     const empty = options.length === 0;
     const style = {
       width,
-      height: height ? height : '200px',
+      height: height ? height : "200px",
     };
 
     if (height) {

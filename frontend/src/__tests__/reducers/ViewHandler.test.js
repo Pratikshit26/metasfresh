@@ -1,26 +1,22 @@
-import { merge } from 'merge-anything';
+import { merge } from "merge-anything";
 
-import * as ACTION_TYPES from '../../constants/ActionTypes';
-import reducer, {
-  initialState,
-  viewState
-} from '../../reducers/viewHandler';
+import * as ACTION_TYPES from "../../constants/ActionTypes";
+import reducer, { initialState, viewState } from "../../reducers/viewHandler";
 
 // limited data sets as we don't need everything for those tests
-import fixtures from '../../../test_setup/fixtures/grid/reducers.json';
-import generalData from '../../../test_setup/fixtures/grid/data.json';
+import fixtures from "../../../test_setup/fixtures/grid/reducers.json";
+import generalData from "../../../test_setup/fixtures/grid/data.json";
 
-
-const createState = function(state = {}) {
+const createState = function (state = {}) {
   return merge(
     {
       ...initialState,
     },
-    state
+    state,
   );
 };
 
-const formatData = function(data) {
+const formatData = function (data) {
   const {
     firstRow,
     headerProperties,
@@ -48,15 +44,15 @@ const formatData = function(data) {
   };
 };
 
-describe('Views reducer for `view` type', () => {
+describe("Views reducer for `view` type", () => {
   const layoutData = fixtures.viewLayout1;
   const documentData = fixtures.basicViewData1;
 
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('Should handle FETCH_LAYOUT', () => {
+  it("Should handle FETCH_LAYOUT", () => {
     const id = layoutData.windowId;
     const actions = [
       {
@@ -73,21 +69,25 @@ describe('Views reducer for `view` type', () => {
           layout: layoutData,
           isModal: false,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
-    expect(state).toEqual(expect.objectContaining({
-      views: expect.objectContaining({
-        [id]: expect.objectContaining({ layout: expect.objectContaining({ ...layoutData }) }),
+    expect(state).toEqual(
+      expect.objectContaining({
+        views: expect.objectContaining({
+          [id]: expect.objectContaining({
+            layout: expect.objectContaining({ ...layoutData }),
+          }),
+        }),
+        modals: {},
       }),
-      modals: {},
-    }));
+    );
   });
 
-  it('Should handle FETCH_LAYOUT_ERROR', () => {
+  it("Should handle FETCH_LAYOUT_ERROR", () => {
     const id = layoutData.windowId;
-    const error = 'Error';
+    const error = "Error";
     const actions = [
       {
         type: ACTION_TYPES.FETCH_LAYOUT_PENDING,
@@ -103,19 +103,25 @@ describe('Views reducer for `view` type', () => {
           error,
           isModal: false,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
-    expect(state).toEqual(expect.objectContaining({
-      views: expect.objectContaining({
-        [id]: expect.objectContaining({ layoutPending: false, layoutError: error, layoutNotFound: true }),
+    expect(state).toEqual(
+      expect.objectContaining({
+        views: expect.objectContaining({
+          [id]: expect.objectContaining({
+            layoutPending: false,
+            layoutError: error,
+            layoutNotFound: true,
+          }),
+        }),
+        modals: {},
       }),
-      modals: {},
-    }));
+    );
   });
 
-  it('Should handle FETCH_DOCUMENT', () => {
+  it("Should handle FETCH_DOCUMENT", () => {
     const id = layoutData.windowId;
     const actions = [
       {
@@ -132,22 +138,24 @@ describe('Views reducer for `view` type', () => {
           data: documentData,
           isModal: false,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
     const formattedData = formatData(documentData);
 
-    expect(state).toEqual(expect.objectContaining({
-      views: expect.objectContaining({
-        [id]: expect.objectContaining({ ...formattedData }),
+    expect(state).toEqual(
+      expect.objectContaining({
+        views: expect.objectContaining({
+          [id]: expect.objectContaining({ ...formattedData }),
+        }),
+        modals: {},
       }),
-      modals: {},
-    }));
+    );
   });
 
-  it('Should handle FETCH_DOCUMENT_ERROR', () => {
+  it("Should handle FETCH_DOCUMENT_ERROR", () => {
     const id = layoutData.windowId;
-    const error = 'Error';
+    const error = "Error";
     const localState = createState({ pending: true });
     const actions = [
       {
@@ -157,19 +165,26 @@ describe('Views reducer for `view` type', () => {
           error,
           isModal: false,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, localState);
 
-    expect(state).toEqual(expect.objectContaining({
-      views: expect.objectContaining({
-        [id]: expect.objectContaining({ pending: false, error: false, notFound: true, error }),
+    expect(state).toEqual(
+      expect.objectContaining({
+        views: expect.objectContaining({
+          [id]: expect.objectContaining({
+            pending: false,
+            error: false,
+            notFound: true,
+            error,
+          }),
+        }),
+        modals: {},
       }),
-      modals: {},
-    }));
+    );
   });
 
-  it('Should handle CREATE_VIEW', () => {
+  it("Should handle CREATE_VIEW", () => {
     const id = documentData.windowId;
     const viewId = documentData.viewId;
     const actions = [
@@ -187,18 +202,22 @@ describe('Views reducer for `view` type', () => {
           viewId,
           isModal: false,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
     expect(state.views).toEqual(
       expect.objectContaining({
-        [id]: expect.objectContaining({ pending: false, notFound: false, viewId }),
+        [id]: expect.objectContaining({
+          pending: false,
+          notFound: false,
+          viewId,
+        }),
       }),
     );
   });
 
-  it('Should handle DELETE_VIEW', () => {
+  it("Should handle DELETE_VIEW", () => {
     const id = documentData.windowId;
     const viewId = documentData.viewId;
     const actions = [
@@ -216,14 +235,14 @@ describe('Views reducer for `view` type', () => {
           id,
           isModal: false,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
     expect(state.views[id]).toBeFalsy();
   });
 
-  it('Should handle RESET_VIEW', () => {
+  it("Should handle RESET_VIEW", () => {
     const id = documentData.windowId;
     const viewId = documentData.viewId;
     const actions = [
@@ -241,7 +260,7 @@ describe('Views reducer for `view` type', () => {
           id,
           isModal: false,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
@@ -253,11 +272,11 @@ describe('Views reducer for `view` type', () => {
   });
 });
 
-describe('Views reducer for `modals` type', () => {
+describe("Views reducer for `modals` type", () => {
   const layoutData = fixtures.modalLayout1;
   const documentData = fixtures.basicModalData1;
 
-  it('Should handle FETCH_LAYOUT', () => {
+  it("Should handle FETCH_LAYOUT", () => {
     const id = layoutData.windowId;
     const actions = [
       {
@@ -274,21 +293,25 @@ describe('Views reducer for `modals` type', () => {
           layout: layoutData,
           isModal: true,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
-    expect(state).toEqual(expect.objectContaining({
-      modals: expect.objectContaining({
-        [id]: expect.objectContaining({ layout: expect.objectContaining({ ...layoutData }) }),
+    expect(state).toEqual(
+      expect.objectContaining({
+        modals: expect.objectContaining({
+          [id]: expect.objectContaining({
+            layout: expect.objectContaining({ ...layoutData }),
+          }),
+        }),
+        views: {},
       }),
-      views: {},
-    }));
+    );
   });
 
-  it('Should handle CREATE_VIEW_ERROR', () => {
+  it("Should handle CREATE_VIEW_ERROR", () => {
     const id = documentData.windowId;
-    const error = 'Error';
+    const error = "Error";
     const actions = [
       {
         type: ACTION_TYPES.CREATE_VIEW_PENDING,
@@ -304,13 +327,17 @@ describe('Views reducer for `modals` type', () => {
           error,
           isModal: true,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
     expect(state.modals).toEqual(
       expect.objectContaining({
-        [id]: expect.objectContaining({ pending: false, notFound: true, error }),
+        [id]: expect.objectContaining({
+          pending: false,
+          notFound: true,
+          error,
+        }),
       }),
     );
   });
@@ -325,9 +352,11 @@ describe('Views reducer for `modals` type', () => {
           showIncludedView: true,
           isModal: true,
         },
-      }
+      },
     ];
-    const localState = createState({ modals: { [`${id}`]: { ...viewState, windowId: id } } });
+    const localState = createState({
+      modals: { [`${id}`]: { ...viewState, windowId: id } },
+    });
     const state = actions.reduce(reducer, localState);
 
     expect(state.modals).toEqual(
@@ -350,19 +379,21 @@ describe('Views reducer for `modals` type', () => {
           viewId,
           viewProfileId: null,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
-    expect(state).toEqual(expect.objectContaining({
-      includedView: expect.objectContaining({
-        windowId,
-        viewId,
-        viewProfileId: null,
+    expect(state).toEqual(
+      expect.objectContaining({
+        includedView: expect.objectContaining({
+          windowId,
+          viewId,
+          viewProfileId: null,
+        }),
+        views: {},
+        modals: {},
       }),
-      views: {},
-      modals: {},
-    }));
+    );
   });
 
   it(`Should handle 'UNSET_INCLUDED_VIEW'`, () => {
@@ -374,26 +405,28 @@ describe('Views reducer for `modals` type', () => {
           id: windowId,
           viewId,
         },
-      }
+      },
     ];
     const localState = createState({
       includedView: {
         windowId,
         viewId,
         viewProfileId: null,
-      }
+      },
     });
     const state = actions.reduce(reducer, localState);
 
-    expect(state).toEqual(expect.objectContaining({
-      includedView: expect.objectContaining({
-        windowId: null,
-        viewId: null,
-        viewProfileId: null,
+    expect(state).toEqual(
+      expect.objectContaining({
+        includedView: expect.objectContaining({
+          windowId: null,
+          viewId: null,
+          viewProfileId: null,
+        }),
+        views: {},
+        modals: {},
       }),
-      views: {},
-      modals: {},
-    }));
+    );
   });
 
   it(`Should handle 'UNSET_INCLUDED_VIEW' when the 'windowId' has changed`, () => {
@@ -405,26 +438,28 @@ describe('Views reducer for `modals` type', () => {
           id: fixtures.basicViewData1.windowId,
           viewId: fixtures.basicViewData1.viewId,
         },
-      }
+      },
     ];
     const localState = createState({
       includedView: {
         windowId,
         viewId,
         viewProfileId: null,
-      }
+      },
     });
     const state = actions.reduce(reducer, localState);
 
-    expect(state).toEqual(expect.objectContaining({
-      includedView: expect.objectContaining({
-        windowId,
-        viewId,
-        viewProfileId: null,
+    expect(state).toEqual(
+      expect.objectContaining({
+        includedView: expect.objectContaining({
+          windowId,
+          viewId,
+          viewProfileId: null,
+        }),
+        views: {},
+        modals: {},
       }),
-      views: {},
-      modals: {},
-    }));
+    );
   });
 
   it(`Should handle 'UNSET_INCLUDED_VIEW' when the 'windowId' has changed, but 'forceClose' is true`, () => {
@@ -437,29 +472,31 @@ describe('Views reducer for `modals` type', () => {
           viewId: fixtures.basicViewData1.viewId,
           forceClose: true,
         },
-      }
+      },
     ];
     const localState = createState({
       includedView: {
         windowId,
         viewId,
         viewProfileId: null,
-      }
+      },
     });
     const state = actions.reduce(reducer, localState);
 
-    expect(state).toEqual(expect.objectContaining({
-      includedView: expect.objectContaining({
-        windowId: null,
-        viewId: null,
-        viewProfileId: null,
+    expect(state).toEqual(
+      expect.objectContaining({
+        includedView: expect.objectContaining({
+          windowId: null,
+          viewId: null,
+          viewProfileId: null,
+        }),
+        views: {},
+        modals: {},
       }),
-      views: {},
-      modals: {},
-    }));
+    );
   });
 
-  it('Should handle FILTER_VIEW', () => {
+  it("Should handle FILTER_VIEW", () => {
     const id = documentData.windowId;
     const filterData = fixtures.basicModalFilters1;
     const { viewId, filters, size } = filterData;
@@ -478,18 +515,23 @@ describe('Views reducer for `modals` type', () => {
           data: { filters, viewId, size },
           isModal: true,
         },
-      }
+      },
     ];
     const state = actions.reduce(reducer, initialState);
 
     expect(state.modals).toEqual(
       expect.objectContaining({
-        [id]: expect.objectContaining({ pending: true, notFound: false, viewId, filters }),
+        [id]: expect.objectContaining({
+          pending: true,
+          notFound: false,
+          viewId,
+          filters,
+        }),
       }),
     );
   });
 
-  it('Should handle UPDATE_VIEW_DATA_SUCCESS', () => {
+  it("Should handle UPDATE_VIEW_DATA_SUCCESS", () => {
     const id = documentData.windowId;
     const headersData = generalData.headerProperties1;
     const actions = [
@@ -500,7 +542,7 @@ describe('Views reducer for `modals` type', () => {
           data: { headerProperties: headersData },
           isModal: false,
         },
-      }
+      },
     ];
 
     const state = actions.reduce(reducer, initialState);

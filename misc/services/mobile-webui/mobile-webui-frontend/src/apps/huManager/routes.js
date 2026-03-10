@@ -12,24 +12,24 @@ export const huManagerBulkActionsLocation = () => `/${APPLICATION_ID}/bulkAction
 export const huManagerHuLabelsLocation = () => `/${APPLICATION_ID}/huLabels`;
 
 export const huManagerRoutes = [
-  {
-    path: huManagerLocation(),
-    Component: HUManagerScreen,
-  },
-  {
-    path: huManagerDisposeLocation(),
-    Component: HUDisposalScreen,
-  },
-  {
-    path: huManagerMoveLocation(),
-    Component: HUMoveScreen,
-  },
-  {
-    path: huManagerBulkActionsLocation(),
-    Component: HUBulkActionsScreen,
-  },
-  {
-    path: huManagerHuLabelsLocation(),
-    Component: HUPrintingOptionsScreen,
-  },
+    {
+        path: huManagerLocation(),
+        Component: HUManagerScreen,
+    },
+    {
+        path: huManagerDisposeLocation(),
+        Component: HUDisposalScreen,
+    },
+    {
+        path: huManagerMoveLocation(),
+        Component: HUMoveScreen,
+    },
+    {
+        path: huManagerBulkActionsLocation(),
+        Component: HUBulkActionsScreen,
+    },
+    {
+        path: huManagerHuLabelsLocation(),
+        Component: HUPrintingOptionsScreen,
+    },
 ];

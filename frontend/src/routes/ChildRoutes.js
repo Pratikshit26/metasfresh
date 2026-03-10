@@ -1,14 +1,14 @@
-import React from 'react';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import React from "react";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 
-import { useAuth } from '../hooks/useAuth';
-import { BoardRoute, DocListRoute, MasterWindowRoute } from './KeyRoutes';
+import { useAuth } from "../hooks/useAuth";
+import { BoardRoute, DocListRoute, MasterWindowRoute } from "./KeyRoutes";
 
-import Board from '../containers/Board.js';
-import Dashboard from '../containers/Dashboard.js';
-import InboxAll from '../containers/InboxAll.js';
-import NavigationTree from '../containers/NavigationTree.js';
-import CalendarPage from '../pages/calendar/CalendarPage';
+import Board from "../containers/Board.js";
+import Dashboard from "../containers/Dashboard.js";
+import InboxAll from "../containers/InboxAll.js";
+import NavigationTree from "../containers/NavigationTree.js";
+import CalendarPage from "../pages/calendar/CalendarPage";
 
 /**
  * @file Functional component.
@@ -38,7 +38,7 @@ const ChildRoutes = () => {
           render={() => {
             if (loggedIn) {
               auth.logout().finally(() => {
-                history.push('/login');
+                history.push("/login");
                 return null;
               });
             } else {

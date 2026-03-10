@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import counterpart from 'counterpart';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import counterpart from "counterpart";
 
-import { addNotification } from '../../actions/AppActions';
+import { addNotification } from "../../actions/AppActions";
 import {
   completeLetter,
   createLetter,
   getTemplates,
   applyTemplate,
   patchMessage,
-} from '../../actions/LetterActions';
+} from "../../actions/LetterActions";
 
-import RawList from '../widget/List/RawList';
+import RawList from "../widget/List/RawList";
 
 class NewLetter extends PureComponent {
   constructor(props) {
@@ -61,7 +61,7 @@ class NewLetter extends PureComponent {
     // Apply default template if any
     if (values && values.length > 0 && defaultValue) {
       const defaultTemplate = values.find(
-        (template) => template.key === defaultValue
+        (template) => template.key === defaultValue,
       );
       if (defaultTemplate != null) {
         await this.handleTemplate(defaultTemplate);
@@ -123,7 +123,7 @@ class NewLetter extends PureComponent {
     handleCloseLetter();
 
     await dispatch(
-      addNotification('Letter', 'Letter has been sent.', 5000, 'success')
+      addNotification("Letter", "Letter has been sent.", 5000, "success"),
     );
   };
 
@@ -149,7 +149,7 @@ class NewLetter extends PureComponent {
           <div className="panel-letter-header-wrapper">
             <div className="panel-letter-header panel-letter-header-top">
               <span className="letter-headline">
-                {counterpart.translate('window.letter.new')}
+                {counterpart.translate("window.letter.new")}
               </span>
               <a
                 href={`${config.API_URL}/letter/${letterId}/printPreview`}
@@ -185,7 +185,7 @@ class NewLetter extends PureComponent {
           </div>
           <div className="panel-letter-body">
             <textarea
-              value={message ? message : ''}
+              value={message ? message : ""}
               onChange={this.handleChange}
               onBlur={this.handleBlur}
             />
@@ -195,7 +195,7 @@ class NewLetter extends PureComponent {
               onClick={this.complete}
               className="btn btn-meta-success btn-sm btn-submit"
             >
-              {counterpart.translate('window.letter.create')}
+              {counterpart.translate("window.letter.create")}
             </button>
           </div>
         </div>

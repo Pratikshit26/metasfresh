@@ -685,9 +685,7 @@
     "includedTabsInfo": {
       "AD_Tab-187": {
         "tabId": "AD_Tab-187",
-        "staleRowIds": [
-          "1000111"
-        ]
+        "staleRowIds": ["1000111"]
       }
     }
   },

@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { get } from 'lodash';
-import classnames from 'classnames';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { get } from "lodash";
+import classnames from "classnames";
 
-import { dropdownRequest } from '../../actions/GenericActions';
+import { dropdownRequest } from "../../actions/GenericActions";
 
-import DocumentStatusContextShortcuts from '../keyshortcuts/DocumentStatusContextShortcuts';
-import Prompt from '../../components/app/Prompt';
+import DocumentStatusContextShortcuts from "../keyshortcuts/DocumentStatusContextShortcuts";
+import Prompt from "../../components/app/Prompt";
 
 /**
  * @file Document Status/Action Button (Complete, Reverse)
@@ -23,9 +23,9 @@ class ActionButton extends PureComponent {
       selected: 0,
       prompt: {
         isOpen: {},
-        title: 'Confirm',
-        text: 'Are you sure?',
-        yes: 'Cancel',
+        title: "Confirm",
+        text: "Are you sure?",
+        yes: "Cancel",
       },
     };
   }
@@ -48,21 +48,21 @@ class ActionButton extends PureComponent {
   handleKeyDown = (e) => {
     const { list, selected } = this.state;
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
         this.navigate(true);
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
         this.navigate();
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         if (selected != null) {
           this.handleChangeStatus(list[selected]);
         }
         break;
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
         this.handleDropdownBlur();
         break;
@@ -91,7 +91,7 @@ class ActionButton extends PureComponent {
    */
   handleDropdownBlur = () => {
     if (this.statusDropdown) {
-      this.statusDropdown.classList.remove('dropdown-status-open');
+      this.statusDropdown.classList.remove("dropdown-status-open");
     }
   };
 
@@ -105,7 +105,7 @@ class ActionButton extends PureComponent {
 
     this.fetchStatusList();
     dropdownOpenCallback();
-    this.statusDropdown.classList.add('dropdown-status-open');
+    this.statusDropdown.classList.add("dropdown-status-open");
   };
 
   /**
@@ -122,7 +122,7 @@ class ActionButton extends PureComponent {
     return dropdownRequest({
       docId: dataId,
       docType: windowType,
-      entity: 'window',
+      entity: "window",
       propertyName: fields[1].field,
     })
       .then((res) => {
@@ -142,7 +142,7 @@ class ActionButton extends PureComponent {
   handleChangeStatus = (status) => {
     const prompt = { ...this.state.prompt };
     const promptOpenClone = { ...prompt.isOpen };
-    if (Object.prototype.hasOwnProperty.call(status, 'validationInformation')) {
+    if (Object.prototype.hasOwnProperty.call(status, "validationInformation")) {
       promptOpenClone[status.key] = true;
       this.setState({
         prompt: {
@@ -168,16 +168,16 @@ class ActionButton extends PureComponent {
   getStatusClassName = (abrev) => {
     const { data } = this.props;
 
-    if (get(data, ['action', 'value', 'key'], null) !== abrev) {
-      return '';
+    if (get(data, ["action", "value", "key"], null) !== abrev) {
+      return "";
     }
 
-    if (abrev === 'DR') {
-      return 'dropdown-status-item-def';
-    } else if (abrev === 'CO') {
-      return 'dropdown-status-item-def-1';
+    if (abrev === "DR") {
+      return "dropdown-status-item-def";
+    } else if (abrev === "CO") {
+      return "dropdown-status-item-def-1";
     } else {
-      return '';
+      return "";
     }
   };
 
@@ -188,12 +188,12 @@ class ActionButton extends PureComponent {
    * @todo Write the documentation
    */
   getStatusContext = (abrev) => {
-    if (abrev === 'DR') {
-      return 'primary';
-    } else if (abrev === 'CO') {
-      return 'success';
+    if (abrev === "DR") {
+      return "primary";
+    } else if (abrev === "CO") {
+      return "success";
     } else {
-      return 'default';
+      return "default";
     }
   };
 
@@ -210,8 +210,8 @@ class ActionButton extends PureComponent {
         <li
           key={index}
           className={
-            'dropdown-status-item ' +
-            (selected === index ? 'dropdown-status-item-on-key ' : '') +
+            "dropdown-status-item " +
+            (selected === index ? "dropdown-status-item-on-key " : "") +
             this.getStatusClassName(item.key)
           }
           title={item.description ? item.description : null}
@@ -266,10 +266,10 @@ class ActionButton extends PureComponent {
     this.processStatus(
       list.find(
         (elem) =>
-          Object.prototype.hasOwnProperty.call(elem, 'validationInformation') &&
-          elem.key === activePrompt
+          Object.prototype.hasOwnProperty.call(elem, "validationInformation") &&
+          elem.key === activePrompt,
       ),
-      true
+      true,
     );
   };
 
@@ -277,7 +277,7 @@ class ActionButton extends PureComponent {
     if (this.isDisabled()) return false;
 
     this.fetchStatusList().then((list) => {
-      const completeStatus = list.find((elem) => elem.key === 'CO');
+      const completeStatus = list.find((elem) => elem.key === "CO");
       if (completeStatus) {
         this.handleChangeStatus(completeStatus);
       }
@@ -295,7 +295,7 @@ class ActionButton extends PureComponent {
    */
   isDisabled = () => {
     const { modalVisible, readonly, processStatus } = this.props;
-    return readonly || processStatus === 'pending' || modalVisible;
+    return readonly || processStatus === "pending" || modalVisible;
   };
 
   /**
@@ -305,7 +305,7 @@ class ActionButton extends PureComponent {
   render() {
     const { data, modalVisible } = this.props;
     const { list, prompt } = this.state;
-    const abrev = get(data, ['status', 'value', 'key'], null);
+    const abrev = get(data, ["status", "value", "key"], null);
     const status = this.getStatusContext(abrev);
     let value;
 
@@ -323,10 +323,10 @@ class ActionButton extends PureComponent {
       <div
         onKeyDown={this.handleKeyDown}
         className={classnames(
-          'meta-dropdown-toggle dropdown-status-toggler js-dropdown-toggler',
+          "meta-dropdown-toggle dropdown-status-toggler js-dropdown-toggler",
           {
             disabled: this.isDisabled(),
-          }
+          },
         )}
         tabIndex={modalVisible ? -1 : 0}
         ref={this.setRef}
@@ -348,7 +348,7 @@ class ActionButton extends PureComponent {
         ) : (
           <div
             className={`tag tag-${status}`}
-            dangerouslySetInnerHTML={{ __html: '&nbsp;' }}
+            dangerouslySetInnerHTML={{ __html: "&nbsp;" }}
           />
         )}
         <i className={`meta-icon-chevron-1 meta-icon-${status}`} />

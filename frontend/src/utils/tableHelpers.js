@@ -1,8 +1,8 @@
-import React from 'react';
-import currentDevice from 'current-device';
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
-import Moment from 'moment-timezone';
+import React from "react";
+import currentDevice from "current-device";
+import PropTypes from "prop-types";
+import numeral from "numeral";
+import Moment from "moment-timezone";
 
 import {
   AMOUNT_FIELD_FORMATS_BY_PRECISION,
@@ -15,9 +15,9 @@ import {
   TIME_FORMAT,
   VIEW_EDITOR_RENDER_MODES_ALWAYS,
   VIEW_EDITOR_RENDER_MODES_ON_DEMAND,
-} from '../constants/Constants';
-import { getCurrentActiveLocale } from './locale';
-import { getSettingFromStateAsBoolean } from './settings';
+} from "../constants/Constants";
+import { getCurrentActiveLocale } from "./locale";
+import { getSettingFromStateAsBoolean } from "./settings";
 
 export const containerPropTypes = {
   // from <DocumentList>
@@ -83,16 +83,16 @@ function getDefaultPrecisionByFieldType(fieldType) {
 }
 
 export function updateDefaultPrecisionsFromUserSettings(userSettings) {
-  userSettings_defaultPrecisionByFieldType['Quantity'] =
-    extractDefaultPrecisionFromUserSettings(userSettings, 'Quantity');
-  userSettings_defaultPrecisionByFieldType['Amount'] =
-    extractDefaultPrecisionFromUserSettings(userSettings, 'Amount');
-  userSettings_defaultPrecisionByFieldType['CostPrice'] =
-    extractDefaultPrecisionFromUserSettings(userSettings, 'CostPrice');
-  userSettings_defaultPrecisionByFieldType['Number'] =
-    extractDefaultPrecisionFromUserSettings(userSettings, 'Number');
+  userSettings_defaultPrecisionByFieldType["Quantity"] =
+    extractDefaultPrecisionFromUserSettings(userSettings, "Quantity");
+  userSettings_defaultPrecisionByFieldType["Amount"] =
+    extractDefaultPrecisionFromUserSettings(userSettings, "Amount");
+  userSettings_defaultPrecisionByFieldType["CostPrice"] =
+    extractDefaultPrecisionFromUserSettings(userSettings, "CostPrice");
+  userSettings_defaultPrecisionByFieldType["Number"] =
+    extractDefaultPrecisionFromUserSettings(userSettings, "Number");
 
-  console.debug('Updated default precision from user settings', {
+  console.debug("Updated default precision from user settings", {
     userSettings_defaultPrecisionByFieldType,
     userSettings,
   });
@@ -103,8 +103,8 @@ function extractDefaultPrecisionFromUserSettings(userSettings, fieldType) {
     userSettings?.[`widget.${fieldType}.defaultPrecision`] ?? null;
   if (
     precision == null ||
-    precision === '-' ||
-    precision === '' ||
+    precision === "-" ||
+    precision === "" ||
     precision < 0
   ) {
     return null;
@@ -135,29 +135,29 @@ export function getDateFormat(fieldType) {
  */
 export function getSizeClass(col) {
   const { widgetType, size } = col;
-  const lg = ['List', 'Lookup', 'LongText', 'Date', 'DateTime', 'Time'];
-  const md = ['Text', 'Address', 'ProductAttributes'];
+  const lg = ["List", "Lookup", "LongText", "Date", "DateTime", "Time"];
+  const md = ["Text", "Address", "ProductAttributes"];
 
   if (size) {
     switch (size) {
-      case 'S':
-        return 'td-sm';
-      case 'M':
-        return 'td-md';
-      case 'L':
-        return 'td-lg';
-      case 'XL':
-        return 'td-xl';
-      case 'XXL':
-        return 'td-xxl';
+      case "S":
+        return "td-sm";
+      case "M":
+        return "td-md";
+      case "L":
+        return "td-lg";
+      case "XL":
+        return "td-xl";
+      case "XXL":
+        return "td-xxl";
     }
   } else {
     if (lg.indexOf(widgetType) > -1) {
-      return 'td-lg';
+      return "td-lg";
     } else if (md.indexOf(widgetType) > -1) {
-      return 'td-md';
+      return "td-md";
     } else {
-      return 'td-sm';
+      return "td-sm";
     }
   }
 }
@@ -169,21 +169,21 @@ export function getSizeClass(col) {
  */
 export function getIconClassName(huType) {
   switch (huType) {
-    case 'LU':
-      return 'meta-icon-pallete';
-    case 'TU':
-      return 'meta-icon-package';
-    case 'CU':
-      return 'meta-icon-product';
-    case 'PP_Order_Receive':
-      return 'meta-icon-receipt';
-    case 'PP_Order_Issue':
-      return 'meta-icon-issue';
-    case 'PP_Order_Issue_Service':
-      return 'meta-icon-issue-service';
-    case 'M_Picking_Slot':
+    case "LU":
+      return "meta-icon-pallete";
+    case "TU":
+      return "meta-icon-package";
+    case "CU":
+      return "meta-icon-product";
+    case "PP_Order_Receive":
+      return "meta-icon-receipt";
+    case "PP_Order_Issue":
+      return "meta-icon-issue";
+    case "PP_Order_Issue_Service":
+      return "meta-icon-issue-service";
+    case "M_Picking_Slot":
       // https://github.com/metasfresh/metasfresh/issues/2298
-      return 'meta-icon-beschaffung';
+      return "meta-icon-beschaffung";
   }
 }
 
@@ -204,7 +204,7 @@ export function createDate({ fieldValue, fieldType }) {
       : Moment(fieldValue).locale(languageKey).format(getDateFormat(fieldType));
   }
 
-  return '';
+  return "";
 }
 
 /**
@@ -234,13 +234,13 @@ export function createAmount(fieldValue, precision, isGerman) {
         return returnValue;
       }
 
-      return `${returnValue}`.replace('.', ',');
+      return `${returnValue}`.replace(".", ",");
     }
 
     return returnValue;
   }
 
-  return '';
+  return "";
 }
 
 /**
@@ -253,7 +253,7 @@ export function createAmount(fieldValue, precision, isGerman) {
  */
 export function createSpecialField(fieldType, fieldValue) {
   switch (fieldType) {
-    case 'Color': {
+    case "Color": {
       const style = {
         backgroundColor: fieldValue,
       };
@@ -274,12 +274,12 @@ export function createSpecialField(fieldType, fieldValue) {
  */
 export function fieldValueToString({
   fieldValue,
-  fieldType = 'Text',
+  fieldType = "Text",
   precision = null,
   isGerman,
 }) {
   if (fieldValue === null) {
-    return '';
+    return "";
   }
 
   switch (typeof fieldValue) {
@@ -287,11 +287,11 @@ export function fieldValueToString({
      * Case when fieldValue is passed as an array - this is used to show date intervals within filters
      * as dd.mm.yyyy - dd.mm.yyyy for example
      */
-    case 'object': {
+    case "object": {
       if (Array.isArray(fieldValue)) {
         return fieldValue
           .map((value) => fieldValueToString(value, fieldType))
-          .join(' - ');
+          .join(" - ");
       }
 
       return DATE_FIELD_TYPES.includes(fieldType) ||
@@ -299,14 +299,14 @@ export function fieldValueToString({
         ? createDate({ fieldValue, fieldType })
         : fieldValue.caption;
     }
-    case 'boolean': {
+    case "boolean": {
       return fieldValue ? (
         <i className="meta-icon-checkbox-1" />
       ) : (
         <i className="meta-icon-checkbox" />
       );
     }
-    case 'string': {
+    case "string": {
       if (
         DATE_FIELD_TYPES.includes(fieldType) ||
         TIME_FIELD_TYPES.includes(fieldType)
@@ -335,7 +335,7 @@ export function handleCopy(e) {
   const cell = e.target;
   const textValue = cell.value || cell.textContent;
 
-  e.clipboardData.setData('text/plain', textValue);
+  e.clipboardData.setData("text/plain", textValue);
 }
 
 export function handleOpenNewTab({ windowId, rowIds }) {
@@ -344,7 +344,7 @@ export function handleOpenNewTab({ windowId, rowIds }) {
   }
 
   rowIds.forEach((rowId) => {
-    window.open(`/window/${windowId}/${rowId}`, '_blank');
+    window.open(`/window/${windowId}/${rowId}`, "_blank");
   });
 }
 
@@ -361,12 +361,12 @@ function shouldRenderColumn_checkMediaType(column) {
   }
 
   const deviceType = currentDevice.type;
-  let mediaType = 'tablet';
+  let mediaType = "tablet";
 
-  if (deviceType === 'mobile') {
-    mediaType = 'phone';
-  } else if (deviceType === 'desktop') {
-    mediaType = 'screen';
+  if (deviceType === "mobile") {
+    mediaType = "phone";
+  } else if (deviceType === "desktop") {
+    mediaType = "screen";
   }
 
   return column.restrictToMediaTypes.indexOf(mediaType) !== -1;
@@ -407,7 +407,7 @@ export function isCellEditable(item, cells) {
         VIEW_EDITOR_RENDER_MODES_ALWAYS) ||
     item.viewEditorRenderMode === VIEW_EDITOR_RENDER_MODES_ALWAYS;
 
-  isEditable = item.widgetType === 'Color' ? false : isEditable;
+  isEditable = item.widgetType === "Color" ? false : isEditable;
 
   return isEditable;
 }
@@ -437,7 +437,7 @@ export function getCellWidgetData(cells, item, isEditable, supportFieldEdit) {
     if (cells) {
       let cellWidget = cells[prop.field] || null;
 
-      if (isEditable || (supportFieldEdit && typeof cellWidget === 'object')) {
+      if (isEditable || (supportFieldEdit && typeof cellWidget === "object")) {
         cellWidget = {
           ...cellWidget,
           widgetType: item.widgetType,
@@ -506,10 +506,10 @@ export function getDescription({ widgetData, tdValue }) {
  * @param {string} desciption
  */
 export function getTdTitle({ item, description }) {
-  return item.widgetType === 'YesNo' ||
-    item.widgetType === 'Switch' ||
-    item.widgetType === 'Color'
-    ? ''
+  return item.widgetType === "YesNo" ||
+    item.widgetType === "Switch" ||
+    item.widgetType === "Color"
+    ? ""
     : description;
 }
 
@@ -556,9 +556,9 @@ export function nestedSelect(elem) {
 export function getTooltipWidget(item, widgetData) {
   let tooltipData = null;
   let tooltipWidget =
-    item.fields && item.widgetType === 'Lookup'
+    item.fields && item.widgetType === "Lookup"
       ? item.fields.find((field, idx) => {
-          if (field.type === 'Tooltip') {
+          if (field.type === "Tooltip") {
             tooltipData = widgetData[idx];
 
             if (tooltipData && tooltipData.value) {
@@ -581,4 +581,4 @@ export const computeNumberOfPages = (size, pageLength) => {
 };
 
 export const isShowCommentsMarker = (state) =>
-  getSettingFromStateAsBoolean(state, 'view.showCommentsMarker', true);
+  getSettingFromStateAsBoolean(state, "view.showCommentsMarker", true);

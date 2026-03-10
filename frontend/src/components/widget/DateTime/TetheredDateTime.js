@@ -1,17 +1,17 @@
-import React from 'react';
-import DateTime from 'react-datetime';
-import CalendarContainer from 'react-datetime/src/CalendarContainer';
-import TetherComponent from 'react-tether';
-import classnames from 'classnames';
-import { setMomentToEndOfDay } from '../../../utils/dateHelpers';
+import React from "react";
+import DateTime from "react-datetime";
+import CalendarContainer from "react-datetime/src/CalendarContainer";
+import TetherComponent from "react-tether";
+import classnames from "classnames";
+import { setMomentToEndOfDay } from "../../../utils/dateHelpers";
 
 // TODO: This monkeypatching that's happening here has to go at some point.
 class TetheredDateTime extends DateTime {
   onInputKeyDown = (e) => {
     if (
-      (e.key === 'Tab' && this.props.closeOnTab) ||
-      e.key === 'Enter' ||
-      e.key === 'Escape'
+      (e.key === "Tab" && this.props.closeOnTab) ||
+      e.key === "Enter" ||
+      e.key === "Escape"
     ) {
       this.closeCalendar();
     }
@@ -53,14 +53,14 @@ class TetheredDateTime extends DateTime {
     const { open, className, input, inputProps, renderInput } = this.props;
     const { inputValue, currentView } = this.state;
 
-    const classNames = classnames('rdt', className, { rdtStatic: !input });
+    const classNames = classnames("rdt", className, { rdtStatic: !input });
 
     let renderedInput = null;
     if (input) {
       const props = {
         ...inputProps,
-        type: 'text',
-        className: 'form-control',
+        type: "text",
+        className: "form-control",
         onFocus: this.openCalendar,
         onChange: this.onInputChange,
         onKeyDown: this.onInputKeyDown,
@@ -77,7 +77,7 @@ class TetheredDateTime extends DateTime {
         <TetherComponent
           attachment="top left"
           targetAttachment="bottom left"
-          constraints={[{ to: 'scrollParent' }, { to: 'window' }]}
+          constraints={[{ to: "scrollParent" }, { to: "window" }]}
           renderTarget={(ref) =>
             renderedInput && <div ref={ref}>{renderedInput}</div>
           }

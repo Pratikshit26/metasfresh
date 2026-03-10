@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { debounce, get } from 'lodash';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { debounce, get } from "lodash";
 
-import { LOCATION_SEARCH_NAME } from '../constants/Constants';
-import { getViewRowsByIds, locationSearchRequest } from '../api';
-import { connectWS, disconnectWS } from '../utils/websockets';
-import { deepUnfreeze } from '../utils';
+import { LOCATION_SEARCH_NAME } from "../constants/Constants";
+import { getViewRowsByIds, locationSearchRequest } from "../api";
+import { connectWS, disconnectWS } from "../utils/websockets";
+import { deepUnfreeze } from "../utils";
 
-import { getTableId } from '../reducers/tables';
-import { getEntityRelatedId } from '../reducers/filters';
-import * as IndicatorState from '../constants/IndicatorState';
+import { getTableId } from "../reducers/tables";
+import { getEntityRelatedId } from "../reducers/filters";
+import * as IndicatorState from "../constants/IndicatorState";
 
 import {
   addViewLocationData,
@@ -24,21 +24,21 @@ import {
   setIncludedView,
   showIncludedView,
   unsetIncludedView,
-} from '../actions/ViewActions';
+} from "../actions/ViewActions";
 import {
   deleteTable,
   deselectTableRows,
   updateGridTableData,
-} from '../actions/TableActions';
+} from "../actions/TableActions";
 import {
   setListId,
   setPagination as setListPagination,
   setSorting as setListSorting,
-} from '../actions/ListActions';
-import { indicatorState, updateRawModal } from '../actions/WindowActions';
-import { setBreadcrumb } from '../actions/MenuActions';
-import { deleteFilter } from '../actions/FiltersActions';
-import { deleteQuickActions, fetchQuickActions } from '../actions/Actions';
+} from "../actions/ListActions";
+import { indicatorState, updateRawModal } from "../actions/WindowActions";
+import { setBreadcrumb } from "../actions/MenuActions";
+import { deleteFilter } from "../actions/FiltersActions";
+import { deleteQuickActions, fetchQuickActions } from "../actions/Actions";
 
 import {
   computePageLengthEffective,
@@ -50,11 +50,11 @@ import {
   mergeRows,
   parseToDisplay,
   retainExistingRowIds,
-} from '../utils/documentListHelper';
-import { filtersActiveContains } from '../utils/filterHelpers';
+} from "../utils/documentListHelper";
+import { filtersActiveContains } from "../utils/filterHelpers";
 
-import DocumentList from '../components/app/DocumentList';
-import { requestRedirect } from '../reducers/redirect';
+import DocumentList from "../components/app/DocumentList";
+import { requestRedirect } from "../reducers/redirect";
 
 // TODO: This can be further simplified by extracting methods that are not responsible
 // for fetching data to a child container/component (or maybe back to DocumentList component)
@@ -80,13 +80,13 @@ class DocumentListContainer extends Component {
         this.browseView(true);
       },
       500,
-      { maxWait: 10000 }
+      { maxWait: 10000 },
     );
   }
 
   handlePopState = () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const page = urlParams.get('page');
+    const page = urlParams.get("page");
 
     if (this.lastViewedPage !== page) {
       this.lastViewedPage = page;
@@ -102,7 +102,7 @@ class DocumentListContainer extends Component {
 
   componentDidMount = () => {
     this.mounted = true;
-    window.addEventListener('popstate', this.handlePopState);
+    window.addEventListener("popstate", this.handlePopState);
   };
 
   componentWillUnmount() {
@@ -113,7 +113,7 @@ class DocumentListContainer extends Component {
 
     deleteTable(getTableId({ windowId, viewId }));
     deleteView(windowId, isModal);
-    window.removeEventListener('popstate', this.handlePopState);
+    window.removeEventListener("popstate", this.handlePopState);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -164,7 +164,7 @@ class DocumentListContainer extends Component {
       nextWindowId !== windowId ||
       (nextWindowId === windowId &&
         ((nextViewId !== viewId && isIncluded && nextIsIncluded) ||
-          location.hash === '#notification')) ||
+          location.hash === "#notification")) ||
       nextRefDocumentId !== refDocumentId ||
       nextReferenceId !== referenceId
     ) {
@@ -199,7 +199,7 @@ class DocumentListContainer extends Component {
             if (included) {
               unsetIncludedView(includedView);
             }
-          }
+          },
         );
 
         this.fetchLayoutAndDataOnUpdate = true;
@@ -225,7 +225,7 @@ class DocumentListContainer extends Component {
     const viewId = customViewId ? customViewId : this.props.viewId;
 
     connectWS.call(this, `/view/${viewId}`, (event) =>
-      this.onViewChangedEvent({ viewId, event })
+      this.onViewChangedEvent({ viewId, event }),
     );
   };
 
@@ -247,7 +247,7 @@ class DocumentListContainer extends Component {
 
     const changedRowIdsInPage = retainExistingRowIds(
       table.rows,
-      event.changedIds
+      event.changedIds,
     );
 
     if (changedRowIdsInPage.length > 0) {
@@ -296,7 +296,7 @@ class DocumentListContainer extends Component {
             preserveCollapsedStateToRowIds: changedRowIdsInPage,
             customLayoutFlags: { uncollapseRowsOnChange },
           });
-        }
+        },
       );
     }
 
@@ -325,7 +325,7 @@ class DocumentListContainer extends Component {
     fetchLayout(windowId, type, viewProfileId, isModal)
       .then((response) => {
         if (!this.mounted) {
-          console.log('Skip updating because no longer mounted');
+          console.log("Skip updating because no longer mounted");
         }
 
         const { viewId, setModalTitle, updateRawModal, setModalDescription } =
@@ -396,7 +396,7 @@ class DocumentListContainer extends Component {
       page,
       sort,
       locationSearchFilter,
-      websocketRefresh
+      websocketRefresh,
     ).catch((err) => {
       if (err.response && err.response.status === 404) {
         this.createNewView();
@@ -561,7 +561,7 @@ class DocumentListContainer extends Component {
         // https://github.com/metasfresh/me03/issues/4734
         mergeColumnInfosIntoViewRows(
           pageColumnInfosByFieldName,
-          response.result
+          response.result,
         );
 
         if (this.mounted) {
@@ -611,8 +611,8 @@ class DocumentListContainer extends Component {
       const locationData = data.locations.map((location) => {
         const name = get(
           resultById,
-          [location.rowId, 'C_BPartner_ID', 'value', 'caption'],
-          location.rowId
+          [location.rowId, "C_BPartner_ID", "value", "caption"],
+          location.rowId,
         );
 
         return {
@@ -642,10 +642,10 @@ class DocumentListContainer extends Component {
     let currentPage = viewData.page;
 
     switch (index) {
-      case 'up':
+      case "up":
         currentPage * viewData.pageLength < table.size ? currentPage++ : null;
         break;
-      case 'down':
+      case "down":
         currentPage !== 1 ? currentPage-- : null;
         break;
       default:
@@ -758,7 +758,7 @@ class DocumentListContainer extends Component {
             windowId: item.supportIncludedViews
               ? item.includedView.windowId || item.includedView.windowId
               : null,
-            viewId: item.supportIncludedViews ? item.includedView.viewId : '',
+            viewId: item.supportIncludedViews ? item.includedView.viewId : "",
             isModal,
           });
         }
@@ -838,5 +838,5 @@ export default connect(
     requestRedirect,
   },
   null,
-  { forwardRef: true }
+  { forwardRef: true },
 )(DocumentListContainer);

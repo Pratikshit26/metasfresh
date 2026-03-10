@@ -24,10 +24,14 @@ export class Shipper {
   }
 }
 function applyShipper(shipper) {
-  describe(`Create new Shipper ${shipper.name}`, function() {
-    cy.visitWindow(142, 'NEW');
-    cy.writeIntoStringField('Name', shipper.name);
-    cy.writeIntoLookupListField('C_BPartner_ID', shipper.bPartner, shipper.bPartner);
-    cy.writeIntoStringField('Description', shipper.description);
+  describe(`Create new Shipper ${shipper.name}`, function () {
+    cy.visitWindow(142, "NEW");
+    cy.writeIntoStringField("Name", shipper.name);
+    cy.writeIntoLookupListField(
+      "C_BPartner_ID",
+      shipper.bPartner,
+      shipper.bPartner,
+    );
+    cy.writeIntoStringField("Description", shipper.description);
   });
 }

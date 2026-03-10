@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import BookmarkButton from '../BookmarkButton';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import BookmarkButton from "../BookmarkButton";
 
 class MenuOverlayItem extends Component {
   componentDidMount() {
     const { query } = this.props;
-    if (!query && document.getElementsByClassName('js-menu-overlay')[0]) {
-      document.getElementsByClassName('js-menu-overlay')[0].focus();
+    if (!query && document.getElementsByClassName("js-menu-overlay")[0]) {
+      document.getElementsByClassName("js-menu-overlay")[0].focus();
     }
   }
 
@@ -28,18 +28,18 @@ class MenuOverlayItem extends Component {
       e.stopPropagation();
     }
 
-    if (type === 'newRecord') {
+    if (type === "newRecord") {
       handleNewRedirect(elementId);
-    } else if (type === 'window' || type === 'board' || type === 'calendar') {
+    } else if (type === "window" || type === "board" || type === "calendar") {
       if (breadcrumb[1] && breadcrumb[1].nodeId === nodeId) {
         history.go(0); // reload
       } else {
         this.handleClick(elementId, type);
       }
-    } else if (type === 'group') {
+    } else if (type === "group") {
       handleClickOnFolder && handleClickOnFolder(e, nodeId);
-    } else if (type === 'report' || type === 'process') {
-      openModal(elementId + '', 'process', caption);
+    } else if (type === "report" || type === "process") {
+      openModal(elementId + "", "process", caption);
     } else {
       console.warn(`Do nothing because type "${type}" is not handled`);
     }
@@ -53,32 +53,32 @@ class MenuOverlayItem extends Component {
 
   handleKeyDown = (e) => {
     const { back, handleMenuOverlay } = this.props;
-    const overlay = document.getElementsByClassName('js-menu-overlay')[0];
+    const overlay = document.getElementsByClassName("js-menu-overlay")[0];
 
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
         this.handleArrowDown();
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
         this.handleArrowUp();
         break;
-      case 'Tab':
+      case "Tab":
         e.preventDefault();
-        document.getElementsByClassName('js-menu-item')[0].focus();
+        document.getElementsByClassName("js-menu-item")[0].focus();
         break;
-      case 'Backspace':
+      case "Backspace":
         e.preventDefault();
         back(e);
         overlay && overlay.focus();
         break;
-      case 'Enter':
+      case "Enter":
         this.clickedItem(e);
         break;
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
-        handleMenuOverlay('', '');
+        handleMenuOverlay("", "");
     }
   };
 
@@ -86,13 +86,13 @@ class MenuOverlayItem extends Component {
     const { inputElement } = this.props;
     let prevSiblings = document.activeElement.previousSibling;
 
-    if (prevSiblings && prevSiblings.classList.contains('input-primary')) {
+    if (prevSiblings && prevSiblings.classList.contains("input-primary")) {
       inputElement && inputElement.focus();
     } else if (
       prevSiblings &&
-      prevSiblings.classList.contains('js-menu-item') &&
+      prevSiblings.classList.contains("js-menu-item") &&
       document.activeElement.parentElement.classList.contains(
-        'menu-overlay-query'
+        "menu-overlay-query",
       )
     ) {
       document.activeElement.previousSibling.focus();
@@ -104,11 +104,11 @@ class MenuOverlayItem extends Component {
     const parentElem = document.activeElement.parentElement;
 
     if (nextElem) {
-      if (nextElem.classList.contains('js-menu-item')) {
+      if (nextElem.classList.contains("js-menu-item")) {
         nextElem.focus();
       } else {
-        nextElem.getElementsByClassName('js-menu-item')[0] &&
-          nextElem.getElementsByClassName('js-menu-item')[0].focus();
+        nextElem.getElementsByClassName("js-menu-item")[0] &&
+          nextElem.getElementsByClassName("js-menu-item")[0].focus();
       }
     } else {
       if (parentElem.nextSibling) {
@@ -116,30 +116,30 @@ class MenuOverlayItem extends Component {
         if (listChildren.length === 1) {
           listChildren[0].focus();
         } else {
-          if (listChildren[1].classList.contains('js-menu-item')) {
+          if (listChildren[1].classList.contains("js-menu-item")) {
             listChildren[1].focus();
           } else {
-            listChildren[1].getElementsByClassName('js-menu-item')[0].focus();
+            listChildren[1].getElementsByClassName("js-menu-item")[0].focus();
           }
         }
       } else if (parentElem.parentElement.nextSibling) {
         if (
           parentElem.parentElement.nextSibling.childNodes[1].classList.contains(
-            'js-menu-item'
+            "js-menu-item",
           )
         ) {
           parentElem.parentElement.nextSibling.childNodes[1].focus();
         } else {
           parentElem.parentElement.nextSibling.childNodes[1]
-            .getElementsByClassName('js-menu-item')[0]
+            .getElementsByClassName("js-menu-item")[0]
             .focus();
         }
       } else if (parentElem.parentElement.parentElement.nextSibling) {
         parentElem.parentElement.parentElement.nextSibling.getElementsByClassName(
-          'js-menu-item'
+          "js-menu-item",
         )[0] &&
           parentElem.parentElement.parentElement.nextSibling
-            .getElementsByClassName('js-menu-item')[0]
+            .getElementsByClassName("js-menu-item")[0]
             .focus();
       }
     }
@@ -147,22 +147,22 @@ class MenuOverlayItem extends Component {
 
   iconByType = (type) => {
     switch (type) {
-      case 'window':
+      case "window":
         return <i className="meta-icon-vertragsverwaltung m-icon-space" />;
-      case 'newRecord':
+      case "newRecord":
         return <i className="meta-icon-file m-icon-space" />;
-      case 'process':
+      case "process":
         return <i className="meta-icon-issue m-icon-space" />;
-      case 'report':
+      case "report":
         return <i className="meta-icon-beschaffung m-icon-space" />;
-      case 'group':
+      case "group":
         return <i className="meta-icon-report m-icon-space" />;
-      case 'board':
+      case "board":
         return <i className="meta-icon-calendar m-icon-space" />;
-      case 'calendar':
+      case "calendar":
         return <i className="meta-icon-calendar m-icon-space" />;
       default:
-        return '';
+        return "";
     }
   };
 
@@ -208,9 +208,9 @@ class MenuOverlayItem extends Component {
             {this.iconByType(type)}
             <span
               className={
-                type === 'group'
-                  ? 'query-clickable-group'
-                  : 'query-clickable-link'
+                type === "group"
+                  ? "query-clickable-group"
+                  : "query-clickable-link"
               }
               onClick={(e) => this.clickedItem(e)}
             >
@@ -254,5 +254,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, null, null, { forwardRef: true })(
-  MenuOverlayItem
+  MenuOverlayItem,
 );

@@ -1,20 +1,20 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
-import { getView, viewState } from '../reducers/viewHandler';
+import { getView, viewState } from "../reducers/viewHandler";
 import {
   setRawModalDescription,
   setRawModalTitle,
-} from '../actions/WindowActions';
+} from "../actions/WindowActions";
 
-import DocumentList from '../containers/DocumentList';
-import ErrorScreen from './app/ErrorScreen';
-import SpinnerOverlay from './app/SpinnerOverlay';
-import Modal from './app/Modal';
-import RawModal from './app/RawModal';
-import Header from './header/Header';
-import { computeSaveStatusFlags } from '../reducers/windowHandler';
+import DocumentList from "../containers/DocumentList";
+import ErrorScreen from "./app/ErrorScreen";
+import SpinnerOverlay from "./app/SpinnerOverlay";
+import Modal from "./app/Modal";
+import RawModal from "./app/RawModal";
+import Header from "./header/Header";
+import { computeSaveStatusFlags } from "../reducers/windowHandler";
 
 /**
  * @file Class based component.
@@ -71,7 +71,7 @@ class Container extends PureComponent {
           window.META_HOST_APP.getRegistry().getEntry(modalPluginName);
 
         PluginModalComponent = parentPlugin.components.filter(
-          (component) => component.id === pluginModal.id
+          (component) => component.id === pluginModal.id,
         )[0].component;
       }
     }
@@ -111,8 +111,8 @@ class Container extends PureComponent {
 
         <div
           className={
-            'header-sticky-distance js-unselect panel-vertical-scroll ' +
-            (noMargin ? 'dashboard' : 'container-fluid')
+            "header-sticky-distance js-unselect panel-vertical-scroll " +
+            (noMargin ? "dashboard" : "container-fluid")
           }
         >
           {!modalHidden && (
@@ -256,7 +256,7 @@ const mapStateToProps = (state, { windowId }) => {
 
   return {
     notFound: master.notFound,
-    connectionErrorType: state.appHandler.connectionErrorType || '',
+    connectionErrorType: state.appHandler.connectionErrorType || "",
     showSpinner: state.windowHandler.showSpinner || false,
     pluginComponents: state.pluginsHandler.components,
     pluginModal: state.windowHandler.pluginModal,

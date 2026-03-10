@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Lane from './Lane';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Lane from "./Lane";
 
 class Lanes extends Component {
   constructor(props) {

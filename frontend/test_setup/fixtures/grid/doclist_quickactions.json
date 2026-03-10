@@ -5,9 +5,7 @@
         "processId": "ADP_540900",
         "caption": "WEBUI_TestParentChildViewParams",
         "description": "Process used to test parent and child views informations provided by webui frontend.\nSee task https://github.com/metasfresh/metasfresh-webui-api/issues/755.",
-        "displayPlaces": [
-          "ViewQuickActions"
-        ],
+        "displayPlaces": ["ViewQuickActions"],
         "quickAction": true,
         "defaultQuickAction": false,
         "evaluateDuration": "180.2 μs",
@@ -17,9 +15,7 @@
         "processId": "ADP_540874",
         "caption": "Take out HU",
         "description": "",
-        "displayPlaces": [
-          "ViewQuickActions"
-        ],
+        "displayPlaces": ["ViewQuickActions"],
         "quickAction": true,
         "defaultQuickAction": false,
         "disabled": true,
@@ -35,9 +31,7 @@
         "processId": "ADP_540900",
         "caption": "WEBUI_TestParentChildViewParams",
         "description": "Process used to test parent and child views informations provided by webui frontend.\nSee task https://github.com/metasfresh/metasfresh-webui-api/issues/755.",
-        "displayPlaces": [
-          "ViewQuickActions"
-        ],
+        "displayPlaces": ["ViewQuickActions"],
         "quickAction": true,
         "defaultQuickAction": false,
         "evaluateDuration": "132.8 μs",
@@ -51,9 +45,7 @@
         "processId": "ADP_540904",
         "caption": "Add to Transportation Order, Ship and Invoice",
         "description": "",
-        "displayPlaces": [
-          "ViewQuickActions"
-        ],
+        "displayPlaces": ["ViewQuickActions"],
         "quickAction": true,
         "defaultQuickAction": false,
         "evaluateDuration": "9.764 μs",
@@ -95,9 +87,7 @@
         "processId": "ADP_540899",
         "caption": "Add to Transportation Order",
         "description": "",
-        "displayPlaces": [
-          "ViewQuickActions"
-        ],
+        "displayPlaces": ["ViewQuickActions"],
         "quickAction": true,
         "defaultQuickAction": false,
         "disabled": true,

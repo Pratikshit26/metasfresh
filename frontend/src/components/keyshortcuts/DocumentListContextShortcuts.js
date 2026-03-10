@@ -1,6 +1,6 @@
-import React, { Fragment, PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Shortcut } from '../keyshortcuts';
+import React, { Fragment, PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Shortcut } from "../keyshortcuts";
 
 export default class DocumentListContextShortcuts extends PureComponent {
   handlers = {

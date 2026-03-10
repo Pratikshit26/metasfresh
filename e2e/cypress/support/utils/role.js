@@ -29,12 +29,12 @@ export class Role {
 }
 
 function applyRole(role) {
-  describe(`Create new role ${role.name}`, function() {
-    cy.visitWindow('111', 'NEW');
-    cy.writeIntoStringField('Name', role.name);
+  describe(`Create new role ${role.name}`, function () {
+    cy.visitWindow("111", "NEW");
+    cy.writeIntoStringField("Name", role.name);
 
     if (role.isAutoLogin) {
-      cy.clickOnCheckBox('IsAutoRoleLogin');
+      cy.clickOnCheckBox("IsAutoRoleLogin");
     }
     if (!role.isActive) {
       cy.clickOnIsActive();

@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import ReactDOM from "react-dom";
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
 
-import Table from '../containers/Table';
-import TableContextShortcuts from './keyshortcuts/TableContextShortcuts';
-import keymap from '../shortcuts/keymap';
-import Tabs, { TabSingleEntry } from './window/Tabs';
-import Tooltips from './tooltips/Tooltips';
-import Section from './window/Section';
-import Dropzone from './Dropzone';
-import { INITIALLY_CLOSED } from '../constants/Constants';
+import Table from "../containers/Table";
+import TableContextShortcuts from "./keyshortcuts/TableContextShortcuts";
+import keymap from "../shortcuts/keymap";
+import Tabs, { TabSingleEntry } from "./window/Tabs";
+import Tooltips from "./tooltips/Tooltips";
+import Section from "./window/Section";
+import Dropzone from "./Dropzone";
+import { INITIALLY_CLOSED } from "../constants/Constants";
 
 const EMPTY_OBJECT = {};
 
@@ -101,7 +101,7 @@ class SectionGroup extends PureComponent {
     });
   };
 
-  toggleSectionCollapsed = (idx, tabId = '') => {
+  toggleSectionCollapsed = (idx, tabId = "") => {
     this.setState({
       ...this.state,
       collapsedSections: {
@@ -111,7 +111,7 @@ class SectionGroup extends PureComponent {
     });
   };
 
-  isSectionCollapsed = (idx, tabId = '') => {
+  isSectionCollapsed = (idx, tabId = "") => {
     return this.state.collapsedSections[`${tabId}_${idx}`];
   };
 
@@ -204,10 +204,10 @@ class SectionGroup extends PureComponent {
                   name={keymap.TOGGLE_EXPAND}
                   action={
                     fullScreen
-                      ? counterpart.translate('window.table.collapse')
-                      : counterpart.translate('window.table.expand')
+                      ? counterpart.translate("window.table.collapse")
+                      : counterpart.translate("window.table.expand")
                   }
-                  type={''}
+                  type={""}
                 />
               )}
             </button>
@@ -216,7 +216,7 @@ class SectionGroup extends PureComponent {
                 handleToggleExpand={this.toggleTableFullScreen}
               />
             )}
-          </TabSingleEntry>
+          </TabSingleEntry>,
         );
       } else {
         tabComponentsCollector.push(
@@ -242,7 +242,7 @@ class SectionGroup extends PureComponent {
             newRecordInputMode={newRecordInputMode}
             tabInfo={tabsInfo && tabsInfo[tabId]}
             updateDocList={onRefreshTab}
-          />
+          />,
         );
       }
 
@@ -359,13 +359,13 @@ class SectionGroup extends PureComponent {
       if (currentWidgetIndex >= 0) {
         let nextWidgetIndex = Math.min(
           this.widgets.length - 1,
-          currentWidgetIndex + 1
+          currentWidgetIndex + 1,
         );
 
         // eslint-disable-next-line react/no-find-dom-node
         let element = ReactDOM.findDOMNode(this.widgets[nextWidgetIndex]);
         if (element) {
-          let tabElement = element.querySelector('[tabindex]');
+          let tabElement = element.querySelector("[tabindex]");
 
           if (tabElement) {
             tabElement.focus();
@@ -457,15 +457,15 @@ SectionGroup.propTypes = {
 SectionGroup.defaultProps = {
   handleDropFile: () => {
     // eslint-disable-next-line no-console
-    console.warn('TODO: handleDropFile prop is missing');
+    console.warn("TODO: handleDropFile prop is missing");
   },
   handleRejectDropped: () => {
     // eslint-disable-next-line no-console
-    console.warn('TODO: handleRejectDropped prop is missing');
+    console.warn("TODO: handleRejectDropped prop is missing");
   },
   handleDragStart: () => {
     // eslint-disable-next-line no-console
-    console.warn('TODO: handleDragStart prop is missing');
+    console.warn("TODO: handleDragStart prop is missing");
   },
 };
 

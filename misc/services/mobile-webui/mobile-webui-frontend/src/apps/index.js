@@ -8,16 +8,6 @@ import * as posApp from './pos';
 const registeredApplications = {};
 
 const registerApplication = ({
-  applicationId,
-  routes,
-  messages,
-  isFullScreen,
-  startApplication,
-  startApplicationByQRCode,
-  reduxReducer,
-  onWFActivityCompleted,
-}) => {
-  const applicationInfo = {
     applicationId,
     routes,
     messages,
@@ -26,81 +16,92 @@ const registerApplication = ({
     startApplicationByQRCode,
     reduxReducer,
     onWFActivityCompleted,
-  };
-  registeredApplications[applicationId] = applicationInfo;
+}) => {
+    const applicationInfo = {
+        applicationId,
+        routes,
+        messages,
+        isFullScreen,
+        startApplication,
+        startApplicationByQRCode,
+        reduxReducer,
+        onWFActivityCompleted,
+    };
+    registeredApplications[applicationId] = applicationInfo;
 
-  console.log(`Registered application ${applicationId}`, { applicationInfo });
-  // console.log('=>registeredApplications', registeredApplications);
+    console.log(`Registered application ${applicationId}`, { applicationInfo });
+    // console.log('=>registeredApplications', registeredApplications);
 };
 
 export const isApplicationFullScreen = (applicationId) => {
-  return !!registeredApplications?.[applicationId]?.isFullScreen;
+    return !!registeredApplications?.[applicationId]?.isFullScreen;
 };
 
 export const getApplicationStartFunction = (applicationId) => {
-  return registeredApplications[applicationId]?.startApplication;
+    return registeredApplications[applicationId]?.startApplication;
 };
 export const getApplicationStartByQRCodeFunction = (applicationId) => {
-  return registeredApplications[applicationId]?.startApplicationByQRCode;
+    return registeredApplications[applicationId]?.startApplicationByQRCode;
 };
 
 export const getApplicationRoutes = () => {
-  const result = [];
+    const result = [];
 
-  Object.values(registeredApplications).forEach((applicationDescriptor) => {
-    if (Array.isArray(applicationDescriptor.routes)) {
-      applicationDescriptor.routes.forEach((route) => {
-        result.push({
-          applicationId: applicationDescriptor.applicationId,
-          ...route,
-        });
-      });
-    }
-  });
+    Object.values(registeredApplications).forEach((applicationDescriptor) => {
+        if (Array.isArray(applicationDescriptor.routes)) {
+            applicationDescriptor.routes.forEach((route) => {
+                result.push({
+                    applicationId: applicationDescriptor.applicationId,
+                    ...route,
+                });
+            });
+        }
+    });
 
-  return result;
+    return result;
 };
 
 export const getApplicationMessages = () => {
-  return Object.values(registeredApplications).reduce((result, applicationDescriptor) => {
-    if (applicationDescriptor.messages) {
-      Object.keys(applicationDescriptor.messages).forEach((locale) => {
-        if (!result[locale]) {
-          result[locale] = {};
+    return Object.values(registeredApplications).reduce((result, applicationDescriptor) => {
+        if (applicationDescriptor.messages) {
+            Object.keys(applicationDescriptor.messages).forEach((locale) => {
+                if (!result[locale]) {
+                    result[locale] = {};
+                }
+
+                result[locale][applicationDescriptor.applicationId] = applicationDescriptor.messages[locale];
+            });
         }
 
-        result[locale][applicationDescriptor.applicationId] = applicationDescriptor.messages[locale];
-      });
-    }
-
-    return result;
-  }, {});
+        return result;
+    }, {});
 };
 
 export const getApplicationReduxReducers = () => {
-  return Object.values(registeredApplications).reduce((result, applicationDescriptor) => {
-    if (applicationDescriptor.reduxReducer) {
-      result[computeApplicationStateKey(applicationDescriptor.applicationId)] = applicationDescriptor.reduxReducer;
-    }
-    return result;
-  }, {});
+    return Object.values(registeredApplications).reduce((result, applicationDescriptor) => {
+        if (applicationDescriptor.reduxReducer) {
+            result[computeApplicationStateKey(applicationDescriptor.applicationId)] =
+                applicationDescriptor.reduxReducer;
+        }
+        return result;
+    }, {});
 };
 
 export const getApplicationState = (globalState, applicationId) => {
-  return globalState?.[computeApplicationStateKey(applicationId)] ?? {};
+    return globalState?.[computeApplicationStateKey(applicationId)] ?? {};
 };
 
 const computeApplicationStateKey = (applicationId) => 'applications/' + applicationId;
 
 export const fireWFActivityCompleted = ({ applicationId, defaultAction, ...params }) => {
-  const onWFActivityCompleted = registeredApplications[applicationId]?.onWFActivityCompleted;
-  return (dispatch, getState) => {
-    if (onWFActivityCompleted) {
-      onWFActivityCompleted({ applicationId, defaultAction, ...params, dispatch, getState });
-    } else {
-      defaultAction?.();
-    }
-  };
+    const onWFActivityCompleted = registeredApplications[applicationId]?.onWFActivityCompleted;
+    return (dispatch, getState) => {
+        if (onWFActivityCompleted) {
+            onWFActivityCompleted({ applicationId, defaultAction, ...params, dispatch, getState });
+        } else {
+            defaultAction?.();
+        }
+    };
 };
 
 //

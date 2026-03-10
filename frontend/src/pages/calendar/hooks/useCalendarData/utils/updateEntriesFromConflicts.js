@@ -39,7 +39,7 @@ const extractEntryIdsWithConflicts = (conflictsArray) => {
   const entryIdsWithConflicts = [];
   if (conflictsArray) {
     conflictsArray.forEach((conflict) => {
-      if (conflict.status === 'CONFLICT') {
+      if (conflict.status === "CONFLICT") {
         entryIdsWithConflicts.push(conflict.entryId1);
         entryIdsWithConflicts.push(conflict.entryId2);
       }

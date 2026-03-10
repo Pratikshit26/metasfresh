@@ -9,7 +9,7 @@ import { unboxAxiosResponse } from '../utils';
  * @returns
  */
 export function postUserConfirmation({ wfProcessId, activityId }) {
-  return axios
-    .post(`${apiBasePath}/userWorkflows/wfProcess/${wfProcessId}/${activityId}/userConfirmation`)
-    .then((response) => unboxAxiosResponse(response));
+    return axios
+        .post(`${apiBasePath}/userWorkflows/wfProcess/${wfProcessId}/${activityId}/userConfirmation`)
+        .then((response) => unboxAxiosResponse(response));
 }

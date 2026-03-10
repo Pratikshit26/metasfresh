@@ -1,4 +1,4 @@
-import { getLanguageSpecific } from '../../support/utils/utils';
+import { getLanguageSpecific } from "../../support/utils/utils";
 
 export class ContractConditions {
   constructor({ name, ...vals }) {
@@ -51,11 +51,11 @@ export class ContractConditions {
 }
 
 export class ConditionsType {
-  static Procurement = 'conditionsType_procuremnt';
+  static Procurement = "conditionsType_procuremnt";
 
-  static Subscription = 'conditionsType_subscription';
+  static Subscription = "conditionsType_subscription";
 
-  static QualityBased = 'conditionsType_quality_based';
+  static QualityBased = "conditionsType_quality_based";
 }
 
 export class ProductAllocation {
@@ -73,37 +73,47 @@ export class ProductAllocation {
 }
 
 function applyConditions(conditions) {
-  cy.visitWindow('540113', 'NEW', 'newConditions');
-  cy.writeIntoStringField('Name', conditions.name);
+  cy.visitWindow("540113", "NEW", "newConditions");
+  cy.writeIntoStringField("Name", conditions.name);
 
-  cy.fixture('contract/contract_dictionary.json').then(contractDictionary => {
-    cy.getStringFieldValue('Type_Conditions').then(currentType => {
-      const targetType = getLanguageSpecific(contractDictionary, conditions.conditionsType);
+  cy.fixture("contract/contract_dictionary.json").then((contractDictionary) => {
+    cy.getStringFieldValue("Type_Conditions").then((currentType) => {
+      const targetType = getLanguageSpecific(
+        contractDictionary,
+        conditions.conditionsType,
+      );
       if (currentType !== targetType) {
-        cy.selectInListField('Type_Conditions', targetType);
+        cy.selectInListField("Type_Conditions", targetType);
       }
     });
   });
 
   if (conditions.conditionsType === ConditionsType.QualityBased) {
-    cy.selectInListField('M_QualityInsp_LagerKonf_ID', conditions.lagerKonferenz);
+    cy.selectInListField(
+      "M_QualityInsp_LagerKonf_ID",
+      conditions.lagerKonferenz,
+    );
   }
 
-  cy.selectInListField('OnFlatrateTermExtend', 'Co');
-  cy.selectInListField('C_Flatrate_Transition_ID', conditions.transition);
+  cy.selectInListField("OnFlatrateTermExtend", "Co");
+  cy.selectInListField("C_Flatrate_Transition_ID", conditions.transition);
 
-  conditions.productAllocations.forEach(function(productAllocation) {
+  conditions.productAllocations.forEach(function (productAllocation) {
     applyProductAllocation(productAllocation);
   });
   cy.expectNumberOfRows(conditions.productAllocations.length);
 }
 
 function applyProductAllocation(productAllocation) {
-  cy.selectTab('C_Flatrate_Matching');
+  cy.selectTab("C_Flatrate_Matching");
   cy.pressAddNewButton();
-  cy.selectInListField('M_Product_Category_Matching_ID', productAllocation.productcategory, true);
+  cy.selectInListField(
+    "M_Product_Category_Matching_ID",
+    productAllocation.productcategory,
+    true,
+  );
   if (productAllocation.product) {
-    cy.selectInListField('M_Product_ID', productAllocation.product, true);
+    cy.selectInListField("M_Product_ID", productAllocation.product, true);
   }
   cy.pressDoneButton();
 }

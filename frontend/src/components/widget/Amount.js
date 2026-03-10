@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
-import DevicesWidget from './Devices/DevicesWidget';
+import DevicesWidget from "./Devices/DevicesWidget";
 
 export default class Amount extends PureComponent {
   render() {
@@ -31,8 +31,8 @@ export default class Amount extends PureComponent {
     return (
       <div
         className={classnames(
-          typeof className === 'function' ? className() : className,
-          'number-field'
+          typeof className === "function" ? className() : className,
+          "number-field",
         )}
       >
         <input

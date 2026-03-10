@@ -2,13 +2,15 @@
 
 All URIs are relative to *https://virtserver.swaggerhub.com/it-labs.de/Artikel/1.0.2*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**postDevice**](DeviceApi.md#postDevice) | **POST** /device | Gerätedaten nach Alberta übertragen
-[**putDevice**](DeviceApi.md#putDevice) | **PUT** /device/{_id} | Gerätedaten in Alberta ändern
+| Method                                    | HTTP request           | Description                         |
+| ----------------------------------------- | ---------------------- | ----------------------------------- |
+| [**postDevice**](DeviceApi.md#postDevice) | **POST** /device       | Gerätedaten nach Alberta übertragen |
+| [**putDevice**](DeviceApi.md#putDevice)   | **PUT** /device/{\_id} | Gerätedaten in Alberta ändern       |
 
 <a name="postDevice"></a>
+
 # **postDevice**
+
 > DeviceMapping postDevice(albertaApiKey, body)
 
 Gerätedaten nach Alberta übertragen
@@ -16,6 +18,7 @@ Gerätedaten nach Alberta übertragen
 legt Geräte in Alberta an
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -23,7 +26,7 @@ legt Geräte in Alberta an
 
 
 DeviceApi apiInstance = new DeviceApi();
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 DeviceToCreate body = new DeviceToCreate(); // DeviceToCreate | device to create
 try {
     DeviceMapping result = apiInstance.postDevice(albertaApiKey, body);
@@ -36,10 +39,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albertaApiKey** | **String**|  |
- **body** | [**DeviceToCreate**](DeviceToCreate.md)| device to create | [optional]
+| Name              | Type                                    | Description      | Notes      |
+| ----------------- | --------------------------------------- | ---------------- | ---------- |
+| **albertaApiKey** | **String**                              |                  |
+| **body**          | [**DeviceToCreate**](DeviceToCreate.md) | device to create | [optional] |
 
 ### Return type
 
@@ -51,18 +54,21 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 <a name="putDevice"></a>
+
 # **putDevice**
-> DeviceMapping putDevice(albertaApiKey, _id, body)
+
+> DeviceMapping putDevice(albertaApiKey, \_id, body)
 
 Gerätedaten in Alberta ändern
 
 ändert Geräte in Alberta
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -70,8 +76,8 @@ Gerätedaten in Alberta ändern
 
 
 DeviceApi apiInstance = new DeviceApi();
-String albertaApiKey = "albertaApiKey_example"; // String | 
-String _id = "_id_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
+String _id = "_id_example"; // String |
 DeviceToCreate body = new DeviceToCreate(); // DeviceToCreate | device to create
 try {
     DeviceMapping result = apiInstance.putDevice(albertaApiKey, _id, body);
@@ -84,11 +90,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albertaApiKey** | **String**|  |
- **_id** | **String**|  |
- **body** | [**DeviceToCreate**](DeviceToCreate.md)| device to create | [optional]
+| Name              | Type                                    | Description      | Notes      |
+| ----------------- | --------------------------------------- | ---------------- | ---------- |
+| **albertaApiKey** | **String**                              |                  |
+| **\_id**          | **String**                              |                  |
+| **body**          | [**DeviceToCreate**](DeviceToCreate.md) | device to create | [optional] |
 
 ### Return type
 
@@ -100,6 +106,5 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
-
+- **Content-Type**: application/json
+- **Accept**: application/json

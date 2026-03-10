@@ -18,8 +18,8 @@ export class CostCenter {
   }
 }
 function applyCostCenter(costCenter) {
-  describe(`Create new CostCenter ${costCenter.name}`, function() {
-    cy.visitWindow(134, 'NEW');
-    cy.writeIntoStringField('Name', costCenter.name);
+  describe(`Create new CostCenter ${costCenter.name}`, function () {
+    cy.visitWindow(134, "NEW");
+    cy.writeIntoStringField("Name", costCenter.name);
   });
 }

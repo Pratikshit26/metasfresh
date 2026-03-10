@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import ElementGroup from './ElementGroup';
-import EntryTable from '../table/EntryTable';
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import ElementGroup from "./ElementGroup";
+import EntryTable from "../table/EntryTable";
 
 const extractEntryTableColumnsArray = (elementGroupsArray) => {
   return elementGroupsArray.reduce((acc, elementGroup) => {
@@ -54,9 +54,9 @@ const Column = ({
         {
           <div
             className={classnames(
-              'panel panel-primary panel-bordered',
-              'panel-bordered-force table-flex-wrapper',
-              'document-list-table js-not-unselect'
+              "panel panel-primary panel-bordered",
+              "panel-bordered-force table-flex-wrapper",
+              "document-list-table js-not-unselect",
             )}
           >
             <EntryTable
@@ -85,7 +85,7 @@ const Column = ({
           elementGroups.map((elementGroupLayout, elementGroupIndex) => {
             return (
               <ElementGroup
-                key={'elemGroups' + elementGroupIndex}
+                key={"elemGroups" + elementGroupIndex}
                 elementGroupLayout={elementGroupLayout}
                 elementGroupIndex={elementGroupIndex}
                 columnIndex={columnIndex}
@@ -96,7 +96,7 @@ const Column = ({
                 dataId={dataId}
                 shouldBeFocused={isFirst && elementGroupIndex === 0}
                 tabIndex={
-                  elementGroupLayout.type === 'primary'
+                  elementGroupLayout.type === "primary"
                     ? tabIndexSpec.firstColumn
                     : tabIndexSpec.secondColumn
                 }

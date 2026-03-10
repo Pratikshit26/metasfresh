@@ -49,24 +49,31 @@ export class ProductPrice {
 }
 
 function applyProductPrice(productPrice) {
-  cy.visitWindow('540325', 'NEW');
+  cy.visitWindow("540325", "NEW");
 
-  cy.writeIntoLookupListField('M_Product_ID', productPrice.product, productPrice.product);
+  cy.writeIntoLookupListField(
+    "M_Product_ID",
+    productPrice.product,
+    productPrice.product,
+  );
 
-  cy.setCheckBoxValue('IsAttributeDependant', productPrice.isAttributeDependant);
+  cy.setCheckBoxValue(
+    "IsAttributeDependant",
+    productPrice.isAttributeDependant,
+  );
   if (productPrice.isAttributeDependant) {
     //cy.get('.M_AttributeSetInstance_ID').should('exist'); // idk what to look for here, but this class should exist if isAttributeDependant is true.
   }
 
-  cy.selectInListField('M_PriceList_Version_ID', productPrice.priceListVersion);
+  cy.selectInListField("M_PriceList_Version_ID", productPrice.priceListVersion);
   if (productPrice.packingItem !== undefined) {
-    cy.selectInListField('M_HU_PI_Item_Product_ID', productPrice.packingItem);
+    cy.selectInListField("M_HU_PI_Item_Product_ID", productPrice.packingItem);
   }
-  cy.writeIntoStringField('PriceStd', productPrice.standardPrice);
+  cy.writeIntoStringField("PriceStd", productPrice.standardPrice);
   if (productPrice.uom !== undefined) {
-    cy.selectInListField('C_UOM_ID', productPrice.uom);
+    cy.selectInListField("C_UOM_ID", productPrice.uom);
   }
-  cy.selectInListField('C_TaxCategory_ID', productPrice.taxCategory);
+  cy.selectInListField("C_TaxCategory_ID", productPrice.taxCategory);
 
-  cy.getStringFieldValue('M_Product_Category_ID').should('not.be.empty');
+  cy.getStringFieldValue("M_Product_Category_ID").should("not.be.empty");
 }

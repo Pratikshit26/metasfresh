@@ -7,10 +7,10 @@ import { useRef } from 'react';
  * the component is rendered.
  */
 const useConstructor = (callBack = () => {}) => {
-  const hasBeenCalled = useRef(false);
-  if (hasBeenCalled.current) return;
-  callBack();
-  hasBeenCalled.current = true;
+    const hasBeenCalled = useRef(false);
+    if (hasBeenCalled.current) return;
+    callBack();
+    hasBeenCalled.current = true;
 };
 
 export default useConstructor;

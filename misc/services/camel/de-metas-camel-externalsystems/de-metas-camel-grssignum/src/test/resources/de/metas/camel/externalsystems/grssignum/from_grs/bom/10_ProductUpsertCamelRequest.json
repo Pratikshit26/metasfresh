@@ -83,10 +83,7 @@
             }
           },
           "qualityAttributes": {
-            "qualityAttributeLabels": [
-              "BIO",
-              "EU_NON_EU_AGRICULTURE"
-            ],
+            "qualityAttributeLabels": ["BIO", "EU_NON_EU_AGRICULTURE"],
             "syncAdvise": {
               "ifNotExists": "CREATE",
               "ifExists": "REPLACE"

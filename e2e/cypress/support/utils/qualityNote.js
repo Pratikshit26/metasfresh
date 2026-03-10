@@ -32,10 +32,10 @@ export class QualityNote {
   }
 }
 function applyQualityNote(qualityNote) {
-  describe(`Create new quality note ${qualityNote.name}`, function() {
-    cy.visitWindow(540316, 'NEW');
-    cy.writeIntoStringField('Name', qualityNote.name);
-    cy.writeIntoStringField('Value', qualityNote.value);
-    cy.selectInListField('PerformanceType', 'Quality Performance');
+  describe(`Create new quality note ${qualityNote.name}`, function () {
+    cy.visitWindow(540316, "NEW");
+    cy.writeIntoStringField("Name", qualityNote.name);
+    cy.writeIntoStringField("Value", qualityNote.value);
+    cy.selectInListField("PerformanceType", "Quality Performance");
   });
 }

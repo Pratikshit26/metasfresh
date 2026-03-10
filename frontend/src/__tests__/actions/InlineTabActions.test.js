@@ -1,6 +1,6 @@
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { merge } from 'merge-anything';
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import { merge } from "merge-anything";
 import {
   updateInlineTabItemFields,
   updateInlineTabWrapperFields,
@@ -9,42 +9,42 @@ import {
   setInlineTabLayoutAndData,
   setInlineTabAddNew,
   setInlineTabItemProp,
-} from '../../actions/InlineTabActions';
-import * as ACTION_TYPES from '../../constants/ActionTypes';
-import gridProps from '../../../test_setup/fixtures/grid.json';
-import gridLayoutFixtures from '../../../test_setup/fixtures/grid/layout.json';
-import { initialState as initialViewsState } from '../../reducers/viewHandler';
-import tablesHandler from '../../reducers/tables';
+} from "../../actions/InlineTabActions";
+import * as ACTION_TYPES from "../../constants/ActionTypes";
+import gridProps from "../../../test_setup/fixtures/grid.json";
+import gridLayoutFixtures from "../../../test_setup/fixtures/grid/layout.json";
+import { initialState as initialViewsState } from "../../reducers/viewHandler";
+import tablesHandler from "../../reducers/tables";
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-const createState = function(state = {}) {
+const createState = function (state = {}) {
   const res = merge(
     {
       viewHandler: initialViewsState,
       tables: { ...tablesHandler(undefined, {}) },
     },
-    state
+    state,
   );
 
   return res;
 };
 
-describe('InlineTab - actions general', () => {
+describe("InlineTab - actions general", () => {
   /** UPDATE_INLINE_TAB_ITEM_FIELDS action */
-  it('should call UPDATE_INLINE_TAB_ITEM_FIELDS action with correct payload', () => {
+  it("should call UPDATE_INLINE_TAB_ITEM_FIELDS action with correct payload", () => {
     const { windowType } = gridProps.props1;
     const layoutResponse = gridLayoutFixtures.layout1;
-    const initialInlineTabId = '123_AD_Tab-222_2205230';
+    const initialInlineTabId = "123_AD_Tab-222_2205230";
     const initialFieldsByName = {
       BPartnerName: {
-        field: 'BPartnerName',
-        value: 'e',
-        widgetType: 'Text',
+        field: "BPartnerName",
+        value: "e",
+        widgetType: "Text",
         validStatus: {
           valid: true,
           initialValue: true,
-          fieldName: 'BPartnerName',
+          fieldName: "BPartnerName",
         },
       },
     };
@@ -58,8 +58,8 @@ describe('InlineTab - actions general', () => {
     });
 
     expect(action.type).toEqual(ACTION_TYPES.UPDATE_INLINE_TAB_ITEM_FIELDS);
-    expect(action.payload).toHaveProperty('inlineTabId', payload.inlineTabId);
-    expect(action.payload).toHaveProperty('fieldsByName', payload.fieldsByName);
+    expect(action.payload).toHaveProperty("inlineTabId", payload.inlineTabId);
+    expect(action.payload).toHaveProperty("fieldsByName", payload.fieldsByName);
 
     const initialState = createState({
       viewHandler: {
@@ -79,17 +79,17 @@ describe('InlineTab - actions general', () => {
       updateInlineTabItemFields({
         inlineTabId: initialInlineTabId,
         fieldsByName: initialFieldsByName,
-      })
+      }),
     );
     expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions));
   });
 
   /** UPDATE_INLINE_TAB_WRAPPER_FIELDS action */
-  it('should call UPDATE_INLINE_TAB_WRAPPER_FIELDS action with correct payload', () => {
+  it("should call UPDATE_INLINE_TAB_WRAPPER_FIELDS action with correct payload", () => {
     const { windowType } = gridProps.props1;
     const layoutResponse = gridLayoutFixtures.layout1;
-    const initialInlineTabId = '123_AD_Tab-222_2205230';
-    const rowId = '2205230';
+    const initialInlineTabId = "123_AD_Tab-222_2205230";
+    const rowId = "2205230";
     const payload = {
       inlineTabWrapperId: initialInlineTabId,
       rowId,
@@ -104,11 +104,11 @@ describe('InlineTab - actions general', () => {
 
     expect(action.type).toEqual(ACTION_TYPES.UPDATE_INLINE_TAB_WRAPPER_FIELDS);
     expect(action.payload).toHaveProperty(
-      'inlineTabWrapperId',
-      payload.inlineTabWrapperId
+      "inlineTabWrapperId",
+      payload.inlineTabWrapperId,
     );
-    expect(action.payload).toHaveProperty('rowId', payload.rowId);
-    expect(action.payload).toHaveProperty('response', payload.response);
+    expect(action.payload).toHaveProperty("rowId", payload.rowId);
+    expect(action.payload).toHaveProperty("response", payload.response);
 
     const initialState = createState({
       viewHandler: {
@@ -129,17 +129,17 @@ describe('InlineTab - actions general', () => {
         inlineTabWrapperId: initialInlineTabId,
         rowId,
         response: {},
-      })
+      }),
     );
     expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions));
   });
 
   /** SET_INLINE_TAB_WRAPPER_DATA action */
-  it('should call SET_INLINE_TAB_WRAPPER_DATA action with correct payload', () => {
+  it("should call SET_INLINE_TAB_WRAPPER_DATA action with correct payload", () => {
     const { windowType } = gridProps.props1;
     const layoutResponse = gridLayoutFixtures.layout1;
-    const initialInlineTabWrapperId = '123_AD_Tab-222_2205230';
-    const dummyProp = { dummyProp: 'test ' };
+    const initialInlineTabWrapperId = "123_AD_Tab-222_2205230";
+    const dummyProp = { dummyProp: "test " };
     const payload = {
       inlineTabWrapperId: initialInlineTabWrapperId,
       data: dummyProp,
@@ -152,10 +152,10 @@ describe('InlineTab - actions general', () => {
 
     expect(action.type).toEqual(ACTION_TYPES.SET_INLINE_TAB_WRAPPER_DATA);
     expect(action.payload).toHaveProperty(
-      'inlineTabWrapperId',
-      payload.inlineTabWrapperId
+      "inlineTabWrapperId",
+      payload.inlineTabWrapperId,
     );
-    expect(action.payload).toHaveProperty('data', payload.data);
+    expect(action.payload).toHaveProperty("data", payload.data);
 
     const initialState = createState({
       viewHandler: {
@@ -175,16 +175,16 @@ describe('InlineTab - actions general', () => {
       setInlineTabWrapperData({
         inlineTabWrapperId: initialInlineTabWrapperId,
         data: dummyProp,
-      })
+      }),
     );
     expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions));
   });
 
   /** SET_INLINE_TAB_SHOW_MORE action */
-  it('should call SET_INLINE_TAB_SHOW_MORE action with correct payload', () => {
+  it("should call SET_INLINE_TAB_SHOW_MORE action with correct payload", () => {
     const { windowType } = gridProps.props1;
     const layoutResponse = gridLayoutFixtures.layout1;
-    const initialInlineTabWrapperId = '123_AD_Tab-222_2205230';
+    const initialInlineTabWrapperId = "123_AD_Tab-222_2205230";
     const payload = {
       inlineTabWrapperId: initialInlineTabWrapperId,
       showMore: true,
@@ -197,10 +197,10 @@ describe('InlineTab - actions general', () => {
 
     expect(action.type).toEqual(ACTION_TYPES.SET_INLINE_TAB_SHOW_MORE);
     expect(action.payload).toHaveProperty(
-      'inlineTabWrapperId',
-      payload.inlineTabWrapperId
+      "inlineTabWrapperId",
+      payload.inlineTabWrapperId,
     );
-    expect(action.payload).toHaveProperty('showMore', payload.showMore);
+    expect(action.payload).toHaveProperty("showMore", payload.showMore);
 
     const initialState = createState({
       viewHandler: {
@@ -220,16 +220,16 @@ describe('InlineTab - actions general', () => {
       setInlineTabShowMore({
         inlineTabWrapperId: initialInlineTabWrapperId,
         showMore: true,
-      })
+      }),
     );
     expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions));
   });
 
   /** SET_INLINE_TAB_LAYOUT_AND_DATA action */
-  it('should call SET_INLINE_TAB_LAYOUT_AND_DATA action with correct payload', () => {
+  it("should call SET_INLINE_TAB_LAYOUT_AND_DATA action with correct payload", () => {
     const { windowType } = gridProps.props1;
     const layoutResponse = gridLayoutFixtures.layout1;
-    const initialInlineTabId = '123_AD_Tab-222_2205230';
+    const initialInlineTabId = "123_AD_Tab-222_2205230";
     const payload = {
       inlineTabId: initialInlineTabId,
       data: {},
@@ -241,8 +241,8 @@ describe('InlineTab - actions general', () => {
     });
 
     expect(action.type).toEqual(ACTION_TYPES.SET_INLINE_TAB_LAYOUT_AND_DATA);
-    expect(action.payload).toHaveProperty('inlineTabId', payload.inlineTabId);
-    expect(action.payload).toHaveProperty('data', payload.data);
+    expect(action.payload).toHaveProperty("inlineTabId", payload.inlineTabId);
+    expect(action.payload).toHaveProperty("data", payload.data);
 
     const initialState = createState({
       viewHandler: {
@@ -262,20 +262,20 @@ describe('InlineTab - actions general', () => {
       setInlineTabLayoutAndData({
         inlineTabId: initialInlineTabId,
         data: {},
-      })
+      }),
     );
     expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions));
   });
 
   /** SET_INLINE_TAB_ADD_NEW action */
-  it('should call SET_INLINE_TAB_ADD_NEW action with correct payload', () => {
+  it("should call SET_INLINE_TAB_ADD_NEW action with correct payload", () => {
     const { windowType } = gridProps.props1;
     const layoutResponse = gridLayoutFixtures.layout1;
     const visible = true;
-    const windowId = '123';
-    const tabId = 'AD_Tab-222';
-    const docId = '2205230';
-    const rowId = '111111';
+    const windowId = "123";
+    const tabId = "AD_Tab-222";
+    const docId = "2205230";
+    const rowId = "111111";
     const payload = {
       visible,
       windowId,
@@ -287,11 +287,11 @@ describe('InlineTab - actions general', () => {
     const action = setInlineTabAddNew(payload);
 
     expect(action.type).toEqual(ACTION_TYPES.SET_INLINE_TAB_ADD_NEW);
-    expect(action.payload).toHaveProperty('visible', payload.visible);
-    expect(action.payload).toHaveProperty('windowId', payload.windowId);
-    expect(action.payload).toHaveProperty('docId', payload.docId);
-    expect(action.payload).toHaveProperty('rowId', payload.rowId);
-    expect(action.payload).toHaveProperty('tabId', payload.tabId);
+    expect(action.payload).toHaveProperty("visible", payload.visible);
+    expect(action.payload).toHaveProperty("windowId", payload.windowId);
+    expect(action.payload).toHaveProperty("docId", payload.docId);
+    expect(action.payload).toHaveProperty("rowId", payload.rowId);
+    expect(action.payload).toHaveProperty("tabId", payload.tabId);
 
     const initialState = createState({
       viewHandler: {
@@ -314,32 +314,32 @@ describe('InlineTab - actions general', () => {
         tabId,
         rowId,
         docId,
-      })
+      }),
     );
     expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions));
   });
 
   /** SET_INLINE_TAB_ITEM_PROP action */
-  it('should call SET_INLINE_TAB_ITEM_PROP action with correct payload', () => {
+  it("should call SET_INLINE_TAB_ITEM_PROP action with correct payload", () => {
     const { windowType } = gridProps.props1;
     const layoutResponse = gridLayoutFixtures.layout1;
-    const initialInlineTabId = '123_AD_Tab-222_2205230';
+    const initialInlineTabId = "123_AD_Tab-222_2205230";
     const payload = {
       inlineTabId: initialInlineTabId,
-      targetProp: 'promptOpen',
+      targetProp: "promptOpen",
       targetValue: true,
     };
 
     const action = setInlineTabItemProp({
       inlineTabId: initialInlineTabId,
-      targetProp: 'promptOpen',
+      targetProp: "promptOpen",
       targetValue: true,
     });
 
     expect(action.type).toEqual(ACTION_TYPES.SET_INLINE_TAB_ITEM_PROP);
-    expect(action.payload).toHaveProperty('inlineTabId', payload.inlineTabId);
-    expect(action.payload).toHaveProperty('targetProp', payload.targetProp);
-    expect(action.payload).toHaveProperty('targetValue', payload.targetValue);
+    expect(action.payload).toHaveProperty("inlineTabId", payload.inlineTabId);
+    expect(action.payload).toHaveProperty("targetProp", payload.targetProp);
+    expect(action.payload).toHaveProperty("targetValue", payload.targetValue);
 
     const initialState = createState({
       viewHandler: {
@@ -358,9 +358,9 @@ describe('InlineTab - actions general', () => {
     store.dispatch(
       setInlineTabItemProp({
         inlineTabId: initialInlineTabId,
-        targetProp: 'promptOpen',
+        targetProp: "promptOpen",
         targetValue: true,
-      })
+      }),
     );
     expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions));
   });

@@ -2,11 +2,11 @@
  * Filter element displayed inline for frequent filters
  * To see how this should behave look at https://github.com/metasfresh/metasfresh-webui-frontend-legacy/issues/1387
  **/
-import React, { useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useMemo, useState } from "react";
+import PropTypes from "prop-types";
 
-import WidgetWrapper from '../../containers/WidgetWrapper';
-import { convertDateToReadable } from '../../utils/dateHelpers';
+import WidgetWrapper from "../../containers/WidgetWrapper";
+import { convertDateToReadable } from "../../utils/dateHelpers";
 
 const InlineFilterItem = ({
   id,
@@ -26,21 +26,21 @@ const InlineFilterItem = ({
 
   const [parameterValue, setParameterValue] = useState(() => {
     const parameterData = filterData?.parameters?.find(
-      (param) => param.parameterName === parameterName
+      (param) => param.parameterName === parameterName,
     );
-    return parameterData?.value ?? '';
+    return parameterData?.value ?? "";
   });
 
   const setValue = (property, value) => {
     //console.log('setValue', { property, value, id, valueTo });
-    setParameterValue(value ? value : '');
+    setParameterValue(value ? value : "");
   };
 
   const handleApply = () => {
     const filter = mergeParameterValueToFilter(
       filterProp,
       parameterName,
-      parameterValue
+      parameterValue,
     );
 
     clearFilters(filter, true);
@@ -49,11 +49,11 @@ const InlineFilterItem = ({
 
   const widgetFields = useMemo(
     () => [{ ...filterParameter, emptyText: filterParameter.caption }],
-    [filterParameter]
+    [filterParameter],
   );
   const widgetData = useMemo(
     () => [{ ...filterParameter, value: parameterValue }],
-    [filterParameter, parameterValue]
+    [filterParameter, parameterValue],
   );
 
   return (

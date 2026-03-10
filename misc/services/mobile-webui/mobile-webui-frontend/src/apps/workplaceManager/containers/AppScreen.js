@@ -33,68 +33,72 @@ import Spinner from '../../../components/Spinner';
 import { useScreenDefinition } from '../../../hooks/useScreenDefinition';
 
 const AppScreen = () => {
-  const { history } = useScreenDefinition({ back: '/' });
+    const { history } = useScreenDefinition({ back: '/' });
 
-  const [loading, setLoading] = useState(true);
-  const [workplace, setWorkplace] = useState();
+    const [loading, setLoading] = useState(true);
+    const [workplace, setWorkplace] = useState();
 
-  const queryParameters = new URLSearchParams(window.location.search);
-  const qrCodeParam = queryParameters.get('qrCode');
-  const parentApplicationId = queryParameters.get('parent');
-  useEffect(() => {
-    if (qrCodeParam && !workplace) {
-      setLoading(true);
-      onBarcodeScanned({ scannedBarcode: qrCodeParam }).finally(() => setLoading(false));
+    const queryParameters = new URLSearchParams(window.location.search);
+    const qrCodeParam = queryParameters.get('qrCode');
+    const parentApplicationId = queryParameters.get('parent');
+    useEffect(() => {
+        if (qrCodeParam && !workplace) {
+            setLoading(true);
+            onBarcodeScanned({ scannedBarcode: qrCodeParam }).finally(() => setLoading(false));
+        } else {
+            setLoading(false);
+        }
+    }, []);
+
+    const setWorkplaceAndUpdateUrl = (newWorkplace) => {
+        setWorkplace(newWorkplace);
+        history.replace(appLocation({ qrCode: newWorkplace?.qrCode, parent: parentApplicationId }));
+    };
+
+    const onBarcodeScanned = ({ scannedBarcode }) => {
+        return api
+            .getWorkplaceByQRCode(scannedBarcode)
+            .then((workplaceInfo) => setWorkplaceAndUpdateUrl(workplaceInfo));
+    };
+
+    const onAssignClick = () => {
+        api.assignWorkplace(workplace.id)
+            .then((workplace) => setWorkplace(workplace))
+            .catch((axiosError) => toastError({ axiosError }));
+    };
+
+    const onScanAgainClick = () => {
+        if (parentApplicationId === APPLICATION_ID_scanAnything) {
+            history.push(scanAnythingRoutes.appLocation());
+        } else {
+            setWorkplaceAndUpdateUrl(null);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="app-workstantionManager">
+                <Spinner />
+            </div>
+        );
+    } else if (workplace) {
+        return (
+            <>
+                <WorkplaceInfoComponent workplaceInfo={workplace} />
+                <div className="pt-3 section">
+                    {!workplace.userAssigned && (
+                        <ButtonWithIndicator caption={appTrl('action.assign.buttonCaption')} onClick={onAssignClick} />
+                    )}
+                    <ButtonWithIndicator
+                        caption={appTrl('action.scanAgain.buttonCaption')}
+                        onClick={onScanAgainClick}
+                    />
+                </div>
+            </>
+        );
     } else {
-      setLoading(false);
+        return <BarcodeScannerComponent onResolvedResult={onBarcodeScanned} continuousRunning={true} />;
     }
-  }, []);
-
-  const setWorkplaceAndUpdateUrl = (newWorkplace) => {
-    setWorkplace(newWorkplace);
-    history.replace(appLocation({ qrCode: newWorkplace?.qrCode, parent: parentApplicationId }));
-  };
-
-  const onBarcodeScanned = ({ scannedBarcode }) => {
-    return api.getWorkplaceByQRCode(scannedBarcode).then((workplaceInfo) => setWorkplaceAndUpdateUrl(workplaceInfo));
-  };
-
-  const onAssignClick = () => {
-    api
-      .assignWorkplace(workplace.id)
-      .then((workplace) => setWorkplace(workplace))
-      .catch((axiosError) => toastError({ axiosError }));
-  };
-
-  const onScanAgainClick = () => {
-    if (parentApplicationId === APPLICATION_ID_scanAnything) {
-      history.push(scanAnythingRoutes.appLocation());
-    } else {
-      setWorkplaceAndUpdateUrl(null);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="app-workstantionManager">
-        <Spinner />
-      </div>
-    );
-  } else if (workplace) {
-    return (
-      <>
-        <WorkplaceInfoComponent workplaceInfo={workplace} />
-        <div className="pt-3 section">
-          {!workplace.userAssigned && (
-            <ButtonWithIndicator caption={appTrl('action.assign.buttonCaption')} onClick={onAssignClick} />
-          )}
-          <ButtonWithIndicator caption={appTrl('action.scanAgain.buttonCaption')} onClick={onScanAgainClick} />
-        </div>
-      </>
-    );
-  } else {
-    return <BarcodeScannerComponent onResolvedResult={onBarcodeScanned} continuousRunning={true} />;
-  }
 };
 
 export default AppScreen;

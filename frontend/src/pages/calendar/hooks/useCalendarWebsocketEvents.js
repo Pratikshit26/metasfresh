@@ -1,19 +1,19 @@
-import { useEffect } from 'react';
-import * as StompJs from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
+import { useEffect } from "react";
+import * as StompJs from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 
-import converters from '../api/converters';
-import { getQueryString } from '../../../utils';
+import converters from "../api/converters";
+import { getQueryString } from "../../../utils";
 
-const WS_TOPIC_NAME_PREFIX = '/v2/calendar';
+const WS_TOPIC_NAME_PREFIX = "/v2/calendar";
 const WS_DEBUG = true;
 
-export const WSEventType_entryAddOrChange = 'addOrChange';
-export const WSEventType_entryRemove = 'remove';
-const WSEventType_conflictsChanged = 'conflictsChanged';
-const WSEventType_simulationPlanChanged = 'simulationPlanChanged';
+export const WSEventType_entryAddOrChange = "addOrChange";
+export const WSEventType_entryRemove = "remove";
+const WSEventType_conflictsChanged = "conflictsChanged";
+const WSEventType_simulationPlanChanged = "simulationPlanChanged";
 const WSEventType_simulationOptimizerStatusChanged =
-  'simulationOptimizerStatusChanged';
+  "simulationOptimizerStatusChanged";
 
 export const useCalendarWebsocketEvents = ({
   simulationId,
@@ -62,7 +62,7 @@ const connectToWS = ({
     heartbeatOutgoing: 4000,
   };
   if (WS_DEBUG) {
-    stompJsConfig.debug = (msg) => console.log('STOMP DEBUG: ' + msg);
+    stompJsConfig.debug = (msg) => console.log("STOMP DEBUG: " + msg);
   }
 
   const client = new StompJs.Client(stompJsConfig);
@@ -70,11 +70,11 @@ const connectToWS = ({
   client.webSocketFactory = () => new SockJS(config.WS_URL);
 
   client.onConnect = (frame) => {
-    if (WS_DEBUG) console.log('websocket connected: ', frame);
+    if (WS_DEBUG) console.log("websocket connected: ", frame);
 
     client.subscribe(wsTopicName, (msg) => {
       const wsEvents = fromAPIWebsocketEventsArray(
-        JSON.parse(msg.body)?.events
+        JSON.parse(msg.body)?.events,
       );
 
       if (wsEvents) {
@@ -84,17 +84,17 @@ const connectToWS = ({
   };
 
   client.onStompError = (frame) => {
-    console.log('websocket error: ' + frame.headers['message'], {
+    console.log("websocket error: " + frame.headers["message"], {
       frame,
     });
   };
 
-  if (WS_DEBUG) console.log('websocket activating for ' + wsTopicName + '...');
+  if (WS_DEBUG) console.log("websocket activating for " + wsTopicName + "...");
   client.activate();
 
   return () => {
     if (WS_DEBUG)
-      console.log('websocket deactivating for ' + wsTopicName + '...');
+      console.log("websocket deactivating for " + wsTopicName + "...");
 
     client && client.deactivate();
   };
@@ -154,7 +154,7 @@ const fromAPIWebsocketEventsArray = (apiWSEventsArray) => {
         changedSimulationIds.push(String(apiWSEvent.simulationId));
       }
     } else {
-      console.log('Ignored unknown WS event: ', apiWSEvent);
+      console.log("Ignored unknown WS event: ", apiWSEvent);
     }
   });
 

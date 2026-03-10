@@ -2,7 +2,7 @@
  * @constant
  * @type {string} Type of `connectionErrorType` to be used in the redux store when we receive 502 error from the server.
  */
-export const BAD_GATEWAY_ERROR = 'badGateway';
+export const BAD_GATEWAY_ERROR = "badGateway";
 
 /**
  * @constant
@@ -10,7 +10,7 @@ export const BAD_GATEWAY_ERROR = 'badGateway';
  * Note: do not change this to another value because this matches the key in the translation messages (as it comes from the BE).
  *       (see ErrorScreen component for more details)
  */
-export const NO_CONNECTION_ERROR = 'noStatus';
+export const NO_CONNECTION_ERROR = "noStatus";
 
 /**
  * @type {integer} The number of milliseconds to wait before retrying to ping the server
@@ -21,71 +21,71 @@ export const CONNECTION_ERROR_RETRY_INTERVAL_MILLIS = 5000;
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const VIEW_EDITOR_RENDER_MODES_NEVER = 'never';
+export const VIEW_EDITOR_RENDER_MODES_NEVER = "never";
 
 /**
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const VIEW_EDITOR_RENDER_MODES_ON_DEMAND = 'on-demand';
+export const VIEW_EDITOR_RENDER_MODES_ON_DEMAND = "on-demand";
 
 /**
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const VIEW_EDITOR_RENDER_MODES_ALWAYS = 'always';
+export const VIEW_EDITOR_RENDER_MODES_ALWAYS = "always";
 
 /**
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const INITIALLY_CLOSED = 'INITIALLY_CLOSED';
+export const INITIALLY_CLOSED = "INITIALLY_CLOSED";
 
 /**
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const INITIALLY_OPEN = 'INITIALLY_OPEN';
+export const INITIALLY_OPEN = "INITIALLY_OPEN";
 
 /**
  * @constant
  * @type {string} - the event string fired when down arrow is pressed
  */
-export const ARROW_DOWN_KEY = 'ArrowDown';
+export const ARROW_DOWN_KEY = "ArrowDown";
 
 /**
  * @constant
  * @type {string} - the event string fired when up arrow is pressed
  */
-export const ARROW_UP_KEY = 'ArrowUp';
+export const ARROW_UP_KEY = "ArrowUp";
 
 /**
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const AMOUNT_FIELD_TYPES = ['Amount', 'CostPrice', 'Quantity'];
+export const AMOUNT_FIELD_TYPES = ["Amount", "CostPrice", "Quantity"];
 
-export const NUMERIC_FIELD_TYPES = [...AMOUNT_FIELD_TYPES, 'Integer', 'Number'];
+export const NUMERIC_FIELD_TYPES = [...AMOUNT_FIELD_TYPES, "Integer", "Number"];
 
 /**
  * @constant
  * @type {array} ToDo: Description for the constant.
  */
 export const AMOUNT_FIELD_FORMATS_BY_PRECISION = [
-  '0,0.[00000]',
-  '0,0.0[0000]',
-  '0,0.00[000]',
-  '0,0.000[00]',
-  '0,0.0000[0]',
-  '0,0.00000',
+  "0,0.[00000]",
+  "0,0.0[0000]",
+  "0,0.00[000]",
+  "0,0.000[00]",
+  "0,0.0000[0]",
+  "0,0.00000",
 ];
-export const SPECIAL_FIELD_TYPES = ['Color'];
+export const SPECIAL_FIELD_TYPES = ["Color"];
 
 /**
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const DATE_FORMAT = 'YYYY-MM-DD';
+export const DATE_FORMAT = "YYYY-MM-DD";
 
 /**
  * @constant
@@ -103,7 +103,7 @@ export const DATE_TIMEZONE_FORMAT = `YYYY-MM-DDTHH:mm:ss.SSSZ`;
  * @constant
  * @type {string} ToDo: Description for the constant.
  */
-export const DATE_FIELDS = ['Date', 'DateTime'];
+export const DATE_FIELDS = ["Date", "DateTime"];
 
 /**
  * @constant
@@ -111,10 +111,10 @@ export const DATE_FIELDS = ['Date', 'DateTime'];
  *  Format strings available for 'Date', 'DateTime', 'ZonedDateTime', 'Timestamp'.
  */
 export const DATE_FIELD_TYPES = [
-  'Date',
-  'DateTime',
-  'ZonedDateTime',
-  'Timestamp',
+  "Date",
+  "DateTime",
+  "ZonedDateTime",
+  "Timestamp",
 ];
 
 /**
@@ -122,24 +122,24 @@ export const DATE_FIELD_TYPES = [
  * @type {object} ToDo: Description for the constant.
  */
 export const DATE_FIELD_FORMATS = {
-  Date: 'L',
-  ZonedDateTime: 'L LTS',
-  DateTime: 'L LTS',
-  Time: 'LT',
-  Timestamp: 'L HH:mm:ss',
+  Date: "L",
+  ZonedDateTime: "L LTS",
+  DateTime: "L LTS",
+  Time: "LT",
+  Timestamp: "L HH:mm:ss",
 };
 
 /**
  * @constant
  * @type {array} ToDo: Description for the constant.
  */
-export const TIME_FIELD_TYPES = ['Time'];
+export const TIME_FIELD_TYPES = ["Time"];
 
 export const TIME_REGEX_TEST = /^\d\d:\d\d$/;
 
-export const PROCESS_NAME = 'process';
+export const PROCESS_NAME = "process";
 
-export const LOCATION_SEARCH_NAME = 'location-area-search';
+export const LOCATION_SEARCH_NAME = "location-area-search";
 
 /**
  * @constant
@@ -158,7 +158,7 @@ export const DROPDOWN_OFFSET_BIG = 250;
  * @type {integer} Used to indicate the offset position for resizing the table container
  */
 export const DROPUP_OFFSET_SMALL = 150;
-export const LOCAL_LANG = 'metasfreshLanguage';
+export const LOCAL_LANG = "metasfreshLanguage";
 
 /**
  * @constant
@@ -170,7 +170,7 @@ export const F2_KEY = 113;
  * @constant
  * @type {string} Used to indicate the max height for the TableContextMenu from where the autoscroll will start
  */
-export const TBL_CONTEXT_MENU_HEIGHT = '300px';
+export const TBL_CONTEXT_MENU_HEIGHT = "300px";
 
 /**
  * @constant
@@ -244,4 +244,4 @@ export const TBL_CONTEXT_Y_OFFSET = 65;
  * @constant
  * @type {integer} Used to indicate the popup pre-defined height
  */
-export const TBL_CONTEXT_POPUP_HEIGHT = '215px';
+export const TBL_CONTEXT_POPUP_HEIGHT = "215px";

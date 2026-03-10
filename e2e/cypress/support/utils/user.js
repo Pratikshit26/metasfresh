@@ -53,10 +53,10 @@ export class User {
 }
 
 function applyUser(user) {
-  describe(`Create new user ${user.name}`, function() {
-    cy.visitWindow('108', 'NEW');
-    cy.writeIntoStringField('Firstname', user.firstName);
-    cy.writeIntoStringField('Lastname', user.lastName);
-    cy.writeIntoStringField('EMail', user.email);
+  describe(`Create new user ${user.name}`, function () {
+    cy.visitWindow("108", "NEW");
+    cy.writeIntoStringField("Firstname", user.firstName);
+    cy.writeIntoStringField("Lastname", user.lastName);
+    cy.writeIntoStringField("EMail", user.email);
   });
 }

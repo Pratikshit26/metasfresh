@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import Calendar from './Calendar';
-import Header from '../../components/header/Header';
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
+import Calendar from "./Calendar";
+import Header from "../../components/header/Header";
 
 //import history from '../../services/History';
-import { useHistory } from 'react-router-dom';
-import { buildURL } from '../../utils';
+import { useHistory } from "react-router-dom";
+import { buildURL } from "../../utils";
 
-import './CalendarPage.scss';
+import "./CalendarPage.scss";
 
-const DEFAULT_CALENDAR_VIEW = 'resourceTimelineMonth';
+const DEFAULT_CALENDAR_VIEW = "resourceTimelineMonth";
 
 const updateURI = (
   history,
@@ -21,14 +21,14 @@ const updateURI = (
     onlyCustomerId,
     onlyResponsibleId,
     view,
-  }
+  },
 ) => {
   // IMPORTANT: keep the URL query param names
   // in sync with de.metas.ui.web.process.json.JSONProcessInstanceResult.JSONOpenCalendarAction
   const url = buildURL(location.pathname, {
     ...location.query,
     simulationId,
-    resourceId: onlyResourceIds ? onlyResourceIds.join(',') : null,
+    resourceId: onlyResourceIds ? onlyResourceIds.join(",") : null,
     projectId: onlyProjectId,
     customerId: onlyCustomerId,
     responsibleId: onlyResponsibleId,
@@ -43,8 +43,8 @@ const CalendarPage = ({ location }) => {
 
   const onlyResourceIds = useMemo(
     () =>
-      location.query.resourceId ? location.query.resourceId.split(',') : null,
-    [location.query.resourceId]
+      location.query.resourceId ? location.query.resourceId.split(",") : null,
+    [location.query.resourceId],
   );
 
   return (

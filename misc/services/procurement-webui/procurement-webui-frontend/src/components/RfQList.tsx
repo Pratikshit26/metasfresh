@@ -10,46 +10,52 @@ import View from './View';
 import RFQ from './RfQ';
 
 interface Props {
-  store?: RootInstance;
+    store?: RootInstance;
 }
 
 @inject('store')
 @observer
 class RfQList extends React.Component<Props> {
-  componentDidMount(): void {
-    const { store } = this.props;
+    componentDidMount(): void {
+        const { store } = this.props;
 
-    store.navigation.setViewNames(translate('RfQsListView.caption'));
-    store.rfqs.fetchRFQs();
-  }
+        store.navigation.setViewNames(translate('RfQsListView.caption'));
+        store.rfqs.fetchRFQs();
+    }
 
-  render(): ReactElement {
-    const { store } = this.props;
-    const items = getSnapshot(store.rfqs.quotations);
-    const { lang } = store.i18n;
-    return (
-      <View>
-        <section className="section">
-          <div className="mt-4">
-            {items
-              ? items.map((rfq) => {
-                  return (
-                    <RFQ
-                      key={rfq.rfqId}
-                      id={rfq.rfqId}
-                      quantityPromised={rfq.qtyPromised}
-                      dateStart={prettyDate({ lang, date: formDate({ currentDay: new Date(rfq.dateStart) }) })}
-                      dateEnd={prettyDate({ lang, date: formDate({ currentDay: new Date(rfq.dateEnd) }) })}
-                      name={rfq.productName}
-                    />
-                  );
-                })
-              : null}
-          </div>
-        </section>
-      </View>
-    );
-  }
+    render(): ReactElement {
+        const { store } = this.props;
+        const items = getSnapshot(store.rfqs.quotations);
+        const { lang } = store.i18n;
+        return (
+            <View>
+                <section className="section">
+                    <div className="mt-4">
+                        {items
+                            ? items.map((rfq) => {
+                                  return (
+                                      <RFQ
+                                          key={rfq.rfqId}
+                                          id={rfq.rfqId}
+                                          quantityPromised={rfq.qtyPromised}
+                                          dateStart={prettyDate({
+                                              lang,
+                                              date: formDate({ currentDay: new Date(rfq.dateStart) }),
+                                          })}
+                                          dateEnd={prettyDate({
+                                              lang,
+                                              date: formDate({ currentDay: new Date(rfq.dateEnd) }),
+                                          })}
+                                          name={rfq.productName}
+                                      />
+                                  );
+                              })
+                            : null}
+                    </div>
+                </section>
+            </View>
+        );
+    }
 }
 
 export default RfQList;

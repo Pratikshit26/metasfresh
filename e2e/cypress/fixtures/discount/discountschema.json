@@ -1,7 +1,9 @@
 {
-    "name": "DiscountSchemaTest",
-    "discountType": [{
-        "name": "Breaks"
-    }],
-    "validFrom": "01/01/2019"
+  "name": "DiscountSchemaTest",
+  "discountType": [
+    {
+      "name": "Breaks"
+    }
+  ],
+  "validFrom": "01/01/2019"
 }

@@ -271,20 +271,14 @@
       "viewEditorRenderMode": "always"
     }
   },
-  "rowData": {
-    
-  },
+  "rowData": {},
   "modalTitle": "Transform",
   "modalType": "process",
   "isAdvanced": false,
-  "viewDocumentIds": [
-    "1000036"
-  ],
+  "viewDocumentIds": ["1000036"],
   "triggerField": null,
   "title": "Transform",
-  "standardActions": [
-    
-  ],
+  "standardActions": [],
   "windowType": "ADP_540763",
   "modalViewId": "540189-Dy",
   "parentType": "540189",
@@ -294,12 +288,8 @@
   },
   "rawModalVisible": false,
   "indicator": "saved",
-  "modalViewDocumentIds": [
-    "1000036"
-  ],
+  "modalViewDocumentIds": ["1000036"],
   "modalSaveStatus": true,
-  "parentSelection": [
-    "1000036"
-  ],
+  "parentSelection": ["1000036"],
   "activeTabId": null
 }

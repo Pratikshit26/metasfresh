@@ -3,29 +3,29 @@
  * https://github.com/captivationsoftware/react-file-input
  */
 
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const STYLES = {
   parent: {
-    position: 'relative',
+    position: "relative",
   },
   file: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     opacity: 0,
-    width: '100%',
+    width: "100%",
     zIndex: 1,
   },
   text: {
-    position: 'relative',
+    position: "relative",
     zIndex: -1,
   },
 };
 
 const extractFilenameFromPath = (filepath) => {
-  return filepath ? filepath.split(/([\\/])/g).pop() : '';
+  return filepath ? filepath.split(/([\\/])/g).pop() : "";
 };
 
 const FileInput = ({
@@ -36,7 +36,7 @@ const FileInput = ({
   placeholder,
   accept,
 }) => {
-  const [filename, setFilename] = useState('');
+  const [filename, setFilename] = useState("");
 
   const handleChange = (event) => {
     setFilename(extractFilenameFromPath(event.target.value));

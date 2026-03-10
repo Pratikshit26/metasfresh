@@ -1,8 +1,8 @@
-import * as types from '../constants/ActionTypes';
+import * as types from "../constants/ActionTypes";
 
 export const initialState = {
   sorting: {
-    sort: '',
+    sort: "",
     windowType: null,
   },
   pagination: {
@@ -10,7 +10,7 @@ export const initialState = {
     windowType: null,
   },
   viewId: {
-    id: '',
+    id: "",
     windowType: null,
   },
 };

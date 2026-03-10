@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import { updateKeymap, updateHotkeys } from '../../actions/AppActions';
-import { Shortcut } from '../keyshortcuts';
+import { updateKeymap, updateHotkeys } from "../../actions/AppActions";
+import { Shortcut } from "../keyshortcuts";
 
 class TableFilterContextShortcuts extends PureComponent {
   constructor() {

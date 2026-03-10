@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Dropzone from 'react-dropzone';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import Dropzone from "react-dropzone";
+import PropTypes from "prop-types";
 
 /**
  * @file The DropzoneWrapper allows the user to drag&drop files onto the UI. These files are
@@ -51,7 +51,7 @@ class DropzoneWrapper extends Component {
       },
       () => {
         dragActive && handleDragStart();
-      }
+      },
     );
   };
 
@@ -75,8 +75,8 @@ class DropzoneWrapper extends Component {
     return (
       <Dropzone
         className={
-          'document-file-dropzone' +
-          (dragActive ? ' document-file-dropzone-active' : '')
+          "document-file-dropzone" +
+          (dragActive ? " document-file-dropzone-active" : "")
         }
         disablePreview={true}
         disableClick={true}

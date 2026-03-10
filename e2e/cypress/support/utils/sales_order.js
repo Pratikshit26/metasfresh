@@ -49,43 +49,68 @@ export class SalesOrder {
   }
 
   static applySalesOrder(salesOrder) {
-    describe(`Create new salesOrder`, function() {
-      cy.visitWindow('143', 'NEW');
-      cy.get('.header-breadcrumb-sitename').should('contain', '<');
+    describe(`Create new salesOrder`, function () {
+      cy.visitWindow("143", "NEW");
+      cy.get(".header-breadcrumb-sitename").should("contain", "<");
 
-      cy.writeIntoLookupListField('C_BPartner_ID', salesOrder.bPartner, salesOrder.bPartner);
+      cy.writeIntoLookupListField(
+        "C_BPartner_ID",
+        salesOrder.bPartner,
+        salesOrder.bPartner,
+      );
       if (salesOrder.bPartnerLocation) {
-        cy.writeIntoLookupListField('C_BPartner_Location_ID', salesOrder.bPartnerLocation, salesOrder.bPartnerLocation, true /*typeList*/);
+        cy.writeIntoLookupListField(
+          "C_BPartner_Location_ID",
+          salesOrder.bPartnerLocation,
+          salesOrder.bPartnerLocation,
+          true /*typeList*/,
+        );
       }
 
       if (salesOrder.warehouse) {
-        cy.selectInListField('M_Warehouse_ID', salesOrder.warehouse);
+        cy.selectInListField("M_Warehouse_ID", salesOrder.warehouse);
       }
 
       if (salesOrder.priceSystem) {
-        cy.resetListValue('M_PricingSystem_ID');
-        cy.writeIntoLookupListField('M_PricingSystem_ID', salesOrder.priceSystem, salesOrder.priceSystem);
+        cy.resetListValue("M_PricingSystem_ID");
+        cy.writeIntoLookupListField(
+          "M_PricingSystem_ID",
+          salesOrder.priceSystem,
+          salesOrder.priceSystem,
+        );
       }
 
-      cy.get('.header-breadcrumb-sitename').should('not.contain', '<'); // make sure the order was successfully saved as bpartner, warehouse price system were dealt with
+      cy.get(".header-breadcrumb-sitename").should("not.contain", "<"); // make sure the order was successfully saved as bpartner, warehouse price system were dealt with
 
       if (salesOrder.reference) {
-        cy.writeIntoStringField('POReference', salesOrder.reference);
+        cy.writeIntoStringField("POReference", salesOrder.reference);
       }
 
-      salesOrder.lines.forEach(line => {
+      salesOrder.lines.forEach((line) => {
         SalesOrder.applyLine(line);
       });
     });
   }
 
   static applyLine(salesOrderLine) {
-    cy.selectTab('C_OrderLine');
+    cy.selectTab("C_OrderLine");
     cy.pressAddNewButton();
 
-    cy.writeIntoLookupListField('M_Product_ID', salesOrderLine.product, salesOrderLine.product, false /*typeList*/, true /*modal*/);
+    cy.writeIntoLookupListField(
+      "M_Product_ID",
+      salesOrderLine.product,
+      salesOrderLine.product,
+      false /*typeList*/,
+      true /*modal*/,
+    );
 
-    cy.writeIntoStringField('QtyEntered', salesOrderLine.quantity, true /*modal*/, null /*rewriteUrl*/, true /*noRequest, bc the patch response is e.g. 20 and we would be waiting for e.g. '20' */);
+    cy.writeIntoStringField(
+      "QtyEntered",
+      salesOrderLine.quantity,
+      true /*modal*/,
+      null /*rewriteUrl*/,
+      true /*noRequest, bc the patch response is e.g. 20 and we would be waiting for e.g. '20' */,
+    );
 
     cy.pressDoneButton();
   }

@@ -7,7 +7,7 @@ export const mergeWSConflictChangesEvents = (conflictsArray, wsEventsArray) => {
   wsEventsArray.forEach((wsEvent) => {
     changedConflictsArray = mergeSingleWSConflictChangesEvent(
       changedConflictsArray,
-      wsEvent
+      wsEvent,
     );
   });
 
@@ -15,7 +15,7 @@ export const mergeWSConflictChangesEvents = (conflictsArray, wsEventsArray) => {
 };
 
 const mergeSingleWSConflictChangesEvent = (conflictsArray, wsEvent) => {
-  console.groupCollapsed('mergeSingleWSConflictChangesEvent', {
+  console.groupCollapsed("mergeSingleWSConflictChangesEvent", {
     conflictsArray,
     wsEvent,
   });
@@ -26,14 +26,14 @@ const mergeSingleWSConflictChangesEvent = (conflictsArray, wsEvent) => {
   let changedConflictsArray = conflictsArray.filter(
     (conflict) =>
       !affectedEntryIds.includes(conflict.entryId1) &&
-      !affectedEntryIds.includes(conflict.entryId2)
+      !affectedEntryIds.includes(conflict.entryId2),
   );
-  console.log('conflicts after removing affected:', changedConflictsArray);
+  console.log("conflicts after removing affected:", changedConflictsArray);
 
   //
   // Add conflicts from this event
   changedConflictsArray = [...changedConflictsArray, ...wsEvent.conflicts];
-  console.log('conflicts after adding new ones:', changedConflictsArray);
+  console.log("conflicts after adding new ones:", changedConflictsArray);
 
   console.groupEnd();
   return changedConflictsArray;

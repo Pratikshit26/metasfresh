@@ -1,9 +1,9 @@
-import counterpart from 'counterpart';
+import counterpart from "counterpart";
 
 afterEach(() => {
-    cleanupTranslations();
+  cleanupTranslations();
 });
 
 const cleanupTranslations = () => {
-    counterpart.registerTranslations('lang', {});
-}
+  counterpart.registerTranslations("lang", {});
+};

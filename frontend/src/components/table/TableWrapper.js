@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import onClickOutside from 'react-onclickoutside';
-import classnames from 'classnames';
-import counterpart from 'counterpart';
-import { DROPDOWN_OFFSET_SMALL } from '../../constants/Constants';
-import { handleOpenNewTab, componentPropTypes } from '../../utils/tableHelpers';
-import DocumentListContextShortcuts from '../keyshortcuts/DocumentListContextShortcuts';
-import TableContextShortcuts from '../keyshortcuts/TableContextShortcuts';
-import { getTableId } from '../../reducers/tables';
+import React, { PureComponent } from "react";
+import onClickOutside from "react-onclickoutside";
+import classnames from "classnames";
+import counterpart from "counterpart";
+import { DROPDOWN_OFFSET_SMALL } from "../../constants/Constants";
+import { handleOpenNewTab, componentPropTypes } from "../../utils/tableHelpers";
+import DocumentListContextShortcuts from "../keyshortcuts/DocumentListContextShortcuts";
+import TableContextShortcuts from "../keyshortcuts/TableContextShortcuts";
+import { getTableId } from "../../reducers/tables";
 
-import Prompt from '../app/Prompt';
-import TableContextMenu from './TableContextMenu';
-import TableFilter from './TableFilter';
-import Table from './Table';
-import TablePagination from './TablePagination';
+import Prompt from "../app/Prompt";
+import TableContextMenu from "./TableContextMenu";
+import TableFilter from "./TableFilter";
+import Table from "./Table";
+import TablePagination from "./TablePagination";
 
 class TableWrapper extends PureComponent {
   constructor(props) {
@@ -67,7 +67,7 @@ class TableWrapper extends PureComponent {
     clientY,
     fieldName,
     supportZoomInto,
-    supportFieldEdit
+    supportFieldEdit,
   ) => {
     this.setState({
       contextMenu: {
@@ -93,13 +93,13 @@ class TableWrapper extends PureComponent {
   triggerFocus = (idFocused, idFocusedDown) => {
     if (this.table) {
       const rowsSelected =
-        this.table.table.getElementsByClassName('row-selected');
+        this.table.table.getElementsByClassName("row-selected");
 
       if (rowsSelected.length > 0) {
-        if (typeof idFocused === 'number') {
+        if (typeof idFocused === "number") {
           rowsSelected[0].children[idFocused].focus();
         }
-        if (typeof idFocusedDown === 'number') {
+        if (typeof idFocusedDown === "number") {
           rowsSelected[rowsSelected.length - 1].children[idFocusedDown].focus();
         }
       }
@@ -210,16 +210,16 @@ class TableWrapper extends PureComponent {
       // is modal
       limitOnClickOutside
         ? // user is clicking within the document list component
-          (parentNode.className.includes('document-list-wrapper') ||
-            event.target.className.includes('document-list-wrapper')) &&
-          !event.target.className.includes('document-list-is-included')
+          (parentNode.className.includes("document-list-wrapper") ||
+            event.target.className.includes("document-list-wrapper")) &&
+          !event.target.className.includes("document-list-is-included")
         : true;
 
     if (
       allowOutsideClick &&
       parentNode &&
       parentNode !== document &&
-      !parentNode.className.includes('notification') &&
+      !parentNode.className.includes("notification") &&
       !inBackground &&
       closeIncluded
     ) {
@@ -229,12 +229,12 @@ class TableWrapper extends PureComponent {
         for (let i = 0; i < item.length; i++) {
           if (
             item[i].classList &&
-            item[i].classList.contains('js-not-unselect')
+            item[i].classList.contains("js-not-unselect")
           ) {
             return;
           }
         }
-      } else if (parentNode.className.includes('js-not-unselect')) {
+      } else if (parentNode.className.includes("js-not-unselect")) {
         return;
       }
 
@@ -272,7 +272,7 @@ class TableWrapper extends PureComponent {
         clientY,
         fieldName,
         supportZoomInto,
-        supportFieldEdit
+        supportFieldEdit,
       );
     } else {
       this.handleSelect(id, null, null, () => {
@@ -281,7 +281,7 @@ class TableWrapper extends PureComponent {
           clientY,
           fieldName,
           supportZoomInto,
-          supportFieldEdit
+          supportFieldEdit,
         );
       });
     }
@@ -344,15 +344,15 @@ class TableWrapper extends PureComponent {
     return (
       <div
         ref={this.setWrapperRef}
-        className={classnames('table-flex-wrapper', {
-          'col-12': toggleState === 'grid' || toggleState == null,
-          'col-6': toggleState === 'all',
-          'd-none': toggleState === 'map',
+        className={classnames("table-flex-wrapper", {
+          "col-12": toggleState === "grid" || toggleState == null,
+          "col-6": toggleState === "all",
+          "d-none": toggleState === "map",
         })}
       >
         <div
-          className={classnames('table-padding-top', {
-            'table-flex-wrapper-row': mainTable,
+          className={classnames("table-padding-top", {
+            "table-flex-wrapper-row": mainTable,
           })}
         >
           {contextMenu.open && (
@@ -436,11 +436,11 @@ class TableWrapper extends PureComponent {
         ) : null}
         {promptOpen && (
           <Prompt
-            title={counterpart.translate('window.Delete.caption')}
-            text={counterpart.translate('window.delete.message')}
+            title={counterpart.translate("window.Delete.caption")}
+            text={counterpart.translate("window.delete.message")}
             buttons={{
-              submit: counterpart.translate('window.delete.confirm'),
-              cancel: counterpart.translate('window.delete.cancel'),
+              submit: counterpart.translate("window.delete.confirm"),
+              cancel: counterpart.translate("window.delete.cancel"),
             }}
             onCancelClick={this.handlePromptCancelClick}
             selected={selected}

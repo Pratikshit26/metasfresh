@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
 export default class Password extends PureComponent {
   render() {
@@ -18,7 +18,7 @@ export default class Password extends PureComponent {
           className={classnames(
             getClassNames({
               icon: true,
-            })
+            }),
           )}
         >
           <input {...widgetProperties} type="password" />
@@ -26,8 +26,8 @@ export default class Password extends PureComponent {
         </div>
         {allowShowPassword && (
           <div
-            onMouseDown={() => onSetWidgetType('text')}
-            onMouseUp={() => onSetWidgetType('password')}
+            onMouseDown={() => onSetWidgetType("text")}
+            onMouseUp={() => onSetWidgetType("password")}
             className="btn btn-icon btn-meta-outline-secondary btn-inline pointer btn-distance-rev btn-sm"
           >
             <i className="meta-icon-show" />

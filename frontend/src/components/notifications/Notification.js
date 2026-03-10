@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
-import { SHOW_READ_MORE_FROM } from '../../constants/Constants';
-import { deleteNotification } from '../../actions/AppActions';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { SHOW_READ_MORE_FROM } from "../../constants/Constants";
+import { deleteNotification } from "../../actions/AppActions";
 class Notification extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class Notification extends Component {
     };
 
     this.closing = null;
-    this.allowMouse = props.item.shortMsg === 'disableMouse' ? false : true;
+    this.allowMouse = props.item.shortMsg === "disableMouse" ? false : true;
   }
 
   componentDidMount() {
@@ -58,7 +58,7 @@ class Notification extends Component {
     const { dispatch, item } = this.props;
 
     if (item.onCancel) {
-      item.onCancel.cancel('Operation canceled by the user.');
+      item.onCancel.cancel("Operation canceled by the user.");
     } else {
       this.closing && clearInterval(this.closing);
     }
@@ -99,16 +99,16 @@ class Notification extends Component {
     let { shortMsg } = item;
     let progress = item.progress;
 
-    if (shortMsg === 'disableMouse') {
+    if (shortMsg === "disableMouse") {
       shortMsg = null;
     }
 
     return (
       <div
         className={classnames(
-          'notification-item',
+          "notification-item",
           { [`${notifType}`]: notifType },
-          { error: !notifType }
+          { error: !notifType },
         )}
         onMouseEnter={() => this.handleClosing(false)}
         onMouseLeave={() => this.handleClosing(true)}
@@ -135,20 +135,20 @@ class Notification extends Component {
                 (read more)
               </u>
             )}
-          {isDisplayedMore ? <p>{msg}</p> : ''}
+          {isDisplayedMore ? <p>{msg}</p> : ""}
         </div>
         <div
           className={classnames(
-            'progress-bar',
+            "progress-bar",
             { [`${notifType}`]: notifType },
-            { error: !notifType }
+            { error: !notifType },
           )}
           style={
-            typeof progress === 'number'
-              ? { width: `${progress}%`, transition: 'width 0s' }
+            typeof progress === "number"
+              ? { width: `${progress}%`, transition: "width 0s" }
               : isClosing
-              ? { width: 0, transition: 'width 5s linear' }
-              : { width: '100%', transition: 'width 0s' }
+                ? { width: 0, transition: "width 5s linear" }
+                : { width: "100%", transition: "width 0s" }
           }
         />
       </div>

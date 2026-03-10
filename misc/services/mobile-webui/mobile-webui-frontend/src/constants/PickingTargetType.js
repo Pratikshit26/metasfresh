@@ -1,4 +1,4 @@
 export const PickingTargetType = {
-  LU: 'lu',
-  TU: 'tu',
+    LU: 'lu',
+    TU: 'tu',
 };

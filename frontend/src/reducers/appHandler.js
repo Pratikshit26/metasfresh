@@ -1,14 +1,14 @@
-import update from 'immutability-helper';
+import update from "immutability-helper";
 
-import * as types from '../constants/ActionTypes';
+import * as types from "../constants/ActionTypes";
 
 export const initialState = {
-  connectionErrorType: '',
+  connectionErrorType: "",
   notifications: {},
   me: {},
   isLogged: false,
   enableTutorial: false,
-  processStatus: 'saved',
+  processStatus: "saved",
   inbox: {
     notifications: [],
     unreadCount: 0,
@@ -16,7 +16,7 @@ export const initialState = {
   },
   keymap: {},
   hotkeys: {},
-  lastBackPage: '',
+  lastBackPage: "",
 };
 
 export default function appHandler(state = initialState, action) {
@@ -176,7 +176,7 @@ export default function appHandler(state = initialState, action) {
         inbox: {
           notifications: {
             $set: state.inbox.notifications.filter(
-              (item) => item.id !== action.notificationId
+              (item) => item.id !== action.notificationId,
             ),
           },
           unreadCount: {
@@ -191,7 +191,9 @@ export default function appHandler(state = initialState, action) {
         inbox: {
           notifications: {
             $set: state.inbox.notifications.map((item) =>
-              item.id === action.notificationId ? { ...item, read: true } : item
+              item.id === action.notificationId
+                ? { ...item, read: true }
+                : item,
             ),
           },
           unreadCount: {
@@ -233,13 +235,13 @@ export default function appHandler(state = initialState, action) {
     case types.SET_PROCESS_STATE_PENDING:
       return {
         ...state,
-        processStatus: 'pending',
+        processStatus: "pending",
       };
 
     case types.SET_PROCESS_STATE_SAVED:
       return {
         ...state,
-        processStatus: 'saved',
+        processStatus: "saved",
       };
 
     case types.INIT_KEYMAP:

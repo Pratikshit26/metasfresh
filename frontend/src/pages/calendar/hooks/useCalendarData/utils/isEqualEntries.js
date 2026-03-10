@@ -1,4 +1,4 @@
-import { isSameMoment } from '../../../utils/calendarUtils';
+import { isSameMoment } from "../../../utils/calendarUtils";
 
 export const isEqualEntries = (entry1, entry2) => {
   if (entry1 === entry2) {

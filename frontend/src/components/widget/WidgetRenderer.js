@@ -1,34 +1,34 @@
-import React, { Fragment, PureComponent } from 'react';
-import Moment from 'moment';
-import classnames from 'classnames';
-import { get } from 'lodash';
+import React, { Fragment, PureComponent } from "react";
+import Moment from "moment";
+import classnames from "classnames";
+import { get } from "lodash";
 
 import {
   DATE_FORMAT,
   DATE_TIMEZONE_FORMAT,
   TIME_FORMAT,
-} from '../../constants/Constants';
-import { getClassNames, getFormattedDate } from '../../utils/widgetHelpers';
-import { withForwardedRef } from '../hoc/WithRouterAndRef';
+} from "../../constants/Constants";
+import { getClassNames, getFormattedDate } from "../../utils/widgetHelpers";
+import { withForwardedRef } from "../hoc/WithRouterAndRef";
 
-import ActionButton from './ActionButton';
-import Attributes from './Attributes/Attributes';
-import Checkbox from './Checkbox';
-import DatePicker from './DateTime/DatePicker';
-import DatetimeRange from './DatetimeRange';
-import Image from './Image';
-import Labels from './Labels';
-import Link from './Link';
-import CharacterLimitInfo from './CharacterLimitInfo';
-import List from './List/List';
-import Lookup from './Lookup/Lookup';
-import Switch from './Switch';
-import Amount from './Amount';
-import Password from './Password';
-import CostPrice from './CostPrice';
-import PropTypes from 'prop-types';
-import CostPriceRange from './CostPriceRange';
-import AmountRange from './AmountRange';
+import ActionButton from "./ActionButton";
+import Attributes from "./Attributes/Attributes";
+import Checkbox from "./Checkbox";
+import DatePicker from "./DateTime/DatePicker";
+import DatetimeRange from "./DatetimeRange";
+import Image from "./Image";
+import Labels from "./Labels";
+import Link from "./Link";
+import CharacterLimitInfo from "./CharacterLimitInfo";
+import List from "./List/List";
+import Lookup from "./Lookup/Lookup";
+import Switch from "./Switch";
+import Amount from "./Amount";
+import Password from "./Password";
+import CostPrice from "./CostPrice";
+import PropTypes from "prop-types";
+import CostPriceRange from "./CostPriceRange";
+import AmountRange from "./AmountRange";
 
 class WidgetRenderer extends PureComponent {
   constructor(props) {
@@ -123,10 +123,10 @@ class WidgetRenderer extends PureComponent {
     } = this.props;
 
     const filterActiveState =
-      typeof isFilterActive === 'undefined' ? false : isFilterActive; // safety check - do not pass `undefined` further down
+      typeof isFilterActive === "undefined" ? false : isFilterActive; // safety check - do not pass `undefined` further down
 
     const { tabIndex, onFocus } = widgetProperties;
-    const widgetValue = get(widgetProperties, ['value'], null);
+    const widgetValue = get(widgetProperties, ["value"], null);
     widgetProperties.ref = forwardedRef;
 
     const selectedValue = widgetData[0].value
@@ -215,7 +215,7 @@ class WidgetRenderer extends PureComponent {
     };
 
     switch (widgetType) {
-      case 'Date':
+      case "Date":
         if (range) {
           // TODO: Watch out! The datetimerange widget as exception,
           // is non-controlled input! For further usage, needs
@@ -228,7 +228,7 @@ class WidgetRenderer extends PureComponent {
                   widgetField,
                   value ? Moment(value).format(DATE_FORMAT) : null,
                   null,
-                  valueTo ? Moment(valueTo).format(DATE_FORMAT) : null
+                  valueTo ? Moment(valueTo).format(DATE_FORMAT) : null,
                 )
               }
               field={widgetField}
@@ -237,7 +237,7 @@ class WidgetRenderer extends PureComponent {
           );
         } else {
           dateProps.defaultValue =
-            dateProps.defaultValue === null ? '' : dateProps.defaultValue;
+            dateProps.defaultValue === null ? "" : dateProps.defaultValue;
           return (
             <div className={this.getClassNames({ icon: true })}>
               <DatePicker
@@ -253,14 +253,14 @@ class WidgetRenderer extends PureComponent {
                     getFormattedDate(date, DATE_FORMAT),
                     null,
                     null,
-                    true
+                    true,
                   )
                 }
               />
             </div>
           );
         }
-      case 'ZonedDateTime':
+      case "ZonedDateTime":
         return (
           <div className={this.getClassNames({ icon: true })}>
             <DatePicker
@@ -277,13 +277,13 @@ class WidgetRenderer extends PureComponent {
                   getFormattedDate(dateTime, DATE_TIMEZONE_FORMAT),
                   null,
                   null,
-                  true
+                  true,
                 )
               }
             />
           </div>
         );
-      case 'Time':
+      case "Time":
         return (
           <div className={this.getClassNames({ icon: true })}>
             <DatePicker
@@ -297,20 +297,20 @@ class WidgetRenderer extends PureComponent {
                   getFormattedDate(date, TIME_FORMAT),
                   null,
                   null,
-                  true
+                  true,
                 )
               }
               tabIndex={tabIndex}
             />
           </div>
         );
-      case 'Timestamp':
+      case "Timestamp":
         return (
           <div className={this.getClassNames({ icon: true })}>
             <DatePicker
               {...dateProps}
               dateFormat={dateFormat || true}
-              timeFormat={'LTS'}
+              timeFormat={"LTS"}
               hasTimeZone={true}
               timeZone={timeZone}
               value={widgetValue}
@@ -320,14 +320,14 @@ class WidgetRenderer extends PureComponent {
                   getFormattedDate(date, `x`),
                   null,
                   null,
-                  true
+                  true,
                 )
               }
               tabIndex={tabIndex}
             />
           </div>
         );
-      case 'DateRange': {
+      case "DateRange": {
         return (
           <DatetimeRange
             {...dateRangeProps}
@@ -343,7 +343,7 @@ class WidgetRenderer extends PureComponent {
           />
         );
       }
-      case 'Lookup': {
+      case "Lookup": {
         const { typeaheadSupplier } = this.props;
 
         return (
@@ -371,8 +371,8 @@ class WidgetRenderer extends PureComponent {
           />
         );
       }
-      case 'List':
-      case 'MultiListValue': {
+      case "List":
+      case "MultiListValue": {
         const { dropdownValuesSupplier } = this.props;
 
         const commonProps = {
@@ -385,7 +385,7 @@ class WidgetRenderer extends PureComponent {
         };
         const typeProps = {};
 
-        if (widgetType === 'List') {
+        if (widgetType === "List") {
           typeProps.selected = selectedValue;
           typeProps.isMultiselect = isMultiselect;
         } else {
@@ -395,7 +395,7 @@ class WidgetRenderer extends PureComponent {
 
         return <List {...commonProps} {...typeProps} />;
       }
-      case 'Link':
+      case "Link":
         return (
           <Link
             getClassNames={() => this.getClassNames({ icon: true })}
@@ -409,14 +409,14 @@ class WidgetRenderer extends PureComponent {
             }}
           />
         );
-      case 'Text':
-      case 'LongText': {
+      case "Text":
+      case "LongText": {
         const classNameParams = { icon: true };
         let renderContent = null;
         delete widgetProperties.id; // removed the id as this is not used anyway
         // this was passed as a prop (i.e inline filter and due to that we got warnings due to dup ID for elements)
 
-        if (widgetType === 'Text') {
+        if (widgetType === "Text") {
           renderContent = (
             <Fragment>
               <input {...widgetProperties} type="text" />
@@ -431,7 +431,7 @@ class WidgetRenderer extends PureComponent {
           <div>
             <div
               className={classnames(this.getClassNames(classNameParams), {
-                'border-danger': showErrorBorder,
+                "border-danger": showErrorBorder,
               })}
             >
               {renderContent}
@@ -445,7 +445,7 @@ class WidgetRenderer extends PureComponent {
           </div>
         );
       }
-      case 'Password':
+      case "Password":
         return (
           <Password
             {...{
@@ -457,10 +457,10 @@ class WidgetRenderer extends PureComponent {
             getClassNames={this.getClassNames}
           />
         );
-      case 'Integer':
-      case 'Amount':
-      case 'Quantity': {
-        const step = subentity === 'quickInput' ? 'any' : 1;
+      case "Integer":
+      case "Amount":
+      case "Quantity": {
+        const step = subentity === "quickInput" ? "any" : 1;
         const devices = widgetData?.[0]?.devices;
         if (range) {
           return (
@@ -516,8 +516,8 @@ class WidgetRenderer extends PureComponent {
           );
         }
       }
-      case 'Number':
-      case 'CostPrice':
+      case "Number":
+      case "CostPrice":
         if (range) {
           return (
             <CostPriceRange
@@ -541,7 +541,7 @@ class WidgetRenderer extends PureComponent {
           );
         } else {
           return (
-            <div className={classnames(this.getClassNames(), 'number-field')}>
+            <div className={classnames(this.getClassNames(), "number-field")}>
               <CostPrice
                 {...widgetProperties}
                 precision={widgetData[0].precision}
@@ -549,7 +549,7 @@ class WidgetRenderer extends PureComponent {
             </div>
           );
         }
-      case 'YesNo':
+      case "YesNo":
         return (
           <Checkbox
             {...{
@@ -568,7 +568,7 @@ class WidgetRenderer extends PureComponent {
             handlePatch={onPatch}
           />
         );
-      case 'Switch':
+      case "Switch":
         return (
           <Switch
             {...{
@@ -584,10 +584,10 @@ class WidgetRenderer extends PureComponent {
             }}
           />
         );
-      case 'Label':
+      case "Label":
         return (
           <div
-            className={classnames('tag tag-warning ', {
+            className={classnames("tag tag-warning ", {
               [`text-${gridAlign}`]: gridAlign,
             })}
             tabIndex={tabIndex}
@@ -596,18 +596,18 @@ class WidgetRenderer extends PureComponent {
             {widgetData[0].value}
           </div>
         );
-      case 'Button':
-      case 'ZoomIntoButton':
-      case 'ProcessButton': {
+      case "Button":
+      case "ZoomIntoButton":
+      case "ProcessButton": {
         let textContent = caption;
         let clickHandler = undefined;
 
-        if (widgetType === 'Button') {
+        if (widgetType === "Button") {
           clickHandler = () => onPatch(widgetField);
           textContent =
             widgetData[0].value &&
             widgetData[0].value[Object.keys(widgetData[0].value)[0]];
-        } else if (widgetType === 'ZoomIntoButton') {
+        } else if (widgetType === "ZoomIntoButton") {
           clickHandler = () => handleZoomInto(fields[0].field);
         } else {
           clickHandler = onHandleProcess;
@@ -615,9 +615,9 @@ class WidgetRenderer extends PureComponent {
 
         return (
           <button
-            className={classnames('btn btn-sm btn-meta-primary', {
+            className={classnames("btn btn-sm btn-meta-primary", {
               [`text-${gridAlign}`]: gridAlign,
-              'tag-disabled disabled': readonly,
+              "tag-disabled disabled": readonly,
             })}
             onClick={clickHandler}
             tabIndex={tabIndex}
@@ -627,7 +627,7 @@ class WidgetRenderer extends PureComponent {
           </button>
         );
       }
-      case 'ActionButton':
+      case "ActionButton":
         return (
           <ActionButton
             data={widgetData[0]}
@@ -642,7 +642,7 @@ class WidgetRenderer extends PureComponent {
             ref={forwardedRef}
           />
         );
-      case 'ProductAttributes':
+      case "ProductAttributes":
         return (
           <Attributes
             {...attributesProps}
@@ -653,7 +653,7 @@ class WidgetRenderer extends PureComponent {
             updateHeight={updateHeight}
           />
         );
-      case 'Address':
+      case "Address":
         return (
           <Attributes
             {...attributesProps}
@@ -661,7 +661,7 @@ class WidgetRenderer extends PureComponent {
             isModal={isModal}
           />
         );
-      case 'Image':
+      case "Image":
         return (
           <Image
             fields={fields}
@@ -670,7 +670,7 @@ class WidgetRenderer extends PureComponent {
             readonly={readonly}
           />
         );
-      case 'Labels': {
+      case "Labels": {
         let values = [];
         const entry = widgetData[0];
 

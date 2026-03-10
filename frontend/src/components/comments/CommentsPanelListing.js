@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import CommentsPanelListingItem from './CommentsPanelListingItem';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import CommentsPanelListingItem from "./CommentsPanelListingItem";
 
 export const CommentsPanelListing = (props) => {
   const { comments } = props;

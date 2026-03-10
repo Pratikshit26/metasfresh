@@ -1,4 +1,4 @@
-import { handleAction } from 'redux-actions';
+import { handleAction } from "redux-actions";
 
 export const initialState = {
   files: [],
@@ -6,7 +6,7 @@ export const initialState = {
 };
 
 export default handleAction(
-  'ADD-PLUGINS',
+  "ADD-PLUGINS",
   (state, action) => {
     const plugins = action.payload;
     const files = [];
@@ -28,5 +28,5 @@ export default handleAction(
       components: { ...state.components, ...components },
     };
   },
-  initialState
+  initialState,
 );

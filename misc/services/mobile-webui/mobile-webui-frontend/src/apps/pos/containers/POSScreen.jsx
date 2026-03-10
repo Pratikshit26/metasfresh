@@ -14,26 +14,26 @@ import { POSContent } from './POSContent';
 import SelectOrderModal from './select_order/SelectOrderModal';
 
 const POSScreen = () => {
-  const dispatch = useDispatch();
-  const posTerminal = usePOSTerminal({ refresh: true });
-  const posTerminalId = posTerminal.id;
+    const dispatch = useDispatch();
+    const posTerminal = usePOSTerminal({ refresh: true });
+    const posTerminalId = posTerminal.id;
 
-  useOrdersWebsocket({
-    posTerminalId,
-    onWebsocketMessage: (message) => {
-      dispatch(updateOrderFromBackendAction({ order: message.posOrder }));
-    },
-  });
+    useOrdersWebsocket({
+        posTerminalId,
+        onWebsocketMessage: (message) => {
+            dispatch(updateOrderFromBackendAction({ order: message.posOrder }));
+        },
+    });
 
-  const modal = useModal();
+    const modal = useModal();
 
-  return (
-    <div className="pos-screen">
-      <Header />
-      {modal}
-      <POSContent disabled={!!modal} />
-    </div>
-  );
+    return (
+        <div className="pos-screen">
+            <Header />
+            {modal}
+            <POSContent disabled={!!modal} />
+        </div>
+    );
 };
 
 //
@@ -47,37 +47,37 @@ const POSScreen = () => {
 //
 
 const getCashJournalStatus = (posTerminal) => {
-  if (posTerminal?.cashJournalOpen) {
-    return posTerminal?.isCashJournalClosing ? 'closing' : 'open';
-  } else {
-    return 'closed';
-  }
+    if (posTerminal?.cashJournalOpen) {
+        return posTerminal?.isCashJournalClosing ? 'closing' : 'open';
+    } else {
+        return 'closed';
+    }
 };
 
 const useModal = () => {
-  const posTerminal = usePOSTerminal();
-  const modal = useSelector((globalState) => getModalFromState({ globalState }));
+    const posTerminal = usePOSTerminal();
+    const modal = useSelector((globalState) => getModalFromState({ globalState }));
 
-  if (!posTerminal.id) {
-    return <POSTerminalSelectModal allowCancel={false} />;
-  }
-
-  if (modal) {
-    if (modal === MODAL_POSTerminalSelect) {
-      return <POSTerminalSelectModal allowCancel={true} />;
-    } else if (modal === MODAL_SelectOrders) {
-      return <SelectOrderModal />;
+    if (!posTerminal.id) {
+        return <POSTerminalSelectModal allowCancel={false} />;
     }
-  }
 
-  const journalStatus = getCashJournalStatus(posTerminal);
-  if (journalStatus === 'closed') {
-    return <POSCashJournalOpenModal />;
-  } else if (journalStatus === 'closing') {
-    return <POSCashJournalClosingModal />;
-  }
+    if (modal) {
+        if (modal === MODAL_POSTerminalSelect) {
+            return <POSTerminalSelectModal allowCancel={true} />;
+        } else if (modal === MODAL_SelectOrders) {
+            return <SelectOrderModal />;
+        }
+    }
 
-  return null;
+    const journalStatus = getCashJournalStatus(posTerminal);
+    if (journalStatus === 'closed') {
+        return <POSCashJournalOpenModal />;
+    } else if (journalStatus === 'closing') {
+        return <POSCashJournalClosingModal />;
+    }
+
+    return null;
 };
 
 export default POSScreen;

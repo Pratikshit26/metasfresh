@@ -64,7 +64,7 @@
         "43cbba8631b94fc6938c1fb7d79151b6",
         "683e9e4e25cc403ab0e1e31220b05d02"
       ],
-      "streamIds": [ ],
+      "streamIds": [],
       "optionIds": null,
       "propertyIds": [
         "0d2b862e4cd547ca85ab081f1bf4964a",
@@ -351,12 +351,11 @@
         "metaDescription": null,
         "name": "!!parentName!!",
         "keywords": null,
-        "description":  "!!parentDesc!!",
+        "description": "!!parentDesc!!",
         "metaTitle": null,
         "packUnit": null,
         "packUnitPlural": null,
-        "customFields": {
-        },
+        "customFields": {},
         "slotConfig": null,
         "customSearchKeywords": null
       },
@@ -372,8 +371,7 @@
         "swagCustomizedProductsTemplate": null
       },
       "id": "!!productParentId!!",
-      "customFields": {
-      },
+      "customFields": {},
       "apiAlias": "product"
     }
   ],

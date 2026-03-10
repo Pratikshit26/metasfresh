@@ -4,132 +4,128 @@
   "definitions": {
     "UBLExtensions": {
       "description": "A container for all extensions present in the document.",
-      "required": [
-        "UBLExtension"
-        ],
+      "required": ["UBLExtension"],
       "properties": {
         "UBLExtension": {
           "description": "A single extension for private use.",
           "items": {
             "$ref": "#/definitions/UBLExtension"
-            },
+          },
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          }
-        },
+        }
+      },
       "additionalProperties": false,
       "type": "object"
-      },
+    },
     "UBLExtension": {
       "description": "A single extension for private use.",
-      "required": [
-        "ExtensionContent"
-        ],
+      "required": ["ExtensionContent"],
       "properties": {
         "ID": {
           "description": "An identifier for the Extension assigned by the creator of the extension.",
           "items": {
             "$ref": "UBL-CommonBasicComponents-2.3.json#/definitions/ID"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "Name": {
           "description": "A name for the Extension assigned by the creator of the extension.",
           "items": {
             "$ref": "UBL-CommonBasicComponents-2.3.json#/definitions/Name"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionAgencyID": {
           "description": "An agency that maintains one or more Extensions.",
           "items": {
             "$ref": "BDNDR-UnqualifiedDataTypes-1.1.json#/definitions/IdentifierType"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionAgencyName": {
           "description": "The name of the agency that maintains the Extension.",
           "items": {
             "$ref": "BDNDR-UnqualifiedDataTypes-1.1.json#/definitions/TextType"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionVersionID": {
           "description": "The version of the Extension.",
           "items": {
             "$ref": "BDNDR-UnqualifiedDataTypes-1.1.json#/definitions/IdentifierType"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionAgencyURI": {
           "description": "A URI for the Agency that maintains the Extension.",
           "items": {
             "$ref": "BDNDR-UnqualifiedDataTypes-1.1.json#/definitions/IdentifierType"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionURI": {
           "description": "A URI for the Extension.",
           "items": {
             "$ref": "BDNDR-UnqualifiedDataTypes-1.1.json#/definitions/IdentifierType"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionReasonCode": {
           "description": "A code for reason the Extension is being included.",
           "items": {
             "$ref": "BDNDR-UnqualifiedDataTypes-1.1.json#/definitions/CodeType"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionReason": {
           "description": "A description of the reason for the Extension.",
           "items": {
             "$ref": "BDNDR-UnqualifiedDataTypes-1.1.json#/definitions/TextType"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          },
+        },
         "ExtensionContent": {
           "description": "The definition of the extension content.",
           "items": {
             "$ref": "UBL-ExtensionContentDataType-2.3.json#/definitions/ExtensionContent"
-            },
+          },
           "maxItems": 1,
           "minItems": 1,
           "type": "array",
           "additionalProperties": false
-          }
-        },
+        }
+      },
       "additionalProperties": false,
       "type": "object"
-      }
     }
   }
+}

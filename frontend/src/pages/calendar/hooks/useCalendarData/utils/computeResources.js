@@ -1,5 +1,5 @@
-import { updateResourcesFromConflicts } from './updateResourcesFromConflicts';
-import { removeZeroEntriesResourcesFromArray } from './removeZeroEntriesResourcesFromArray';
+import { updateResourcesFromConflicts } from "./updateResourcesFromConflicts";
+import { removeZeroEntriesResourcesFromArray } from "./removeZeroEntriesResourcesFromArray";
 
 export const computeResources = ({ calendars, entries, conflicts }) => {
   if (!calendars) {

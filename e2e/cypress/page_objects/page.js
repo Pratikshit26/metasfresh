@@ -1,7 +1,7 @@
 export default class MetasfreshPage {
   constructor() {
-    this.breadcrumbs = '.header-breadcrumb';
-    this.sitename = '.header-breadcrumb-sitename';
+    this.breadcrumbs = ".header-breadcrumb";
+    this.sitename = ".header-breadcrumb-sitename";
   }
 
   getBreadcrumbs() {
@@ -13,6 +13,6 @@ export default class MetasfreshPage {
   }
 
   selectAllVisibleRows() {
-    cy.get('body').type('{alt}a');
+    cy.get("body").type("{alt}a");
   }
 }

@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { get } from 'lodash';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import cx from "classnames";
+import { get } from "lodash";
 
 class Link extends PureComponent {
   handleClick = () => {
     const { widgetData } = this.props;
-    const url = get(widgetData[0], ['value'], '');
+    const url = get(widgetData[0], ["value"], "");
 
     if (url) {
-      window.open(url, '_blank');
+      window.open(url, "_blank");
     }
   };
 
@@ -21,19 +21,19 @@ class Link extends PureComponent {
 
     return (
       <div className="input-inner-container">
-        <div className={cx(getClassNames(), { 'input-focused': isFocused })}>
+        <div className={cx(getClassNames(), { "input-focused": isFocused })}>
           <input {...widgetProperties} type="text" />
           {icon && <i className="meta-icon-edit input-icon-right" />}
         </div>
         <div
           onClick={this.handleClick}
           className={cx(
-            'btn btn-icon btn-meta-outline-secondary btn-inline',
-            'pointer btn-distance-rev btn-sm',
+            "btn btn-icon btn-meta-outline-secondary btn-inline",
+            "pointer btn-distance-rev btn-sm",
             {
-              'btn-disabled btn-meta-disabled':
-                (validStatus && !validStatus.valid) || value === '',
-            }
+              "btn-disabled btn-meta-disabled":
+                (validStatus && !validStatus.valid) || value === "",
+            },
           )}
         >
           <i className="meta-icon-link" />

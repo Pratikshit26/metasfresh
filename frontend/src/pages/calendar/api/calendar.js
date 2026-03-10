@@ -1,6 +1,6 @@
-import axios from 'axios';
-import converters from './converters';
-import { buildURL } from '../../../utils';
+import axios from "axios";
+import converters from "./converters";
+import { buildURL } from "../../../utils";
 
 const API_URL = `${config.API_URL}/calendars`;
 
@@ -36,8 +36,8 @@ export const fetchCalendarEntries = ({
 
   if (!query.calendarIds || query.calendarIds.length === 0) {
     console.log(
-      'fetchCalendarEntries: return empty because no calendarIds',
-      query
+      "fetchCalendarEntries: return empty because no calendarIds",
+      query,
     );
 
     return Promise.resolve({
@@ -108,7 +108,7 @@ export const fetchConflicts = ({
       buildURL(`${API_URL}/queryConflicts`, {
         simulationId,
         onlyResourceIds,
-      })
+      }),
     )
     .then(extractAxiosResponseData)
     .then(({ conflicts }) => conflicts.map(converters.fromAPIConflict));

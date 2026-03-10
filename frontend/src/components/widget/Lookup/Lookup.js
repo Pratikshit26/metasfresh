@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import onClickOutside from 'react-onclickoutside';
-import classnames from 'classnames';
-import * as _ from 'lodash';
+import React, { Component } from "react";
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import onClickOutside from "react-onclickoutside";
+import classnames from "classnames";
+import * as _ from "lodash";
 
-import { withForwardedRef } from '../../hoc/WithRouterAndRef';
-import { getItemsByProperty } from '../../../utils';
-import BarcodeScanner from '../BarcodeScanner/BarcodeScannerWidget';
-import List from '../List/List';
-import RawLookup from './RawLookup';
-import WidgetTooltip from '../WidgetTooltip';
+import { withForwardedRef } from "../../hoc/WithRouterAndRef";
+import { getItemsByProperty } from "../../../utils";
+import BarcodeScanner from "../BarcodeScanner/BarcodeScannerWidget";
+import List from "../List/List";
+import RawLookup from "./RawLookup";
+import WidgetTooltip from "../WidgetTooltip";
 
 /**
  * Composed lookup (e.g. partner/location/contact) component.
@@ -39,8 +39,8 @@ class Lookup extends Component {
 
     this.state = {
       isInputEmpty: true,
-      propertiesCopy: getItemsByProperty(props.properties, 'source', 'list'),
-      property: '', // current property
+      propertiesCopy: getItemsByProperty(props.properties, "source", "list"),
+      property: "", // current property
       initialFocus: props.initialFocus,
       localClearing: false,
       autofocusDisabled: false,
@@ -99,7 +99,7 @@ class Lookup extends Component {
         {
           lookupWidgets: newLookupWidgets,
         },
-        callback
+        callback,
       );
     }
   };
@@ -140,16 +140,16 @@ class Lookup extends Component {
             { property: nextProp.field }, //
             () => {
               onBlurWidget && onBlurWidget();
-            }
+            },
           );
         } else if (
           widgetData[widgetData.length - 1].field === currentFieldName
         ) {
           this.setState(
-            { property: '' }, //
+            { property: "" }, //
             () => {
               onBlurWidget && onBlurWidget();
-            }
+            },
           );
         }
       });
@@ -166,7 +166,7 @@ class Lookup extends Component {
 
     this._changeWidgetProperty(
       field,
-      'dropdownOpen',
+      "dropdownOpen",
       isDropdownListOpen,
       () => {
         this.setState({ isDropdownListOpen });
@@ -178,7 +178,7 @@ class Lookup extends Component {
             onBlur && onBlur();
           }
         }
-      }
+      },
     );
   };
 
@@ -188,7 +188,7 @@ class Lookup extends Component {
         ? !!tooltipOpen
         : !this.getItemLocalState(field).tooltipOpen;
 
-    this._changeWidgetProperty(field, 'tooltipOpen', tooltipOpenEffective);
+    this._changeWidgetProperty(field, "tooltipOpen", tooltipOpenEffective);
   };
 
   resetLocalClearing = () => {
@@ -208,11 +208,11 @@ class Lookup extends Component {
           isDropdownListOpen: false,
           isFocused: false,
           lookupWidgets: this.rawLookupsState,
-          property: '',
+          property: "",
         },
         () => {
           onClickOutside && onClickOutside();
-        }
+        },
       );
     }
   };
@@ -229,7 +229,7 @@ class Lookup extends Component {
       const { updateItems, widgetData, onChange, properties, onSelectBarcode } =
         this.props;
       const propsWithoutTooltips = properties.filter(
-        (prop) => prop.type !== 'Tooltip'
+        (prop) => prop.type !== "Tooltip",
       );
       const onChangeResp =
         onChange && onChange(propsWithoutTooltips, null, false);
@@ -240,7 +240,7 @@ class Lookup extends Component {
             updateItems &&
               updateItems({
                 widgetField: widgetData[0].field,
-                value: '',
+                value: "",
               });
 
             if (this.mounted) {
@@ -248,7 +248,7 @@ class Lookup extends Component {
 
               this.setState({
                 isInputEmpty: true,
-                property: '',
+                property: "",
                 initialFocus: true,
                 localClearing: true,
                 autofocusDisabled: false,
@@ -261,14 +261,14 @@ class Lookup extends Component {
   };
 
   handleListFocus = (field) => {
-    this._changeWidgetProperty(field, 'isFocused', true, () => {
+    this._changeWidgetProperty(field, "isFocused", true, () => {
       this.setState({ isFocused: true });
       this.props.onFocus();
     });
   };
 
   handleListBlur = (field) => {
-    this._changeWidgetProperty(field, 'isFocused', false, () => {
+    this._changeWidgetProperty(field, "isFocused", false, () => {
       this.setState({ isFocused: false });
       this.props.onBlur();
     });
@@ -296,7 +296,7 @@ class Lookup extends Component {
     // // TODO: This is really not how we should be doing this. Backend should send
     // // us info which fields are usable with barcode scanner
     const isShowBarcodeScanner =
-      properties && properties.some((item) => item.field === 'M_LocatorTo_ID');
+      properties && properties.some((item) => item.field === "M_LocatorTo_ID");
 
     return (
       <div
@@ -308,13 +308,13 @@ class Lookup extends Component {
             className="btn btn-sm btn-meta-success btn-scanner"
             onClick={() => onScanBarcode(true)}
           >
-            {counterpart.translate('widget.scanFromCamera.caption')}
+            {counterpart.translate("widget.scanFromCamera.caption")}
           </button>
         ) : null}
         <i
           className={classnames({
-            'meta-icon-close-alt': !isInputEmpty,
-            'meta-icon-preview': isInputEmpty,
+            "meta-icon-close-alt": !isInputEmpty,
+            "meta-icon-preview": isInputEmpty,
           })}
           onClick={!isInputEmpty ? this.handleClear : null}
         />
@@ -324,21 +324,21 @@ class Lookup extends Component {
 
   renderSingleLookupPart = (item, index) => {
     const { widgetData } = this.props;
-    const itemData = getItemsByProperty(widgetData, 'field', item.field)[0];
+    const itemData = getItemsByProperty(widgetData, "field", item.field)[0];
 
-    if (item.type === 'Tooltip') {
+    if (item.type === "Tooltip") {
       return this.renderSingleLookupPart_Tooltip(item);
     } else if (
-      item.source === 'lookup' ||
-      item.widgetType === 'Lookup' ||
-      (itemData && itemData.widgetType === 'Lookup')
+      item.source === "lookup" ||
+      item.widgetType === "Lookup" ||
+      (itemData && itemData.widgetType === "Lookup")
     ) {
       return this.renderSingleLookupPart_Lookup(item, index);
     } else if (
       widgetData &&
-      (item.source === 'list' ||
-        item.widgetType === 'List' ||
-        (itemData && itemData.source === 'List'))
+      (item.source === "list" ||
+        item.widgetType === "List" ||
+        (itemData && itemData.source === "List"))
     ) {
       return this.renderSingleLookupPart_List(item, index);
     }
@@ -346,7 +346,7 @@ class Lookup extends Component {
 
   renderSingleLookupPart_Tooltip = (item) => {
     const { widgetData } = this.props;
-    const itemData = getItemsByProperty(widgetData, 'field', item.field)[0];
+    const itemData = getItemsByProperty(widgetData, "field", item.field)[0];
 
     if (!itemData.value) {
       return null;
@@ -413,7 +413,7 @@ class Lookup extends Component {
       this.state;
 
     const field = itemDescriptor.field;
-    const itemData = getItemsByProperty(widgetData, 'field', field)[0];
+    const itemData = getItemsByProperty(widgetData, "field", field)[0];
 
     const isDropdownOpen = this.getItemLocalState(field).dropdownOpen;
     const disabled = isInputEmpty && index !== 0;
@@ -531,7 +531,7 @@ class Lookup extends Component {
     } = this.state;
 
     const field = itemDescriptor.field;
-    const itemData = getItemsByProperty(widgetData, 'field', field)[0];
+    const itemData = getItemsByProperty(widgetData, "field", field)[0];
 
     const idValue = `lookup_${field}`;
     const isPrimaryField = index === 0;
@@ -550,11 +550,11 @@ class Lookup extends Component {
         key={field}
         id={idValue}
         className={classnames(
-          'lookup-widget-wrapper lookup-widget-wrapper-bcg',
+          "lookup-widget-wrapper lookup-widget-wrapper-bcg",
           {
-            'raw-lookup-disabled': disabled || readonly,
+            "raw-lookup-disabled": disabled || readonly,
             focused: this.getItemLocalState(field).isFocused,
-          }
+          },
         )}
       >
         <List
@@ -567,7 +567,7 @@ class Lookup extends Component {
           doNotOpenOnFocus={false}
           properties={itemDescriptor}
           mainProperty={itemDescriptor}
-          defaultValue={defaultValue ? defaultValue : ''}
+          defaultValue={defaultValue ? defaultValue : ""}
           initialFocus={isPrimaryField ? initialFocus : false}
           emptyText={itemDescriptor?.emptyText || placeholder}
           mandatory={itemData.mandatory}
@@ -620,7 +620,7 @@ class Lookup extends Component {
 
     const errorInputCondition =
       validStatus && !validStatus.valid && !validStatus.initialValue;
-    const classRank = rank || 'primary';
+    const classRank = rank || "primary";
 
     if (scanning) {
       return (
@@ -632,16 +632,16 @@ class Lookup extends Component {
       <div
         ref={this.setWrapperElement}
         className={classnames(
-          'input-dropdown-container lookup-wrapper',
+          "input-dropdown-container lookup-wrapper",
           `input-${classRank}`,
           {
-            'pulse-on': updated,
-            'pulse-off': !updated,
-            'input-full': filterWidget,
-            'input-mandatory': mandatoryInputCondition,
-            'input-error': errorInputCondition,
-            'lookup-wrapper-disabled': readonly,
-          }
+            "pulse-on": updated,
+            "pulse-off": !updated,
+            "input-full": filterWidget,
+            "input-mandatory": mandatoryInputCondition,
+            "input-error": errorInputCondition,
+            "lookup-wrapper-disabled": readonly,
+          },
         )}
       >
         {properties && properties.map(this.renderSingleLookupPart)}

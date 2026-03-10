@@ -1,4 +1,3 @@
-
 # metasfresh-procurement-webui
 
 The metasfresh procurement webui is a standalone mobile web application that communicates with metasfresh and allows producers/ vendors to report supplies.
@@ -7,6 +6,6 @@ Those supply reports are transferred to metasfresh ERP and then transformed into
 
 The webui leans on the following components to do its job:
 
-* vaadin
-* spring-boot
-* rabbitmq
+- vaadin
+- spring-boot
+- rabbitmq

@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { forEach, get } from 'lodash';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { forEach, get } from "lodash";
 
-import { connectWS, disconnectWS } from '../utils/websockets';
-import { getRowsData, getTabRequest } from '../api';
-import { getTab } from '../utils';
+import { connectWS, disconnectWS } from "../utils/websockets";
+import { getRowsData, getTabRequest } from "../api";
+import { getTab } from "../utils";
 
-import { getTableId } from '../reducers/tables';
-import { addNotification, updateLastBackPage } from '../actions/AppActions';
+import { getTableId } from "../reducers/tables";
+import { addNotification, updateLastBackPage } from "../actions/AppActions";
 import {
   attachFileAction,
   clearMasterData,
@@ -17,18 +17,18 @@ import {
   patchWindow,
   sortTab,
   updateTabLayout,
-} from '../actions/WindowActions';
+} from "../actions/WindowActions";
 import {
   deleteTable,
   updateTabRowsData,
   updateTabTableData,
-} from '../actions/TableActions';
+} from "../actions/TableActions";
 
-import MasterWindow from '../components/app/MasterWindow';
-import { toOrderBysCommaSeparatedString } from '../utils/windowHelpers';
-import { fetchTopActions } from '../actions/Actions';
+import MasterWindow from "../components/app/MasterWindow";
+import { toOrderBysCommaSeparatedString } from "../utils/windowHelpers";
+import { fetchTopActions } from "../actions/Actions";
 
-import history from '../services/History';
+import history from "../services/History";
 
 /**
  * @file Class based component.
@@ -59,8 +59,8 @@ class MasterWindowContainer extends PureComponent {
   componentDidMount() {
     const fullPath = window.location.href;
     const { updateLastBackPage } = this.props;
-    if (!fullPath.includes('viewId')) {
-      updateLastBackPage('');
+    if (!fullPath.includes("viewId")) {
+      updateLastBackPage("");
     }
   }
 
@@ -77,7 +77,7 @@ class MasterWindowContainer extends PureComponent {
 
     const activeTab = includedTabsInfo
       ? Object.values(includedTabsInfo).find((tabInfo) =>
-          this.isActiveTab(tabInfo.tabId)
+          this.isActiveTab(tabInfo.tabId),
         )
       : null;
     //console.log('onWebsocketEvent', { event, activeTab });
@@ -105,7 +105,7 @@ class MasterWindowContainer extends PureComponent {
       await this.getTabRows(activeTab.tabId, activeTab.staleRowIds).then(
         (res) => {
           this.mergeDataIntoIncludedTab(res);
-        }
+        },
       );
     }
   }
@@ -140,12 +140,12 @@ class MasterWindowContainer extends PureComponent {
       doRemoveURLParams = true;
 
       const value = urlParams.get(fieldName);
-      if (value === 'NEW' && field.newRecordWindowId) {
+      if (value === "NEW" && field.newRecordWindowId) {
         openModal({
           title: field.newRecordCaption,
           windowId: field.newRecordWindowId,
-          modalType: 'window',
-          dataId: 'NEW',
+          modalType: "window",
+          dataId: "NEW",
           triggerField: field.field,
         });
       } else {
@@ -170,7 +170,7 @@ class MasterWindowContainer extends PureComponent {
     } = this.props;
 
     return getRowsData({
-      entity: 'window',
+      entity: "window",
       docType: windowId,
       docId,
       tabId,
@@ -182,7 +182,7 @@ class MasterWindowContainer extends PureComponent {
     const { master } = this.props;
     const activeTab = master.layout.activeTab;
     if (!activeTab) {
-      console.log('No active activeTab found', { master });
+      console.log("No active activeTab found", { master });
       return false;
     }
 
@@ -261,7 +261,7 @@ class MasterWindowContainer extends PureComponent {
     updateTabLayout(windowId, activeTabId)
       .then(() => {
         getTabRequest(activeTabId, windowId, docId, orderBy).then(({ rows }) =>
-          updateTabTableData(tableId, rows)
+          updateTabTableData(tableId, rows),
         );
       })
       .catch((error) => error);
@@ -306,11 +306,11 @@ class MasterWindowContainer extends PureComponent {
       return;
     }
 
-    const orderBy = (asc ? '+' : '-') + field;
+    const orderBy = (asc ? "+" : "-") + field;
     const dataId = master.docId;
     const tableId = getTableId({ windowId, docId, tabId });
 
-    sortTab({ scope: 'master', windowId, docId, tabId, field, asc });
+    sortTab({ scope: "master", windowId, docId, tabId, field, asc });
     getTabRequest(tabId, windowId, dataId, orderBy).then(({ rows }) => {
       updateTabTableData(tableId, rows);
     });

@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 export const URLsChart = ({ data }) => {
   return (
@@ -22,7 +22,7 @@ URLsChart.propTypes = {
 
 const URLItem = ({ url, caption, target }) => {
   const captionEffective = caption ? caption : url;
-  const targetEffective = target ? target : '_blank';
+  const targetEffective = target ? target : "_blank";
 
   return (
     <div className="item">

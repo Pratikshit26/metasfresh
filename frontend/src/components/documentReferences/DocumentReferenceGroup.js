@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 
-import DocumentReferenceItem from './DocumentReferenceItem';
+import DocumentReferenceItem from "./DocumentReferenceItem";
 
 const DocumentReferenceGroup = ({
   caption,

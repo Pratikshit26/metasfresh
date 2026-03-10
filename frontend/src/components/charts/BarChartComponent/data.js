@@ -1,8 +1,8 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 const mapDataset = (dataset, prevData, labelField) =>
   Object.keys(dataset)
-    .filter((key) => key[0] !== '_' && key !== labelField)
+    .filter((key) => key[0] !== "_" && key !== labelField)
     .map((key) => ({
       key,
       value: dataset[key],
@@ -31,7 +31,7 @@ export const isYRangeChanged = (data, prevData, fields) => {
 
 export const isXRangeChanged = (data, prevData, svg) => {
   if (data.length !== (prevData && prevData.length)) {
-    svg.select('g.datasets').selectAll('g').remove();
+    svg.select("g.datasets").selectAll("g").remove();
   } else {
     data.map((item, index) => {
       if (
@@ -39,7 +39,7 @@ export const isXRangeChanged = (data, prevData, svg) => {
         JSON.stringify(Object.keys(data[index])) !==
           JSON.stringify(Object.keys(prevData[index]))
       ) {
-        svg.select('g.datasets').selectAll('g').remove();
+        svg.select("g.datasets").selectAll("g").remove();
       }
     });
   }
@@ -53,10 +53,10 @@ export const drawData = (
   labelField,
   prev,
   fields,
-  reRender
+  reRender,
 ) => {
   if (reRender) {
-    svg.select('g.datasets').selectAll('g').remove();
+    svg.select("g.datasets").selectAll("g").remove();
   }
 
   let chartData = [];
@@ -67,35 +67,35 @@ export const drawData = (
   const yChanged = isYRangeChanged(data, prev, fields);
   isXRangeChanged(data, prev, svg);
 
-  const groups = svg.select('g.datasets').selectAll('g').data(chartData);
+  const groups = svg.select("g.datasets").selectAll("g").data(chartData);
 
   const bars = groups
     .enter()
-    .append('g')
-    .classed('bar-group', true)
+    .append("g")
+    .classed("bar-group", true)
     .merge(groups)
     .attr(
-      'transform',
-      (d) => 'translate(' + ranges.x0(d.data[labelField]) + ', 0)'
+      "transform",
+      (d) => "translate(" + ranges.x0(d.data[labelField]) + ", 0)",
     )
-    .selectAll('rect')
+    .selectAll("rect")
     .data((d) => mapDataset(d.data, d.prevData, labelField));
 
   bars
     .enter()
-    .append('rect')
-    .classed('bar', true)
+    .append("rect")
+    .classed("bar", true)
     .merge(bars)
-    .attr('x', (d) => ranges.x1(d.key))
-    .attr('width', ranges.x1.bandwidth())
-    .attr('y', (d) => {
+    .attr("x", (d) => ranges.x1(d.key))
+    .attr("width", ranges.x1.bandwidth())
+    .attr("y", (d) => {
       if (yChanged || reRender) {
         return dimensions.height;
       } else {
         return getY(d.valuePrev, ranges);
       }
     })
-    .attr('height', (d) => {
+    .attr("height", (d) => {
       if (yChanged || reRender) {
         return 0;
       } else {
@@ -104,11 +104,11 @@ export const drawData = (
     })
     .transition()
     .duration(1000)
-    .attr('y', (d) => {
+    .attr("y", (d) => {
       return getY(d.value, ranges);
     })
-    .attr('height', (d) => Math.abs(ranges.y(d.value) - ranges.y(0)))
-    .attr('fill', (d) => ranges.z(d.key));
+    .attr("height", (d) => Math.abs(ranges.y(d.value) - ranges.y(0)))
+    .attr("fill", (d) => ranges.z(d.key));
 };
 
 function getY(value, ranges) {

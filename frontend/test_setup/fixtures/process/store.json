@@ -152,9 +152,7 @@
             "supportAttributes": true,
             "supportTree": true,
             "collapsible": false,
-            "allowedCloseActions": [
-              "DONE"
-            ],
+            "allowedCloseActions": ["DONE"],
             "includedView": {
               "openOnSelect": false,
               "blurWhenOpen": true,
@@ -493,9 +491,7 @@
             "supportTree": true,
             "collapsible": true,
             "expandedDepth": 0,
-            "allowedCloseActions": [
-              "DONE"
-            ],
+            "allowedCloseActions": ["DONE"],
             "includedView": null,
             "supportIncludedView": false,
             "supportIncludedViewOnSelect": null,
@@ -669,9 +665,7 @@
             ],
             "supportAttributes": false,
             "supportTree": false,
-            "allowedCloseActions": [
-              "DONE"
-            ],
+            "allowedCloseActions": ["DONE"],
             "includedView": {
               "openOnSelect": true,
               "blurWhenOpen": true,

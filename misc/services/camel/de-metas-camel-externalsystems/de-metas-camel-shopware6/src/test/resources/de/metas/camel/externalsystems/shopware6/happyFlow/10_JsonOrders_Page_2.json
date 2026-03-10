@@ -12,9 +12,7 @@
         "lastName": "willNotBeImportedDueToStateMachineState",
         "customerNumber": "willNotBeImportedDueToStateMachineState",
         "email": "orderCustomerEmail@example.com",
-        "vatIds": [
-          "vatId12"
-        ],
+        "vatIds": ["vatId12"],
         "customFields": {
           "externalReference": "customerId",
           "customSalesRepId": "mockSalesRepIdentifier"

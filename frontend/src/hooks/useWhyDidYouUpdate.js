@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 /**
  * @function useWhyDidYouUpdate
@@ -25,8 +25,8 @@ export const logWhyDidYouUpdate = (name, props, previousProps) => {
     return;
   }
 
-  const changedPropNamesStr = changedPropNames.join(', ');
-  console.log('[why-did-you-update]', name, changedPropNamesStr, changedProps);
+  const changedPropNamesStr = changedPropNames.join(", ");
+  console.log("[why-did-you-update]", name, changedPropNamesStr, changedProps);
 };
 
 const computeChangedProps = (props, previousProps) => {

@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import axios from 'axios';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import axios from "axios";
 
-import PaypalReservationConfirmForm from '../components/app/PaypalReservationConfirmForm';
+import PaypalReservationConfirmForm from "../components/app/PaypalReservationConfirmForm";
 
 class PaypalReservationConfirm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      confirmStatus: 'checking',
+      confirmStatus: "checking",
       message: null,
     };
   }
@@ -20,7 +20,7 @@ class PaypalReservationConfirm extends Component {
       .post(`${config.API_URL}/paypal/approved?token=${token}`)
       .then(() => {
         this.setState({
-          confirmStatus: 'confirmed',
+          confirmStatus: "confirmed",
           message: null,
         });
       });
@@ -30,12 +30,12 @@ class PaypalReservationConfirm extends Component {
     this.approvePaypalReservation().catch((exchange) => {
       if (exchange.response.data.status == 404) {
         this.setState({
-          confirmStatus: 'error',
-          message: 'Order not found.',
+          confirmStatus: "error",
+          message: "Order not found.",
         });
       } else {
         this.setState({
-          confirmStatus: 'error',
+          confirmStatus: "error",
           message: exchange.response.data.message,
         });
       }

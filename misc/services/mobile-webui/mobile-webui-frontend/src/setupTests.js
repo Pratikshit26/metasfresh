@@ -1,3 +1,3 @@
 global.config = {
-  SERVER_URL: 'http://api.test.url',
+    SERVER_URL: 'http://api.test.url',
 };

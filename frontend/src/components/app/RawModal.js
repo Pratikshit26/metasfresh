@@ -1,23 +1,23 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { advSearchRequest, patchRequest } from '../../api';
-import { PATCH_RESET } from '../../constants/ActionTypes';
+import { advSearchRequest, patchRequest } from "../../api";
+import { PATCH_RESET } from "../../constants/ActionTypes";
 
-import { closeViewModal } from '../../actions/ViewActions';
-import { addNotification } from '../../actions/AppActions';
-import { openRawModal } from '../../actions/WindowActions';
+import { closeViewModal } from "../../actions/ViewActions";
+import { addNotification } from "../../actions/AppActions";
+import { openRawModal } from "../../actions/WindowActions";
 
-import keymap from '../../shortcuts/keymap';
-import { renderHeaderPropertiesGroups } from '../../utils/documentListHelper';
-import Tooltips from '../tooltips/Tooltips.js';
-import ModalButton from '../modal/ModalButton';
-import ModalComponent from '../modal/ModalComponent';
-import { OIViewHeader_WINDOW_ID } from '../acctOpenItems/OIViewHeader';
-import { AcctSimulationViewHeader_WINDOW_ID } from '../acctSimulation/AcctSimulationViewHeader';
-import { getIndicatorFromState } from '../../reducers/windowHandler';
+import keymap from "../../shortcuts/keymap";
+import { renderHeaderPropertiesGroups } from "../../utils/documentListHelper";
+import Tooltips from "../tooltips/Tooltips.js";
+import ModalButton from "../modal/ModalButton";
+import ModalComponent from "../modal/ModalComponent";
+import { OIViewHeader_WINDOW_ID } from "../acctOpenItems/OIViewHeader";
+import { AcctSimulationViewHeader_WINDOW_ID } from "../acctSimulation/AcctSimulationViewHeader";
+import { getIndicatorFromState } from "../../reducers/windowHandler";
 
 /**
  * View modal
@@ -82,7 +82,7 @@ class RawModal extends Component {
       selectedId: modalTableSelectedId,
     }).then((response) => {
       if (!response.data.length) {
-        console.error('No data for the selected ID');
+        console.error("No data for the selected ID");
         return false;
       }
       let {
@@ -95,7 +95,7 @@ class RawModal extends Component {
       patchRequest({
         docId: docIdToPatch,
         docType: docTypeToPatch,
-        entity: 'window',
+        entity: "window",
         isAdvanced: false,
         isEdit: false,
         property: parentFieldId,
@@ -107,8 +107,8 @@ class RawModal extends Component {
   handleClose = async (type) => {
     const { dispatch, requests, rawModal, featureType } = this.props;
 
-    featureType === 'SEARCH' &&
-      type === 'DONE' &&
+    featureType === "SEARCH" &&
+      type === "DONE" &&
       this.handleSearchDone(this.props);
 
     if (requests.length > 0) {
@@ -121,10 +121,10 @@ class RawModal extends Component {
       if (!success) {
         await dispatch({ type: PATCH_RESET });
 
-        const title = 'Error while saving';
-        const message = 'Not all fields have been saved';
+        const title = "Error while saving";
+        const message = "Not all fields have been saved";
         const time = 5000;
-        const type = 'error';
+        const type = "error";
 
         await dispatch(addNotification(title, message, time, type));
 
@@ -132,12 +132,12 @@ class RawModal extends Component {
       }
     }
 
-    if (type === 'BACK') {
+    if (type === "BACK") {
       await dispatch(
         openRawModal({
           windowId: rawModal.parentWindowId,
           viewId: rawModal.parentViewId,
-        })
+        }),
       );
     } else {
       await this.removeModal();
@@ -153,8 +153,8 @@ class RawModal extends Component {
         windowId,
         viewId,
         modalVisible,
-        closeAction: closeAction ?? 'DONE',
-      })
+        closeAction: closeAction ?? "DONE",
+      }),
     );
   };
 
@@ -164,9 +164,9 @@ class RawModal extends Component {
     let { allowedCloseActions } = this.props;
 
     // This is hardcoded for the Search Window feature (injecting cancel button)
-    if (windowId === '541045' && allowedCloseActions) {
-      !allowedCloseActions.includes('CANCEL') &&
-        allowedCloseActions.unshift('CANCEL');
+    if (windowId === "541045" && allowedCloseActions) {
+      !allowedCloseActions.includes("CANCEL") &&
+        allowedCloseActions.unshift("CANCEL");
     }
 
     const rawModalVisible = rawModal.visible || false;
@@ -190,7 +190,7 @@ class RawModal extends Component {
           onHideTooltip={this.hideTooltip}
           key={i}
           disabled={
-            windowId === '541045' && !modalTableSelectedId && name === 'DONE'
+            windowId === "541045" && !modalTableSelectedId && name === "DONE"
               ? true
               : false
           } // Disable the btn if no selection in src table
@@ -200,10 +200,10 @@ class RawModal extends Component {
             <Tooltips
               name={keymap[name]}
               action={counterpart.translate(selector)}
-              type={''}
+              type={""}
             />
           )}
-        </ModalButton>
+        </ModalButton>,
       );
     }
 
@@ -260,7 +260,7 @@ class RawModal extends Component {
         }
         renderButtons={this.renderButtons}
         shortcutActions={this.generateShortcutActions()}
-        onClickOutside={() => this.removeModal('CANCEL')}
+        onClickOutside={() => this.removeModal("CANCEL")}
       >
         {children}
       </ModalComponent>

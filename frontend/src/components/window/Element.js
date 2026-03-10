@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { omit } from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import { omit } from "lodash";
 
-import WidgetWrapper from '../../containers/WidgetWrapper';
+import WidgetWrapper from "../../containers/WidgetWrapper";
 
 const Element = ({
   windowId,
@@ -26,13 +26,13 @@ const Element = ({
 }) => {
   const { widgetType } = elementLayout;
   const autoFocus = isFocused && elementIndex === 0;
-  const fieldName = elementLayout.fields ? elementLayout.fields[0].field : '';
+  const fieldName = elementLayout.fields ? elementLayout.fields[0].field : "";
   const layoutId = `${sectionIndex}_${columnIndex}_${elementGroupIndex}_${elementsLineIndex}_${elementIndex}`;
-  const element = omit(elementLayout, ['fields']);
-  let dataSource = isModal ? 'modal' : 'element';
+  const element = omit(elementLayout, ["fields"]);
+  let dataSource = isModal ? "modal" : "element";
   // InlineTab specific adapts
-  dataSource = widgetType === 'InlineTab' ? 'inline-wrapper' : dataSource;
-  if (widgetType === 'InlineTab') {
+  dataSource = widgetType === "InlineTab" ? "inline-wrapper" : dataSource;
+  if (widgetType === "InlineTab") {
     // this is because from the BE we don't get any fields arr
     element.fields = [];
   }
@@ -44,7 +44,7 @@ const Element = ({
       layoutId={layoutId}
       ref={addRefToWidgets}
       entity="window"
-      key={'element' + elementIndex}
+      key={"element" + elementIndex}
       windowId={windowId}
       dataId={dataId}
       isModal={!!isModal}

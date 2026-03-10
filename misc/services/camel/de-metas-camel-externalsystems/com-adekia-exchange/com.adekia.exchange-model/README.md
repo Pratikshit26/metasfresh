@@ -1,6 +1,6 @@
 # Adekia Exchange models
 
-Internal exchange models folowing UBL specifications 
+Internal exchange models folowing UBL specifications
 
 ## Implementation details
 

@@ -1,11 +1,11 @@
-import produce from 'immer';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import counterpart from 'counterpart';
+import produce from "immer";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import counterpart from "counterpart";
 
-import { connectWS, disconnectWS } from '../../utils/websockets';
+import { connectWS, disconnectWS } from "../../utils/websockets";
 import {
   addDashboardWidget,
   changeKPIItem,
@@ -13,15 +13,15 @@ import {
   getKPIsDashboard,
   getTargetIndicatorsDashboard,
   removeDashboardWidget,
-} from '../../actions/DashboardActions';
-import logo from '../../assets/images/metasfresh_logo_green_thumb.png';
-import RawChart from '../charts/RawChart';
-import ChartWidget from './ChartWidget';
-import DndWidget from './DndWidget';
-import Placeholder from './Placeholder';
-import Sidenav from './Sidenav';
-import EntityType from './EntityType';
-import { ChartOptions } from './ChartOptions';
+} from "../../actions/DashboardActions";
+import logo from "../../assets/images/metasfresh_logo_green_thumb.png";
+import RawChart from "../charts/RawChart";
+import ChartWidget from "./ChartWidget";
+import DndWidget from "./DndWidget";
+import Placeholder from "./Placeholder";
+import Sidenav from "./Sidenav";
+import EntityType from "./EntityType";
+import { ChartOptions } from "./ChartOptions";
 
 export class DraggableWrapper extends Component {
   state = {
@@ -54,11 +54,11 @@ export class DraggableWrapper extends Component {
 
   onWebsocketEvent = (event) => {
     switch (event.changeType) {
-      case 'itemDataChanged':
+      case "itemDataChanged":
         this.onDashboardItemDataChanged(event);
         break;
-      case 'dashboardChanged':
-      case 'itemChanged':
+      case "dashboardChanged":
+      case "itemChanged":
         this.onDashboardStructureChanged(event);
         break;
     }
@@ -70,7 +70,7 @@ export class DraggableWrapper extends Component {
 
     const indicatorsNew = produce(indicators, (draft) => {
       const index = draft.findIndex(
-        (indicator) => indicator.id === wsEvent.itemId
+        (indicator) => indicator.id === wsEvent.itemId,
       );
       if (index !== -1) {
         draft[index] = { ...draft[index], data: wsEvent.data };
@@ -92,10 +92,10 @@ export class DraggableWrapper extends Component {
 
   onDashboardStructureChanged = (wsEvent) => {
     switch (wsEvent.widgetType) {
-      case 'TargetIndicator':
+      case "TargetIndicator":
         this.loadTargetIndicators();
         break;
-      case 'KPI':
+      case "KPI":
         this.loadKPIs();
         break;
     }
@@ -120,14 +120,14 @@ export class DraggableWrapper extends Component {
   };
 
   getType = (entity) => {
-    return entity === EntityType.KPI ? 'kpis' : 'targetIndicators';
+    return entity === EntityType.KPI ? "kpis" : "targetIndicators";
   };
 
   onDrop = ({ entity, id, isNew, droppedOverId }) => {
     const position =
       this.state[entity]?.findIndex((item) => item.id === droppedOverId) ?? -1;
 
-    console.log('onDrop', {
+    console.log("onDrop", {
       entity,
       id,
       isNew,
@@ -180,7 +180,7 @@ export class DraggableWrapper extends Component {
               <Placeholder
                 entity={EntityType.TARGET_INDICATOR}
                 description={counterpart.translate(
-                  'dashboard.targetIndicators.dropContainer.caption'
+                  "dashboard.targetIndicators.dropContainer.caption",
                 )}
               />
             </DndWidget>
@@ -191,7 +191,7 @@ export class DraggableWrapper extends Component {
       }
     } else {
       return (
-        <div className={'indicators-wrapper'}>
+        <div className={"indicators-wrapper"}>
           {targetIndicators.map((indicator, index) => (
             <DndWidget
               key={indicator.id}
@@ -213,7 +213,7 @@ export class DraggableWrapper extends Component {
                   zoomToDetailsAvailable={
                     !!indicator.kpi.zoomToDetailsAvailable
                   }
-                  chartType={'Indicator'}
+                  chartType={"Indicator"}
                   kpi={false}
                   data={indicator.data}
                   noData={indicator.fetchOnDrop}
@@ -275,7 +275,7 @@ export class DraggableWrapper extends Component {
               <Placeholder
                 entity={EntityType.KPI}
                 description={counterpart.translate(
-                  'dashboard.kpis.dropContainer.caption'
+                  "dashboard.kpis.dropContainer.caption",
                 )}
               />
             </DndWidget>
@@ -295,8 +295,8 @@ export class DraggableWrapper extends Component {
                 id={item.id}
                 entity={EntityType.KPI}
                 className={
-                  'draggable-widget ' +
-                  (idMaximized === item.id ? 'draggable-widget-maximize ' : '')
+                  "draggable-widget " +
+                  (idMaximized === item.id ? "draggable-widget-maximize " : "")
                 }
                 transparent={!editmode}
                 onDrop={this.onDrop}
@@ -370,7 +370,7 @@ export class DraggableWrapper extends Component {
               onClose={() => this.closeChartOptions()}
             />
           )}
-          <div className={editmode ? 'dashboard-edit-mode' : 'dashboard-cards'}>
+          <div className={editmode ? "dashboard-edit-mode" : "dashboard-cards"}>
             {this.renderIndicators()}
             {this.renderKpis()}
           </div>

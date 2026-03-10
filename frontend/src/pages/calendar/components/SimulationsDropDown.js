@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SimpleList from '../../../components/widget/List/SimpleList';
+import React from "react";
+import PropTypes from "prop-types";
+import SimpleList from "../../../components/widget/List/SimpleList";
 
-import './SimulationsDropDown.scss';
-import counterpart from 'counterpart';
+import "./SimulationsDropDown.scss";
+import counterpart from "counterpart";
 
 function computeSelectedSimulation(simulations, selectedSimulationId) {
   if (selectedSimulationId == null) {
@@ -12,7 +12,7 @@ function computeSelectedSimulation(simulations, selectedSimulationId) {
 
   const selectedSimulation = simulations.find(
     (simulation) =>
-      String(simulation.simulationId) === String(selectedSimulationId)
+      String(simulation.simulationId) === String(selectedSimulationId),
   );
   if (selectedSimulation != null) {
     return selectedSimulation;
@@ -29,7 +29,7 @@ const toKeyCaption = (simulation) => {
     let caption = simulation.name;
     if (simulation.processed) {
       caption =
-        counterpart.translate('calendar.simulation.processed') + caption;
+        counterpart.translate("calendar.simulation.processed") + caption;
     }
 
     return {
@@ -51,7 +51,7 @@ const SimulationsDropDown = ({
 }) => {
   const selectedSimulation = computeSelectedSimulation(
     simulations,
-    selectedSimulationId
+    selectedSimulationId,
   );
 
   const handleOnSelect = (keyCaptionEntry) => {
@@ -64,16 +64,16 @@ const SimulationsDropDown = ({
     }
   };
 
-  const KEY_ACTUAL_DATA = 'ACTUAL';
+  const KEY_ACTUAL_DATA = "ACTUAL";
   const OPTION_ACTUAL_DATA = {
     key: KEY_ACTUAL_DATA,
-    caption: counterpart.translate('calendar.option.actual.data'),
+    caption: counterpart.translate("calendar.option.actual.data"),
   };
 
-  const KEY_NEW_SIMULATION = 'NEW';
+  const KEY_NEW_SIMULATION = "NEW";
   const OPTION_NEW_SIMULATION = {
     key: KEY_NEW_SIMULATION,
-    caption: counterpart.translate('calendar.option.new.simulation'),
+    caption: counterpart.translate("calendar.option.new.simulation"),
   };
 
   return (

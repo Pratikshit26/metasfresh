@@ -1,36 +1,36 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef } from "react";
+import PropTypes from "prop-types";
 
-import FullCalendar from '@fullcalendar/react';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 
-import '@fullcalendar/common/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
-import deLocale from '@fullcalendar/core/locales/de';
+import "@fullcalendar/common/main.css";
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
+import deLocale from "@fullcalendar/core/locales/de";
 
-import * as api from './api/calendar';
-import { normalizeDateTime } from './utils/calendarUtils';
+import * as api from "./api/calendar";
+import { normalizeDateTime } from "./utils/calendarUtils";
 
-import SimulationsDropDown from './components/SimulationsDropDown';
-import { getCurrentActiveLanguage } from '../../utils/locale';
-import { useCalendarData } from './hooks/useCalendarData';
-import { useCalendarWebsocketEvents } from './hooks/useCalendarWebsocketEvents';
+import SimulationsDropDown from "./components/SimulationsDropDown";
+import { getCurrentActiveLanguage } from "../../utils/locale";
+import { useCalendarData } from "./hooks/useCalendarData";
+import { useCalendarWebsocketEvents } from "./hooks/useCalendarWebsocketEvents";
 
-import './Calendar.scss';
-import ConflictsSummary from './components/ConflictsSummary';
-import CalendarResourceLabel from './components/CalendarResourceLabel';
-import CalendarFilters from './components/CalendarFilters';
+import "./Calendar.scss";
+import ConflictsSummary from "./components/ConflictsSummary";
+import CalendarResourceLabel from "./components/CalendarResourceLabel";
+import CalendarFilters from "./components/CalendarFilters";
 import {
   getEventClassNames,
   renderEventContent,
-} from './components/CalendarEvent';
-import SimulationOptimizerButton from './components/SimulationOptimizerButton';
-import { useSimulationOptimizerStatus } from './hooks/useSimulationOptimizerStatus';
-import counterpart from 'counterpart';
+} from "./components/CalendarEvent";
+import SimulationOptimizerButton from "./components/SimulationOptimizerButton";
+import { useSimulationOptimizerStatus } from "./hooks/useSimulationOptimizerStatus";
+import counterpart from "counterpart";
 
 const Calendar = ({
   view,
@@ -51,7 +51,7 @@ const Calendar = ({
       onlyResponsibleId,
       ...changedParams,
     };
-    console.log('notifyParamsChanged', { changedParams, params });
+    console.log("notifyParamsChanged", { changedParams, params });
     onParamsChanged && onParamsChanged(params);
   };
 
@@ -92,7 +92,7 @@ const Calendar = ({
   const handleEventClick = (params) => {
     if (params.event.url) {
       params.jsEvent.preventDefault();
-      window.open(params.event.url, '_blank');
+      window.open(params.event.url, "_blank");
     }
   };
 
@@ -102,7 +102,7 @@ const Calendar = ({
       params.event.endStr === params.oldEvent.endStr &&
       params.event.allDay === params.oldEvent.allDay
     ) {
-      console.log('handleEventDragOrResize: no change', { params });
+      console.log("handleEventDragOrResize: no change", { params });
       return;
     }
 
@@ -116,7 +116,7 @@ const Calendar = ({
       })
       .then(calendarData.addEntriesArray)
       .catch((error) => {
-        console.log('Got error', error);
+        console.log("Got error", error);
         params.revert();
       });
   };
@@ -190,10 +190,10 @@ const Calendar = ({
             resourceTimelineYear: {
               slotDuration: { months: 1 },
               slotLabelInterval: { months: 1 },
-              slotLabelFormat: [{ month: 'long' }],
+              slotLabelFormat: [{ month: "long" }],
             },
             resourceTimelineMonth: {
-              slotMinWidth: '60',
+              slotMinWidth: "60",
             },
           }}
           initialView={view}
@@ -206,13 +206,13 @@ const Calendar = ({
           weekends="true"
           editable="true"
           headerToolbar={{
-            left: 'prev,today,next',
-            center: 'title',
+            left: "prev,today,next",
+            center: "title",
             right:
-              'dayGridMonth resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth,resourceTimelineYear',
+              "dayGridMonth resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth,resourceTimelineYear",
           }}
           resourceAreaHeaderContent={counterpart.translate(
-            'calendar.resource.area.header'
+            "calendar.resource.area.header",
           )}
           resources={calendarData.getResourcesArray()}
           resourceLabelContent={(params) => (
@@ -241,16 +241,16 @@ const Calendar = ({
           eventClassNames={getEventClassNames}
           eventContent={renderEventContent}
           eventDragStart={(event) => {
-            console.log('eventDragStart', { event });
+            console.log("eventDragStart", { event });
           }}
           eventDragStop={(event) => {
-            console.log('eventDragStop', { event });
+            console.log("eventDragStop", { event });
           }}
           eventDrop={(params) => {
-            console.log('eventDrop', { params });
+            console.log("eventDrop", { params });
 
             if (params.oldResource?.id !== params.newResource?.id) {
-              console.log('moving event to another resource is not allowed');
+              console.log("moving event to another resource is not allowed");
               params.revert();
               return;
             }
@@ -258,24 +258,24 @@ const Calendar = ({
             handleEventDragOrResize(params);
           }}
           drop={(event) => {
-            console.log('drop', { event });
+            console.log("drop", { event });
           }}
           eventResizeStart={(event) => {
-            console.log('eventResizeStart', { event });
+            console.log("eventResizeStart", { event });
           }}
           eventResizeStop={(event) => {
-            console.log('eventResizeStop', { event });
+            console.log("eventResizeStop", { event });
           }}
           eventResize={(params) => {
-            console.log('eventResize', { params });
+            console.log("eventResize", { params });
             handleEventDragOrResize(params);
           }}
           eventReceive={(event) => {
-            console.log('eventReceive', { event });
+            console.log("eventReceive", { event });
             event.revert();
           }}
           eventLeave={(event) => {
-            console.log('eventLeave', { event });
+            console.log("eventLeave", { event });
             event.revert();
           }}
         />

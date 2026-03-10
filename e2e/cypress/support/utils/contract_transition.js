@@ -1,4 +1,4 @@
-import { getLanguageSpecific } from '../../support/utils/utils';
+import { getLanguageSpecific } from "../../support/utils/utils";
 
 export class ContractTransition {
   constructor({ name, ...vals }) {
@@ -50,54 +50,62 @@ export class ContractTransition {
 }
 
 export class ExtensionType {
-  static ExtendOne = 'extensionType_for_first_priod';
+  static ExtendOne = "extensionType_for_first_priod";
 
-  static ExtendAll = 'extensionType_for_all_periods';
+  static ExtendAll = "extensionType_for_all_periods";
 }
 
 function applyTransition(transition) {
-  cy.visitWindow('540120', 'NEW');
+  cy.visitWindow("540120", "NEW");
 
-  cy.writeIntoStringField('Name', transition.name);
+  cy.writeIntoStringField("Name", transition.name);
 
-  cy.selectInListField('C_Calendar_Contract_ID', transition.calendar);
+  cy.selectInListField("C_Calendar_Contract_ID", transition.calendar);
 
-  cy.clearField('TermDuration');
-  cy.writeIntoStringField('TermDuration', '1'); // note: there seems to be some bug somewhere, just '1' dos not work
+  cy.clearField("TermDuration");
+  cy.writeIntoStringField("TermDuration", "1"); // note: there seems to be some bug somewhere, just '1' dos not work
 
-  cy.selectInListField('TermDurationUnit', 'Jahr');
+  cy.selectInListField("TermDurationUnit", "Jahr");
 
-  cy.clearField('TermOfNotice');
-  cy.writeIntoStringField('TermOfNotice', '1');
-  cy.selectInListField('TermOfNoticeUnit', 'Monat');
+  cy.clearField("TermOfNotice");
+  cy.writeIntoStringField("TermOfNotice", "1");
+  cy.selectInListField("TermOfNoticeUnit", "Monat");
 
-  cy.clearField('DeliveryInterval');
-  cy.writeIntoStringField('DeliveryInterval', '1');
+  cy.clearField("DeliveryInterval");
+  cy.writeIntoStringField("DeliveryInterval", "1");
 
-  cy.selectInListField('DeliveryIntervalUnit', 'Monat');
+  cy.selectInListField("DeliveryIntervalUnit", "Monat");
 
   if (transition.extensionType) {
-    cy.fixture('contract/contract_dictionary.json').then(contractDictionary => {
-      const targetType = getLanguageSpecific(contractDictionary, transition.extensionType);
-      cy.selectInListField('ExtensionType', targetType);
-    });
+    cy.fixture("contract/contract_dictionary.json").then(
+      (contractDictionary) => {
+        const targetType = getLanguageSpecific(
+          contractDictionary,
+          transition.extensionType,
+        );
+        cy.selectInListField("ExtensionType", targetType);
+      },
+    );
   }
   if (transition.nextConditions) {
-    cy.selectInListField('C_Flatrate_Conditions_Next_ID', transition.nextConditions);
+    cy.selectInListField(
+      "C_Flatrate_Conditions_Next_ID",
+      transition.nextConditions,
+    );
   }
 
   cy.pressAddNewButton();
 
-  cy.getStringFieldValue('DeadLine', true).then(deadLine => {
+  cy.getStringFieldValue("DeadLine", true).then((deadLine) => {
     // noinspection EqualityComparisonWithCoercionJS
     if (deadLine != 0) {
-      cy.clearField('DeadLine');
-      cy.writeIntoStringField('DeadLine', 0, true /*modal*/);
+      cy.clearField("DeadLine");
+      cy.writeIntoStringField("DeadLine", 0, true /*modal*/);
     }
   });
-  cy.selectInListField('DeadLineUnit', 'Tag', true /*modal*/);
-  cy.selectInListField('Action', 'Statuswechsel', true /*modal*/);
-  cy.selectInListField('ContractStatus', 'Gekündigt', true /*modal*/);
+  cy.selectInListField("DeadLineUnit", "Tag", true /*modal*/);
+  cy.selectInListField("Action", "Statuswechsel", true /*modal*/);
+  cy.selectInListField("ContractStatus", "Gekündigt", true /*modal*/);
 
   cy.pressDoneButton();
 }

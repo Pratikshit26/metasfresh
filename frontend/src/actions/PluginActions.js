@@ -1,3 +1,3 @@
-import { createAction } from 'redux-actions';
+import { createAction } from "redux-actions";
 
-export const addPlugins = createAction('ADD-PLUGINS');
+export const addPlugins = createAction("ADD-PLUGINS");

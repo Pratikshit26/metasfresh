@@ -1,5 +1,5 @@
-import { patch, post } from 'axios';
-import { createPatchRequestPayload, toSingleFieldPatchRequest } from '../utils';
+import { patch, post } from "axios";
+import { createPatchRequestPayload, toSingleFieldPatchRequest } from "../utils";
 
 /**
  * @summary Creates a new editing instance
@@ -11,7 +11,7 @@ import { createPatchRequestPayload, toSingleFieldPatchRequest } from '../utils';
 export function createAttributesEditingInstance(
   attributeType,
   templateId,
-  source
+  source,
 ) {
   return post(`${config.API_URL}/${attributeType}`, {
     templateId: templateId,
@@ -32,11 +32,11 @@ export function patchAttributes({
 
   return patch(
     `${config.API_URL}/${attributeType}/${editingInstanceId}`,
-    payload
+    payload,
   ).then((axiosResponse) =>
     axiosResponse.data && axiosResponse.data.length
       ? axiosResponse.data[0].fieldsByName
-      : {}
+      : {},
   );
 }
 
@@ -50,7 +50,7 @@ export function patchAttributes({
 export function completeAttributesEditing(
   attributeType,
   editingInstanceId,
-  fieldsByName = null
+  fieldsByName = null,
 ) {
   const requestBody = { events: [] };
   if (fieldsByName) {
@@ -62,6 +62,6 @@ export function completeAttributesEditing(
 
   return post(
     `${config.API_URL}/${attributeType}/${editingInstanceId}/complete`,
-    requestBody
+    requestBody,
   ).then((response) => response.data);
 }

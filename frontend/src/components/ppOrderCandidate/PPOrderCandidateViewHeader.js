@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { getTable, getTableId } from '../../reducers/tables';
+import React from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { getTable, getTableId } from "../../reducers/tables";
 
-import '../../assets/css/PPOrderCandidateViewHeader.scss';
-import { computeNumberOfPages } from '../../utils/tableHelpers';
+import "../../assets/css/PPOrderCandidateViewHeader.scss";
+import { computeNumberOfPages } from "../../utils/tableHelpers";
 
-export const PP_ORDER_CANDIDATE_WINDOW_ID = '541316'; // FIXME HARDCODED
-const FIELDNAME_NumberOfResources_ToProcess = 'NumberOfResources_ToProcess';
-const FIELDNAME_QtyToProcess = 'QtyToProcess';
-const FIELDNAME_QtyProcessed = 'QtyProcessed';
+export const PP_ORDER_CANDIDATE_WINDOW_ID = "541316"; // FIXME HARDCODED
+const FIELDNAME_NumberOfResources_ToProcess = "NumberOfResources_ToProcess";
+const FIELDNAME_QtyToProcess = "QtyToProcess";
+const FIELDNAME_QtyProcessed = "QtyProcessed";
 
 export const PPOrderCandidateViewHeader = ({
   windowId,
@@ -47,7 +47,7 @@ const computeFields = (table, selectedRowIds, hasMoreThanOnePage) => {
   if (table?.rows?.length && selectedRowIds?.length > 0) {
     // In case user selected all rows from all pages,
     // better don't show the sums because the sums are computed only from current page.
-    const isAllRowsSelected = selectedRowIds.includes('all');
+    const isAllRowsSelected = selectedRowIds.includes("all");
     if (isAllRowsSelected && hasMoreThanOnePage) {
       return [];
     }
@@ -68,22 +68,22 @@ const computeFields = (table, selectedRowIds, hasMoreThanOnePage) => {
           numberOfResources_ToProcess_SUM,
           extractFieldValueAsInteger(
             fieldsByName,
-            FIELDNAME_NumberOfResources_ToProcess
-          )
+            FIELDNAME_NumberOfResources_ToProcess,
+          ),
         );
 
         //
         // Qty to process
         addToQtysByUomMap(
           qtyToProcess_SUM,
-          extractFieldValueAsQty(fieldsByName, FIELDNAME_QtyToProcess)
+          extractFieldValueAsQty(fieldsByName, FIELDNAME_QtyToProcess),
         );
 
         //
         // Qty processed
         addToQtysByUomMap(
           qtyProcessed_SUM,
-          extractFieldValueAsQty(fieldsByName, FIELDNAME_QtyProcessed)
+          extractFieldValueAsQty(fieldsByName, FIELDNAME_QtyProcessed),
         );
       });
 
@@ -94,10 +94,10 @@ const computeFields = (table, selectedRowIds, hasMoreThanOnePage) => {
     if (numberOfResources_ToProcess_SUM != null) {
       const caption = getFieldCaption(
         table,
-        FIELDNAME_NumberOfResources_ToProcess
+        FIELDNAME_NumberOfResources_ToProcess,
       );
       result.push({
-        key: 'numberOfResources_ToProcess_SUM',
+        key: "numberOfResources_ToProcess_SUM",
         caption,
         value: String(numberOfResources_ToProcess_SUM),
       });
@@ -212,7 +212,7 @@ const addQtysIfNotNull = (qty1, qty2) => {
 };
 
 const formatQtyToString = (qty, precision) => {
-  return parseFloat(qty.value ?? 0).toFixed(precision) + ' ' + qty.uom;
+  return parseFloat(qty.value ?? 0).toFixed(precision) + " " + qty.uom;
 };
 
 //

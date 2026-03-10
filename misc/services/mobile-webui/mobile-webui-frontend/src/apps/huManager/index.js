@@ -11,28 +11,27 @@ import { toastError } from '../../utils/toast';
 import { APPLICATION_ID } from './constants';
 
 export const applicationDescriptor = {
-  applicationId: APPLICATION_ID,
-  routes: huManagerRoutes,
-  messages: {
-    en: messages_en,
-    de: messages_de,
-  },
-  startApplication: () => {
-    return (dispatch) => {
-      dispatch(clearLoadedData());
-      dispatch(push(huManagerLocation()));
-    };
-  },
-  startApplicationByQRCode: ({ qrCode }) => {
-    return (dispatch) => {
-      api
-        .getHUByQRCode(qrCode)
-        .then((handlingUnitInfo) => {
-          dispatch(handlingUnitLoaded({ handlingUnitInfo }));
-          dispatch(push(huManagerLocation()));
-        })
-        .catch((axiosError) => toastError({ axiosError }));
-    };
-  },
-  reduxReducer: huManagerReducer,
+    applicationId: APPLICATION_ID,
+    routes: huManagerRoutes,
+    messages: {
+        en: messages_en,
+        de: messages_de,
+    },
+    startApplication: () => {
+        return (dispatch) => {
+            dispatch(clearLoadedData());
+            dispatch(push(huManagerLocation()));
+        };
+    },
+    startApplicationByQRCode: ({ qrCode }) => {
+        return (dispatch) => {
+            api.getHUByQRCode(qrCode)
+                .then((handlingUnitInfo) => {
+                    dispatch(handlingUnitLoaded({ handlingUnitInfo }));
+                    dispatch(push(huManagerLocation()));
+                })
+                .catch((axiosError) => toastError({ axiosError }));
+        };
+    },
+    reduxReducer: huManagerReducer,
 };

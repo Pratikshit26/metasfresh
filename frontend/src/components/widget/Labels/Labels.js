@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import TetherComponent from 'react-tether';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import TetherComponent from "react-tether";
 
 import {
   autocompleteRequest,
   dropdownRequest,
-} from '../../../actions/GenericActions';
-import Label from './Label';
-import SelectionDropdown from '../SelectionDropdown';
+} from "../../../actions/GenericActions";
+import Label from "./Label";
+import SelectionDropdown from "../SelectionDropdown";
 
 /**
  * @file Class based component.
@@ -23,7 +23,7 @@ export default class Labels extends PureComponent {
     labelsUpdated: false,
   };
 
-  lastTypeAhead = '';
+  lastTypeAhead = "";
 
   /**
    * @async
@@ -149,7 +149,7 @@ export default class Labels extends PureComponent {
     this.setState({ focused: true });
 
     switch (event.key) {
-      case 'Backspace': {
+      case "Backspace": {
         this.setState({ focused: false });
         if (selected.length < 1) {
           return;
@@ -173,7 +173,7 @@ export default class Labels extends PureComponent {
         return;
       }
 
-      case 'ArrowLeft': {
+      case "ArrowLeft": {
         if (typeAhead) {
           return;
         }
@@ -183,7 +183,7 @@ export default class Labels extends PureComponent {
         return;
       }
 
-      case 'ArrowRight': {
+      case "ArrowRight": {
         if (typeAhead) {
           return;
         }
@@ -194,7 +194,7 @@ export default class Labels extends PureComponent {
       }
     }
 
-    if (['Tab', 'ArrowTop', 'ArrowBottom'].includes(event.key)) {
+    if (["Tab", "ArrowTop", "ArrowBottom"].includes(event.key)) {
       return;
     }
 
@@ -297,7 +297,7 @@ export default class Labels extends PureComponent {
    * @summary Clears the input by setting the innerHTML to an empty string
    */
   clearInput = () => {
-    this.input.innerHTML = '';
+    this.input.innerHTML = "";
   };
 
   render() {
@@ -336,7 +336,7 @@ export default class Labels extends PureComponent {
         onKeyUp={this.handleKeyUp}
         onKeyDown={this.handleKeyDown}
         tabIndex={tabIndex}
-      />
+      />,
     );
 
     return (
@@ -345,11 +345,11 @@ export default class Labels extends PureComponent {
         targetAttachment="bottom left"
         constraints={[
           {
-            to: 'scrollParent',
+            to: "scrollParent",
           },
           {
-            to: 'window',
-            pin: ['bottom'],
+            to: "window",
+            pin: ["bottom"],
           },
         ]}
         renderTarget={(ref) => (
@@ -421,5 +421,5 @@ Labels.propTypes = {
 };
 
 Labels.defaultProps = {
-  entity: 'window',
+  entity: "window",
 };

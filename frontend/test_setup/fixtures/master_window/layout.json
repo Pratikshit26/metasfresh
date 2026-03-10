@@ -730,9 +730,7 @@
         "closableMode": "ALWAYS_OPEN"
       },
       {
-        "columns": [
-          {}
-        ],
+        "columns": [{}],
         "closableMode": "ALWAYS_OPEN"
       }
     ],

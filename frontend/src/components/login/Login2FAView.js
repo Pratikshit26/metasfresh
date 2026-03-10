@@ -20,16 +20,16 @@
  * #L%
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import counterpart from 'counterpart';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from "react";
+import counterpart from "counterpart";
+import classnames from "classnames";
+import PropTypes from "prop-types";
 
 export const Login2FAView = ({ onSubmit }) => {
   const inputRef = useRef(null);
   const [pending, setPending] = useState(false);
-  const [code, setCode] = useState('');
-  const [error, setError] = useState('');
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
 
   const isSubmitEnabled = !pending && !!code;
 
@@ -56,7 +56,7 @@ export const Login2FAView = ({ onSubmit }) => {
   return (
     <div
       onKeyUp={(e) => {
-        if (!pending && e.key === 'Enter') {
+        if (!pending && e.key === "Enter") {
           fireOnSubmit(code);
         }
       }}
@@ -64,7 +64,7 @@ export const Login2FAView = ({ onSubmit }) => {
       {error && <div className="input-error">{error}</div>}
       <div>
         <div className="form-control-label">
-          <small>{counterpart.translate('login.2FA.caption')}</small>
+          <small>{counterpart.translate("login.2FA.caption")}</small>
         </div>
         <input
           ref={inputRef}
@@ -73,16 +73,16 @@ export const Login2FAView = ({ onSubmit }) => {
           onChange={(e) => {
             const code = e.target.value;
             setCode(code);
-            setError('');
+            setError("");
 
             if (code && code.length === 6) {
               fireOnSubmit(code);
             }
           }}
           name="code2FA"
-          className={classnames('input-primary input-block', {
-            'input-error': error,
-            'input-disabled': pending,
+          className={classnames("input-primary input-block", {
+            "input-error": error,
+            "input-disabled": pending,
           })}
           disabled={pending}
         />
@@ -93,7 +93,7 @@ export const Login2FAView = ({ onSubmit }) => {
           onClick={() => fireOnSubmit(code)}
           disabled={!isSubmitEnabled}
         >
-          {counterpart.translate('login.send.caption')}
+          {counterpart.translate("login.send.caption")}
         </button>
       </div>
     </div>

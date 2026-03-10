@@ -1,8 +1,8 @@
-import axios, { delete as del, get, patch, post } from 'axios';
+import axios, { delete as del, get, patch, post } from "axios";
 
-import { createPatchRequestPayload, getQueryString } from '../utils';
-import { prepareFilterForBackend } from '../utils/filterHelpers';
-import { toOrderBysCommaSeparatedString } from '../utils/windowHelpers';
+import { createPatchRequestPayload, getQueryString } from "../utils";
+import { prepareFilterForBackend } from "../utils/filterHelpers";
+import { toOrderBysCommaSeparatedString } from "../utils/windowHelpers";
 
 export function getData({
   entity,
@@ -22,22 +22,22 @@ export function getData({
   });
 
   return get(
-    `${config.API_URL}/${entity}/${docType}${viewId ? `/${viewId}` : ''}${
-      docId ? `/${docId}` : ''
-    }${tabId ? `/${tabId}` : ''}${rowId ? `/${rowId}` : ''}${
-      subentity ? `/${subentity}` : ''
-    }${subentityId ? `/${subentityId}` : ''}/${
-      queryParams ? `?${queryParams}` : ''
-    }`
+    `${config.API_URL}/${entity}/${docType}${viewId ? `/${viewId}` : ""}${
+      docId ? `/${docId}` : ""
+    }${tabId ? `/${tabId}` : ""}${rowId ? `/${rowId}` : ""}${
+      subentity ? `/${subentity}` : ""
+    }${subentityId ? `/${subentityId}` : ""}/${
+      queryParams ? `?${queryParams}` : ""
+    }`,
   );
 }
 
 export function getRowsData({ entity, docType, docId, tabId, rows }) {
   rows = rows || [];
-  const ids = rows.join(',');
+  const ids = rows.join(",");
 
   return get(
-    `${config.API_URL}/${entity}/${docType}/${docId}/${tabId}?ids=${ids}`
+    `${config.API_URL}/${entity}/${docType}/${docId}/${tabId}?ids=${ids}`,
   );
 }
 
@@ -49,27 +49,27 @@ export function getLayout(
   docId = null,
   isAdvanced,
   list,
-  supportTree
+  supportTree,
 ) {
   return get(`${config.API_URL}/${entity}/${docType}${
-    docId ? `/${docId}` : ''
-  }${tabId ? `/${tabId}` : ''}${subentity ? `/${subentity}` : ''}/layout${
-    isAdvanced ? '?advanced=true' : ''
-  }${list ? `?viewType=${list}` : ''}${supportTree ? '&supportTree=true' : ''}
+    docId ? `/${docId}` : ""
+  }${tabId ? `/${tabId}` : ""}${subentity ? `/${subentity}` : ""}/layout${
+    isAdvanced ? "?advanced=true" : ""
+  }${list ? `?viewType=${list}` : ""}${supportTree ? "&supportTree=true" : ""}
   `);
 }
 
 export function getViewLayout(windowId, viewType, viewProfileId = null) {
   return get(
     `${config.API_URL}/documentView/${windowId}/layout?viewType=${viewType}${
-      viewProfileId ? `&profileId=${viewProfileId}` : ''
-    }`
+      viewProfileId ? `&profileId=${viewProfileId}` : ""
+    }`,
   );
 }
 
 export function getViewRowsByIds(windowId, viewId, docIds) {
   return get(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/byIds?ids=${docIds}`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/byIds?ids=${docIds}`,
   );
 }
 
@@ -81,7 +81,7 @@ export const getViewFieldDropdown = ({
 }) => {
   const rowIdEncoded = encodeURIComponent(rowId);
   return axios.get(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowIdEncoded}/edit/${fieldName}/dropdown`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowIdEncoded}/edit/${fieldName}/dropdown`,
   );
 };
 
@@ -95,7 +95,7 @@ export const getViewFieldTypeahead = ({
   const rowIdEncoded = encodeURIComponent(rowId);
   const queryParams = getQueryString({ query });
   return axios.get(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowIdEncoded}/edit/${fieldName}/typeahead?${queryParams}`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowIdEncoded}/edit/${fieldName}/typeahead?${queryParams}`,
   );
 };
 
@@ -109,7 +109,7 @@ export const patchModalView = ({
   const rowIdEncoded = encodeURIComponent(rowId);
   return patch(
     `${config.API_URL}/documentView/${windowId}/${viewId}/${rowIdEncoded}/edit`,
-    createPatchRequestPayload(fieldName, value)
+    createPatchRequestPayload(fieldName, value),
   ).then((rawResponse) => rawResponse.data);
 };
 
@@ -131,22 +131,22 @@ export function patchRequest({
 }) {
   const rowIdEncoded = rowId != null ? encodeURIComponent(rowId) : null;
   const payload =
-    docId !== 'NEW' ? createPatchRequestPayload(property, value) : [];
+    docId !== "NEW" ? createPatchRequestPayload(property, value) : [];
 
   return patch(
     config.API_URL +
-      '/' +
+      "/" +
       entity +
-      (docType ? '/' + docType : '') +
-      (viewId ? '/' + viewId : '') +
-      (docId ? '/' + docId : '') +
-      (tabId ? '/' + tabId : '') +
-      (rowIdEncoded ? '/' + rowIdEncoded : '') +
-      (subentity ? '/' + subentity : '') +
-      (subentityId ? '/' + subentityId : '') +
-      (isAdvanced ? '?advanced=true' : '') +
-      (isEdit ? '/edit' : ''),
-    payload
+      (docType ? "/" + docType : "") +
+      (viewId ? "/" + viewId : "") +
+      (docId ? "/" + docId : "") +
+      (tabId ? "/" + tabId : "") +
+      (rowIdEncoded ? "/" + rowIdEncoded : "") +
+      (subentity ? "/" + subentity : "") +
+      (subentityId ? "/" + subentityId : "") +
+      (isAdvanced ? "?advanced=true" : "") +
+      (isEdit ? "/edit" : ""),
+    payload,
   ).then((rawResponse) => {
     // this is fixed on the FE because the BE is not consistent in sending the `documents` key with every PATCH request
     // this differs when patch is done within processes for example
@@ -168,7 +168,7 @@ export function browseViewRequest({
   return get(
     `${config.API_URL}/documentView/${windowId}/${viewId}?firstRow=${
       pageLength * (page - 1)
-    }&pageLength=${pageLength}${orderBy ? `&orderBy=${orderBy}` : ''}`
+    }&pageLength=${pageLength}${orderBy ? `&orderBy=${orderBy}` : ""}`,
   );
 }
 
@@ -218,7 +218,7 @@ export function filterViewRequest(windowId, viewId, filters) {
 
 export function locationSearchRequest({ windowId, viewId }) {
   return get(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/geoLocations?limit=0`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/geoLocations?limit=0`,
   );
 }
 
@@ -234,14 +234,14 @@ export function headerPropertiesRequest({ windowId, viewId }) {
 export function deleteViewRequest(windowId, viewId, action) {
   return del(
     `${config.API_URL}/documentView/${windowId}/${viewId}${
-      action ? `?action=${action}` : ''
-    }`
+      action ? `?action=${action}` : ""
+    }`,
   );
 }
 
 export function deleteStaticFilter(windowId, viewId, filterId) {
   return del(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/staticFilter/${filterId}`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/staticFilter/${filterId}`,
   );
 }
 
@@ -299,7 +299,7 @@ export function quickActionsRequest({
 
   return post(
     `${config.API_URL}/documentView/${windowId}/${viewId}/quickActions`,
-    requestBody
+    requestBody,
   );
 }
 
@@ -325,7 +325,7 @@ export function advSearchRequest({
     {
       advSearchWindowId,
       selectedId,
-    }
+    },
   );
 }
 
@@ -339,7 +339,7 @@ export function advSearchRequest({
  */
 export function getViewAttributesLayoutRequest(windowId, viewId, rowId) {
   return get(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowId}/attributes/layout`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowId}/attributes/layout`,
   );
 }
 
@@ -353,7 +353,7 @@ export function getViewAttributesLayoutRequest(windowId, viewId, rowId) {
  */
 export function getViewAttributesRequest(windowId, viewId, rowId) {
   return get(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowId}/attributes`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowId}/attributes`,
   );
 }
 
@@ -372,13 +372,13 @@ export function patchViewAttributesRequest(
   viewId,
   rowId,
   property,
-  value
+  value,
 ) {
   const payload = createPatchRequestPayload(property, value);
 
   return patch(
     `${config.API_URL}/documentView/${windowId}/${viewId}/${rowId}/attributes`,
-    payload
+    payload,
   );
 }
 
@@ -393,7 +393,7 @@ export function patchViewAttributesRequest(
  */
 export function getViewAttributeDropdown(windowId, viewId, rowId, attribute) {
   return get(
-    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowId}/attributes/attribute/${attribute}/dropdown`
+    `${config.API_URL}/documentView/${windowId}/${viewId}/${rowId}/attributes/attribute/${attribute}/dropdown`,
   );
 }
 
@@ -412,14 +412,14 @@ export function getViewAttributeTypeahead(
   viewId,
   rowId,
   attribute,
-  query
+  query,
 ) {
   return get(`
     ${
       config.API_URL
     }/documentView/${windowId}/${viewId}/${rowId}/attributes/attribute/${attribute}/typeahead?query=${encodeURIComponent(
-    query
-  )}`);
+      query,
+    )}`);
 }
 
 export const getViewFilterParameterDropdown = ({
@@ -433,7 +433,7 @@ export const getViewFilterParameterDropdown = ({
     `${config.API_URL}/documentView/${windowId}/${viewId}/filter/${filterId}/field/${parameterName}/dropdown`,
     {
       context,
-    }
+    },
   );
 };
 
@@ -450,6 +450,6 @@ export const getViewFilterParameterTypeahead = ({
     {
       query: query,
       context,
-    }
+    },
   );
 };

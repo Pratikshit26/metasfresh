@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
-import { last, uniqueId } from 'lodash';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { last, uniqueId } from "lodash";
 
-import { activateTab, unselectTab } from '../../actions/WindowActions';
-import Tab from './Tab';
+import { activateTab, unselectTab } from "../../actions/WindowActions";
+import Tab from "./Tab";
 
 const TabSingleEntry = (props) => (
   // eslint-disable-next-line react/prop-types
@@ -26,19 +26,19 @@ class Tabs extends PureComponent {
   }
 
   componentDidMount = () => {
-    this.props.dispatch(activateTab('master', last(this.state.selected)));
+    this.props.dispatch(activateTab("master", last(this.state.selected)));
   };
 
   componentDidUpdate = (prevProps, prevState) => {
     const { dispatch } = this.props;
 
     if (prevState.tabsVersionId !== this.state.tabsVersionId) {
-      dispatch(activateTab('master', last(this.state.selected)));
+      dispatch(activateTab("master", last(this.state.selected)));
     }
   };
 
   componentWillUnmount() {
-    this.props.dispatch(unselectTab('master'));
+    this.props.dispatch(unselectTab("master"));
   }
 
   getSelected = (tab, selected, reverse) => {
@@ -80,7 +80,7 @@ class Tabs extends PureComponent {
   };
 
   handlePillKeyDown = (e, key) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       this.handleClick(e, key);
     }
   };
@@ -112,7 +112,7 @@ class Tabs extends PureComponent {
       <li
         id={`tab_${item.internalName}`}
         className="nav-item"
-        key={'tab-' + item.tabId}
+        key={"tab-" + item.tabId}
         onClick={(e) => this.handleClick(e, item.tabId)}
         tabIndex={modalVisible ? -1 : tabIndex}
         onKeyDown={(e) => this.handlePillKeyDown(e, item.tabId)}
@@ -120,7 +120,7 @@ class Tabs extends PureComponent {
         title={item.description || item.caption}
       >
         <a
-          className={classnames('nav-link', {
+          className={classnames("nav-link", {
             active: selected.indexOf(item.tabId) > -1,
           })}
         >
@@ -131,7 +131,7 @@ class Tabs extends PureComponent {
   };
 
   renderPills = (pills) => {
-    const maxWidth = 95 / pills.length + '%';
+    const maxWidth = 95 / pills.length + "%";
     const { selected } = this.state;
     const nestedPills = [];
 
@@ -161,7 +161,7 @@ class Tabs extends PureComponent {
           item.props;
 
         return (
-          <div key={'pane-' + item.key} className="tab-pane active">
+          <div key={"pane-" + item.key} className="tab-pane active">
             <Tab
               {...{
                 queryOnActivate,
@@ -192,8 +192,8 @@ class Tabs extends PureComponent {
 
     return (
       <div
-        className={classnames('mb-1', {
-          'tabs-fullscreen container-fluid': fullScreen,
+        className={classnames("mb-1", {
+          "tabs-fullscreen container-fluid": fullScreen,
         })}
       >
         {this.renderPills(tabs)}

@@ -1,23 +1,23 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import React from "react";
+import { shallow, mount } from "enzyme";
 
-import tableHeaderProps from '../../../../test_setup/fixtures/table/table_header.json';
+import tableHeaderProps from "../../../../test_setup/fixtures/table/table_header.json";
 
-import TableHeader from '../../../components/table/TableHeader';
+import TableHeader from "../../../components/table/TableHeader";
 
 const props = {
   ...tableHeaderProps,
   selected: [],
 };
 
-describe('TableHeader', () => {
-  it('renders without errors with the given props', () => {
+describe("TableHeader", () => {
+  it("renders without errors with the given props", () => {
     const wrapperTableCMenu = shallow(
       <table>
         <thead>
           <TableHeader {...props} />
         </thead>
-      </table>
+      </table>,
     );
     const html = wrapperTableCMenu.html();
 
@@ -30,7 +30,7 @@ describe('TableHeader', () => {
     expect(html).toContain(`<th class="td-md">Organisation</th>`);
   });
 
-  it('should have indent present', () => {
+  it("should have indent present", () => {
     const localProps = {
       ...props,
       indentSupported: true,
@@ -41,14 +41,14 @@ describe('TableHeader', () => {
         <thead>
           <TableHeader {...localProps} />
         </thead>
-      </table>
+      </table>,
     );
     const html = wrapperTableCMenu.html();
 
     expect(html).toContain(`<th class="indent"></th>`);
   });
 
-  it('should call `onTableSort` when cell is clicked', () => {
+  it("should call `onTableSort` when cell is clicked", () => {
     const onSortTableSpy = jest.fn();
     const localProps = {
       ...props,
@@ -62,13 +62,19 @@ describe('TableHeader', () => {
         <thead>
           <TableHeader {...localProps} />
         </thead>
-      </table>
+      </table>,
     );
     const html = wrapper.html();
 
-    expect(html).toContain('sort-menu');
-    expect(wrapper.find(`.th-caption[title="${tableHeaderProps.cols[0].description}"]`).length).toBe(1);
-    wrapper.find(`.th-caption[title="${tableHeaderProps.cols[0].description}"]`).simulate('click')
+    expect(html).toContain("sort-menu");
+    expect(
+      wrapper.find(
+        `.th-caption[title="${tableHeaderProps.cols[0].description}"]`,
+      ).length,
+    ).toBe(1);
+    wrapper
+      .find(`.th-caption[title="${tableHeaderProps.cols[0].description}"]`)
+      .simulate("click");
     expect(onSortTableSpy).toHaveBeenCalled();
   });
 });

@@ -30,13 +30,13 @@ export class BoilerPlate {
   }
 }
 function applyBoilerPlate(boilerPlate) {
-  describe(`Create new BoilerPlate ${boilerPlate.name}`, function() {
-    cy.visitWindow(504410, 'NEW');
-    cy.writeIntoStringField('Name', boilerPlate.name);
-    cy.writeIntoStringField('Subject', boilerPlate.subject);
-    cy.writeIntoTextField('TextSnippet', boilerPlate.subject);
+  describe(`Create new BoilerPlate ${boilerPlate.name}`, function () {
+    cy.visitWindow(504410, "NEW");
+    cy.writeIntoStringField("Name", boilerPlate.name);
+    cy.writeIntoStringField("Subject", boilerPlate.subject);
+    cy.writeIntoTextField("TextSnippet", boilerPlate.subject);
     if (this.jasperProcess) {
-      cy.selectInListField('JasperProcess_ID', this.jasperProcess);
+      cy.selectInListField("JasperProcess_ID", this.jasperProcess);
     }
   });
 }

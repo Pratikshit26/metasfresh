@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import BarcodeScanner from './BarcodeScanner';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import BarcodeScanner from "./BarcodeScanner";
+import PropTypes from "prop-types";
 
-import currentDevice from 'current-device';
+import currentDevice from "current-device";
 
 /* @file HOC function
  * addBarcodeScanner wraps the underlying component adding Barcode scanner. The wrapped component
@@ -41,7 +41,7 @@ function addBarcodeScanner(WrappedComponent) {
           ? props.layout.barcodeScannerType
           : null;
 
-      const scanning = barcodeScannerType && currentDevice.type === 'mobile';
+      const scanning = barcodeScannerType && currentDevice.type === "mobile";
 
       this.state = {
         barcodeScannerType: barcodeScannerType,
@@ -56,7 +56,7 @@ function addBarcodeScanner(WrappedComponent) {
      */
     scanBarcode = (val) => {
       this.setState({
-        scanning: typeof val !== 'undefined' ? val : !this.state.scanning,
+        scanning: typeof val !== "undefined" ? val : !this.state.scanning,
         codeSelected: null,
       });
     };
@@ -94,10 +94,10 @@ function addBarcodeScanner(WrappedComponent) {
               barcodeScannerType={barcodeScannerType}
               onDetected={this.onBarcodeDetected}
               onClose={(val) => {
-                const value = typeof val !== 'undefined' ? val : false;
+                const value = typeof val !== "undefined" ? val : false;
                 this.scanBarcode(value);
 
-                if (currentDevice.type === 'mobile') {
+                if (currentDevice.type === "mobile") {
                   closeOverlay();
                 }
               }}

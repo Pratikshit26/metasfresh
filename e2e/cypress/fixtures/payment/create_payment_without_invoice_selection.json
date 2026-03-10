@@ -1,8 +1,8 @@
 {
-    "paymentDocumentType": "Zahlungseingang",
-    "bPartnerName": "BPartner",
-    "discountSchemaName": "DiscountSchemaTest",
-    "accountNo1060": "1060",
-    "accountNo1106": "1106",
-    "currency": "CHF"
+  "paymentDocumentType": "Zahlungseingang",
+  "bPartnerName": "BPartner",
+  "discountSchemaName": "DiscountSchemaTest",
+  "accountNo1060": "1060",
+  "accountNo1106": "1106",
+  "currency": "CHF"
 }

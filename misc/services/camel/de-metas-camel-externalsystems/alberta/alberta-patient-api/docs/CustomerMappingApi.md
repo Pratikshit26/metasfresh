@@ -2,12 +2,14 @@
 
 All URIs are relative to *https://virtserver.swaggerhub.com/it-labs.de/PatientWawi/1.0.1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getCustomerMapping**](CustomerMappingApi.md#getCustomerMapping) | **GET** /patient/customerMapping | Zuordnung Kunde (WaWi) zu Patient (Alberta) abrufen
+| Method                                                             | HTTP request                     | Description                                         |
+| ------------------------------------------------------------------ | -------------------------------- | --------------------------------------------------- |
+| [**getCustomerMapping**](CustomerMappingApi.md#getCustomerMapping) | **GET** /patient/customerMapping | Zuordnung Kunde (WaWi) zu Patient (Alberta) abrufen |
 
 <a name="getCustomerMapping"></a>
+
 # **getCustomerMapping**
+
 > CustomerMapping getCustomerMapping(albertaApiKey, customerId)
 
 Zuordnung Kunde (WaWi) zu Patient (Alberta) abrufen
@@ -15,6 +17,7 @@ Zuordnung Kunde (WaWi) zu Patient (Alberta) abrufen
 Szenario - das WaWi fragt bei Alberta nach, welche Alberta-Id dem jeweiligen Kunden zugeordnet ist
 
 ### Example
+
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
@@ -22,7 +25,7 @@ Szenario - das WaWi fragt bei Alberta nach, welche Alberta-Id dem jeweiligen Kun
 
 
 CustomerMappingApi apiInstance = new CustomerMappingApi();
-String albertaApiKey = "albertaApiKey_example"; // String | 
+String albertaApiKey = "albertaApiKey_example"; // String |
 String customerId = "customerId_example"; // String | die Id des Kunden aus dem WaWi
 try {
     CustomerMapping result = apiInstance.getCustomerMapping(albertaApiKey, customerId);
@@ -35,10 +38,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **albertaApiKey** | **String**|  |
- **customerId** | **String**| die Id des Kunden aus dem WaWi |
+| Name              | Type       | Description                    | Notes |
+| ----------------- | ---------- | ------------------------------ | ----- |
+| **albertaApiKey** | **String** |                                |
+| **customerId**    | **String** | die Id des Kunden aus dem WaWi |
 
 ### Return type
 
@@ -50,6 +53,5 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
-
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/xml

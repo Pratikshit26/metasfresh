@@ -23,12 +23,12 @@ export class PaymentTerm {
   }
 
   apply() {
-    cy.visitWindow('141', 'NEW');
-    this.fillField('Name', this.name);
-    this.fillField('Value', this.name);
-    this.fillField('NetDays', this.netDays);
-    this.fillField('GraceDays', this.graceDays);
-    cy.getCheckboxValue('IsValid').then(isValidValue => {
+    cy.visitWindow("141", "NEW");
+    this.fillField("Name", this.name);
+    this.fillField("Value", this.name);
+    this.fillField("NetDays", this.netDays);
+    this.fillField("GraceDays", this.graceDays);
+    cy.getCheckboxValue("IsValid").then((isValidValue) => {
       expect(isValidValue).to.equal(true);
     });
     return this;

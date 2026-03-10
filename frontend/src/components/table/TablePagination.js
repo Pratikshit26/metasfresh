@@ -1,9 +1,9 @@
-import counterpart from 'counterpart';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import counterpart from "counterpart";
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
-import PaginationContextShortcuts from '../keyshortcuts/PaginationContextShortcuts';
+import PaginationContextShortcuts from "../keyshortcuts/PaginationContextShortcuts";
 
 class TablePagination extends PureComponent {
   static defaultProps = {
@@ -15,14 +15,14 @@ class TablePagination extends PureComponent {
     this.state = {
       firstDotsState: false,
       secondDotsState: false,
-      value: '',
+      value: "",
     };
   }
 
   handleValue = (e) => {
     e.preventDefault();
     this.setState({
-      value: e.target.value ? e.target.value : '',
+      value: e.target.value ? e.target.value : "",
     });
   };
 
@@ -31,17 +31,17 @@ class TablePagination extends PureComponent {
       this.props;
     const selectedWholePage = selected && selected.length === rowLength;
 
-    return selectedWholePage ? handleSelectRange(['all']) : handleSelectAll();
+    return selectedWholePage ? handleSelectRange(["all"]) : handleSelectAll();
   };
 
   handleSubmit = (e, value, pages) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
 
       if (value <= pages && value > 0) {
         this.handleChangePage(Number(value));
         this.setState({
-          value: '',
+          value: "",
           secondDotsState: false,
           firstDotsState: false,
         });
@@ -59,7 +59,7 @@ class TablePagination extends PureComponent {
         if (!firstDotsState) {
           this.goToPage.focus();
         }
-      }
+      },
     );
   };
 
@@ -73,7 +73,7 @@ class TablePagination extends PureComponent {
         if (!secondDotsState) {
           this.goToPage.focus();
         }
-      }
+      },
     );
   };
 
@@ -93,7 +93,7 @@ class TablePagination extends PureComponent {
   renderGoToPage = (pages, value) => {
     return (
       <div className="page-dots-open">
-        <span>{counterpart.translate('view.goTo.caption')}</span>
+        <span>{counterpart.translate("view.goTo.caption")}</span>
         <input
           type="number"
           min="1"
@@ -121,27 +121,27 @@ class TablePagination extends PureComponent {
         }}
       >
         <a
-          className={classnames('page-link', {
-            'page-link-compressed': compressed,
+          className={classnames("page-link", {
+            "page-link-compressed": compressed,
           })}
         >
           {1}
         </a>
-      </li>
+      </li>,
     );
 
     pagination.push(
       <li className="page-item page-dots" key={0}>
         {firstDotsState && this.renderGoToPage(pages, value)}
         <a
-          className={classnames('page-link', {
-            'page-link-compressed': compressed,
+          className={classnames("page-link", {
+            "page-link-compressed": compressed,
           })}
           onClick={() => this.handleFirstDotsState()}
         >
-          {'...'}
+          {"..."}
         </a>
-      </li>
+      </li>,
     );
   };
 
@@ -153,14 +153,14 @@ class TablePagination extends PureComponent {
       <li className="page-item page-dots" key={99990}>
         {secondDotsState && this.renderGoToPage(pages, value)}
         <a
-          className={classnames('page-link', {
-            'page-link-compressed': compressed,
+          className={classnames("page-link", {
+            "page-link-compressed": compressed,
           })}
           onClick={() => this.handleSecondDotsState()}
         >
-          {'...'}
+          {"..."}
         </a>
-      </li>
+      </li>,
     );
     pagination.push(
       <li
@@ -172,13 +172,13 @@ class TablePagination extends PureComponent {
         }}
       >
         <a
-          className={classnames('page-link', {
-            'page-link-compressed': compressed,
+          className={classnames("page-link", {
+            "page-link-compressed": compressed,
           })}
         >
           {pages}
         </a>
-      </li>
+      </li>,
     );
   };
 
@@ -188,7 +188,7 @@ class TablePagination extends PureComponent {
     for (let i = start; i <= end; i++) {
       pagination.push(
         <li
-          className={classnames('page-item js-not-unselect', {
+          className={classnames("page-item js-not-unselect", {
             active: page === i,
           })}
           key={i}
@@ -198,13 +198,13 @@ class TablePagination extends PureComponent {
           }}
         >
           <a
-            className={classnames('page-link', {
-              'page-link-compressed': compressed,
+            className={classnames("page-link", {
+              "page-link-compressed": compressed,
             })}
           >
             {i}
           </a>
-        </li>
+        </li>,
       );
     }
   };
@@ -215,7 +215,7 @@ class TablePagination extends PureComponent {
     return (
       <div className="hidden-sm-down">
         <div>
-          {counterpart.translate('view.totalItems.caption')} {size}
+          {counterpart.translate("view.totalItems.caption")} {size}
           {queryLimitHit && <span className="text-danger"> (limited)</span>}
         </div>
       </div>
@@ -231,10 +231,10 @@ class TablePagination extends PureComponent {
       <div className="hidden-sm-down js-not-unselect">
         <div>
           {selected.length > 0
-            ? counterpart.translate('view.itemsSelected.caption', {
-                size: selected[0] === 'all' ? size : selected.length,
+            ? counterpart.translate("view.itemsSelected.caption", {
+                size: selected[0] === "all" ? size : selected.length,
               })
-            : counterpart.translate('view.noItemSelected.caption')}
+            : counterpart.translate("view.noItemSelected.caption")}
         </div>
         <div
           className="pagination-link pointer"
@@ -242,10 +242,10 @@ class TablePagination extends PureComponent {
           title="Alt+A"
         >
           {selectedWholePage && isShowSelectAllItems
-            ? counterpart.translate('view.selectAllItems.caption', {
+            ? counterpart.translate("view.selectAllItems.caption", {
                 size: size,
               })
-            : counterpart.translate('view.selectAllOnPage.caption')}
+            : counterpart.translate("view.selectAllOnPage.caption")}
         </div>
       </div>
     );
@@ -263,23 +263,23 @@ class TablePagination extends PureComponent {
 
     return (
       <li
-        className={classnames('page-item', {
+        className={classnames("page-item", {
           inactive: disabled,
         })}
       >
         <a
-          className={classnames('page-link', {
-            'page-link-compressed': compressed,
+          className={classnames("page-link", {
+            "page-link-compressed": compressed,
             disabled: disabled,
           })}
           onClick={() => {
             if (!disabled) {
               this.resetGoToPage();
-              this.handleChangePage(left ? 'down' : 'up');
+              this.handleChangePage(left ? "down" : "up");
             }
           }}
         >
-          <span>{left ? '«' : '»'}</span>
+          <span>{left ? "«" : "»"}</span>
         </a>
       </li>
     );
@@ -294,8 +294,8 @@ class TablePagination extends PureComponent {
         handleFirstPage: () => this.handleChangePage(1),
         handleLastPage: () =>
           this.handleChangePage(size ? Math.ceil(size / pageLength) : 0),
-        handleNextPage: () => this.handleChangePage('up'),
-        handlePrevPage: () => this.handleChangePage('down'),
+        handleNextPage: () => this.handleChangePage("up"),
+        handlePrevPage: () => this.handleChangePage("down"),
         pages: pages,
       }
     );

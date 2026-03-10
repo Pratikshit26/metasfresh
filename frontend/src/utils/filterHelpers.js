@@ -1,14 +1,14 @@
-import Moment from 'moment';
+import Moment from "moment";
 
-import { DATE_FIELD_TYPES, DATE_FORMAT } from '../constants/Constants';
-import { deepUnfreeze } from './index';
-import { fieldValueToString } from './tableHelpers';
-import { getFormatForDateField, getFormattedDate } from './widgetHelpers';
+import { DATE_FIELD_TYPES, DATE_FORMAT } from "../constants/Constants";
+import { deepUnfreeze } from "./index";
+import { fieldValueToString } from "./tableHelpers";
+import { getFormatForDateField, getFormattedDate } from "./widgetHelpers";
 
 function formatFilterParameter(filterParameter, filterData) {
   const { parameterName, value, valueTo } = filterParameter;
   const dataFilterParameter = filterData.parameters.find(
-    (param) => param.parameterName === parameterName
+    (param) => param.parameterName === parameterName,
   );
   const { widgetType } = dataFilterParameter;
 
@@ -46,7 +46,7 @@ export function formatFilters({ filtersData, filtersActive = [] }) {
 
     if (filter.parameters && filter.parameters.length) {
       filter.parameters = filter.parameters.map((parameter) =>
-        formatFilterParameter(parameter, filterData)
+        formatFilterParameter(parameter, filterData),
       );
     }
 
@@ -95,7 +95,7 @@ export function populateFiltersCaptions(filters) {
 
     filtersActive.forEach((filter, filterIdx) => {
       const { filterId } = filter;
-      let captionsArray = ['', ''];
+      let captionsArray = ["", ""];
 
       if (filter.parameters && filter.parameters.length) {
         filter.parameters.forEach((filterParameter) => {
@@ -111,46 +111,46 @@ export function populateFiltersCaptions(filters) {
             });
 
             const filterParameter = parentFilter.parameters.find(
-              (param) => param.parameterName === parameterName
+              (param) => param.parameterName === parameterName,
             );
             let captionName = filterParameter.caption;
             let itemCaption = filterParameter.caption;
 
             switch (filterParameter.widgetType) {
-              case 'Text':
+              case "Text":
                 captionName = value;
 
                 if (!value) {
-                  captionName = '';
-                  itemCaption = '';
+                  captionName = "";
+                  itemCaption = "";
                 }
                 break;
-              case 'Lookup':
-              case 'List':
+              case "Lookup":
+              case "List":
                 captionName = value && value.caption;
                 break;
-              case 'Labels':
+              case "Labels":
                 captionName = value.values.reduce((caption, item) => {
                   return caption
                     ? `${caption}, ${item.caption}`
                     : `${item.caption}`;
-                }, '');
+                }, "");
                 break;
-              case 'YesNo':
+              case "YesNo":
                 if (value === null) {
-                  captionName = '';
-                  itemCaption = '';
+                  captionName = "";
+                  itemCaption = "";
                 } else if (value === false) {
                   // TODO: introduce AD_Process_Param.NameWhenNotSet and propagate it to FE
-                  captionName = 'Not ' + filterParameter.caption;
+                  captionName = "Not " + filterParameter.caption;
                   itemCaption = captionName;
                 }
                 break;
-              case 'Switch':
+              case "Switch":
               default:
                 if (!value && !valueTo) {
-                  captionName = '';
-                  itemCaption = '';
+                  captionName = "";
+                  itemCaption = "";
                 }
                 break;
             }
@@ -186,7 +186,7 @@ export function populateFiltersCaptions(filters) {
         captionsArray = [originalFilter.caption, originalFilter.caption];
       }
 
-      if (captionsArray.join('').length) {
+      if (captionsArray.join("").length) {
         filtersCaptions[filterId] = captionsArray;
         filtersCaptions[filterIdx] = captionsArray;
       }
@@ -254,10 +254,10 @@ export function isFilterActive({ filterId, filtersActive }) {
   if (filtersActive) {
     // filters with only defaultValues shouldn't be set to active
     const active = filtersActive.find(
-      (item) => item.filterId === filterId && !item.defaultVal
+      (item) => item.filterId === filterId && !item.defaultVal,
     );
 
-    return typeof active !== 'undefined';
+    return typeof active !== "undefined";
   }
 
   return false;
@@ -288,7 +288,7 @@ export function annotateFilters({ unannotatedFilters, filtersActive }) {
     const filterType =
       unannotatedFilter.parameters && activeParameter
         ? unannotatedFilter.parameters.find(
-            (filter) => filter.parameterName === activeParameter.parameterName
+            (filter) => filter.parameterName === activeParameter.parameterName,
           )
         : parameter && parameter.widgetType;
 
@@ -299,7 +299,7 @@ export function annotateFilters({ unannotatedFilters, filtersActive }) {
             : activeParameter.value,
           fieldType: filterType,
         })
-      : '';
+      : "";
 
     return {
       ...unannotatedFilter,
@@ -333,8 +333,8 @@ export function normalizeFilterValue(params) {
   return params.reduce((acc, param) => {
     acc.push({
       ...param,
-      value: param.value === '' ? null : param.value,
-      valueTo: param.valueTo === '' ? null : param.valueTo,
+      value: param.value === "" ? null : param.value,
+      valueTo: param.valueTo === "" ? null : param.valueTo,
     });
 
     return acc;
@@ -373,7 +373,7 @@ export const prepareParameterValueForBackend = ({
 }) => {
   let valuePrepared = value;
 
-  if (widgetType === 'Date' && valuePrepared) {
+  if (widgetType === "Date" && valuePrepared) {
     valuePrepared = Moment(valuePrepared).format(DATE_FORMAT);
   }
 

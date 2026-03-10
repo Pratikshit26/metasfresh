@@ -20,10 +20,10 @@
  * #L%
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import counterpart from 'counterpart';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from "react";
+import counterpart from "counterpart";
+import classnames from "classnames";
+import PropTypes from "prop-types";
 
 export const LoginUserAndPasswordView = ({
   onSubmit,
@@ -32,9 +32,9 @@ export const LoginUserAndPasswordView = ({
   const usernameRef = useRef(null);
 
   const [pending, setPending] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const isSubmitEnabled = !pending && !!username && !!password;
 
@@ -61,7 +61,7 @@ export const LoginUserAndPasswordView = ({
   return (
     <div
       onKeyUp={(e) => {
-        if (!pending && e.key === 'Enter') {
+        if (!pending && e.key === "Enter") {
           fireOnSubmit();
         }
       }}
@@ -69,7 +69,7 @@ export const LoginUserAndPasswordView = ({
       {error && <div className="input-error">{error}</div>}
       <div>
         <div className="form-control-label">
-          <small>{counterpart.translate('login.caption')}</small>
+          <small>{counterpart.translate("login.caption")}</small>
         </div>
         <input
           ref={usernameRef}
@@ -77,20 +77,20 @@ export const LoginUserAndPasswordView = ({
           value={username}
           onChange={(e) => {
             e.preventDefault();
-            setError('');
+            setError("");
             setUsername(e.target.value);
           }}
           name="username"
-          className={classnames('input-primary input-block', {
-            'input-error': error,
-            'input-disabled': pending,
+          className={classnames("input-primary input-block", {
+            "input-error": error,
+            "input-disabled": pending,
           })}
           disabled={pending}
         />
       </div>
       <div>
         <div className="form-control-label">
-          <small>{counterpart.translate('login.password.caption')}</small>
+          <small>{counterpart.translate("login.password.caption")}</small>
         </div>
         <input
           type="password"
@@ -98,12 +98,12 @@ export const LoginUserAndPasswordView = ({
           value={password}
           onChange={(e) => {
             e.preventDefault();
-            setError('');
+            setError("");
             setPassword(e.target.value);
           }}
-          className={classnames('input-primary input-block', {
-            'input-error': error,
-            'input-disabled': pending,
+          className={classnames("input-primary input-block", {
+            "input-error": error,
+            "input-disabled": pending,
           })}
           disabled={pending}
         />
@@ -114,12 +114,12 @@ export const LoginUserAndPasswordView = ({
           onClick={fireOnSubmit}
           disabled={pending}
         >
-          {counterpart.translate('login.callToAction')}
+          {counterpart.translate("login.callToAction")}
         </button>
       </div>
       <div className="mt-2 text-center">
         <a className="forgot-password-link" onClick={onForgotPasswordClicked}>
-          {counterpart.translate('login.forgotPassword.caption')}
+          {counterpart.translate("login.forgotPassword.caption")}
         </a>
       </div>
     </div>

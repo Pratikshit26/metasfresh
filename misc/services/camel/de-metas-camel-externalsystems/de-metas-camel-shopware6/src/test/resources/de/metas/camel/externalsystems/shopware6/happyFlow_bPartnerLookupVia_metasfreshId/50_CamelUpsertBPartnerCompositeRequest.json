@@ -12,8 +12,8 @@
             "companyName": "company",
             "customer": true,
             "priceListId": 121,
-            "group":"test_group",
-            "groupSet":true,
+            "group": "test_group",
+            "groupSet": true,
             "vatId": "vatId12",
             "vatIdSet": true,
             "syncAdvise": {
@@ -34,7 +34,7 @@
                   "countryCode": "DE",
                   "shipTo": false,
                   "billTo": true,
-                  "bpartnerName":"company, firstName lastName",
+                  "bpartnerName": "company, firstName lastName",
                   "phone": "phoneNumber",
                   "email": "billingEmailAddress@example.com"
                 }
@@ -50,7 +50,7 @@
                   "countryCode": "DE",
                   "shipTo": true,
                   "billTo": false,
-                  "bpartnerName":"company, firstName lastName",
+                  "bpartnerName": "company, firstName lastName",
                   "phone": "phoneNumber",
                   "email": "shippingOrderAddress@example.com"
                 }

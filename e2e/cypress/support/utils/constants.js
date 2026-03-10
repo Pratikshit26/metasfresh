@@ -1,17 +1,17 @@
 export class DocumentStatusKey {
-  static Completed = 'docStatusCompleted';
-  static Reversed = 'docStatusReversed';
+  static Completed = "docStatusCompleted";
+  static Reversed = "docStatusReversed";
   // noinspection JSUnusedGlobalSymbols
-  static Voided = 'docStatusVoided';
-  static InProgress = 'docStatusInProgress';
-  static Drafted = 'docStatusDrafted';
+  static Voided = "docStatusVoided";
+  static InProgress = "docStatusInProgress";
+  static Drafted = "docStatusDrafted";
 }
 
 export class DocumentActionKey {
-  static Complete = 'docActionComplete';
-  static Void = 'docActionVoid';
-  static Reactivate = 'docActionReactivate';
-  static Reverse = 'docActionReverse';
+  static Complete = "docActionComplete";
+  static Void = "docActionVoid";
+  static Reactivate = "docActionReactivate";
+  static Reverse = "docActionReverse";
 }
 
 /**
@@ -22,11 +22,11 @@ export class RewriteURL {
   /**
    * WINDOW is the default
    */
-  static WINDOW = '/rest/api/window/';
+  static WINDOW = "/rest/api/window/";
 
-  static PROCESS = '/rest/api/process/';
+  static PROCESS = "/rest/api/process/";
 
-  static ATTRIBUTE = '/rest/api/pattribute';
+  static ATTRIBUTE = "/rest/api/pattribute";
 
   static QUICKACTION = `/rest/api/process/.*/start$`;
 

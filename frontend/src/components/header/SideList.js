@@ -1,14 +1,14 @@
-import counterpart from 'counterpart';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import onClickOutside from 'react-onclickoutside';
-import { connect } from 'react-redux';
+import counterpart from "counterpart";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import onClickOutside from "react-onclickoutside";
+import { connect } from "react-redux";
 
-import keymap from '../../shortcuts/keymap';
-import DocumentList from '../../containers/DocumentList';
-import Tooltips from '../tooltips/Tooltips';
-import Attachments from './Attachments';
-import DocumentReferences from '../documentReferences/DocumentReferences';
+import keymap from "../../shortcuts/keymap";
+import DocumentList from "../../containers/DocumentList";
+import Tooltips from "../tooltips/Tooltips";
+import Attachments from "./Attachments";
+import DocumentReferences from "../documentReferences/DocumentReferences";
 
 /**
  * @file Class based component.
@@ -132,20 +132,20 @@ class SideList extends Component {
 
     const tabs = [
       {
-        icon: 'meta-icon-list',
+        icon: "meta-icon-list",
         title: counterpart.translate(
-          'mainScreen.sideList.documentList.tooltip'
+          "mainScreen.sideList.documentList.tooltip",
         ),
       },
       {
-        icon: 'meta-icon-share',
+        icon: "meta-icon-share",
         title: counterpart.translate(
-          'mainScreen.sideList.referencedDocuments.tooltip'
+          "mainScreen.sideList.referencedDocuments.tooltip",
         ),
       },
       {
-        icon: 'meta-icon-attachments',
-        title: counterpart.translate('mainScreen.sideList.attachments.tooltip'),
+        icon: "meta-icon-attachments",
+        title: counterpart.translate("mainScreen.sideList.attachments.tooltip"),
       },
     ];
 
@@ -160,8 +160,8 @@ class SideList extends Component {
               <div
                 key={index}
                 className={
-                  'order-list-btn tooltip-parent ' +
-                  (index === tab ? 'active ' : '')
+                  "order-list-btn tooltip-parent " +
+                  (index === tab ? "active " : "")
                 }
                 onClick={() => this.changeTab(index)}
                 onMouseEnter={() => this.toggleTooltip(index)}
@@ -171,9 +171,9 @@ class SideList extends Component {
                 <i className={item.icon} />
                 {tooltipOpen === index && (
                   <Tooltips
-                    name={keymap['OPEN_SIDEBAR_MENU_' + index]}
+                    name={keymap["OPEN_SIDEBAR_MENU_" + index]}
                     action={item.title}
-                    type={''}
+                    type={""}
                   />
                 )}
               </div>
