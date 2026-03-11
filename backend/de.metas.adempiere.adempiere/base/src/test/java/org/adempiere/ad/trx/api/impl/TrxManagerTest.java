@@ -189,6 +189,7 @@ public class TrxManagerTest
 		final String localTrxName = runnable.getLastTrxName();
 		// NOTE: until we get rid of "TrxCallableWithTrxName" our Runnables will get the "effective" localTrxName instead of ThreadInherited.
 		// Assert.assertEquals("Invalid trxName used", ITrx.TRXNAME_ThreadInherited, localTrxName);
+		
 		assertThat(TrxCallableWithTrxName.class).isNotNull(); // non-sense, but we just want to have a reference here for future refactoring
 		assertThat(localTrxName).as("Invalid trxName used").isEqualTo(trxName);
 

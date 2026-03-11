@@ -117,8 +117,8 @@ public class AttachmentListenerServiceTest
 		InterfaceWrapperHelper.save(adTable);
 	}
 
-	// Prepare the attachement listner record which will link with the ad.
-    // PreapreAttachement logic
+	 // Prepare the attachment listner record which will link with the ad.
+     // Preapre attachment logic here
 
 	private void prepareAttachmentListenerMockRecord()
 	{
