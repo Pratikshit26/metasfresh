@@ -58,6 +58,9 @@ public class MockedTrxRunnable extends TrxRunnableAdapter
 
 	@Override
 	public void doFinally()
+	
+    // Final Runnable logic here
+
 	{
 		if (doFinallyRunnable != null)
 		{
@@ -90,8 +93,7 @@ public class MockedTrxRunnable extends TrxRunnableAdapter
 		}
 	}
 
-// Inner runnable logic and assertions logic here. 
-// Final Trx name changes logic isalso build her
+	// Inner runnabble logic is built here .
 
 	/**
 	 * Sets inner runnable to be executed on {@link #run(String)}
